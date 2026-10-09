@@ -123,6 +123,11 @@ async function setLang(lang, { persist = true } = {}) {
   state.lang = lang;
   root.setAttribute('lang', lang);
   if (persist) storage.set(STORE.lang, lang);
+  // Keep a shared ?lang= link in step with the menu, so a reload does not revert the choice
+  if (persist && params.has('lang') && params.get('lang') !== lang) {
+    params.set('lang', lang);
+    try { history.replaceState(null, '', `${location.pathname}?${params}${location.hash}`); } catch (e) { /* ignore */ }
+  }
   const ui = uiFor(lang);
   syncLangMenu(lang, ui);
   document.getElementById('theme-toggle').setAttribute('aria-label', ui.themeToggle);

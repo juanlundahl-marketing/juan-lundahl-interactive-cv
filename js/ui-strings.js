@@ -88,7 +88,7 @@ export const UI = {
 
     contactEyebrow: 'Contact',
     contactTitle: "Let's *talk.*",
-    contactIntro: 'Open to conversations about AI, marketing automation, CRM and martech in B2B and SaaS.',
+    contactIntro: 'Always happy to exchange ideas about AI, marketing automation, CRM and martech in B2B and SaaS.',
     contactEmail: 'Email',
     contactLinkedin: 'LinkedIn',
     contactBase: 'Home base',
@@ -182,7 +182,7 @@ export const UI = {
 
     contactEyebrow: 'Contacto',
     contactTitle: 'Hablemos *ya.*',
-    contactIntro: 'Abierto a conversar sobre IA, automatización de marketing, CRM y martech en B2B y SaaS.',
+    contactIntro: 'Siempre con gusto para intercambiar ideas sobre IA, automatización de marketing, CRM y martech en B2B y SaaS.',
     contactEmail: 'Email',
     contactLinkedin: 'LinkedIn',
     contactBase: 'Base',
@@ -277,7 +277,7 @@ export const UI = {
 
     contactEyebrow: 'Kontakt',
     contactTitle: 'Lass uns *reden.*',
-    contactIntro: 'Offen für Gespräche über KI, Marketing-Automatisierung, CRM und Martech in B2B und SaaS.',
+    contactIntro: 'Ich tausche mich jederzeit gern über KI, Marketing-Automatisierung, CRM und Martech in B2B und SaaS aus.',
     contactEmail: 'E-Mail',
     contactLinkedin: 'LinkedIn',
     contactBase: 'Heimatbasis',

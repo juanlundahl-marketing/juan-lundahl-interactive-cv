@@ -1,27 +1,27 @@
 /* About: the Marketing ID as an enamelled door nameplate (the kind screwed
    beside a porteño building door), with a hanging shop sign below it that
-   flips between "Abierto" and "Vuelvo enseguida" on tap / click / Enter /
+   flips between "Trabajando" and "Vuelvo enseguida" on tap / click / Enter /
    Space. Bio copy on the other side. */
 import { marketChips, esc, rich, photoHTML, wirePhotoFallbacks } from '../utils.js';
 
 const SIGN = {
   en: {
-    open: 'Open to opportunities', away: 'Back in five minutes',
+    open: 'Currently at VU Inc.', away: 'Back in five minutes',
     hint: 'Tap the sign to flip it',
     sr: (word, sub) => `Shop sign reads: ${word}, ${sub}. Activate to flip it.`
   },
   es: {
-    open: 'A nuevas oportunidades', away: 'En cinco minutos',
+    open: 'Hoy en VU Inc.', away: 'En cinco minutos',
     hint: 'Tocá el cartel para darlo vuelta',
     sr: (word, sub) => `El cartel dice: ${word}, ${sub}. Activalo para darlo vuelta.`
   },
   de: {
-    open: 'Offen für neue Chancen', away: 'Bin in fünf Minuten zurück',
+    open: 'Aktuell bei VU Inc.', away: 'Bin in fünf Minuten zurück',
     hint: 'Schild antippen zum Umdrehen',
     sr: (word, sub) => `Auf dem Schild steht: ${word}, ${sub}. Aktivieren zum Umdrehen.`
   }
 };
-const WORD = { open: 'Abierto', away: 'Vuelvo enseguida' };
+const WORD = { open: 'Trabajando', away: 'Vuelvo enseguida' };
 
 export default function render(el, ctx) {
   const { data, meta, ui, lang } = ctx;
