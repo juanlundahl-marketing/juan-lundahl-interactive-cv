@@ -276,7 +276,7 @@
         { "id": "film", "name": "Film & documentary production", "text": "Translation, transcription and video editing for the documentary El Pueblo es el Mar, and production editing at Bordahl Analytics.", "where": ["Somos OcéanoS", "Bordahl Analytics"] }
       ],
       "modes": [
-        { "id": "onsite", "companies": [{ "name": "US Ophthalmic", "note": "Buenos Aires (for Miami)" }] },
+        { "id": "onsite", "companies": [{ "name": "US Ophthalmic" }] },
         { "id": "remote", "companies": [{ "name": "Onewater" }, { "name": "Somos OcéanoS" }] },
         { "id": "hybrid", "companies": [{ "name": "VU Inc." }, { "name": "E-Planning" }, { "name": "Bordahl Analytics" }] }
       ],
@@ -582,7 +582,7 @@
         { "id": "film", "name": "Cine y producción documental", "text": "Traducción, transcripción y edición de video para el documental El Pueblo es el Mar, y edición de producción en Bordahl Analytics.", "where": ["Somos OcéanoS", "Bordahl Analytics"] }
       ],
       "modes": [
-        { "id": "onsite", "companies": [{ "name": "US Ophthalmic", "note": "Buenos Aires (para Miami)" }] },
+        { "id": "onsite", "companies": [{ "name": "US Ophthalmic" }] },
         { "id": "remote", "companies": [{ "name": "Onewater" }, { "name": "Somos OcéanoS" }] },
         { "id": "hybrid", "companies": [{ "name": "VU Inc." }, { "name": "E-Planning" }, { "name": "Bordahl Analytics" }] }
       ],
@@ -889,7 +889,7 @@
         { "id": "film", "name": "Film- & Dokumentarfilmproduktion", "text": "Übersetzung, Transkription und Videoschnitt für den Dokumentarfilm El Pueblo es el Mar sowie Produktionsschnitt bei Bordahl Analytics.", "where": ["Somos OcéanoS", "Bordahl Analytics"] }
       ],
       "modes": [
-        { "id": "onsite", "companies": [{ "name": "US Ophthalmic", "note": "Buenos Aires (für Miami)" }] },
+        { "id": "onsite", "companies": [{ "name": "US Ophthalmic" }] },
         { "id": "remote", "companies": [{ "name": "Onewater" }, { "name": "Somos OcéanoS" }] },
         { "id": "hybrid", "companies": [{ "name": "VU Inc." }, { "name": "E-Planning" }, { "name": "Bordahl Analytics" }] }
       ],
