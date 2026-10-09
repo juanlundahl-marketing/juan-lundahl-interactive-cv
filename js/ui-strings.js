@@ -112,7 +112,7 @@ export const UI = {
 
     aboutEyebrow: 'Sobre mí',
     aboutTitle: 'Quién *soy.*',
-    idHeader: 'Marketing ID',
+    idHeader: 'Credencial de marketing',
     idStatus: 'Activo',
     idNumberLabel: 'N.º ID',
     idNumber: 'MKT-2016-JL',
@@ -207,7 +207,7 @@ export const UI = {
 
     aboutEyebrow: 'Über mich',
     aboutTitle: 'Wer ich *bin.*',
-    idHeader: 'Marketing ID',
+    idHeader: 'Marketing-Ausweis',
     idStatus: 'Aktiv',
     idNumberLabel: 'ID-Nr.',
     idNumber: 'MKT-2016-JL',
