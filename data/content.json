@@ -28,7 +28,7 @@
       "headline": "AI and automation inside marketing and sales, with measurable impact",
       "text": [
         "My focus now is bringing AI and automation into marketing and sales processes and operations: optimizing CRMs and integrating a modern, advanced tech stack so teams can work with more clarity and speed.",
-        "At VU Inc. I work on the martech stack, the automation infrastructure and the integration of AI into campaigns. At E-Planning I led lead generation on HubSpot CRM, building workflows aligned with Sales. Earlier work in SEO and paid media (US Ophthalmic) and in content and design (Onewater, Bordahl Analytics) gave me the full view of the funnel.",
+        "At VU Inc. I work on the martech stack, the automation infrastructure and the integration of AI into campaigns. At E-Planning I led lead generation on HubSpot CRM, building workflows aligned with Sales. Earlier work in paid media (US Ophthalmic) and in content and design (Onewater, Bordahl Analytics) gave me the full view of the funnel.",
         "I started in communication, and a journalism degree is still a strength: I write clearly, listen to audiences and bring a structured, collaborative attitude to every team."
       ],
       "facts": [
@@ -46,9 +46,9 @@
           "id": "awareness",
           "name": "Awareness",
           "tagline": "Be found and be remembered: search, social, design and video.",
-          "doing": "Built brand awareness through SEO and social media optimization at E-Planning and US Ophthalmic, and designed content and video for Onewater and Bordahl Analytics.",
+          "doing": "Built brand awareness through SEO and social media optimization at E-Planning, designed content and video for Onewater and Bordahl Analytics, and now apply that content, SEO and social know-how at VU Inc.",
           "tools": [
-            { "name": "SEO", "abbr": "SEO", "level": "expert", "note": "US Ophthalmic, E-Planning" },
+            { "name": "SEO", "abbr": "SEO", "level": "expert", "note": "E-Planning, VU Inc." },
             { "name": "SMO", "abbr": "SMO", "level": "expert", "note": "Onewater, E-Planning" },
             { "name": "Canva", "abbr": "CAN", "level": "expert", "note": "Onewater: templates for Meta, LinkedIn, X and YouTube" },
             { "name": "Photoshop", "abbr": "PS", "level": "advanced", "note": "" },
@@ -60,7 +60,7 @@
           "id": "interest",
           "name": "Interest",
           "tagline": "Turn attention into consideration with paid campaigns and interactive design.",
-          "doing": "Ran paid media on Google Ads, Meta and LinkedIn for NA and LATAM audiences at US Ophthalmic, and executed paid campaigns with budget optimization at Onewater.",
+          "doing": "Ran paid media on Google Ads, Meta and LinkedIn for NA and LATAM audiences at US Ophthalmic, executed paid campaigns with budget optimization at Onewater, and bring paid and design know-how to campaigns at VU Inc.",
           "tools": [
             { "name": "Meta Ads", "abbr": "META", "level": "expert", "note": "US Ophthalmic: paid media for NA and LATAM" },
             { "name": "LinkedIn Ads", "abbr": "LNK", "level": "expert", "note": "US Ophthalmic: paid media for NA and LATAM" },
@@ -73,9 +73,9 @@
           "id": "conversion",
           "name": "Conversion",
           "tagline": "Turn interest into customers, with a CRM shared with Sales and the analytics to see what works.",
-          "doing": "Led lead-generation strategy and execution at E-Planning, aligned with Sales at every stage of the funnel and managing contacts in HubSpot CRM.",
+          "doing": "Led lead-generation strategy and execution at E-Planning, aligned with Sales at every stage of the funnel and managing contacts in HubSpot CRM, and now run HubSpot CRM and analytics at VU Inc.",
           "tools": [
-            { "name": "HubSpot CRM", "abbr": "HS", "level": "expert", "featured": true, "note": "E-Planning, US Ophthalmic: pipeline, contacts and lead management, aligned with Sales" },
+            { "name": "HubSpot CRM", "abbr": "HS", "level": "expert", "featured": true, "note": "E-Planning, VU Inc.: pipeline, contacts and lead management, aligned with Sales" },
             { "name": "Programmatic advertising", "abbr": "PRG", "level": "intermediate", "note": "Udemy certification (2024)" },
             { "name": "Google Analytics", "abbr": "GA", "level": "advanced", "note": "" }
           ]
@@ -84,17 +84,17 @@
           "id": "retention",
           "name": "Retention & Loyalty",
           "tagline": "Keep customers close and coming back: email marketing and automated nurturing.",
-          "doing": "Ran B2B email marketing at US Ophthalmic and email marketing at Onewater, and designed tailored HubSpot workflows and flowcharts at E-Planning to nurture every contact automatically.",
+          "doing": "Ran email marketing at Onewater and designed tailored HubSpot workflows and flowcharts at E-Planning to nurture every contact automatically, and now apply email nurturing and HubSpot automation at VU Inc.",
           "tools": [
-            { "name": "Email marketing", "abbr": "EML", "level": "advanced", "note": "US Ophthalmic (B2B), Onewater" },
-            { "name": "HubSpot workflows", "abbr": "HSW", "level": "expert", "featured": true, "note": "E-Planning: tailored workflows and flowchart design with HubSpot's native automation" }
+            { "name": "Email marketing", "abbr": "EML", "level": "advanced", "note": "Onewater, VU Inc." },
+            { "name": "HubSpot workflows", "abbr": "HSW", "level": "expert", "featured": true, "note": "E-Planning, VU Inc.: tailored workflows and flowchart design with HubSpot's native automation" }
           ]
         }
       ],
       "across": {
         "eyebrow": "Across the funnel",
         "title": "AI copilots and a CRM at the *center.*",
-        "intro": "Some tools work at every stage. I use AI copilots throughout, in line with my work on the martech stack, the automation infrastructure and AI integration in campaigns at VU Inc.",
+        "intro": "Some tools work at every stage. At VU Inc. I apply my full marketing toolkit and add AI and automation on top: AI copilots throughout, plus work on the martech stack, the automation infrastructure and AI integration in campaigns.",
         "aiLabel": "AI copilots",
         "ai": [
           { "name": "Claude", "abbr": "CL", "level": "expert" },
@@ -123,8 +123,9 @@
         "period": "Mar 2026 – Present",
         "mode": "hybrid",
         "location": "",
-        "summary": "Marketing and automation role focused on the martech stack and AI-driven campaigns.",
+        "summary": "Marketing and automation role where I apply my full marketing toolkit and add AI and automation on top, focused on the martech stack and AI-driven campaigns.",
         "bullets": [
+          "Applying my prior marketing knowledge (content, SEO, paid media, design, CRM and email) across the funnel",
           "Martech stack and automation infrastructure",
           "AI integration in campaigns"
         ]
@@ -153,10 +154,10 @@
         "period": "Jan 2024 – May 2024",
         "mode": "onsite",
         "location": "",
-        "summary": "Paid media, SEO and B2B email marketing for NA and LATAM.",
+        "summary": "Mostly paid media on Google Ads, Meta and LinkedIn for NA and LATAM.",
         "bullets": [
           "Paid Media Specialist for Google Ads, Meta and LinkedIn campaigns across NA and LATAM.",
-          "SEO Analyst and B2B Email Marketing Strategist across NA and LATAM."
+          "Supporting SEO and B2B email marketing alongside paid media."
         ]
       },
       {
@@ -260,7 +261,7 @@
         { "id": "sports", "name": "Sports", "text": "Sports writing and content, plus the website and video production, at Bordahl Analytics.", "where": ["Bordahl Analytics"] },
         { "id": "adtech", "name": "Programmatic advertising & adtech", "text": "Lead generation, HubSpot workflows and sales enablement assets for an adtech company.", "where": ["E-Planning"] },
         { "id": "cyber", "name": "Cybersecurity & digital identity", "text": "Martech stack, automation infrastructure and AI integration in campaigns.", "where": ["VU Inc."] },
-        { "id": "health", "name": "Ophthalmic equipment & healthcare commerce", "text": "SEO, paid media and B2B email marketing across NA and LATAM.", "where": ["US Ophthalmic"] },
+        { "id": "health", "name": "Ophthalmic equipment & healthcare commerce", "text": "Paid media on Google Ads, Meta and LinkedIn across NA and LATAM.", "where": ["US Ophthalmic"] },
         { "id": "film", "name": "Film & documentary production", "text": "Translation, transcription and video editing for the documentary El Pueblo es el Mar, and production editing at Bordahl Analytics.", "where": ["Somos OcéanoS", "Bordahl Analytics"] }
       ],
       "modes": [
@@ -322,7 +323,7 @@
       "headline": "IA y automatización dentro de marketing y ventas, con impacto medible",
       "text": [
         "Hoy mi foco es llevar la IA y la automatización a los procesos y operaciones de marketing y ventas: optimizar CRMs e integrar un stack tecnológico moderno y avanzado para que los equipos trabajen con más claridad y velocidad.",
-        "En VU Inc. trabajo en el stack martech, la infraestructura de automatización y la integración de IA en campañas. En E-Planning lideré la generación de leads en HubSpot CRM, con workflows alineados con Ventas. Mi trabajo previo en SEO y medios pagos (US Ophthalmic) y en contenido y diseño (Onewater, Bordahl Analytics) me dio la visión completa del embudo.",
+        "En VU Inc. trabajo en el stack martech, la infraestructura de automatización y la integración de IA en campañas. En E-Planning lideré la generación de leads en HubSpot CRM, con workflows alineados con Ventas. Mi trabajo previo en medios pagos (US Ophthalmic) y en contenido y diseño (Onewater, Bordahl Analytics) me dio la visión completa del embudo.",
         "Empecé en la comunicación y mi formación en periodismo sigue siendo una fortaleza: escribo con claridad, escucho a las audiencias y aporto un enfoque estructurado y colaborativo a cada equipo."
       ],
       "facts": [
@@ -340,9 +341,9 @@
           "id": "awareness",
           "name": "Awareness",
           "tagline": "Que te encuentren y te recuerden: búsqueda, redes, diseño y video.",
-          "doing": "Construí brand awareness con SEO y optimización en redes sociales en E-Planning y US Ophthalmic, y diseñé contenido y video para Onewater y Bordahl Analytics.",
+          "doing": "Construí brand awareness con SEO y optimización en redes sociales en E-Planning, diseñé contenido y video para Onewater y Bordahl Analytics, y hoy aplico ese conocimiento de contenido, SEO y redes en VU Inc.",
           "tools": [
-            { "name": "SEO", "abbr": "SEO", "level": "expert", "note": "US Ophthalmic, E-Planning" },
+            { "name": "SEO", "abbr": "SEO", "level": "expert", "note": "E-Planning, VU Inc." },
             { "name": "SMO", "abbr": "SMO", "level": "expert", "note": "Onewater, E-Planning" },
             { "name": "Canva", "abbr": "CAN", "level": "expert", "note": "Onewater: plantillas para Meta, LinkedIn, X y YouTube" },
             { "name": "Photoshop", "abbr": "PS", "level": "advanced", "note": "" },
@@ -354,7 +355,7 @@
           "id": "interest",
           "name": "Interés",
           "tagline": "Convertir la atención en consideración con campañas pagas y diseño interactivo.",
-          "doing": "Gestioné medios pagos en Google Ads, Meta y LinkedIn para audiencias de NA y LATAM en US Ophthalmic, y ejecuté campañas pagas optimizando el presupuesto en Onewater.",
+          "doing": "Gestioné medios pagos en Google Ads, Meta y LinkedIn para audiencias de NA y LATAM en US Ophthalmic, ejecuté campañas pagas optimizando el presupuesto en Onewater y llevo el conocimiento de pauta y diseño a las campañas de VU Inc.",
           "tools": [
             { "name": "Meta Ads", "abbr": "META", "level": "expert", "note": "US Ophthalmic: medios pagos para NA y LATAM" },
             { "name": "LinkedIn Ads", "abbr": "LNK", "level": "expert", "note": "US Ophthalmic: medios pagos para NA y LATAM" },
@@ -367,9 +368,9 @@
           "id": "conversion",
           "name": "Conversión",
           "tagline": "Convertir el interés en clientes, con un CRM compartido con Ventas y la analítica para ver qué funciona.",
-          "doing": "Lideré la estrategia y ejecución de generación de leads en E-Planning, alineado con Ventas en cada etapa del embudo y gestionando contactos en HubSpot CRM.",
+          "doing": "Lideré la estrategia y ejecución de generación de leads en E-Planning, alineado con Ventas en cada etapa del embudo y gestionando contactos en HubSpot CRM, y hoy uso HubSpot CRM y analítica en VU Inc.",
           "tools": [
-            { "name": "HubSpot CRM", "abbr": "HS", "level": "expert", "featured": true, "note": "E-Planning, US Ophthalmic: pipeline, contactos y gestión de leads, alineado con Ventas" },
+            { "name": "HubSpot CRM", "abbr": "HS", "level": "expert", "featured": true, "note": "E-Planning, VU Inc.: pipeline, contactos y gestión de leads, alineado con Ventas" },
             { "name": "Publicidad programática", "abbr": "PRG", "level": "intermediate", "note": "Certificación Udemy (2024)" },
             { "name": "Google Analytics", "abbr": "GA", "level": "advanced", "note": "" }
           ]
@@ -378,17 +379,17 @@
           "id": "retention",
           "name": "Retención y fidelización",
           "tagline": "Que los clientes se queden cerca y vuelvan: email marketing y nurturing automatizado.",
-          "doing": "Llevé el email marketing B2B en US Ophthalmic y el email marketing en Onewater, y diseñé workflows y diagramas de flujo a medida en HubSpot en E-Planning para nutrir a cada contacto de forma automática.",
+          "doing": "Llevé el email marketing en Onewater y diseñé workflows y diagramas de flujo a medida en HubSpot en E-Planning para nutrir a cada contacto de forma automática, y hoy aplico email nurturing y automatización de HubSpot en VU Inc.",
           "tools": [
-            { "name": "Email marketing", "abbr": "EML", "level": "advanced", "note": "US Ophthalmic (B2B), Onewater" },
-            { "name": "Workflows de HubSpot", "abbr": "HSW", "level": "expert", "featured": true, "note": "E-Planning: flujos personalizados y diagramas de flujo con la automatización nativa de HubSpot" }
+            { "name": "Email marketing", "abbr": "EML", "level": "advanced", "note": "Onewater, VU Inc." },
+            { "name": "Workflows de HubSpot", "abbr": "HSW", "level": "expert", "featured": true, "note": "E-Planning, VU Inc.: flujos personalizados y diagramas de flujo con la automatización nativa de HubSpot" }
           ]
         }
       ],
       "across": {
         "eyebrow": "En todo el embudo",
         "title": "Copilotos de IA y un CRM en el *centro.*",
-        "intro": "Algunas herramientas trabajan en todas las etapas. Uso copilotos de IA en todo el recorrido, en línea con mi trabajo en el stack martech, la infraestructura de automatización y la integración de IA en campañas en VU Inc.",
+        "intro": "Algunas herramientas trabajan en todas las etapas. En VU Inc. aplico todo mi conocimiento de marketing y le sumo IA y automatización: copilotos de IA en todo el recorrido, además del trabajo en el stack martech, la infraestructura de automatización y la integración de IA en campañas.",
         "aiLabel": "Copilotos de IA",
         "ai": [
           { "name": "Claude", "abbr": "CL", "level": "expert" },
@@ -417,8 +418,9 @@
         "period": "Mar 2026 – Actualidad",
         "mode": "hybrid",
         "location": "",
-        "summary": "Rol de marketing y automatización enfocado en el stack martech y en campañas con IA.",
+        "summary": "Rol de marketing y automatización donde aplico todo mi conocimiento de marketing y le sumo IA y automatización, con foco en el stack martech y en campañas con IA.",
         "bullets": [
+          "Aplicación de mi conocimiento previo de marketing (contenido, SEO, medios pagos, diseño, CRM y email) en todo el embudo",
           "Stack martech e infraestructura de automatización",
           "Integración de IA en campañas"
         ]
@@ -447,10 +449,10 @@
         "period": "Ene 2024 – May 2024",
         "mode": "onsite",
         "location": "",
-        "summary": "Medios pagos, SEO y email marketing B2B para NA y LATAM.",
+        "summary": "Principalmente medios pagos en Google Ads, Meta y LinkedIn para NA y LATAM.",
         "bullets": [
           "Especialista en Paid Media para campañas de Google Ads, Meta y LinkedIn en NA y LATAM.",
-          "Analista de SEO y estratega de email marketing B2B en NA y LATAM."
+          "Apoyo en SEO y email marketing B2B junto a los medios pagos."
         ]
       },
       {
@@ -554,7 +556,7 @@
         { "id": "sports", "name": "Deportes", "text": "Redacción y contenido deportivo, además del sitio web y la producción de video, en Bordahl Analytics.", "where": ["Bordahl Analytics"] },
         { "id": "adtech", "name": "Publicidad programática y adtech", "text": "Generación de leads, workflows en HubSpot y materiales de apoyo comercial para una empresa de adtech.", "where": ["E-Planning"] },
         { "id": "cyber", "name": "Ciberseguridad e identidad digital", "text": "Stack martech, infraestructura de automatización e integración de IA en campañas.", "where": ["VU Inc."] },
-        { "id": "health", "name": "Equipamiento oftalmológico y comercio de salud", "text": "SEO, medios pagos y email marketing B2B en NA y LATAM.", "where": ["US Ophthalmic"] },
+        { "id": "health", "name": "Equipamiento oftalmológico y comercio de salud", "text": "Medios pagos en Google Ads, Meta y LinkedIn en NA y LATAM.", "where": ["US Ophthalmic"] },
         { "id": "film", "name": "Cine y producción documental", "text": "Traducción, transcripción y edición de video para el documental El Pueblo es el Mar, y edición de producción en Bordahl Analytics.", "where": ["Somos OcéanoS", "Bordahl Analytics"] }
       ],
       "modes": [
@@ -617,7 +619,7 @@
       "headline": "KI und Automatisierung in Marketing und Vertrieb, mit messbarer Wirkung",
       "text": [
         "Mein Schwerpunkt liegt heute darauf, KI und Automatisierung in Marketing- und Vertriebsprozesse und -abläufe zu bringen: CRM-Systeme zu optimieren und einen modernen, fortschrittlichen Tech-Stack zu integrieren, damit Teams mit mehr Klarheit und Tempo arbeiten können.",
-        "Bei VU Inc. arbeite ich am Martech-Stack, an der Automatisierungsinfrastruktur und an der Integration von KI in Kampagnen. Bei E-Planning habe ich die Leadgenerierung im HubSpot CRM geleitet und Workflows in enger Abstimmung mit dem Vertrieb aufgebaut. Frühere Tätigkeiten in SEO und Paid Media (US Ophthalmic) sowie in Content und Design (Onewater, Bordahl Analytics) haben mir den vollständigen Blick auf den Funnel verschafft.",
+        "Bei VU Inc. arbeite ich am Martech-Stack, an der Automatisierungsinfrastruktur und an der Integration von KI in Kampagnen. Bei E-Planning habe ich die Leadgenerierung im HubSpot CRM geleitet und Workflows in enger Abstimmung mit dem Vertrieb aufgebaut. Frühere Tätigkeiten in Paid Media (US Ophthalmic) sowie in Content und Design (Onewater, Bordahl Analytics) haben mir den vollständigen Blick auf den Funnel verschafft.",
         "Ich habe in der Kommunikation angefangen, und mein Journalismusstudium ist bis heute eine Stärke: Ich schreibe klar, höre Zielgruppen zu und bringe eine strukturierte, kooperative Haltung in jedes Team."
       ],
       "facts": [
@@ -635,9 +637,9 @@
           "id": "awareness",
           "name": "Awareness",
           "tagline": "Gefunden und in Erinnerung behalten werden: Suche, Social Media, Design und Video.",
-          "doing": "Ich habe Markenbekanntheit durch SEO und Social-Media-Optimierung bei E-Planning und US Ophthalmic aufgebaut sowie Content und Videos für Onewater und Bordahl Analytics gestaltet.",
+          "doing": "Ich habe Markenbekanntheit durch SEO und Social-Media-Optimierung bei E-Planning aufgebaut, Content und Videos für Onewater und Bordahl Analytics gestaltet und setze dieses Wissen zu Content, SEO und Social Media heute bei VU Inc. ein.",
           "tools": [
-            { "name": "SEO", "abbr": "SEO", "level": "expert", "note": "US Ophthalmic, E-Planning" },
+            { "name": "SEO", "abbr": "SEO", "level": "expert", "note": "E-Planning, VU Inc." },
             { "name": "SMO", "abbr": "SMO", "level": "expert", "note": "Onewater, E-Planning" },
             { "name": "Canva", "abbr": "CAN", "level": "expert", "note": "Onewater: Vorlagen für Meta, LinkedIn, X und YouTube" },
             { "name": "Photoshop", "abbr": "PS", "level": "advanced", "note": "" },
@@ -649,7 +651,7 @@
           "id": "interest",
           "name": "Interesse",
           "tagline": "Aus Aufmerksamkeit echtes Interesse machen, mit bezahlten Kampagnen und interaktivem Design.",
-          "doing": "Ich habe bei US Ophthalmic Paid Media auf Google Ads, Meta und LinkedIn für Zielgruppen in NA und LATAM betreut und bei Onewater bezahlte Kampagnen mit Budgetoptimierung umgesetzt.",
+          "doing": "Ich habe bei US Ophthalmic Paid Media auf Google Ads, Meta und LinkedIn für Zielgruppen in NA und LATAM betreut, bei Onewater bezahlte Kampagnen mit Budgetoptimierung umgesetzt und bringe mein Wissen zu Paid Media und Design in die Kampagnen bei VU Inc. ein.",
           "tools": [
             { "name": "Meta Ads", "abbr": "META", "level": "expert", "note": "US Ophthalmic: Paid Media für NA und LATAM" },
             { "name": "LinkedIn Ads", "abbr": "LNK", "level": "expert", "note": "US Ophthalmic: Paid Media für NA und LATAM" },
@@ -662,9 +664,9 @@
           "id": "conversion",
           "name": "Conversion",
           "tagline": "Aus Interesse Kunden machen, mit einem CRM, das ich mit dem Vertrieb teile, und Analytics, die zeigen, was wirkt.",
-          "doing": "Ich habe bei E-Planning die Strategie und Umsetzung der Leadgenerierung geleitet, in jeder Phase des Funnels mit dem Vertrieb abgestimmt und Kontakte im HubSpot CRM verwaltet.",
+          "doing": "Ich habe bei E-Planning die Strategie und Umsetzung der Leadgenerierung geleitet, in jeder Phase des Funnels mit dem Vertrieb abgestimmt und Kontakte im HubSpot CRM verwaltet, und arbeite heute bei VU Inc. mit HubSpot CRM und Analytics.",
           "tools": [
-            { "name": "HubSpot CRM", "abbr": "HS", "level": "expert", "featured": true, "note": "E-Planning, US Ophthalmic: Pipeline, Kontakte und Lead-Management, abgestimmt mit dem Vertrieb" },
+            { "name": "HubSpot CRM", "abbr": "HS", "level": "expert", "featured": true, "note": "E-Planning, VU Inc.: Pipeline, Kontakte und Lead-Management, abgestimmt mit dem Vertrieb" },
             { "name": "Programmatische Werbung", "abbr": "PRG", "level": "intermediate", "note": "Udemy-Zertifikat (2024)" },
             { "name": "Google Analytics", "abbr": "GA", "level": "advanced", "note": "" }
           ]
@@ -673,17 +675,17 @@
           "id": "retention",
           "name": "Bindung & Loyalität",
           "tagline": "Kunden nah halten und zurückholen: E-Mail-Marketing und automatisiertes Nurturing.",
-          "doing": "Ich habe bei US Ophthalmic das B2B-E-Mail-Marketing und bei Onewater das E-Mail-Marketing betreut und bei E-Planning maßgeschneiderte HubSpot-Workflows und Flussdiagramme entworfen, um jeden Kontakt automatisiert zu pflegen.",
+          "doing": "Ich habe bei Onewater das E-Mail-Marketing betreut und bei E-Planning maßgeschneiderte HubSpot-Workflows und Flussdiagramme entworfen, um jeden Kontakt automatisiert zu pflegen, und nutze E-Mail-Nurturing und HubSpot-Automatisierung heute bei VU Inc.",
           "tools": [
-            { "name": "E-Mail-Marketing", "abbr": "EML", "level": "advanced", "note": "US Ophthalmic (B2B), Onewater" },
-            { "name": "HubSpot-Workflows", "abbr": "HSW", "level": "expert", "featured": true, "note": "E-Planning: individuelle Workflows und Flussdiagramme mit der nativen Automatisierung von HubSpot" }
+            { "name": "E-Mail-Marketing", "abbr": "EML", "level": "advanced", "note": "Onewater, VU Inc." },
+            { "name": "HubSpot-Workflows", "abbr": "HSW", "level": "expert", "featured": true, "note": "E-Planning, VU Inc.: individuelle Workflows und Flussdiagramme mit der nativen Automatisierung von HubSpot" }
           ]
         }
       ],
       "across": {
         "eyebrow": "Im ganzen Funnel",
         "title": "KI-Copiloten und ein CRM im *Zentrum.*",
-        "intro": "Manche Tools wirken in jeder Phase. KI-Copiloten nutze ich durchgehend, passend zu meiner Arbeit am Martech-Stack, an der Automatisierungsinfrastruktur und an der KI-Integration in Kampagnen bei VU Inc.",
+        "intro": "Manche Tools wirken in jeder Phase. Bei VU Inc. setze ich mein gesamtes Marketing-Know-how ein und ergänze es um KI und Automatisierung: KI-Copiloten durchgehend, dazu die Arbeit am Martech-Stack, an der Automatisierungsinfrastruktur und an der KI-Integration in Kampagnen.",
         "aiLabel": "KI-Copiloten",
         "ai": [
           { "name": "Claude", "abbr": "CL", "level": "expert" },
@@ -712,8 +714,9 @@
         "period": "Mär 2026 – heute",
         "mode": "hybrid",
         "location": "",
-        "summary": "Rolle in Marketing und Automatisierung mit Fokus auf den Martech-Stack und KI-gestützte Kampagnen.",
+        "summary": "Rolle in Marketing und Automatisierung, in der ich mein gesamtes Marketing-Know-how einsetze und um KI und Automatisierung ergänze, mit Fokus auf den Martech-Stack und KI-gestützte Kampagnen.",
         "bullets": [
+          "Einsatz meines bisherigen Marketingwissens (Content, SEO, Paid Media, Design, CRM und E-Mail) im gesamten Funnel",
           "Martech-Stack und Automatisierungsinfrastruktur",
           "Integration von KI in Kampagnen"
         ]
@@ -742,10 +745,10 @@
         "period": "Jan 2024 – Mai 2024",
         "mode": "onsite",
         "location": "",
-        "summary": "Paid Media, SEO und B2B-E-Mail-Marketing für NA und LATAM.",
+        "summary": "Überwiegend Paid Media auf Google Ads, Meta und LinkedIn für NA und LATAM.",
         "bullets": [
           "Paid-Media-Spezialist für Kampagnen auf Google Ads, Meta und LinkedIn in NA und LATAM.",
-          "SEO-Analyst und Strategie für B2B-E-Mail-Marketing in NA und LATAM."
+          "Unterstützung bei SEO und B2B-E-Mail-Marketing neben dem Paid Media."
         ]
       },
       {
@@ -849,7 +852,7 @@
         { "id": "sports", "name": "Sport", "text": "Sportberichterstattung und Sport-Content sowie Website und Videoproduktion bei Bordahl Analytics.", "where": ["Bordahl Analytics"] },
         { "id": "adtech", "name": "Programmatische Werbung & Adtech", "text": "Leadgenerierung, HubSpot-Workflows und Sales-Enablement-Materialien für ein Adtech-Unternehmen.", "where": ["E-Planning"] },
         { "id": "cyber", "name": "Cybersicherheit & digitale Identität", "text": "Martech-Stack, Automatisierungsinfrastruktur und KI-Integration in Kampagnen.", "where": ["VU Inc."] },
-        { "id": "health", "name": "Augenheilkundliche Geräte & Gesundheitshandel", "text": "SEO, Paid Media und B2B-E-Mail-Marketing in NA und LATAM.", "where": ["US Ophthalmic"] },
+        { "id": "health", "name": "Augenheilkundliche Geräte & Gesundheitshandel", "text": "Paid Media auf Google Ads, Meta und LinkedIn in NA und LATAM.", "where": ["US Ophthalmic"] },
         { "id": "film", "name": "Film- & Dokumentarfilmproduktion", "text": "Übersetzung, Transkription und Videoschnitt für den Dokumentarfilm El Pueblo es el Mar sowie Produktionsschnitt bei Bordahl Analytics.", "where": ["Somos OcéanoS", "Bordahl Analytics"] }
       ],
       "modes": [
