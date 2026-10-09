@@ -67,13 +67,11 @@ export const UI = {
 
     eduEyebrow: 'Education',
     eduTitle: 'From journalism to *the funnel.*',
-    eduIntro: 'First, journalism at UCA, from 2016 to 2020. Then courses in digital marketing, design and rhetoric along the way.',
-    eduUniLabel: 'University',
+    eduIntro: 'Journalism, marketing, design and rhetoric: how I learned what I do now.',
     eduAward: 'Award',
     eduLog: 'Learning log',
     eduLogAria: 'Learning timeline, 2016 to 2023',
     eduModules: 'Modules',
-    eduMedal: '1st',
     months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 
     certEyebrow: 'Certifications',
@@ -171,13 +169,11 @@ export const UI = {
 
     eduEyebrow: 'Educación',
     eduTitle: 'Del periodismo al *embudo.*',
-    eduIntro: 'Primero, periodismo en la UCA, de 2016 a 2020. Después, cursos de marketing digital, diseño y retórica en el camino.',
-    eduUniLabel: 'Universidad',
+    eduIntro: 'Periodismo, marketing, diseño y retórica: cómo aprendí lo que hago hoy.',
     eduAward: 'Premio',
     eduLog: 'Libreta de formación',
     eduLogAria: 'Recorrido de formación, de 2016 a 2023',
     eduModules: 'Módulos',
-    eduMedal: '1.º',
     months: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
 
     certEyebrow: 'Certificaciones',
@@ -276,13 +272,11 @@ export const UI = {
 
     eduEyebrow: 'Ausbildung',
     eduTitle: 'Vom Journalismus zum *Funnel.*',
-    eduIntro: 'Zuerst journalistische Kommunikation an der UCA, von 2016 bis 2020, danach unterwegs Kurse in digitalem Marketing, Design und Rhetorik.',
-    eduUniLabel: 'Universität',
+    eduIntro: 'Journalismus, Marketing, Design und Rhetorik: wie ich gelernt habe, was ich heute mache.',
     eduAward: 'Auszeichnung',
     eduLog: 'Lernweg',
     eduLogAria: 'Lernweg von 2016 bis 2023',
     eduModules: 'Module',
-    eduMedal: '1.',
     months: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
 
     certEyebrow: 'Zertifikate',

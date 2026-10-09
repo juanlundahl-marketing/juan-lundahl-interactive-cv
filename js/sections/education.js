@@ -1,13 +1,11 @@
 /* Education: "From journalism to the funnel."
-   B2a "Porteño":
-   (a) the university programme as a framed plate (filete corners from the
-       shared sprite, gold double rule): programme, institution and years,
-       like a plain CV line, plus a ribbon medal for the prize won during
-       that time (content.json education[].award -> achievements.awards,
-       matched by name, so ADEPA keeps living in Achievements too);
-   (b) a "libreta" (ruled study log) timeline, oldest first, with each course
-       as a matrícula card dealt in on scroll. A course with modules gets a
-       small school-timetable grid: one bar per module across its months.
+   B2a "Porteño": a "libreta" (ruled study log) timeline, oldest first. Every
+   study is an equal matrícula card dealt in on scroll: dates as a stamp,
+   the programme as the title, the institution below. A course with dated
+   modules gets a small school-timetable grid (one bar per module across its
+   months). A card with an award (content.json education[].award ->
+   achievements.awards, matched by name, so ADEPA keeps living in
+   Achievements too) carries a small prize chip.
    Dates come from content.json as "YYYY" or "YYYY-MM"; month names are
    localized from ui.months. Reduced motion: everything static. */
 import { esc, rich } from '../utils.js';
@@ -20,20 +18,8 @@ const parse = (s) => {
 };
 const monthIndex = (d) => d.y * 12 + ((d.m || 1) - 1);
 
-/* Original prize medal: rosette + two ribbon tails. Fixed enamel colours (same in both themes). */
-const medal = (label) => `
-  <svg class="medal" viewBox="0 0 96 120" aria-hidden="true" focusable="false">
-    <path d="M30 58 L18 116 L31 106 L40 118 L48 64 Z" fill="#7A2430"/>
-    <path d="M66 58 L78 116 L65 106 L56 118 L48 64 Z" fill="#2D5F8A"/>
-    <path d="M36 70 L28 108 M60 70 L68 108" stroke="#F3EBDA" stroke-opacity=".55" stroke-width="1.4" fill="none"/>
-    <g transform="translate(48 44)">
-      ${Array.from({ length: 16 }, (_, i) => `<circle r="7" cx="${(33 * Math.cos((i * Math.PI) / 8)).toFixed(2)}" cy="${(33 * Math.sin((i * Math.PI) / 8)).toFixed(2)}" fill="#C08A2E"/>`).join('')}
-      <circle r="33" fill="#C08A2E"/>
-      <circle r="27" fill="#EBC66E" stroke="#8A6424" stroke-width="1.5"/>
-      <circle r="22.5" fill="none" stroke="#8A6424" stroke-width=".9" stroke-dasharray="2 2.6"/>
-      <text y="7.5" text-anchor="middle" font-family="Sansita, Georgia, serif" font-weight="900" font-size="${label.length > 2 ? 17 : 21}" fill="#1C1B19">${esc(label)}</text>
-    </g>
-  </svg>`;
+/* Small original ribbon icon (decorative) */
+const RIBBON = '<svg viewBox="0 0 16 22" aria-hidden="true" focusable="false"><path d="M4 10 L1.5 21 L5 18.6 L7 21.5 L8 12 Z" fill="#7A2430"/><path d="M12 10 L14.5 21 L11 18.6 L9 21.5 L8 12 Z" fill="#2D5F8A"/><circle cx="8" cy="7" r="6.2" fill="#C08A2E"/><circle cx="8" cy="7" r="4.2" fill="#EBC66E" stroke="#8A6424" stroke-width=".8"/></svg>';
 
 export default function render(el, ctx) {
   const { data, ui } = ctx;
@@ -45,15 +31,15 @@ export default function render(el, ctx) {
   const time = (s) => { const d = parse(s); return `<time datetime="${esc(d.raw)}">${esc(fmt(d))}</time>`; };
   const span = (a, b) => `${time(a)} – ${time(b)}`;
 
-  const uni = list.find((e) => e.featured) || null;
   const awards = (data.achievements && data.achievements.awards) || [];
-  const award = uni && uni.award
-    ? awards.find((a) => new RegExp(uni.award, 'i').test(`${a.title} ${a.issuer}`)) || null
-    : null;
+  const awardFor = (e) => (e.award
+    ? awards.find((a) => new RegExp(e.award, 'i').test(`${a.title} ${a.issuer}`)) || null
+    : null);
+  const lowerFirst = (s) => String(s || '').replace(/^\p{Lu}/u, (c) => c.toLowerCase());
 
   const sorted = [...list].sort((a, b) => monthIndex(parse(a.start)) - monthIndex(parse(b.start)));
-  const first = sorted.length ? parse(sorted[0].start).y : '';
-  const last = sorted.length ? Math.max(...sorted.map((e) => parse(e.end || e.start).y)) : '';
+  const first = parse(sorted[0].start).y;
+  const last = Math.max(...sorted.map((e) => parse(e.end || e.start).y));
 
   /* Mini timetable for a course with dated modules */
   const timetable = (e) => {
@@ -81,46 +67,25 @@ export default function render(el, ctx) {
       </div>`;
   };
 
-  const card = (e, i) => {
-    const isUni = e === uni;
+  /* Small prize chip: "1st Prize, University Journalism (ADEPA) · awarded during my time at UCA" */
+  const prize = (a) => {
+    if (!a) return '';
+    const abbr = (String(a.issuer || '').match(/\(([^)]+)\)\s*$/) || [])[1];
     return `
-    <li class="tl__item${isUni ? ' tl__item--uni' : ''}" data-reveal style="--reveal-delay:${Math.min(i, 3) * 90}ms">
+        <p class="mat__award">${RIBBON}<span><span class="visually-hidden">${esc(ui.eduAward)}: </span>${esc(a.title)}${abbr ? ` (<abbr title="${esc(a.issuer)}">${esc(abbr)}</abbr>)` : ''}${a.context ? ` <span class="mat__award-ctx">· ${esc(lowerFirst(a.context))}</span>` : ''}</span></p>`;
+  };
+
+  const card = (e, i) => `
+    <li class="tl__item" data-reveal style="--reveal-delay:${Math.min(i, 3) * 90}ms">
       <span class="tl__year" aria-hidden="true">${esc(parse(e.start).y)}</span>
       <div class="mat">
         <p class="mat__when">${span(e.start, e.end || e.start)}</p>
-        <h4 class="mat__title">${esc(e.program)}</h4>
+        <h3 class="mat__title">${esc(e.program)}</h3>
         <p class="mat__inst">${esc(e.institution)}</p>
-        ${e.note ? `<p class="mat__note">${esc(e.note)}</p>` : ''}
-        ${isUni ? '' : timetable(e)}
+        ${prize(awardFor(e))}
+        ${timetable(e)}
       </div>
     </li>`;
-  };
-
-  const uniPlate = uni ? `
-    <article class="uni" data-reveal aria-labelledby="edu-uni">
-      <div class="uni__plate">
-        <svg class="uni__corner uni__corner--tl" aria-hidden="true" focusable="false"><use href="#f-corner"/></svg>
-        <svg class="uni__corner uni__corner--tr" aria-hidden="true" focusable="false"><use href="#f-corner"/></svg>
-        <svg class="uni__corner uni__corner--bl" aria-hidden="true" focusable="false"><use href="#f-corner"/></svg>
-        <svg class="uni__corner uni__corner--br" aria-hidden="true" focusable="false"><use href="#f-corner"/></svg>
-        <p class="uni__kicker">${esc(ui.eduUniLabel)}</p>
-        <p class="uni__inst">${esc(uni.institution)}</p>
-        <svg class="filete uni__rule" aria-hidden="true" focusable="false"><use href="#f-rule"/></svg>
-        <h3 class="uni__program" id="edu-uni">${esc(uni.program)}</h3>
-        <p class="uni__years">${span(uni.start, uni.end)}</p>
-        ${uni.note ? `<p class="uni__note">${esc(uni.note)}</p>` : ''}
-        ${award ? `
-        <div class="uni__award">
-          ${medal(ui.eduMedal || '1')}
-          <p class="uni__award-text">
-            <span class="uni__award-tag">${esc(ui.eduAward)}</span>
-            <strong>${esc(award.title)}</strong>
-            <span class="uni__award-issuer">${esc(award.issuer)}</span>
-            ${award.context ? `<span class="uni__award-context">${esc(award.context)}</span>` : ''}
-          </p>
-        </div>` : ''}
-      </div>
-    </article>` : '';
 
   el.innerHTML = `
     <div class="container">
@@ -130,17 +95,14 @@ export default function render(el, ctx) {
         <p data-reveal style="--reveal-delay:120ms">${esc(ui.eduIntro)}</p>
       </header>
 
-      <div class="edu-grid">
-        ${uniPlate}
-        <div class="libreta">
-          <h3 class="libreta__title" id="edu-log" data-reveal>
-            <span>${esc(ui.eduLog)}</span>
-            <span class="libreta__span" aria-hidden="true">${esc(first)} → ${esc(last)}</span>
-          </h3>
-          <ol class="tl" role="list" aria-label="${esc(ui.eduLogAria)}">
-            ${sorted.map(card).join('')}
-          </ol>
-        </div>
+      <div class="libreta">
+        <p class="libreta__title" data-reveal>
+          <span>${esc(ui.eduLog)}</span>
+          <span class="libreta__span" aria-hidden="true">${esc(first)} → ${esc(last)}</span>
+        </p>
+        <ol class="tl" role="list" aria-label="${esc(ui.eduLogAria)}">
+          ${sorted.map(card).join('')}
+        </ol>
       </div>
     </div>`;
 
