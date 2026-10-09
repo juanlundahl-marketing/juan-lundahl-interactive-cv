@@ -1,0 +1,181 @@
+/* Contact. B2a "Porteño": email as a painted sign on a green enamel plate, city on a destination sign. */
+
+/* ---------- B2a "Porteño" local palette (scoped; global tokens win where they exist) ----------
+   Enamel colours are theme-independent (plates look the same day and night).
+   Text-weight colours have a lit variant for "Noche de bar notable". */
+.contact {
+  --pt-enamel: #1F5C4A;          /* colectivo / bondi green enamel */
+  --pt-enamel-ink: #F3EBDA;      /* cream lettering on enamel */
+  --pt-enamel-red: #7A2430;      /* oxblood enamel */
+  --pt-enamel-cel: #2D5F8A;      /* celeste enamel */
+  --pt-enamel-soft: #C9DCD3;     /* secondary text on green enamel (6:1) */
+  --pt-sign: #1C1B19;            /* destination-sign black */
+  --pt-sign-gold: #EBC66E;       /* painted gold on black / green */
+  --pt-slate: #22302A;           /* café pizarra */
+  --pt-wood: #6B4A2A;
+  --pt-chalk: #F2E8D5;
+  --pt-iron: #2B2622;
+  --pt-paper-2: var(--paper-2, #E9DEC6);
+  --pt-green: #1F5C4A;           /* green as text / rules */
+  --pt-oxblood: #7A2430;
+  --pt-ochre: #C08A2E;           /* fills and shadows only */
+  --pt-gold: #8A6424;            /* filete hairline, readable */
+  --pt-celeste: #2D5F8A;         /* readable celeste: links */
+  --pt-shadow: rgba(60, 40, 10, 0.35);
+  --pt-display: var(--font-display, "Sansita", Georgia, serif);
+  --pt-accent: var(--font-accent, "Sansita Swashed", "Sansita", Georgia, serif);
+  --pt-signf: var(--font-sign, "Encode Sans Condensed", "Arial Narrow", system-ui, sans-serif);
+  --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%23E9DEC6'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%232B2622'/%3E%3C/svg%3E");
+  --pt-rivet: radial-gradient(circle at 35% 35%, #F3EBDA 0 1.5px, #9a907f 2.5px, #4a433b 4.5px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .contact {
+    --pt-paper-2: var(--paper-2, #201C18);
+    --pt-green: #6FB59A; --pt-oxblood: #E0828A; --pt-ochre: #D7A64B; --pt-gold: #D7A64B; --pt-celeste: #8FB9DA;
+    --pt-shadow: rgba(0, 0, 0, 0.7);
+    --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%231A1714'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%23514940'/%3E%3C/svg%3E");
+  }
+}
+:root[data-theme="dark"] .contact {
+  --pt-paper-2: var(--paper-2, #201C18);
+  --pt-green: #6FB59A; --pt-oxblood: #E0828A; --pt-ochre: #D7A64B; --pt-gold: #D7A64B; --pt-celeste: #8FB9DA;
+  --pt-shadow: rgba(0, 0, 0, 0.7);
+  --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%231A1714'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%23514940'/%3E%3C/svg%3E");
+}
+
+.contact__inner { display: grid; gap: var(--space-6); }
+.contact__inner .section-head { margin-bottom: 0; }
+
+/* Email: a painted sign on a green enamel plate */
+.contact__mail {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: var(--space-2);
+  padding: 30px 64px 30px 34px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--pt-enamel-ink);
+  background: var(--pt-enamel) linear-gradient(155deg, rgba(255, 255, 255, 0.12), transparent 40%, rgba(0, 0, 0, 0.12));
+  box-shadow:
+    inset 0 0 0 7px var(--pt-enamel),
+    inset 0 0 0 9px rgba(235, 198, 110, 0.8),
+    inset 0 0 0 13px var(--pt-enamel),
+    inset 0 0 0 14px rgba(243, 235, 218, 0.5),
+    6px 6px 0 var(--pt-ochre),
+    0 22px 36px -18px var(--pt-shadow);
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+.contact__mail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 28px;
+  background: var(--pt-chip) no-repeat top right / contain;
+}
+/* Polishing sheen on hover */
+.contact__mail::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.14) 48%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 900ms var(--ease-out);
+  pointer-events: none;
+}
+.contact__mail:hover,
+.contact__mail:focus-visible {
+  transform: translate(-2px, -3px);
+  box-shadow:
+    inset 0 0 0 7px var(--pt-enamel),
+    inset 0 0 0 9px rgba(235, 198, 110, 0.8),
+    inset 0 0 0 13px var(--pt-enamel),
+    inset 0 0 0 14px rgba(243, 235, 218, 0.5),
+    9px 9px 0 var(--pt-ochre),
+    0 26px 40px -18px var(--pt-shadow);
+}
+.contact__mail:hover::after { transform: translateX(100%); }
+.contact__mail:focus-visible { outline: 3px solid var(--pt-celeste); outline-offset: 4px; }
+.contact__rivets {
+  position: absolute;
+  inset: 18px;
+  pointer-events: none;
+  background:
+    var(--pt-rivet) left top / 9px 9px no-repeat,
+    var(--pt-rivet) left bottom / 9px 9px no-repeat,
+    var(--pt-rivet) right bottom / 9px 9px no-repeat;
+}
+.contact__mail-label {
+  position: relative;
+  font-family: var(--pt-signf);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pt-sign-gold);
+}
+.contact__mail-addr {
+  position: relative;
+  font-family: var(--pt-display);
+  font-weight: 900;
+  font-size: clamp(1.1rem, 0.3rem + 4.6vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+  color: var(--pt-enamel-ink);
+  text-shadow: 2px 2px 0 #B07E2A, 3.5px 3.5px 0 rgba(0, 0, 0, 0.35);
+  overflow-wrap: anywhere;
+}
+.contact__mail-arrow {
+  position: absolute;
+  right: 28px;
+  top: 22px;
+  font-size: 1.6rem;
+  color: var(--pt-sign-gold);
+  transition: transform var(--dur) var(--ease-out);
+}
+.contact__mail:hover .contact__mail-arrow { transform: translate(4px, -4px); }
+
+.contact__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.contact__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+/* City on a colectivo destination sign */
+.contact__base {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7em;
+  margin: 0;
+  padding: 0.6em 0.95em 0.55em;
+  border-radius: 4px;
+  background: var(--pt-sign);
+  color: var(--pt-sign-gold);
+  box-shadow: inset 0 0 0 1px #3B3833;
+  font-family: var(--pt-signf);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.contact__base b { color: #F3EBDA; font-weight: 800; white-space: nowrap; }
+.contact__base i { flex: none; width: 5px; height: 5px; border-radius: 50%; background: var(--pt-sign-gold); }
+.contact__resume { display: grid; gap: var(--space-3); }
+
+@media (max-width: 560px) {
+  .contact__mail { padding: 26px 22px 24px; }
+  .contact__mail-arrow { right: 22px; top: 18px; font-size: 1.3rem; }
+  .contact__mail-label { padding-right: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__mail, .contact__mail:hover, .contact__mail:focus-visible, .contact__mail-arrow, .contact__mail::after { transition: none; transform: none; }
+  .contact__mail:hover::after { transform: translateX(-100%); }
+}

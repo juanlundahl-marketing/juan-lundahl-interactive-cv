@@ -1,0 +1,413 @@
+/* Achievements: horizontal scroll-snap strip. B2a "Porteño": café pizarra counters, colectivo route panel for markets, certifications panel. */
+
+/* ---------- B2a "Porteño" local palette (scoped; global tokens win where they exist) ----------
+   Enamel colours are theme-independent (plates look the same day and night).
+   Text-weight colours have a lit variant for "Noche de bar notable". */
+.achievements {
+  --pt-enamel: #1F5C4A;          /* colectivo / bondi green enamel */
+  --pt-enamel-ink: #F3EBDA;      /* cream lettering on enamel */
+  --pt-enamel-red: #7A2430;      /* oxblood enamel */
+  --pt-enamel-cel: #2D5F8A;      /* celeste enamel */
+  --pt-enamel-soft: #C9DCD3;     /* secondary text on green enamel (6:1) */
+  --pt-sign: #1C1B19;            /* destination-sign black */
+  --pt-sign-gold: #EBC66E;       /* painted gold on black / green */
+  --pt-slate: #22302A;           /* café pizarra */
+  --pt-wood: #6B4A2A;
+  --pt-chalk: #F2E8D5;
+  --pt-iron: #2B2622;
+  --pt-paper-2: var(--paper-2, #E9DEC6);
+  --pt-green: #1F5C4A;           /* green as text / rules */
+  --pt-oxblood: #7A2430;
+  --pt-ochre: #C08A2E;           /* fills and shadows only */
+  --pt-gold: #8A6424;            /* filete hairline, readable */
+  --pt-celeste: #2D5F8A;         /* readable celeste: links */
+  --pt-shadow: rgba(60, 40, 10, 0.35);
+  --pt-display: var(--font-display, "Sansita", Georgia, serif);
+  --pt-accent: var(--font-accent, "Sansita Swashed", "Sansita", Georgia, serif);
+  --pt-signf: var(--font-sign, "Encode Sans Condensed", "Arial Narrow", system-ui, sans-serif);
+  --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%23E9DEC6'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%232B2622'/%3E%3C/svg%3E");
+  --pt-rivet: radial-gradient(circle at 35% 35%, #F3EBDA 0 1.5px, #9a907f 2.5px, #4a433b 4.5px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .achievements {
+    --pt-paper-2: var(--paper-2, #201C18);
+    --pt-green: #6FB59A; --pt-oxblood: #E0828A; --pt-ochre: #D7A64B; --pt-gold: #D7A64B; --pt-celeste: #8FB9DA;
+    --pt-shadow: rgba(0, 0, 0, 0.7);
+    --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%231A1714'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%23514940'/%3E%3C/svg%3E");
+  }
+}
+:root[data-theme="dark"] .achievements {
+  --pt-paper-2: var(--paper-2, #201C18);
+  --pt-green: #6FB59A; --pt-oxblood: #E0828A; --pt-ochre: #D7A64B; --pt-gold: #D7A64B; --pt-celeste: #8FB9DA;
+  --pt-shadow: rgba(0, 0, 0, 0.7);
+  --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%231A1714'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%23514940'/%3E%3C/svg%3E");
+}
+
+.ach-head { margin-bottom: var(--space-6); }
+
+.ach-wrap { width: 100%; max-width: 100%; }
+
+/* Horizontal scroll-snap strip (scrolls inside its own box) */
+ul.ach-strip {
+  display: flex;
+  gap: var(--space-4);
+  margin: 0;
+  padding: var(--space-4) var(--gutter) var(--space-6);
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+@media (min-width: 1240px) {
+  ul.ach-strip {
+    padding-inline: calc((100vw - var(--maxw)) / 2 + var(--gutter));
+    scroll-padding-inline: calc((100vw - var(--maxw)) / 2 + var(--gutter));
+  }
+}
+.ach-strip:focus-visible { box-shadow: none; outline: 2px solid var(--pt-celeste); outline-offset: -4px; border-radius: 6px; }
+
+/* ---------- Café pizarra card: green slate in a wooden frame ---------- */
+.ach {
+  position: relative;
+  flex: 0 0 min(78vw, 290px);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: 26px 22px 24px;
+  border: 9px solid var(--pt-wood);
+  border-radius: 8px;
+  color: var(--pt-chalk);
+  background-color: var(--pt-slate);
+  background-image:
+    radial-gradient(120% 80% at 30% 10%, rgba(242, 232, 213, 0.07), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cg fill='none' stroke='%23F2E8D5' stroke-opacity='.07'%3E%3Crect x='.5' y='.5' width='23' height='23'/%3E%3Crect x='3.5' y='3.5' width='4' height='4' rx='1'/%3E%3Crect x='10' y='3.5' width='4' height='4' rx='1'/%3E%3Crect x='16.5' y='3.5' width='4' height='4' rx='1'/%3E%3Crect x='3.5' y='10' width='4' height='4' rx='1'/%3E%3Crect x='10' y='10' width='4' height='4' rx='1'/%3E%3Crect x='16.5' y='10' width='4' height='4' rx='1'/%3E%3Crect x='3.5' y='16.5' width='4' height='4' rx='1'/%3E%3Crect x='10' y='16.5' width='4' height='4' rx='1'/%3E%3Crect x='16.5' y='16.5' width='4' height='4' rx='1'/%3E%3C/g%3E%3C/svg%3E");
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), inset 0 0 40px rgba(0, 0, 0, 0.35), 0 14px 30px -16px var(--pt-shadow);
+  scroll-snap-align: start;
+  overflow: hidden;
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+.ach:hover { transform: translateY(-6px); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), inset 0 0 40px rgba(0, 0, 0, 0.35), 0 26px 40px -20px var(--pt-shadow); }
+.ach--featured { flex-basis: min(86vw, 360px); }
+
+.ach__num {
+  position: relative;
+  z-index: 1;
+  font-family: var(--pt-display);
+  font-weight: 900;
+  font-size: clamp(4.4rem, 3.6rem + 3.6vw, 6.2rem);
+  line-height: 0.9;
+  letter-spacing: 0;
+  color: var(--pt-chalk);
+  text-shadow: 0 0 1px rgba(242, 232, 213, 0.4);
+  font-variant-numeric: tabular-nums;
+}
+/* Chalk underline under the number */
+.ach__num::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: 14px;
+  border-radius: 2px;
+  background: var(--pt-sign-gold);
+  opacity: 0.85;
+}
+.ach__label, .ach__tag {
+  position: relative;
+  z-index: 1;
+  font-family: var(--pt-signf);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  color: #DCD0BA;
+}
+.ach__award {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 6px;
+  padding-top: var(--space-4);
+  border-top: 1.5px dashed rgba(242, 232, 213, 0.35);
+}
+.ach__award-title {
+  font-family: var(--pt-accent);
+  font-weight: 800;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  color: var(--pt-sign-gold);
+}
+.ach__award-issuer { font-size: var(--fs-sm); color: #DCD0BA; }
+
+/* ---------- Markets: colectivo route panel ending at Argentina ---------- */
+.ach.ach--markets {
+  flex-basis: min(86vw, 360px);
+  justify-content: flex-start;
+  gap: 0;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--surface);
+  background-image: none;
+  color: var(--ink);
+  box-shadow: 6px 6px 0 var(--pt-paper-2), 6px 6px 0 2px var(--ink);
+}
+.ach.ach--markets:hover { box-shadow: 8px 8px 0 var(--pt-ochre), 8px 8px 0 2px var(--ink); }
+.route__hd {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--pt-sign);
+}
+.route__line {
+  display: inline-grid;
+  place-items: center;
+  min-width: 44px;
+  height: 38px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: var(--pt-sign-gold);
+  color: var(--pt-sign);
+  font-family: var(--pt-signf);
+  font-size: 1.35rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.ach--markets .ach__label { color: #F3EBDA; font-weight: 800; letter-spacing: 0.16em; }
+.ach__markets {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  padding: 22px 18px 20px;
+}
+/* Stops in order along a dashed route line */
+.ach--markets .mkt {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink);
+}
+.ach--markets .mkt::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 7px;
+  height: 2px;
+  background: repeating-linear-gradient(to right, var(--ink) 0 7px, transparent 7px 12px);
+}
+.ach--markets .mkt__chip {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  padding: 26px 0 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  font-family: var(--pt-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0;
+}
+.ach--markets .mkt__chip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  box-shadow: inset 0 -3px 0 var(--pt-ochre);
+}
+.ach--markets .mkt__chip small {
+  font-family: var(--pt-signf);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pt-green);
+  opacity: 1;
+}
+.ach--markets .mkt__chip--home::before {
+  background: var(--pt-enamel);
+  border-color: var(--pt-enamel);
+  box-shadow: inset 0 0 0 2px var(--pt-enamel), inset 0 0 0 3.5px var(--pt-sign-gold), 0 0 0 1.5px var(--ink);
+}
+/* Cabecera (terminus): green enamel plate */
+.ach__home {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: var(--pt-enamel) linear-gradient(160deg, rgba(255, 255, 255, 0.1), transparent 45%);
+  color: var(--pt-enamel-ink);
+  font-family: var(--pt-signf);
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: inset 0 0 0 4px var(--pt-enamel), inset 0 0 0 5.5px rgba(243, 235, 218, 0.8);
+}
+.ach__home::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 15px;
+  background: var(--pt-chip) no-repeat top right / contain;
+}
+.ach__home-pin {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pt-sign-gold);
+  box-shadow: 0 0 0 3px rgba(235, 198, 110, 0.3);
+}
+.ach__legend {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: var(--space-3) 0 0;
+  list-style: none;
+  border-top: 1px dashed var(--border-strong);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+/* ---------- Controls ---------- */
+.ach-ctrl {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+}
+.ach-hint {
+  font-family: var(--pt-signf);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ach-btns { display: flex; gap: var(--space-2); }
+.ach-btn { border: 1.5px solid var(--ink); border-radius: 6px; width: 44px; height: 44px; color: var(--ink); }
+.ach-btn:hover { background: var(--ink); color: var(--surface); }
+
+/* ---------- Certifications card: chalk toggle + panel under the strip ---------- */
+.ach__toggle {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1.5px solid var(--pt-chalk);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--pt-chalk);
+  font-family: var(--pt-signf);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--dur) ease, color var(--dur) ease;
+}
+.ach__toggle:hover { background: var(--pt-chalk); color: var(--pt-slate); }
+.ach__toggle:focus-visible { outline: 2px solid var(--pt-sign-gold); outline-offset: 3px; box-shadow: none; }
+.ach__toggle svg { width: 18px; height: 18px; flex: none; transition: transform var(--dur) var(--ease-out); }
+.ach__toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+.ach-certs {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.45s var(--ease-out), visibility 0s linear 0.45s;
+}
+.ach-certs.is-open { grid-template-rows: 1fr; visibility: visible; transition-delay: 0s; }
+.ach-certs__clip { min-height: 0; overflow: hidden; }
+.ach-certs__list {
+  display: grid;
+  gap: 0 var(--space-6);
+  margin: var(--space-2) 0 var(--space-5);
+  padding: var(--space-3) var(--space-5);
+  list-style: none;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  background: var(--surface);
+}
+@media (min-width: 760px) { .ach-certs__list { grid-template-columns: 1fr 1fr; } }
+.ach-cert {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-3) 0;
+  border-bottom: 1px dashed var(--border-strong);
+}
+.ach-cert__name { font-weight: 700; line-height: 1.3; }
+.ach-cert__meta {
+  font-family: var(--pt-signf);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ach-cert__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  justify-self: start;
+  min-height: 28px;
+  font-family: var(--pt-signf);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pt-celeste);
+  text-decoration: underline;
+  text-decoration-color: var(--pt-ochre);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.ach-cert__link svg { width: 14px; height: 14px; }
+
+@media (max-width: 560px) {
+  .ach-certs__list { padding: var(--space-2) var(--space-4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ach, .ach:hover { transition: none; transform: none; }
+  ul.ach-strip { scroll-behavior: auto; }
+  .ach-certs, .ach-certs.is-open { transition: none; }
+  .ach__toggle svg { transition: none; }
+}

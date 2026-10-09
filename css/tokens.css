@@ -1,0 +1,285 @@
+/* ==========================================================================
+   Design tokens - Juan Lundahl Interactive CV
+   Identity: "Porteño" (style board B2a). Everyday Buenos Aires vernacular:
+   enamelled street/door plates, painted shop-front lettering, restrained
+   original filete, sidewalk tiles (baldosas), colectivo line numbers, café
+   warmth on newsprint cream. Hero background from board B2b: a worn
+   celeste-white-celeste painted wall with a half Sol de Mayo on the right.
+
+   Light theme is the default. Dark theme ("Noche de bar notable") applies when:
+     - the OS prefers dark and the user has not forced light (data-theme="light"), or
+     - the user forced dark (data-theme="dark" on <html>).
+   Every color used by components MUST come from these tokens.
+
+   LEGACY NAMES ARE KEPT (other section CSS uses them); values now map to B2a:
+   ----------------------------------------------------------------------------
+   token              light                         dark
+   --bg               #F3EBDA paper                 #1A1714
+   --bg-alt           #E9DEC6 paper-2               #201C18
+   --surface          #FBF6EA                       #24201B
+   --surface-2        #F6EFE0                       #2A251F
+   --border           #D9CCB1                       #3A342C
+   --border-strong    #A39070                       #6A6052
+   --ink / -2 / muted #1C1B19 / #3B3833 / #5F584D   #F2E8D5 / #DCD0BA / #B0A592
+   --navy             #1F5C4A bondi enamel          #1F5C4A (plates keep colour)
+   --navy-ink         #F3EBDA                       #F3EBDA
+   --accent           #C08A2E ochre (non-text)      #D7A64B
+   --accent-2         #7A2430 oxblood (accent word) #E0828A
+   --accent-soft      #D3E2EE celeste wash          #2A3D4F
+   --red / --red-deep #7A2430 / #571820 (enamel red, fixed)
+   --white            #FBF6EA (cream "white", fixed)
+   --oxblood          #7A2430                       #E0828A (readable on paper)
+   --on-red-soft      #EBC66E sign gold (fixed; on oxblood 7:1, on slate 8:1)
+   --feature-bg/-ink  #22302A slate / #F2E8D5 (fixed)
+   --stage-1..4       #E9DEC6 #EBC66E #1F5C4A #7A2430
+                      dark: #2A3D4F #D7A64B #6FB59A #E0828A
+
+   NEW TOKENS: --paper --paper-2 --rule --rule-strong --green --oxblood
+   --ochre --gold --gold-bright --celeste --celeste-ink --link --enamel
+   --enamel-ink --enamel-red --slate --wood --iron --band-cel --wall-white
+   --sol-a --sol-b --arg-opacity --font-display --font-accent --font-sign
+   --baldosa --vainilla --chip-tr --noise --nav-ink --ghost-stroke
+
+   AA notes (light, on --paper): ink 14.5:1, ink-2 9.8:1, muted 5.9:1,
+   green 6.6:1, oxblood 8.3:1, link 5.7:1, gold 4.5:1. Ochre and celeste are
+   fills only. Dark (on --bg): ink 14.7:1, muted 7.4:1, oxblood 6.6:1,
+   ochre 8.0:1, celeste 8.6:1, green 7.4:1.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Porteño palette ---- */
+  --paper: #f3ebda;            /* newsprint cream */
+  --paper-2: #e9dec6;          /* aged band */
+  --rule: #d9ccb1;
+  --rule-strong: #bdaa87;
+
+  --green: #1f5c4a;            /* colectivo / bondi green (text-safe) */
+  --oxblood: #7a2430;          /* bar-notable oxblood (text-safe) */
+  --ochre: #c08a2e;            /* painted gold: fills, shadows (non-text) */
+  --gold: #8a6424;             /* filete hairline, 4.5:1 if ever text */
+  --gold-bright: #ebc66e;      /* sign gold on dark plates (fixed) */
+  --celeste: #7fa8c9;          /* weathered celeste (non-text) */
+  --celeste-ink: #2d5f8a;      /* readable celeste */
+  --link: #2d5f8a;
+
+  /* Theme-independent enamel (plates look the same day and night) */
+  --enamel: #1f5c4a;
+  --enamel-ink: #f3ebda;
+  --enamel-red: #7a2430;
+  --slate: #22302a;            /* café pizarra */
+  --wood: #6b4a2a;
+  --iron: #2b2622;             /* metal under chipped enamel */
+  --sign-bg: #1c1b19;          /* destination-sign black */
+  --sign-ink: #ebc66e;
+
+  /* Argentina background: worn wall bands + half Sol de Mayo. ONE dial. */
+  --arg-opacity: 0.5;
+  --band-cel: #74acdb;         /* wall celeste (only under --arg-opacity) */
+  --wall-white: #ffffff;
+  --sol-a: #8a6424;            /* straight rays, rings */
+  --sol-b: #2d5f8a;            /* wavy rays */
+  --sol-disc: #c08a2e;
+
+  /* Surfaces */
+  --bg: var(--paper);
+  --bg-alt: var(--paper-2);
+  --surface: #fbf6ea;
+  --surface-2: #f6efe0;
+  --border: var(--rule);
+  --border-strong: #a39070;
+
+  /* Ink */
+  --ink: #1c1b19;
+  --ink-2: #3b3833;
+  --muted: #5f584d;
+  --ghost: rgba(28, 27, 25, 0.06);          /* hover wash */
+  --ghost-stroke: rgba(122, 36, 48, 0.2);   /* outlined surname behind hero */
+
+  /* Brand (legacy names) */
+  --navy: var(--enamel);
+  --navy-ink: var(--enamel-ink);
+  --accent: var(--ochre);
+  --accent-2: var(--oxblood);
+  --accent-soft: #d3e2ee;
+
+  /* Legacy names, remapped to the Porteño palette */
+  --red: #7a2430;
+  --red-deep: #571820;
+  --white: #fbf6ea;
+  --on-red-soft: #ebc66e;
+  --feature-bg: #22302a;
+  --feature-ink: #f2e8d5;
+
+  /* Funnel stage palette (top -> bottom) */
+  --stage-1: #e9dec6;
+  --stage-2: #ebc66e;
+  --stage-3: #1f5c4a;
+  --stage-4: #7a2430;
+  --stage-ink-1: #1c1b19;
+  --stage-ink-2: #1c1b19;
+  --stage-ink-3: #f3ebda;
+  --stage-ink-4: #f3ebda;
+
+  /* Effects */
+  --shadow-sm: 0 1px 2px rgba(60, 40, 10, 0.12);
+  --shadow-md: 0 14px 30px -16px rgba(60, 40, 10, 0.35);
+  --shadow-lg: 0 30px 60px -28px rgba(60, 40, 10, 0.45);
+  --nav-bg: rgba(28, 27, 25, 0.95);
+  --nav-ink: #f3ebda;
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--link);
+
+  /* Typography: all four families by Argentine designers.
+     Sansita / Sansita Swashed / Archivo (Omnibus-Type), Encode Sans Condensed
+     (Impallari Type). Legacy --font-serif / --font-mono now point at them. */
+  --font-display: "Sansita", Georgia, serif;
+  --font-accent: "Sansita Swashed", "Sansita", Georgia, serif;
+  --font-sign: "Encode Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-sans: "Archivo", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --font-serif: var(--font-display);  /* legacy italic accents -> Sansita italic */
+  --font-mono: var(--font-sign);      /* legacy labels/meta -> condensed signage */
+
+  --fs-xs: 0.78rem;
+  --fs-sm: 0.9rem;
+  --fs-base: 1rem;
+  --fs-md: 1.15rem;
+  --fs-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.55rem);
+  --fs-h2: clamp(2.3rem, 1.4rem + 3.8vw, 4.8rem);
+  --fs-h1: clamp(2.6rem, 1.3rem + 4.4vw, 5.4rem);
+  --fs-ghost: clamp(5rem, 1rem + 13vw, 13rem);
+
+  /* Spacing and layout */
+  --gutter: 16px;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+  --maxw: 1180px;
+
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 160ms;
+  --dur: 320ms;
+  --dur-slow: 700ms;
+
+  /* Textures (original drawings) */
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .27 0 0 0 0 .15 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Baldosa: calcáreo tile = corner quarter-circles + a ring of eight dots */
+  --baldosa: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cg fill='none' stroke='%238A6424' stroke-width='.8'%3E%3Crect x='.4' y='.4' width='27.2' height='27.2'/%3E%3Cpath d='M0 7A7 7 0 0 0 7 0M21 0A7 7 0 0 0 28 7M28 21A7 7 0 0 0 21 28M7 28A7 7 0 0 0 0 21'/%3E%3Ccircle cx='14' cy='14' r='5.2'/%3E%3C/g%3E%3Cg fill='%23C08A2E' fill-opacity='.8'%3E%3Ccircle cx='23.0' cy='14.0' r='1.2'/%3E%3Ccircle cx='20.4' cy='20.4' r='1.2'/%3E%3Ccircle cx='14.0' cy='23.0' r='1.2'/%3E%3Ccircle cx='7.6' cy='20.4' r='1.2'/%3E%3Ccircle cx='5.0' cy='14.0' r='1.2'/%3E%3Ccircle cx='7.6' cy='7.6' r='1.2'/%3E%3Ccircle cx='14.0' cy='5.0' r='1.2'/%3E%3Ccircle cx='20.4' cy='7.6' r='1.2'/%3E%3C/g%3E%3Ccircle cx='14' cy='14' r='2.3' fill='%237A2430'/%3E%3Cg fill='%237FA8C9'%3E%3Ccircle cx='0' cy='0' r='3.6'/%3E%3Ccircle cx='28' cy='0' r='3.6'/%3E%3Ccircle cx='0' cy='28' r='3.6'/%3E%3Ccircle cx='28' cy='28' r='3.6'/%3E%3C/g%3E%3C/svg%3E");
+  --baldosa-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cg fill='none' stroke='%23D7A64B' stroke-width='.8'%3E%3Crect x='.4' y='.4' width='27.2' height='27.2'/%3E%3Cpath d='M0 7A7 7 0 0 0 7 0M21 0A7 7 0 0 0 28 7M28 21A7 7 0 0 0 21 28M7 28A7 7 0 0 0 0 21'/%3E%3Ccircle cx='14' cy='14' r='5.2'/%3E%3C/g%3E%3Cg fill='%23D7A64B' fill-opacity='.8'%3E%3Ccircle cx='23.0' cy='14.0' r='1.2'/%3E%3Ccircle cx='20.4' cy='20.4' r='1.2'/%3E%3Ccircle cx='14.0' cy='23.0' r='1.2'/%3E%3Ccircle cx='7.6' cy='20.4' r='1.2'/%3E%3Ccircle cx='5.0' cy='14.0' r='1.2'/%3E%3Ccircle cx='7.6' cy='7.6' r='1.2'/%3E%3Ccircle cx='14.0' cy='5.0' r='1.2'/%3E%3Ccircle cx='20.4' cy='7.6' r='1.2'/%3E%3C/g%3E%3Ccircle cx='14' cy='14' r='2.3' fill='%23E0828A'/%3E%3Cg fill='%238FB9DA'%3E%3Ccircle cx='0' cy='0' r='3.6'/%3E%3Ccircle cx='28' cy='0' r='3.6'/%3E%3Ccircle cx='0' cy='28' r='3.6'/%3E%3Ccircle cx='28' cy='28' r='3.6'/%3E%3C/g%3E%3C/svg%3E");
+  /* Vereda "vainilla" (nine raised pads), used faintly on the dark background */
+  --vainilla: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cg fill='none' stroke='%23F2E8D5' stroke-opacity='.06'%3E%3Crect x='.5' y='.5' width='23' height='23'/%3E%3Crect x='3.5' y='3.5' width='4' height='4' rx='1'/%3E%3Crect x='10' y='3.5' width='4' height='4' rx='1'/%3E%3Crect x='16.5' y='3.5' width='4' height='4' rx='1'/%3E%3Crect x='3.5' y='10' width='4' height='4' rx='1'/%3E%3Crect x='10' y='10' width='4' height='4' rx='1'/%3E%3Crect x='16.5' y='10' width='4' height='4' rx='1'/%3E%3Crect x='3.5' y='16.5' width='4' height='4' rx='1'/%3E%3Crect x='10' y='16.5' width='4' height='4' rx='1'/%3E%3Crect x='16.5' y='16.5' width='4' height='4' rx='1'/%3E%3C/g%3E%3C/svg%3E");
+  /* Chipped enamel corner (top-right), showing the iron underneath */
+  --chip-tr: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%23E9DEC6'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%232B2622'/%3E%3C/svg%3E");
+  --page-texture: var(--noise);
+  --tile: var(--baldosa);
+}
+
+@media (min-width: 720px) {
+  :root { --gutter: 32px; }
+}
+@media (min-width: 1100px) {
+  :root { --gutter: 48px; }
+}
+
+/* Dark theme: "Noche de bar notable". Same values in both selectors below. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #1a1714;
+    --paper-2: #201c18;
+    --rule: #3a342c;
+    --rule-strong: #514940;
+    --green: #6fb59a;
+    --oxblood: #e0828a;
+    --ochre: #d7a64b;
+    --gold: #d7a64b;
+    --celeste: #8fb9da;
+    --celeste-ink: #8fb9da;
+    --link: #8fb9da;
+    --band-cel: #8fb9da;
+    --wall-white: #e6e0d2;
+    --sol-a: #d7a64b;
+    --sol-b: #8fb9da;
+    --sol-disc: #d7a64b;
+    --surface: #24201b;
+    --surface-2: #2a251f;
+    --border-strong: #6a6052;
+    --ink: #f2e8d5;
+    --ink-2: #dcd0ba;
+    --muted: #b0a592;
+    --ghost: rgba(242, 232, 213, 0.07);
+    --ghost-stroke: rgba(224, 130, 138, 0.16);
+    --accent-soft: #2a3d4f;
+    --stage-1: #2a3d4f;
+    --stage-2: #d7a64b;
+    --stage-3: #6fb59a;
+    --stage-4: #e0828a;
+    --stage-ink-1: #f2e8d5;
+    --stage-ink-2: #1a1714;
+    --stage-ink-3: #1a1714;
+    --stage-ink-4: #1a1714;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 14px 30px -16px rgba(0, 0, 0, 0.7);
+    --shadow-lg: 0 30px 60px -28px rgba(0, 0, 0, 0.8);
+    --nav-bg: rgba(242, 232, 213, 0.96);
+    --nav-ink: #1a1714;
+    --page-texture: var(--vainilla);
+    --tile: var(--baldosa-dark);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #1a1714;
+  --paper-2: #201c18;
+  --rule: #3a342c;
+  --rule-strong: #514940;
+  --green: #6fb59a;
+  --oxblood: #e0828a;
+  --ochre: #d7a64b;
+  --gold: #d7a64b;
+  --celeste: #8fb9da;
+  --celeste-ink: #8fb9da;
+  --link: #8fb9da;
+  --band-cel: #8fb9da;
+  --wall-white: #e6e0d2;
+  --sol-a: #d7a64b;
+  --sol-b: #8fb9da;
+  --sol-disc: #d7a64b;
+  --surface: #24201b;
+  --surface-2: #2a251f;
+  --border-strong: #6a6052;
+  --ink: #f2e8d5;
+  --ink-2: #dcd0ba;
+  --muted: #b0a592;
+  --ghost: rgba(242, 232, 213, 0.07);
+  --ghost-stroke: rgba(224, 130, 138, 0.16);
+  --accent-soft: #2a3d4f;
+  --stage-1: #2a3d4f;
+  --stage-2: #d7a64b;
+  --stage-3: #6fb59a;
+  --stage-4: #e0828a;
+  --stage-ink-1: #f2e8d5;
+  --stage-ink-2: #1a1714;
+  --stage-ink-3: #1a1714;
+  --stage-ink-4: #1a1714;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 14px 30px -16px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 30px 60px -28px rgba(0, 0, 0, 0.8);
+  --nav-bg: rgba(242, 232, 213, 0.96);
+  --nav-ink: #1a1714;
+  --page-texture: var(--vainilla);
+  --tile: var(--baldosa-dark);
+}

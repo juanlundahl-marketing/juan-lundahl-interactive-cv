@@ -1,0 +1,311 @@
+/* Hero (Porteño, board B2a) on the worn Argentine wall (board B2b).
+   Background intensity: ONE dial, --arg-opacity (css/tokens.css).
+     light: bands = dial, sun = dial x 1.6 (capped at 1)
+     dark:  bands = dial x 0.66, sun = dial x 1.2
+   Text sits on a soft paper scrim so AA holds at any dial value
+   (ink-2 still passes 4.9:1 even on fully opaque wall celeste). */
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--space-8) calc(var(--space-8) + 34px);
+  overflow: hidden;
+  isolation: isolate;
+}
+@media (min-width: 900px) {
+  .hero { padding-top: 120px; padding-bottom: 130px; }
+}
+/* Sidewalk strip closing the hero */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 34px;
+  z-index: 0;
+  background: var(--bg) var(--tile) repeat-x left center / 34px 34px;
+  border-block: 1px solid var(--border);
+}
+
+/* ---------- Background: wall + half sun + ghost surname ---------- */
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+}
+.hero__wall {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  opacity: var(--arg-opacity);
+}
+.hero__wall .cel { fill: var(--band-cel); }
+.hero__wall .bla { fill: var(--wall-white); }
+
+/* Half Sol de Mayo: centre sits on the right edge, upper half of the hero */
+.hero__sol {
+  position: absolute;
+  top: 46%;
+  right: 0;
+  width: clamp(560px, 62vw, 880px);
+  height: auto;
+  aspect-ratio: 1;
+  max-width: none;
+  transform: translate(50%, -50%);
+  overflow: visible;
+  opacity: min(1, calc(var(--arg-opacity) * 1.6));
+}
+.hero__sol .rs { fill: var(--sol-a); fill-opacity: 0.22; stroke: var(--sol-a); stroke-width: 1.2; stroke-linejoin: round; }
+.hero__sol .rw { fill: none; stroke: var(--sol-b); stroke-width: 1.6; stroke-linecap: round; }
+.hero__sol .disc { fill: var(--sol-disc); fill-opacity: 0.32; stroke: var(--sol-a); stroke-width: 1.4; }
+.hero__sol .ring { fill: none; stroke: var(--sol-a); stroke-width: 1.2; }
+
+/* Outlined surname, painted faintly low on the wall */
+.hero__ghost {
+  position: absolute;
+  inset: auto 0 52px 0;
+  display: flex;
+  justify-content: center;
+}
+.hero__ghost span {
+  font: 900 var(--fs-ghost)/0.8 var(--font-display);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ghost-stroke);
+  animation: ghost-drift 18s ease-in-out infinite alternate;
+}
+@keyframes ghost-drift {
+  from { transform: translateX(-2%); }
+  to   { transform: translateX(2%); }
+}
+
+/* Dark: "Noche de bar notable" - the wall recedes, the sun glows a little */
+:root[data-theme="dark"] .hero__wall { opacity: calc(var(--arg-opacity) * 0.66); }
+:root[data-theme="dark"] .hero__sol { opacity: min(1, calc(var(--arg-opacity) * 1.2)); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hero__wall { opacity: calc(var(--arg-opacity) * 0.66); }
+  :root:not([data-theme="light"]) .hero__sol { opacity: min(1, calc(var(--arg-opacity) * 1.2)); }
+}
+
+/* ---------- Layout ---------- */
+
+.hero__grid {
+  position: relative;
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  /* leave the right edge free so the half sun shows beside the bill */
+  .hero__grid { grid-template-columns: 1.3fr 0.9fr; gap: var(--space-7); padding-right: calc(var(--gutter) + clamp(40px, 11vw, 190px)); }
+  .hero__grid .hero__cartel { justify-self: start; }
+}
+
+.hero__copy {
+  position: relative;
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
+}
+/* Soft paper scrim behind the copy (no hard edge) */
+.hero__copy::before {
+  content: "";
+  position: absolute;
+  inset: -56px -64px;
+  z-index: -1;
+  border-radius: 40px;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--bg) 90%, transparent) 62%, color-mix(in srgb, var(--bg) 55%, transparent) 84%, transparent);
+  pointer-events: none;
+}
+
+.hero__hello { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.hero__who {
+  font: 700 0.86rem/1.2 var(--font-sign);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* Cinta: painted ribbon with swallowtails (fixed enamel colours) */
+.cinta {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  margin: 0 14px;
+  padding: 0.32em 1em 0.38em;
+  background: var(--enamel-red);
+  color: #fbf6ea;
+  font: 800 1.25rem/1 var(--font-accent);
+  box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.18), inset 0 -1.5px 0 rgba(0, 0, 0, 0.2);
+}
+.cinta::before, .cinta::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 7px;
+  width: 26px;
+  height: 100%;
+  background: #571820;
+}
+.cinta::before { left: -16px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 38% 50%); }
+.cinta::after { right: -16px; clip-path: polygon(0 0, 100% 0, 62% 50%, 100% 100%, 0 100%); }
+
+.hero__title {
+  font-size: var(--fs-h1);
+  max-width: 15ch;
+}
+:lang(de) .hero__title { max-width: 17ch; font-size: clamp(2.3rem, 1.2rem + 4vw, 5rem); }
+.hero__lede {
+  max-width: 48ch;
+  font-size: var(--fs-md);
+  color: var(--ink-2);
+}
+
+.hero__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+
+/* ---------- Portrait as a theatre / milonga bill ---------- */
+
+.hero__cartel {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 340px);
+  margin: 0;
+  padding: 10px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-lg);
+  rotate: 1deg;
+}
+.hero__cartel::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid var(--ink);
+  pointer-events: none;
+}
+.hero__corner {
+  position: absolute;
+  top: -4px;
+  width: 42px;
+  height: 42px;
+  z-index: 1;
+}
+.hero__corner--l { left: -4px; }
+.hero__corner--r { right: -4px; transform: scaleX(-1); }
+
+.hero__bill {
+  padding: 8px 18px 10px;
+  text-align: center;
+  font: 700 0.72rem/1.25 var(--font-sign);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.hero__bill b {
+  display: block;
+  margin-top: 4px;
+  font: 800 1.02rem/1.1 var(--font-sign);
+  letter-spacing: 0.18em;
+  color: var(--ink);
+}
+.hero__ph {
+  position: relative;
+  aspect-ratio: 4 / 4.6;
+  border: 1.5px solid var(--ink);
+  background: #e9dec6;
+}
+.hero__photo img {
+  filter: grayscale(1) contrast(1.1);
+  object-position: 50% 24%;
+}
+.hero__photo .photo__fallback { font-size: clamp(4rem, 3rem + 6vw, 7rem); }
+.hero__name {
+  padding: 12px 4px 2px;
+  text-align: center;
+  font: 900 2.05rem/0.95 var(--font-display);
+  color: var(--ink);
+  text-shadow: 2px 2px 0 color-mix(in srgb, var(--ochre) 65%, transparent);
+}
+.hero__rule { margin: 4px auto 6px; height: 20px; max-width: 220px; }
+.hero__band {
+  padding: 8px 6px 7px;
+  text-align: center;
+  background: var(--enamel-red);
+  color: #fbf6ea;
+  font: 700 0.72rem/1.3 var(--font-sign);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 899px) {
+  .hero__cartel { order: -1; justify-self: start; width: min(100%, 250px); margin-left: 8px; }
+  .hero__name { font-size: 1.7rem; }
+  .hero__bill { font-size: 0.64rem; padding-inline: 12px; }
+  .hero__bill b { font-size: 0.9rem; }
+  .hero__band { font-size: 0.62rem; letter-spacing: 0.12em; }
+  /* Sun moves up beside the bill; the copy sits on plain-ish paper */
+  .hero__sol { top: 150px; width: 520px; }
+  .hero__copy::before { inset: -32px -24px; }
+}
+@media (max-width: 480px) {
+  .hero__title { font-size: 2.45rem; }
+  :lang(de) .hero__title { font-size: 2.15rem; }
+  .cinta { font-size: 1.08rem; margin: 0 12px; }
+  /* compact bill so the headline stays in the first screen */
+  .hero__cartel { width: 176px; padding: 7px; margin-left: 4px; }
+  .hero__cartel::before { inset: 3px; }
+  .hero__corner { width: 30px; height: 30px; }
+  .hero__bill { font-size: 0.52rem; letter-spacing: 0.14em; padding: 4px 6px 6px; }
+  .hero__bill b { font-size: 0.7rem; letter-spacing: 0.14em; }
+  .hero__name { font-size: 1.25rem; padding-top: 8px; }
+  .hero__rule { height: 14px; margin: 2px auto 4px; }
+  .hero__band { font-size: 0.52rem; letter-spacing: 0.1em; padding: 5px 4px; }
+  .hero__who { font-size: 0.76rem; }
+  .hero__sol { top: 130px; width: 440px; }
+}
+
+/* ---------- Scroll hint ---------- */
+
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 52px;
+  transform: translateX(-50%);
+  display: none;
+  font: 700 0.72rem/1 var(--font-sign);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.hero__scroll::after {
+  content: "";
+  display: block;
+  width: 1.5px;
+  height: 30px;
+  margin: 8px auto 0;
+  background: linear-gradient(var(--ink-2), transparent);
+  animation: drip 1.8s ease-in-out infinite;
+}
+@keyframes drip {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+@media (min-width: 900px) {
+  .hero__scroll { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__ghost span, .hero__scroll::after { animation: none; }
+}

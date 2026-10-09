@@ -1,0 +1,281 @@
+/* Certifications: sticky heading left, list right. B2a "Porteño": rows turn into green enamel plates on hover / focus; compact education and languages. */
+
+/* ---------- B2a "Porteño" local palette (scoped; global tokens win where they exist) ----------
+   Enamel colours are theme-independent (plates look the same day and night).
+   Text-weight colours have a lit variant for "Noche de bar notable". */
+.certifications {
+  --pt-enamel: #1F5C4A;          /* colectivo / bondi green enamel */
+  --pt-enamel-ink: #F3EBDA;      /* cream lettering on enamel */
+  --pt-enamel-red: #7A2430;      /* oxblood enamel */
+  --pt-enamel-cel: #2D5F8A;      /* celeste enamel */
+  --pt-enamel-soft: #C9DCD3;     /* secondary text on green enamel (6:1) */
+  --pt-sign: #1C1B19;            /* destination-sign black */
+  --pt-sign-gold: #EBC66E;       /* painted gold on black / green */
+  --pt-slate: #22302A;           /* café pizarra */
+  --pt-wood: #6B4A2A;
+  --pt-chalk: #F2E8D5;
+  --pt-iron: #2B2622;
+  --pt-paper-2: var(--paper-2, #E9DEC6);
+  --pt-green: #1F5C4A;           /* green as text / rules */
+  --pt-oxblood: #7A2430;
+  --pt-ochre: #C08A2E;           /* fills and shadows only */
+  --pt-gold: #8A6424;            /* filete hairline, readable */
+  --pt-celeste: #2D5F8A;         /* readable celeste: links */
+  --pt-shadow: rgba(60, 40, 10, 0.35);
+  --pt-display: var(--font-display, "Sansita", Georgia, serif);
+  --pt-accent: var(--font-accent, "Sansita Swashed", "Sansita", Georgia, serif);
+  --pt-signf: var(--font-sign, "Encode Sans Condensed", "Arial Narrow", system-ui, sans-serif);
+  --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%23E9DEC6'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%232B2622'/%3E%3C/svg%3E");
+  --pt-rivet: radial-gradient(circle at 35% 35%, #F3EBDA 0 1.5px, #9a907f 2.5px, #4a433b 4.5px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .certifications {
+    --pt-paper-2: var(--paper-2, #201C18);
+    --pt-green: #6FB59A; --pt-oxblood: #E0828A; --pt-ochre: #D7A64B; --pt-gold: #D7A64B; --pt-celeste: #8FB9DA;
+    --pt-shadow: rgba(0, 0, 0, 0.7);
+    --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%231A1714'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%23514940'/%3E%3C/svg%3E");
+  }
+}
+:root[data-theme="dark"] .certifications {
+  --pt-paper-2: var(--paper-2, #201C18);
+  --pt-green: #6FB59A; --pt-oxblood: #E0828A; --pt-ochre: #D7A64B; --pt-gold: #D7A64B; --pt-celeste: #8FB9DA;
+  --pt-shadow: rgba(0, 0, 0, 0.7);
+  --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%231A1714'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%23514940'/%3E%3C/svg%3E");
+}
+
+.certs {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .certs { grid-template-columns: minmax(280px, 0.8fr) 1.2fr; gap: var(--space-8); }
+  .certs__head { position: sticky; top: 110px; }
+}
+.certs__head { display: grid; gap: var(--space-4); }
+
+/* Count: painted numerals with a gold drop shadow */
+.certs__count {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  color: var(--muted);
+}
+.certs__count strong {
+  font-family: var(--pt-display);
+  font-weight: 900;
+  font-size: clamp(4.5rem, 3rem + 6vw, 7.5rem);
+  line-height: 0.9;
+  color: var(--ink);
+  text-shadow: 4px 4px 0 color-mix(in srgb, var(--pt-ochre) 70%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+.certs__count span {
+  font-family: var(--pt-signf);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.certs__list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px solid var(--ink);
+}
+
+/* Row at rest: cream, dashed rule. Hover / focus: green enamel plate. */
+.cert {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 2.4rem 1fr auto;
+  grid-template-areas: "n name name" ". info info" ". link link";
+  align-items: baseline;
+  gap: 4px var(--space-3);
+  padding: 14px 18px;
+  border-radius: 6px;
+  border-bottom: 1px dashed var(--border-strong);
+  color: var(--ink);
+  outline: none;
+  cursor: default;
+  transition: background-color 220ms var(--ease-out), color 220ms var(--ease-out),
+              opacity 220ms ease, transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+}
+.cert::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 15px;
+  background: var(--pt-chip) no-repeat top right / contain;
+  opacity: 0;
+  transition: opacity 220ms;
+}
+.cert__n {
+  grid-area: n;
+  font-family: var(--pt-signf);
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--pt-gold);
+  font-variant-numeric: tabular-nums;
+}
+.cert__name {
+  grid-area: name;
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.22;
+}
+.cert__info {
+  grid-area: info;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  font-family: var(--pt-signf);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pt-green);
+}
+.cert__date { color: var(--muted); }
+.cert__date::before { content: "· "; }
+
+/* "View credential" link */
+.cert__link {
+  grid-area: link;
+  justify-self: start;
+  margin-left: -4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: var(--pt-signf);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-color: var(--pt-ochre);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  white-space: nowrap;
+  color: var(--pt-celeste);
+}
+.cert__link svg { width: 14px; height: 14px; flex: none; transition: transform var(--dur-fast, 160ms) var(--ease-out); }
+.cert__link:hover svg, .cert__link:focus-visible svg { transform: translate(2px, -2px); }
+.cert__link:focus-visible { outline: 2px solid var(--pt-sign-gold); outline-offset: 2px; box-shadow: none; }
+
+@media (min-width: 720px) {
+  .cert {
+    grid-template-areas: "n name info" ". link .";
+  }
+  .cert__info {
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    white-space: nowrap;
+  }
+}
+
+/* Spotlight: soften the others, enamel plate on the active row */
+/* Only the decorative index fades: fading whole rows (was opacity .62) dropped
+   issuer/date/link text to 2.5:1 in light theme, below AA. */
+.certs__list.has-active .cert:not(:hover):not(:focus-within) .cert__n { opacity: 0.45; }
+.cert:hover,
+.cert:focus-within,
+.cert:focus-visible {
+  opacity: 1 !important;
+  background: var(--pt-enamel) linear-gradient(160deg, rgba(255, 255, 255, 0.1), transparent 45%);
+  color: var(--pt-enamel-ink);
+  border-bottom-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 0 4px var(--pt-enamel), inset 0 0 0 5.5px rgba(243, 235, 218, 0.8), 0 4px 0 var(--pt-ochre);
+}
+.cert:hover::before,
+.cert:focus-within::before,
+.cert:focus-visible::before { opacity: 1; }
+.cert:hover .cert__n,
+.cert:focus-within .cert__n,
+.cert:focus-visible .cert__n,
+.cert:hover .cert__info,
+.cert:focus-within .cert__info,
+.cert:focus-visible .cert__info { color: var(--pt-sign-gold); }
+.cert:hover .cert__date,
+.cert:focus-within .cert__date,
+.cert:focus-visible .cert__date { color: var(--pt-enamel-soft); }
+.cert:hover .cert__link,
+.cert:focus-within .cert__link { color: var(--pt-enamel-ink); text-decoration-color: var(--pt-sign-gold); }
+.cert:focus-visible { outline: 2px solid var(--pt-celeste); outline-offset: 3px; }
+
+/* ---------- Education + languages (compact) ---------- */
+.certs__extra {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-strong);
+}
+@media (min-width: 900px) {
+  .certs__extra { grid-template-columns: 1.6fr 1fr; gap: var(--space-8); }
+}
+.extra { display: grid; gap: var(--space-4); align-content: start; }
+.edu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.edu li {
+  padding: 14px 16px;
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+  background: var(--surface);
+  box-shadow: 3px 3px 0 var(--pt-paper-2), 3px 3px 0 1.5px var(--ink);
+}
+.edu__degree { font-weight: 700; line-height: 1.25; }
+.edu__inst { margin-top: 2px; font-size: var(--fs-sm); color: var(--ink-2); }
+.edu__period {
+  margin-top: var(--space-2);
+  font-family: var(--pt-signf);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pt-green);
+}
+.langs { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.langs .chip {
+  gap: 6px;
+  padding: 0.5em 0.8em 0.45em;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--pt-signf);
+  font-size: 0.78rem;
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.langs .chip strong { font-weight: 800; }
+.langs .chip span { color: var(--muted); font-weight: 600; }
+.langs .chip span::before { content: "· "; }
+
+@media (max-width: 560px) {
+  .cert { padding: 12px 12px; grid-template-columns: 2rem 1fr auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert, .cert:hover, .cert:focus-within, .cert:focus-visible { transition: none; transform: none; }
+  .cert__link svg { transition: none; transform: none !important; }
+}

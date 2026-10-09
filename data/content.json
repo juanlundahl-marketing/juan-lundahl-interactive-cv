@@ -1,0 +1,891 @@
+{
+  "meta": {
+    "name": "Juan Lundahl",
+    "email": "juanlundahl@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/juan-lundahl"
+  },
+  "en": {
+    "nav": {
+      "about": "About",
+      "funnel": "Skills",
+      "work": "Work",
+      "range": "Range",
+      "certifications": "Certifications",
+      "achievements": "Achievements",
+      "contact": "Contact",
+      "resume": "Resume"
+    },
+    "hero": {
+      "title": "AI & Marketing Automation Specialist",
+      "lede": "I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.",
+      "subtitle": "AI, Automation, CRM Optimization, Martech Stack, Sales & Marketing Ops · Buenos Aires",
+      "cta": {
+        "work": "Explore work",
+        "resume": "Resume"
+      }
+    },
+    "about": {
+      "headline": "AI and automation inside marketing and sales, with measurable impact",
+      "text": [
+        "My focus now is bringing AI and automation into marketing and sales processes and operations: optimizing CRMs and integrating a modern, advanced tech stack so teams can work with more clarity and speed.",
+        "At VU Inc. I work on the martech stack, the automation infrastructure and the integration of AI into campaigns. At E-Planning I led lead generation on HubSpot CRM, building workflows aligned with Sales. Earlier work in SEO and paid media (US Ophthalmic) and in content and design (Onewater, Bordahl Analytics) gave me the full view of the funnel.",
+        "I started in communication, and a journalism degree is still a strength: I write clearly, listen to audiences and bring a structured, collaborative attitude to every team."
+      ],
+      "facts": [
+        { "label": "Experience", "value": "6+ years" },
+        { "label": "Focus", "value": "AI · Automation · CRM" },
+        { "id": "markets", "label": "Markets", "value": "NA · EMEA · LATAM" },
+        { "label": "Based in", "value": "Buenos Aires, Argentina" },
+        { "label": "Languages", "value": "Spanish · English · German (basic-intermediate)" }
+      ],
+      "quote": "Communication is my true passion."
+    },
+    "funnel": {
+      "stages": [
+        {
+          "id": "awareness",
+          "name": "Awareness",
+          "tagline": "Be found and be remembered: search, social, design and video.",
+          "doing": "Built brand awareness through SEO and social media optimization at E-Planning and US Ophthalmic, and designed content and video for Onewater and Bordahl Analytics.",
+          "tools": [
+            { "name": "SEO", "abbr": "SEO", "level": "expert", "note": "US Ophthalmic, E-Planning" },
+            { "name": "SMO", "abbr": "SMO", "level": "expert", "note": "Onewater, E-Planning" },
+            { "name": "Canva", "abbr": "CAN", "level": "expert", "note": "Onewater: templates for Meta, LinkedIn, X and YouTube" },
+            { "name": "Photoshop", "abbr": "PS", "level": "advanced", "note": "" },
+            { "name": "Premiere Pro", "abbr": "PR", "level": "expert", "note": "Bordahl Analytics: video production and editing" },
+            { "name": "Semrush", "abbr": "SEM", "level": "advanced", "note": "" }
+          ]
+        },
+        {
+          "id": "interest",
+          "name": "Interest",
+          "tagline": "Turn attention into consideration with paid campaigns and interactive design.",
+          "doing": "Ran paid media on Google Ads, Meta and LinkedIn for NA and LATAM audiences at US Ophthalmic, and executed paid campaigns with budget optimization at Onewater.",
+          "tools": [
+            { "name": "Meta Ads", "abbr": "META", "level": "expert", "note": "US Ophthalmic: paid media for NA and LATAM" },
+            { "name": "LinkedIn Ads", "abbr": "LNK", "level": "expert", "note": "US Ophthalmic: paid media for NA and LATAM" },
+            { "name": "Google Ads", "abbr": "GADS", "level": "advanced", "note": "US Ophthalmic: paid media for NA and LATAM" },
+            { "name": "Figma", "abbr": "FIG", "level": "intermediate", "note": "" },
+            { "name": "Web Design", "abbr": "WEB", "level": "intermediate", "note": "Bordahl Analytics: website development" }
+          ]
+        },
+        {
+          "id": "conversion",
+          "name": "Conversion",
+          "tagline": "Turn interest into customers, with a CRM shared with Sales and the analytics to see what works.",
+          "doing": "Led lead-generation strategy and execution at E-Planning, aligned with Sales at every stage of the funnel and managing contacts in HubSpot CRM.",
+          "tools": [
+            { "name": "HubSpot CRM", "abbr": "HS", "level": "expert", "featured": true, "note": "E-Planning, US Ophthalmic: pipeline, contacts and lead management, aligned with Sales" },
+            { "name": "Programmatic advertising", "abbr": "PRG", "level": "intermediate", "note": "Udemy certification (2024)" },
+            { "name": "Google Analytics", "abbr": "GA", "level": "advanced", "note": "" }
+          ]
+        },
+        {
+          "id": "retention",
+          "name": "Retention & Loyalty",
+          "tagline": "Keep customers close and coming back: email marketing and automated nurturing.",
+          "doing": "Ran B2B email marketing at US Ophthalmic and email marketing at Onewater, and designed tailored HubSpot workflows and flowcharts at E-Planning to nurture every contact automatically.",
+          "tools": [
+            { "name": "Email marketing", "abbr": "EML", "level": "advanced", "note": "US Ophthalmic (B2B), Onewater" },
+            { "name": "HubSpot workflows", "abbr": "HSW", "level": "expert", "featured": true, "note": "E-Planning: tailored workflows and flowchart design with HubSpot's native automation" }
+          ]
+        }
+      ],
+      "across": {
+        "eyebrow": "Across the funnel",
+        "title": "AI copilots and a CRM at the *center.*",
+        "intro": "Some tools work at every stage. I use AI copilots throughout, in line with my work on the martech stack, the automation infrastructure and AI integration in campaigns at VU Inc.",
+        "aiLabel": "AI copilots",
+        "ai": [
+          { "name": "Claude", "abbr": "CL", "level": "expert" },
+          { "name": "ChatGPT", "abbr": "GPT", "level": "intermediate" },
+          { "name": "Perplexity", "abbr": "PPX", "level": "expert", "note": "for research" }
+        ],
+        "toolsLabel": "Automation & AI",
+        "tools": [
+          { "name": "Power Automate", "abbr": "PA", "level": "intermediate", "note": "Microsoft automation, alongside HubSpot's built-in workflows" },
+          { "name": "AI integration", "abbr": "AI", "level": "intermediate", "note": "VU Inc.: AI in campaigns" }
+        ],
+        "crmLabel": "CRM",
+        "crm": "HubSpot is my go-to CRM: contacts and pipeline at conversion, native workflows for retention.",
+        "envLabel": "Work environments",
+        "env": [
+          { "label": "Environments", "items": ["Microsoft", "Apple"] },
+          { "label": "Channels", "items": ["Slack", "Microsoft Teams"] }
+        ],
+        "envLine": "Slack and Microsoft Teams keep communication solid and fluid across teams."
+      }
+    },
+    "work": [
+      {
+        "company": "VU Inc.",
+        "role": "Marketing & Automation Specialist",
+        "period": "Mar 2026 – Present",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "Marketing and automation role focused on the martech stack and AI-driven campaigns.",
+        "bullets": [
+          "Martech stack and automation infrastructure",
+          "AI integration in campaigns"
+        ]
+      },
+      {
+        "company": "E-Planning",
+        "role": "Senior Marketing Analyst",
+        "period": "May 2024 – Feb 2026",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "Lead generation, HubSpot CRM and SEO and paid media brand-awareness strategy.",
+        "bullets": [
+          "Head of Marketing Strategy and Execution for Lead Generation, aligned with Sales at every stage of the funnel.",
+          "Client Relationship Management Specialist: HubSpot workflows and flowchart design to streamline communication and processes.",
+          "Brand Awareness Strategist: visibility through SEO, paid media and social media optimization."
+        ],
+        "projects": [
+          "CTV One-Sheeter",
+          "Buyers Deck",
+          "Publishers Deck"
+        ]
+      },
+      {
+        "company": "US Ophthalmic",
+        "role": "Digital Marketing Specialist",
+        "period": "Jan 2024 – May 2024",
+        "mode": "onsite",
+        "location": "",
+        "summary": "Paid media, SEO and B2B email marketing for NA and LATAM.",
+        "bullets": [
+          "Paid Media Specialist for Google Ads, Meta and LinkedIn campaigns across NA and LATAM.",
+          "SEO Analyst and B2B Email Marketing Strategist across NA and LATAM."
+        ]
+      },
+      {
+        "company": "Onewater",
+        "role": "Social Media Manager",
+        "period": "Aug 2021 – Jan 2024",
+        "mode": "remote",
+        "location": "",
+        "summary": "Community management, content design and paid media support across social platforms.",
+        "bullets": [
+          "Community Manager: content creation, statistics review, moderation, calendar planning and general social media coordination.",
+          "Content Designer for various platforms, including templates for Meta, LinkedIn, X and YouTube.",
+          "Content Translator for website articles and general social media content.",
+          "Marketing Assistant: paid media execution, email marketing strategy and budget optimization."
+        ]
+      },
+      {
+        "company": "Somos OcéanoS",
+        "role": "Freelance",
+        "period": "2022",
+        "mode": "remote",
+        "location": "",
+        "summary": "Freelance project for the documentary El Pueblo es el Mar.",
+        "bullets": []
+      },
+      {
+        "company": "Bordahl Analytics",
+        "role": "Co-Founder",
+        "period": "Jan 2020 – Jan 2022",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "Co-founded a digital venture covering content, web development and video production.",
+        "bullets": [
+          "Community Manager for content creation across all active platforms.",
+          "Content Editor for articles published on social networks and the website.",
+          "Website Developer for the official site with published articles.",
+          "Production Editor: content graphics, video production and editing."
+        ]
+      }
+    ],
+    "certifications": [
+      { "name": "HubSpot Inbound", "issuer": "HubSpot", "date": "Nov 2025", "url": "https://app.hubspot.com/academy/achievements/9q4mlg74/en/1/juan-lundahl-kalisz/inbound-marketing" },
+      { "name": "Programmatic Advertising", "issuer": "Udemy", "date": "2024", "url": "https://udemy-certificate.s3.amazonaws.com/pdf/UC-4074b59e-cbd4-40f8-bdab-123c2e4ae0af.pdf" },
+      { "name": "Social Media Marketing: Strategy and Optimization", "issuer": "LinkedIn", "date": "Aug 2023", "url": "https://www.linkedin.com/learning/certificates/27b147e29afda0323997c9797d800f83dcacb5e14dec831a821b4c40fbe8c141/" },
+      { "name": "Content Creation: Strategy and Tools", "issuer": "LinkedIn", "date": "Aug 2023", "url": "https://www.linkedin.com/learning/certificates/a94a6b8f1a02ad3b5ce497d36619b02418e4366fe639920c7b1d358148cec0e5/" },
+      { "name": "Content Marketing for Social Media", "issuer": "LinkedIn", "date": "Aug 2023", "url": "https://www.linkedin.com/learning/certificates/66d3f48bca45bb1cc63e4e520dce7c300e76c4b75449552a26107ebba953c152/" },
+      { "name": "Deutsch Intensiv Kompakt", "issuer": "Goethe-Institut", "date": "Aug 2022" },
+      { "name": "Growth Marketing", "issuer": "Coderhouse", "date": "Jul 2022", "url": "https://www.coderhouse.com/certificados/62c8bfc83689af0024c94a65" },
+      { "name": "UX/UI Design", "issuer": "Coderhouse", "date": "Apr 2022", "url": "https://www.coderhouse.com/certificados/62599f6798f76200204cceac" },
+      { "name": "EF SET English Certificate", "issuer": "EF SET", "date": "Mar 2022", "url": "https://www.efset.org/cert/d7RmQ4" },
+      { "name": "Digital Marketing (Community Manager & Advertising)", "issuer": "Coderhouse", "date": "2021 – 2022", "url": "https://www.coderhouse.com/certificados/61d891a784fcd3004b421aa0" }
+    ],
+    "education": [
+      {
+        "institution": "Pontifical Catholic University of Argentina (UCA)",
+        "degree": "Bachelor's degree in Journalistic Communication",
+        "period": "2016 – 2020",
+        "details": []
+      },
+      {
+        "institution": "Coderhouse",
+        "degree": "Digital Marketing",
+        "period": "Oct 2021 – Jun 2022",
+        "details": [
+          "Community Manager & Advertising (Oct 2021 – Jan 2022)",
+          "UX/UI Design (Dec 2021 – Mar 2022)",
+          "Advanced Network Advertising (Jan 2022 – Mar 2022)",
+          "Growth Marketing (Apr 2022 – Jun 2022)"
+        ]
+      },
+      {
+        "institution": "edX (Harvard University)",
+        "degree": "Rhetoric: The Art of Persuasive Writing and Public Speaking",
+        "period": "May 2023 – Jul 2023",
+        "details": []
+      },
+      {
+        "institution": "UCA Cultural Center",
+        "degree": "Community Management",
+        "period": "Sep 2020 – Nov 2020",
+        "details": []
+      }
+    ],
+    "achievements": {
+      "counters": [
+        { "value": 6, "suffix": "+", "label": "Years of experience" },
+        { "type": "markets", "value": 3, "suffix": "", "label": "Markets" },
+        { "type": "certs", "value": 10, "suffix": "", "label": "Certifications" },
+        { "value": 1, "suffix": "", "label": "ADEPA Prize" }
+      ],
+      "awards": [
+        {
+          "title": "1st Prize, University Journalism",
+          "issuer": "Association of Argentine Journalistic Entities (ADEPA)"
+        }
+      ]
+    },
+    "range": {
+      "industries": [
+        { "id": "nonprofit", "name": "Non-profit & environmental", "text": "Social media, content design and translation for mission-driven organizations.", "where": ["Onewater", "Somos OcéanoS"] },
+        { "id": "sports", "name": "Sports", "text": "Sports writing and content, plus the website and video production, at Bordahl Analytics.", "where": ["Bordahl Analytics"] },
+        { "id": "adtech", "name": "Programmatic advertising & adtech", "text": "Lead generation, HubSpot workflows and sales enablement assets for an adtech company.", "where": ["E-Planning"] },
+        { "id": "cyber", "name": "Cybersecurity & digital identity", "text": "Martech stack, automation infrastructure and AI integration in campaigns.", "where": ["VU Inc."] },
+        { "id": "health", "name": "Ophthalmic equipment & healthcare commerce", "text": "SEO, paid media and B2B email marketing across NA and LATAM.", "where": ["US Ophthalmic"] },
+        { "id": "film", "name": "Film & documentary production", "text": "Translation, transcription and video editing for the documentary El Pueblo es el Mar, and production editing at Bordahl Analytics.", "where": ["Somos OcéanoS", "Bordahl Analytics"] }
+      ],
+      "modes": [
+        { "id": "onsite", "companies": [{ "name": "US Ophthalmic", "note": "Miami" }] },
+        { "id": "remote", "companies": [{ "name": "Onewater" }, { "name": "Somos OcéanoS" }] },
+        { "id": "hybrid", "companies": [{ "name": "VU Inc." }, { "name": "E-Planning" }, { "name": "Bordahl Analytics" }] }
+      ],
+      "modesNote": "I adapt to each industry's pace and each team's way of working.",
+      "collab": {
+        "intro": "I am always exchanging ideas and looking for opportunities with other teams. Marketing works best when it is paired with design, sales and engineering.",
+        "items": [
+          { "team": "Design", "text": "Content design in Canva and Figma, and sales enablement assets for the Sales Team at E-Planning." },
+          { "team": "Sales", "text": "Aligned with Sales at every stage of the funnel, using HubSpot workflows to streamline communication and processes." },
+          { "team": "Engineering", "text": "Website development at Bordahl Analytics, and automation and martech stack work at VU Inc." }
+        ]
+      }
+    },
+    "recommendation": {
+      "quote": "Juan has always been responsive, diligent, and proactive about the tasks assigned to him as part of his role as social media manager at WSP. He's reliable and delivers on time and target, while coordinating with other social media managers and team members. Highly recommend him as a motivated and switched on team member.",
+      "author": "Christian Fischer",
+      "role": "Honorary Director | Senior Knowledge Management Specialist",
+      "context": "Managed Juan directly · LinkedIn recommendation · June 2023",
+      "url": "https://www.linkedin.com/in/juan-lundahl/details/recommendations/"
+    },
+    "languages": [
+      { "name": "Spanish", "level": "Native" },
+      { "name": "English", "level": "Fluent" },
+      { "name": "German", "level": "Basic-intermediate" }
+    ],
+    "contact": {
+      "email": "juanlundahl@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/juan-lundahl",
+      "location": "Buenos Aires, Argentina",
+      "cta": "Get in touch",
+      "downloadCv": "Download CV (PDF)"
+    }
+  },
+  "es": {
+    "nav": {
+      "about": "Sobre mí",
+      "funnel": "Habilidades",
+      "work": "Experiencia",
+      "range": "Rango",
+      "certifications": "Certificaciones",
+      "achievements": "Logros",
+      "contact": "Contacto",
+      "resume": "CV"
+    },
+    "hero": {
+      "title": "Especialista en IA y Automatización de Marketing",
+      "lede": "Llevo la IA y la automatización a los procesos de marketing y ventas, optimizo CRMs y ayudo a los equipos a adoptar un stack martech moderno y avanzado.",
+      "subtitle": "IA, Automatización, Optimización de CRM, Stack Martech, Operaciones de Ventas y Marketing · Buenos Aires",
+      "cta": {
+        "work": "Explorar experiencia",
+        "resume": "Descargar CV"
+      }
+    },
+    "about": {
+      "headline": "IA y automatización dentro de marketing y ventas, con impacto medible",
+      "text": [
+        "Hoy mi foco es llevar la IA y la automatización a los procesos y operaciones de marketing y ventas: optimizar CRMs e integrar un stack tecnológico moderno y avanzado para que los equipos trabajen con más claridad y velocidad.",
+        "En VU Inc. trabajo en el stack martech, la infraestructura de automatización y la integración de IA en campañas. En E-Planning lideré la generación de leads en HubSpot CRM, con workflows alineados con Ventas. Mi trabajo previo en SEO y medios pagos (US Ophthalmic) y en contenido y diseño (Onewater, Bordahl Analytics) me dio la visión completa del embudo.",
+        "Empecé en la comunicación y mi formación en periodismo sigue siendo una fortaleza: escribo con claridad, escucho a las audiencias y aporto un enfoque estructurado y colaborativo a cada equipo."
+      ],
+      "facts": [
+        { "label": "Experiencia", "value": "+6 años" },
+        { "label": "Enfoque", "value": "IA · Automatización · CRM" },
+        { "id": "markets", "label": "Mercados", "value": "NA · EMEA · LATAM" },
+        { "label": "Base", "value": "Buenos Aires, Argentina" },
+        { "label": "Idiomas", "value": "Español · Inglés · Alemán (básico-intermedio)" }
+      ],
+      "quote": "La comunicación es mi verdadera pasión."
+    },
+    "funnel": {
+      "stages": [
+        {
+          "id": "awareness",
+          "name": "Awareness",
+          "tagline": "Que te encuentren y te recuerden: búsqueda, redes, diseño y video.",
+          "doing": "Construí brand awareness con SEO y optimización en redes sociales en E-Planning y US Ophthalmic, y diseñé contenido y video para Onewater y Bordahl Analytics.",
+          "tools": [
+            { "name": "SEO", "abbr": "SEO", "level": "expert", "note": "US Ophthalmic, E-Planning" },
+            { "name": "SMO", "abbr": "SMO", "level": "expert", "note": "Onewater, E-Planning" },
+            { "name": "Canva", "abbr": "CAN", "level": "expert", "note": "Onewater: plantillas para Meta, LinkedIn, X y YouTube" },
+            { "name": "Photoshop", "abbr": "PS", "level": "advanced", "note": "" },
+            { "name": "Premiere Pro", "abbr": "PR", "level": "expert", "note": "Bordahl Analytics: producción y edición de video" },
+            { "name": "Semrush", "abbr": "SEM", "level": "advanced", "note": "" }
+          ]
+        },
+        {
+          "id": "interest",
+          "name": "Interés",
+          "tagline": "Convertir la atención en consideración con campañas pagas y diseño interactivo.",
+          "doing": "Gestioné medios pagos en Google Ads, Meta y LinkedIn para audiencias de NA y LATAM en US Ophthalmic, y ejecuté campañas pagas optimizando el presupuesto en Onewater.",
+          "tools": [
+            { "name": "Meta Ads", "abbr": "META", "level": "expert", "note": "US Ophthalmic: medios pagos para NA y LATAM" },
+            { "name": "LinkedIn Ads", "abbr": "LNK", "level": "expert", "note": "US Ophthalmic: medios pagos para NA y LATAM" },
+            { "name": "Google Ads", "abbr": "GADS", "level": "advanced", "note": "US Ophthalmic: medios pagos para NA y LATAM" },
+            { "name": "Figma", "abbr": "FIG", "level": "intermediate", "note": "" },
+            { "name": "Diseño web", "abbr": "WEB", "level": "intermediate", "note": "Bordahl Analytics: desarrollo del sitio web" }
+          ]
+        },
+        {
+          "id": "conversion",
+          "name": "Conversión",
+          "tagline": "Convertir el interés en clientes, con un CRM compartido con Ventas y la analítica para ver qué funciona.",
+          "doing": "Lideré la estrategia y ejecución de generación de leads en E-Planning, alineado con Ventas en cada etapa del embudo y gestionando contactos en HubSpot CRM.",
+          "tools": [
+            { "name": "HubSpot CRM", "abbr": "HS", "level": "expert", "featured": true, "note": "E-Planning, US Ophthalmic: pipeline, contactos y gestión de leads, alineado con Ventas" },
+            { "name": "Publicidad programática", "abbr": "PRG", "level": "intermediate", "note": "Certificación Udemy (2024)" },
+            { "name": "Google Analytics", "abbr": "GA", "level": "advanced", "note": "" }
+          ]
+        },
+        {
+          "id": "retention",
+          "name": "Retención y fidelización",
+          "tagline": "Que los clientes se queden cerca y vuelvan: email marketing y nurturing automatizado.",
+          "doing": "Llevé el email marketing B2B en US Ophthalmic y el email marketing en Onewater, y diseñé workflows y diagramas de flujo a medida en HubSpot en E-Planning para nutrir a cada contacto de forma automática.",
+          "tools": [
+            { "name": "Email marketing", "abbr": "EML", "level": "advanced", "note": "US Ophthalmic (B2B), Onewater" },
+            { "name": "Workflows de HubSpot", "abbr": "HSW", "level": "expert", "featured": true, "note": "E-Planning: flujos personalizados y diagramas de flujo con la automatización nativa de HubSpot" }
+          ]
+        }
+      ],
+      "across": {
+        "eyebrow": "En todo el embudo",
+        "title": "Copilotos de IA y un CRM en el *centro.*",
+        "intro": "Algunas herramientas trabajan en todas las etapas. Uso copilotos de IA en todo el recorrido, en línea con mi trabajo en el stack martech, la infraestructura de automatización y la integración de IA en campañas en VU Inc.",
+        "aiLabel": "Copilotos de IA",
+        "ai": [
+          { "name": "Claude", "abbr": "CL", "level": "expert" },
+          { "name": "ChatGPT", "abbr": "GPT", "level": "intermediate" },
+          { "name": "Perplexity", "abbr": "PPX", "level": "expert", "note": "para investigación" }
+        ],
+        "toolsLabel": "Automatización e IA",
+        "tools": [
+          { "name": "Power Automate", "abbr": "PA", "level": "intermediate", "note": "Automatización de Microsoft, junto a los workflows nativos de HubSpot" },
+          { "name": "Integración de IA", "abbr": "AI", "level": "intermediate", "note": "VU Inc.: IA en campañas" }
+        ],
+        "crmLabel": "CRM",
+        "crm": "HubSpot es mi CRM de cabecera: contactos y pipeline en la conversión, workflows nativos para la retención.",
+        "envLabel": "Entornos de trabajo",
+        "env": [
+          { "label": "Entornos", "items": ["Microsoft", "Apple"] },
+          { "label": "Canales", "items": ["Slack", "Microsoft Teams"] }
+        ],
+        "envLine": "Slack y Microsoft Teams mantienen la comunicación entre equipos sólida y fluida."
+      }
+    },
+    "work": [
+      {
+        "company": "VU Inc.",
+        "role": "Especialista en Marketing y Automatización",
+        "period": "Mar 2026 – Actualidad",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "Rol de marketing y automatización enfocado en el stack martech y en campañas con IA.",
+        "bullets": [
+          "Stack martech e infraestructura de automatización",
+          "Integración de IA en campañas"
+        ]
+      },
+      {
+        "company": "E-Planning",
+        "role": "Analista de Marketing Senior",
+        "period": "May 2024 – Feb 2026",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "Generación de leads, HubSpot CRM y estrategia de awareness con SEO y medios pagos.",
+        "bullets": [
+          "Líder de Estrategia y Ejecución de Marketing para Generación de Leads, alineado con el equipo de ventas en cada etapa del proceso.",
+          "Especialista en Gestión de Relaciones con Clientes: workflows y diagramas de flujo en HubSpot para optimizar la comunicación y los procesos.",
+          "Estratega de Brand Awareness: visibilidad a través de SEO, medios pagos y optimización en redes sociales."
+        ],
+        "projects": [
+          "CTV One-Sheeter",
+          "Buyers Deck",
+          "Publishers Deck"
+        ]
+      },
+      {
+        "company": "US Ophthalmic",
+        "role": "Especialista en Marketing Digital",
+        "period": "Ene 2024 – May 2024",
+        "mode": "onsite",
+        "location": "",
+        "summary": "Medios pagos, SEO y email marketing B2B para NA y LATAM.",
+        "bullets": [
+          "Especialista en Paid Media para campañas de Google Ads, Meta y LinkedIn en NA y LATAM.",
+          "Analista de SEO y estratega de email marketing B2B en NA y LATAM."
+        ]
+      },
+      {
+        "company": "Onewater",
+        "role": "Social Media Manager",
+        "period": "Ago 2021 – Ene 2024",
+        "mode": "remote",
+        "location": "",
+        "summary": "Community management, diseño de contenido y apoyo en medios pagos en redes sociales.",
+        "bullets": [
+          "Community Manager a cargo de la creación de contenido, análisis de métricas, moderación, planificación del calendario y coordinación general en redes sociales.",
+          "Diseñador de contenido para distintas plataformas, con plantillas para Meta, LinkedIn, X y YouTube.",
+          "Traductor de contenido para artículos del sitio web y contenido general en redes sociales.",
+          "Asistente de marketing: ejecución de paid media, estrategia de email marketing y optimización del presupuesto."
+        ]
+      },
+      {
+        "company": "Somos OcéanoS",
+        "role": "Freelance",
+        "period": "2022",
+        "mode": "remote",
+        "location": "",
+        "summary": "Proyecto freelance para el documental El Pueblo es el Mar.",
+        "bullets": []
+      },
+      {
+        "company": "Bordahl Analytics",
+        "role": "Co-fundador",
+        "period": "Ene 2020 – Ene 2022",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "Cofundé un emprendimiento digital de contenido, desarrollo web y producción audiovisual.",
+        "bullets": [
+          "Community Manager responsable de la creación de contenido en todas las plataformas activas.",
+          "Editor de contenido para artículos publicados en redes sociales y sitio web.",
+          "Desarrollador web para el sitio oficial con artículos publicados.",
+          "Editor de producción: diseño de gráficos de contenido y producción y edición de video."
+        ]
+      }
+    ],
+    "certifications": [
+      { "name": "HubSpot Inbound", "issuer": "HubSpot", "date": "Nov 2025", "url": "https://app.hubspot.com/academy/achievements/9q4mlg74/en/1/juan-lundahl-kalisz/inbound-marketing" },
+      { "name": "Publicidad programática", "issuer": "Udemy", "date": "2024", "url": "https://udemy-certificate.s3.amazonaws.com/pdf/UC-4074b59e-cbd4-40f8-bdab-123c2e4ae0af.pdf" },
+      { "name": "Social Media Marketing: Strategy and Optimization", "issuer": "LinkedIn", "date": "Ago 2023", "url": "https://www.linkedin.com/learning/certificates/27b147e29afda0323997c9797d800f83dcacb5e14dec831a821b4c40fbe8c141/" },
+      { "name": "Content Creation: Strategy and Tools", "issuer": "LinkedIn", "date": "Ago 2023", "url": "https://www.linkedin.com/learning/certificates/a94a6b8f1a02ad3b5ce497d36619b02418e4366fe639920c7b1d358148cec0e5/" },
+      { "name": "Content Marketing for Social Media", "issuer": "LinkedIn", "date": "Ago 2023", "url": "https://www.linkedin.com/learning/certificates/66d3f48bca45bb1cc63e4e520dce7c300e76c4b75449552a26107ebba953c152/" },
+      { "name": "Deutsch Intensiv Kompakt", "issuer": "Goethe-Institut", "date": "Ago 2022" },
+      { "name": "Growth Marketing", "issuer": "Coderhouse", "date": "Jul 2022", "url": "https://www.coderhouse.com/certificados/62c8bfc83689af0024c94a65" },
+      { "name": "Diseño UX/UI", "issuer": "Coderhouse", "date": "Abr 2022", "url": "https://www.coderhouse.com/certificados/62599f6798f76200204cceac" },
+      { "name": "EF SET English Certificate", "issuer": "EF SET", "date": "Mar 2022", "url": "https://www.efset.org/cert/d7RmQ4" },
+      { "name": "Marketing Digital (Community Manager y Publicidad)", "issuer": "Coderhouse", "date": "2021 – 2022", "url": "https://www.coderhouse.com/certificados/61d891a784fcd3004b421aa0" }
+    ],
+    "education": [
+      {
+        "institution": "Pontificia Universidad Católica Argentina (UCA)",
+        "degree": "Licenciatura en Comunicación Periodística",
+        "period": "2016 – 2020",
+        "details": []
+      },
+      {
+        "institution": "Coderhouse",
+        "degree": "Marketing Digital",
+        "period": "Oct 2021 – Jun 2022",
+        "details": [
+          "Community Manager y Publicidad (oct 2021 – ene 2022)",
+          "Diseño UX/UI (dic 2021 – mar 2022)",
+          "Publicidad Avanzada (ene 2022 – mar 2022)",
+          "Growth Marketing (abr 2022 – jun 2022)"
+        ]
+      },
+      {
+        "institution": "edX (Harvard University)",
+        "degree": "Retórica: el arte de escribir persuasivamente y hablar en público",
+        "period": "May 2023 – Jul 2023",
+        "details": []
+      },
+      {
+        "institution": "Centro Cultural UCA",
+        "degree": "Community Management",
+        "period": "Sep 2020 – Nov 2020",
+        "details": []
+      }
+    ],
+    "achievements": {
+      "counters": [
+        { "value": 6, "suffix": "+", "label": "Años de experiencia" },
+        { "type": "markets", "value": 3, "suffix": "", "label": "Mercados" },
+        { "type": "certs", "value": 10, "suffix": "", "label": "Certificaciones" },
+        { "value": 1, "suffix": "", "label": "Premio ADEPA" }
+      ],
+      "awards": [
+        {
+          "title": "1er Premio, Periodismo Universitario",
+          "issuer": "Asociación de Entidades Periodísticas Argentinas (ADEPA)"
+        }
+      ]
+    },
+    "range": {
+      "industries": [
+        { "id": "nonprofit", "name": "Sin fines de lucro y medioambiente", "text": "Redes sociales, diseño de contenido y traducción para organizaciones con una misión.", "where": ["Onewater", "Somos OcéanoS"] },
+        { "id": "sports", "name": "Deportes", "text": "Redacción y contenido deportivo, además del sitio web y la producción de video, en Bordahl Analytics.", "where": ["Bordahl Analytics"] },
+        { "id": "adtech", "name": "Publicidad programática y adtech", "text": "Generación de leads, workflows en HubSpot y materiales de apoyo comercial para una empresa de adtech.", "where": ["E-Planning"] },
+        { "id": "cyber", "name": "Ciberseguridad e identidad digital", "text": "Stack martech, infraestructura de automatización e integración de IA en campañas.", "where": ["VU Inc."] },
+        { "id": "health", "name": "Equipamiento oftalmológico y comercio de salud", "text": "SEO, medios pagos y email marketing B2B en NA y LATAM.", "where": ["US Ophthalmic"] },
+        { "id": "film", "name": "Cine y producción documental", "text": "Traducción, transcripción y edición de video para el documental El Pueblo es el Mar, y edición de producción en Bordahl Analytics.", "where": ["Somos OcéanoS", "Bordahl Analytics"] }
+      ],
+      "modes": [
+        { "id": "onsite", "companies": [{ "name": "US Ophthalmic", "note": "Miami" }] },
+        { "id": "remote", "companies": [{ "name": "Onewater" }, { "name": "Somos OcéanoS" }] },
+        { "id": "hybrid", "companies": [{ "name": "VU Inc." }, { "name": "E-Planning" }, { "name": "Bordahl Analytics" }] }
+      ],
+      "modesNote": "Me adapto al ritmo de cada industria y a la forma de trabajar de cada equipo.",
+      "collab": {
+        "intro": "Siempre estoy intercambiando ideas y buscando oportunidades con otros equipos. El marketing funciona mejor cuando se combina con diseño, ventas e ingeniería.",
+        "items": [
+          { "team": "Diseño", "text": "Diseño de contenido en Canva y Figma, y materiales de apoyo comercial para el equipo de Ventas en E-Planning." },
+          { "team": "Ventas", "text": "Alineado con Ventas en cada etapa del embudo, con workflows de HubSpot para agilizar la comunicación y los procesos." },
+          { "team": "Ingeniería", "text": "Desarrollo web en Bordahl Analytics, y trabajo de automatización y stack martech en VU Inc." }
+        ]
+      }
+    },
+    "recommendation": {
+      "quote": "Juan has always been responsive, diligent, and proactive about the tasks assigned to him as part of his role as social media manager at WSP. He's reliable and delivers on time and target, while coordinating with other social media managers and team members. Highly recommend him as a motivated and switched on team member.",
+      "translation": "Juan siempre ha sido receptivo, diligente y proactivo con las tareas que se le asignaron como parte de su rol de social media manager en WSP. Es confiable y entrega a tiempo y con precisión, mientras se coordina con otros social media managers y miembros del equipo. Lo recomiendo mucho como un integrante del equipo motivado y despierto.",
+      "author": "Christian Fischer",
+      "role": "Honorary Director | Senior Knowledge Management Specialist",
+      "context": "Lo supervisó directamente · Recomendación de LinkedIn · Junio de 2023",
+      "url": "https://www.linkedin.com/in/juan-lundahl/details/recommendations/"
+    },
+    "languages": [
+      { "name": "Español", "level": "Nativo" },
+      { "name": "Inglés", "level": "Fluido" },
+      { "name": "Alemán", "level": "Básico-intermedio" }
+    ],
+    "contact": {
+      "email": "juanlundahl@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/juan-lundahl",
+      "location": "Buenos Aires, Argentina",
+      "cta": "Escribime",
+      "downloadCv": "Descargar CV (PDF)"
+    }
+  },
+  "de": {
+    "nav": {
+      "about": "Über mich",
+      "funnel": "Kompetenzen",
+      "work": "Erfahrung",
+      "range": "Bandbreite",
+      "certifications": "Zertifikate",
+      "achievements": "Erfolge",
+      "contact": "Kontakt",
+      "resume": "Lebenslauf"
+    },
+    "hero": {
+      "title": "Spezialist für KI & Marketing-Automatisierung",
+      "lede": "Ich bringe KI und Automatisierung in Marketing- und Vertriebsprozesse, optimiere CRM-Systeme und unterstütze Teams dabei, einen modernen, fortschrittlichen Martech-Stack einzuführen.",
+      "subtitle": "KI, Automatisierung, CRM-Optimierung, Martech-Stack, Vertriebs- und Marketing-Operations · Buenos Aires",
+      "cta": {
+        "work": "Erfahrung ansehen",
+        "resume": "Lebenslauf"
+      }
+    },
+    "about": {
+      "headline": "KI und Automatisierung in Marketing und Vertrieb, mit messbarer Wirkung",
+      "text": [
+        "Mein Schwerpunkt liegt heute darauf, KI und Automatisierung in Marketing- und Vertriebsprozesse und -abläufe zu bringen: CRM-Systeme zu optimieren und einen modernen, fortschrittlichen Tech-Stack zu integrieren, damit Teams mit mehr Klarheit und Tempo arbeiten können.",
+        "Bei VU Inc. arbeite ich am Martech-Stack, an der Automatisierungsinfrastruktur und an der Integration von KI in Kampagnen. Bei E-Planning habe ich die Leadgenerierung im HubSpot CRM geleitet und Workflows in enger Abstimmung mit dem Vertrieb aufgebaut. Frühere Tätigkeiten in SEO und Paid Media (US Ophthalmic) sowie in Content und Design (Onewater, Bordahl Analytics) haben mir den vollständigen Blick auf den Funnel verschafft.",
+        "Ich habe in der Kommunikation angefangen, und mein Journalismusstudium ist bis heute eine Stärke: Ich schreibe klar, höre Zielgruppen zu und bringe eine strukturierte, kooperative Haltung in jedes Team."
+      ],
+      "facts": [
+        { "label": "Erfahrung", "value": "6+ Jahre" },
+        { "label": "Schwerpunkt", "value": "KI · Automatisierung · CRM" },
+        { "id": "markets", "label": "Märkte", "value": "NA · EMEA · LATAM" },
+        { "label": "Standort", "value": "Buenos Aires, Argentinien" },
+        { "label": "Sprachen", "value": "Spanisch · Englisch · Deutsch (Grundkenntnisse bis mittleres Niveau)" }
+      ],
+      "quote": "Kommunikation ist meine wahre Leidenschaft."
+    },
+    "funnel": {
+      "stages": [
+        {
+          "id": "awareness",
+          "name": "Awareness",
+          "tagline": "Gefunden und in Erinnerung behalten werden: Suche, Social Media, Design und Video.",
+          "doing": "Ich habe Markenbekanntheit durch SEO und Social-Media-Optimierung bei E-Planning und US Ophthalmic aufgebaut sowie Content und Videos für Onewater und Bordahl Analytics gestaltet.",
+          "tools": [
+            { "name": "SEO", "abbr": "SEO", "level": "expert", "note": "US Ophthalmic, E-Planning" },
+            { "name": "SMO", "abbr": "SMO", "level": "expert", "note": "Onewater, E-Planning" },
+            { "name": "Canva", "abbr": "CAN", "level": "expert", "note": "Onewater: Vorlagen für Meta, LinkedIn, X und YouTube" },
+            { "name": "Photoshop", "abbr": "PS", "level": "advanced", "note": "" },
+            { "name": "Premiere Pro", "abbr": "PR", "level": "expert", "note": "Bordahl Analytics: Videoproduktion und -schnitt" },
+            { "name": "Semrush", "abbr": "SEM", "level": "advanced", "note": "" }
+          ]
+        },
+        {
+          "id": "interest",
+          "name": "Interesse",
+          "tagline": "Aus Aufmerksamkeit echtes Interesse machen, mit bezahlten Kampagnen und interaktivem Design.",
+          "doing": "Ich habe bei US Ophthalmic Paid Media auf Google Ads, Meta und LinkedIn für Zielgruppen in NA und LATAM betreut und bei Onewater bezahlte Kampagnen mit Budgetoptimierung umgesetzt.",
+          "tools": [
+            { "name": "Meta Ads", "abbr": "META", "level": "expert", "note": "US Ophthalmic: Paid Media für NA und LATAM" },
+            { "name": "LinkedIn Ads", "abbr": "LNK", "level": "expert", "note": "US Ophthalmic: Paid Media für NA und LATAM" },
+            { "name": "Google Ads", "abbr": "GADS", "level": "advanced", "note": "US Ophthalmic: Paid Media für NA und LATAM" },
+            { "name": "Figma", "abbr": "FIG", "level": "intermediate", "note": "" },
+            { "name": "Webdesign", "abbr": "WEB", "level": "intermediate", "note": "Bordahl Analytics: Entwicklung der Website" }
+          ]
+        },
+        {
+          "id": "conversion",
+          "name": "Conversion",
+          "tagline": "Aus Interesse Kunden machen, mit einem CRM, das ich mit dem Vertrieb teile, und Analytics, die zeigen, was wirkt.",
+          "doing": "Ich habe bei E-Planning die Strategie und Umsetzung der Leadgenerierung geleitet, in jeder Phase des Funnels mit dem Vertrieb abgestimmt und Kontakte im HubSpot CRM verwaltet.",
+          "tools": [
+            { "name": "HubSpot CRM", "abbr": "HS", "level": "expert", "featured": true, "note": "E-Planning, US Ophthalmic: Pipeline, Kontakte und Lead-Management, abgestimmt mit dem Vertrieb" },
+            { "name": "Programmatische Werbung", "abbr": "PRG", "level": "intermediate", "note": "Udemy-Zertifikat (2024)" },
+            { "name": "Google Analytics", "abbr": "GA", "level": "advanced", "note": "" }
+          ]
+        },
+        {
+          "id": "retention",
+          "name": "Bindung & Loyalität",
+          "tagline": "Kunden nah halten und zurückholen: E-Mail-Marketing und automatisiertes Nurturing.",
+          "doing": "Ich habe bei US Ophthalmic das B2B-E-Mail-Marketing und bei Onewater das E-Mail-Marketing betreut und bei E-Planning maßgeschneiderte HubSpot-Workflows und Flussdiagramme entworfen, um jeden Kontakt automatisiert zu pflegen.",
+          "tools": [
+            { "name": "E-Mail-Marketing", "abbr": "EML", "level": "advanced", "note": "US Ophthalmic (B2B), Onewater" },
+            { "name": "HubSpot-Workflows", "abbr": "HSW", "level": "expert", "featured": true, "note": "E-Planning: individuelle Workflows und Flussdiagramme mit der nativen Automatisierung von HubSpot" }
+          ]
+        }
+      ],
+      "across": {
+        "eyebrow": "Im ganzen Funnel",
+        "title": "KI-Copiloten und ein CRM im *Zentrum.*",
+        "intro": "Manche Tools wirken in jeder Phase. KI-Copiloten nutze ich durchgehend, passend zu meiner Arbeit am Martech-Stack, an der Automatisierungsinfrastruktur und an der KI-Integration in Kampagnen bei VU Inc.",
+        "aiLabel": "KI-Copiloten",
+        "ai": [
+          { "name": "Claude", "abbr": "CL", "level": "expert" },
+          { "name": "ChatGPT", "abbr": "GPT", "level": "intermediate" },
+          { "name": "Perplexity", "abbr": "PPX", "level": "expert", "note": "für Recherche" }
+        ],
+        "toolsLabel": "Automatisierung & KI",
+        "tools": [
+          { "name": "Power Automate", "abbr": "PA", "level": "intermediate", "note": "Microsoft-Automatisierung, ergänzend zu den integrierten Workflows von HubSpot" },
+          { "name": "KI-Integration", "abbr": "AI", "level": "intermediate", "note": "VU Inc.: KI in Kampagnen" }
+        ],
+        "crmLabel": "CRM",
+        "crm": "HubSpot ist mein Go-to-CRM: Kontakte und Pipeline in der Conversion, native Workflows für die Kundenbindung.",
+        "envLabel": "Arbeitsumgebungen",
+        "env": [
+          { "label": "Umgebungen", "items": ["Microsoft", "Apple"] },
+          { "label": "Kanäle", "items": ["Slack", "Microsoft Teams"] }
+        ],
+        "envLine": "Mit Slack und Microsoft Teams halte ich die Kommunikation zwischen Teams stabil und reibungslos."
+      }
+    },
+    "work": [
+      {
+        "company": "VU Inc.",
+        "role": "Spezialist für Marketing & Automatisierung",
+        "period": "Mär 2026 – heute",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "Rolle in Marketing und Automatisierung mit Fokus auf den Martech-Stack und KI-gestützte Kampagnen.",
+        "bullets": [
+          "Martech-Stack und Automatisierungsinfrastruktur",
+          "Integration von KI in Kampagnen"
+        ]
+      },
+      {
+        "company": "E-Planning",
+        "role": "Senior Marketing Analyst",
+        "period": "Mai 2024 – Feb 2026",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "Leadgenerierung, HubSpot CRM sowie Strategie für Markenbekanntheit mit SEO und Paid Media.",
+        "bullets": [
+          "Verantwortlich für Marketingstrategie und -umsetzung in der Leadgenerierung, in jeder Phase des Funnels mit dem Vertrieb abgestimmt.",
+          "Spezialist für Customer-Relationship-Management: HubSpot-Workflows und Flussdiagramme, um Kommunikation und Prozesse zu straffen.",
+          "Brand-Awareness-Stratege: Sichtbarkeit durch SEO, Paid Media und Social-Media-Optimierung."
+        ],
+        "projects": [
+          "CTV One-Sheeter",
+          "Buyers Deck",
+          "Publishers Deck"
+        ]
+      },
+      {
+        "company": "US Ophthalmic",
+        "role": "Digital-Marketing-Spezialist",
+        "period": "Jan 2024 – Mai 2024",
+        "mode": "onsite",
+        "location": "",
+        "summary": "Paid Media, SEO und B2B-E-Mail-Marketing für NA und LATAM.",
+        "bullets": [
+          "Paid-Media-Spezialist für Kampagnen auf Google Ads, Meta und LinkedIn in NA und LATAM.",
+          "SEO-Analyst und Strategie für B2B-E-Mail-Marketing in NA und LATAM."
+        ]
+      },
+      {
+        "company": "Onewater",
+        "role": "Social Media Manager",
+        "period": "Aug 2021 – Jan 2024",
+        "mode": "remote",
+        "location": "",
+        "summary": "Community-Management, Content-Design und Unterstützung bei Paid Media auf Social-Media-Plattformen.",
+        "bullets": [
+          "Community Manager: Content-Erstellung, Auswertung von Statistiken, Moderation, Redaktionsplanung und allgemeine Koordination der Social-Media-Kanäle.",
+          "Content-Designer für verschiedene Plattformen, unter anderem mit Vorlagen für Meta, LinkedIn, X und YouTube.",
+          "Content-Übersetzer für Website-Artikel und allgemeine Social-Media-Inhalte.",
+          "Marketing-Assistent: Umsetzung von Paid Media, Strategie im E-Mail-Marketing und Budgetoptimierung."
+        ]
+      },
+      {
+        "company": "Somos OcéanoS",
+        "role": "Freelance",
+        "period": "2022",
+        "mode": "remote",
+        "location": "",
+        "summary": "Freelance-Projekt für den Dokumentarfilm El Pueblo es el Mar.",
+        "bullets": []
+      },
+      {
+        "company": "Bordahl Analytics",
+        "role": "Mitgründer",
+        "period": "Jan 2020 – Jan 2022",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "Mitgründung eines digitalen Unternehmens für Content, Webentwicklung und Videoproduktion.",
+        "bullets": [
+          "Community Manager für die Content-Erstellung auf allen aktiven Plattformen.",
+          "Content-Redakteur für Artikel auf Social-Media-Kanälen und der Website.",
+          "Webentwickler für die offizielle Website mit veröffentlichten Artikeln.",
+          "Produktionsredakteur: Content-Grafiken sowie Videoproduktion und -schnitt."
+        ]
+      }
+    ],
+    "certifications": [
+      { "name": "HubSpot Inbound", "issuer": "HubSpot", "date": "Nov 2025", "url": "https://app.hubspot.com/academy/achievements/9q4mlg74/en/1/juan-lundahl-kalisz/inbound-marketing" },
+      { "name": "Programmatische Werbung", "issuer": "Udemy", "date": "2024", "url": "https://udemy-certificate.s3.amazonaws.com/pdf/UC-4074b59e-cbd4-40f8-bdab-123c2e4ae0af.pdf" },
+      { "name": "Social Media Marketing: Strategy and Optimization", "issuer": "LinkedIn", "date": "Aug 2023", "url": "https://www.linkedin.com/learning/certificates/27b147e29afda0323997c9797d800f83dcacb5e14dec831a821b4c40fbe8c141/" },
+      { "name": "Content Creation: Strategy and Tools", "issuer": "LinkedIn", "date": "Aug 2023", "url": "https://www.linkedin.com/learning/certificates/a94a6b8f1a02ad3b5ce497d36619b02418e4366fe639920c7b1d358148cec0e5/" },
+      { "name": "Content Marketing for Social Media", "issuer": "LinkedIn", "date": "Aug 2023", "url": "https://www.linkedin.com/learning/certificates/66d3f48bca45bb1cc63e4e520dce7c300e76c4b75449552a26107ebba953c152/" },
+      { "name": "Deutsch Intensiv Kompakt", "issuer": "Goethe-Institut", "date": "Aug 2022" },
+      { "name": "Growth Marketing", "issuer": "Coderhouse", "date": "Jul 2022", "url": "https://www.coderhouse.com/certificados/62c8bfc83689af0024c94a65" },
+      { "name": "UX/UI-Design", "issuer": "Coderhouse", "date": "Apr 2022", "url": "https://www.coderhouse.com/certificados/62599f6798f76200204cceac" },
+      { "name": "EF SET English Certificate", "issuer": "EF SET", "date": "Mär 2022", "url": "https://www.efset.org/cert/d7RmQ4" },
+      { "name": "Digitales Marketing (Community Manager & Werbung)", "issuer": "Coderhouse", "date": "2021 – 2022", "url": "https://www.coderhouse.com/certificados/61d891a784fcd3004b421aa0" }
+    ],
+    "education": [
+      {
+        "institution": "Päpstliche Katholische Universität Argentiniens (UCA)",
+        "degree": "Bachelor in Journalistischer Kommunikation",
+        "period": "2016 – 2020",
+        "details": []
+      },
+      {
+        "institution": "Coderhouse",
+        "degree": "Digitales Marketing",
+        "period": "Okt 2021 – Jun 2022",
+        "details": [
+          "Community Manager & Werbung (Okt 2021 – Jan 2022)",
+          "UX/UI-Design (Dez 2021 – Mär 2022)",
+          "Fortgeschrittene Netzwerkwerbung (Jan 2022 – Mär 2022)",
+          "Growth Marketing (Apr 2022 – Jun 2022)"
+        ]
+      },
+      {
+        "institution": "edX (Harvard University)",
+        "degree": "Rhetorik: Die Kunst des überzeugenden Schreibens und öffentlichen Sprechens",
+        "period": "Mai 2023 – Jul 2023",
+        "details": []
+      },
+      {
+        "institution": "Kulturzentrum der UCA",
+        "degree": "Community-Management",
+        "period": "Sep 2020 – Nov 2020",
+        "details": []
+      }
+    ],
+    "achievements": {
+      "counters": [
+        { "value": 6, "suffix": "+", "label": "Jahre Erfahrung" },
+        { "type": "markets", "value": 3, "suffix": "", "label": "Märkte" },
+        { "type": "certs", "value": 10, "suffix": "", "label": "Zertifikate" },
+        { "value": 1, "suffix": "", "label": "ADEPA-Preis" }
+      ],
+      "awards": [
+        {
+          "title": "1. Preis, Universitätsjournalismus",
+          "issuer": "Vereinigung argentinischer Presseorganisationen (ADEPA)"
+        }
+      ]
+    },
+    "range": {
+      "industries": [
+        { "id": "nonprofit", "name": "Non-Profit & Umwelt", "text": "Social Media, Content-Design und Übersetzung für Organisationen mit gesellschaftlicher Mission.", "where": ["Onewater", "Somos OcéanoS"] },
+        { "id": "sports", "name": "Sport", "text": "Sportberichterstattung und Sport-Content sowie Website und Videoproduktion bei Bordahl Analytics.", "where": ["Bordahl Analytics"] },
+        { "id": "adtech", "name": "Programmatische Werbung & Adtech", "text": "Leadgenerierung, HubSpot-Workflows und Sales-Enablement-Materialien für ein Adtech-Unternehmen.", "where": ["E-Planning"] },
+        { "id": "cyber", "name": "Cybersicherheit & digitale Identität", "text": "Martech-Stack, Automatisierungsinfrastruktur und KI-Integration in Kampagnen.", "where": ["VU Inc."] },
+        { "id": "health", "name": "Augenheilkundliche Geräte & Gesundheitshandel", "text": "SEO, Paid Media und B2B-E-Mail-Marketing in NA und LATAM.", "where": ["US Ophthalmic"] },
+        { "id": "film", "name": "Film- & Dokumentarfilmproduktion", "text": "Übersetzung, Transkription und Videoschnitt für den Dokumentarfilm El Pueblo es el Mar sowie Produktionsschnitt bei Bordahl Analytics.", "where": ["Somos OcéanoS", "Bordahl Analytics"] }
+      ],
+      "modes": [
+        { "id": "onsite", "companies": [{ "name": "US Ophthalmic", "note": "Miami" }] },
+        { "id": "remote", "companies": [{ "name": "Onewater" }, { "name": "Somos OcéanoS" }] },
+        { "id": "hybrid", "companies": [{ "name": "VU Inc." }, { "name": "E-Planning" }, { "name": "Bordahl Analytics" }] }
+      ],
+      "modesNote": "Ich passe mich dem Tempo jeder Branche und der Arbeitsweise jedes Teams an.",
+      "collab": {
+        "intro": "Ich tausche mich ständig mit anderen Teams aus und suche nach Möglichkeiten der Zusammenarbeit. Marketing funktioniert am besten im Zusammenspiel mit Design, Vertrieb und Entwicklung.",
+        "items": [
+          { "team": "Design", "text": "Content-Design in Canva und Figma sowie Sales-Enablement-Materialien für das Vertriebsteam bei E-Planning." },
+          { "team": "Vertrieb", "text": "In jeder Phase des Funnels mit dem Vertrieb abgestimmt, mit HubSpot-Workflows für schlankere Kommunikation und Prozesse." },
+          { "team": "Entwicklung", "text": "Webentwicklung bei Bordahl Analytics sowie Arbeit an Automatisierung und Martech-Stack bei VU Inc." }
+        ]
+      }
+    },
+    "recommendation": {
+      "quote": "Juan has always been responsive, diligent, and proactive about the tasks assigned to him as part of his role as social media manager at WSP. He's reliable and delivers on time and target, while coordinating with other social media managers and team members. Highly recommend him as a motivated and switched on team member.",
+      "translation": "Juan war stets reaktionsschnell, gewissenhaft und proaktiv bei den Aufgaben, die ihm in seiner Rolle als Social Media Manager bei WSP übertragen wurden. Er ist zuverlässig und liefert pünktlich und zielgenau, während er sich mit anderen Social Media Managern und Teammitgliedern abstimmt. Ich empfehle ihn uneingeschränkt als motiviertes und aufgewecktes Teammitglied.",
+      "author": "Christian Fischer",
+      "role": "Honorary Director | Senior Knowledge Management Specialist",
+      "context": "Hat Juan direkt geführt · LinkedIn-Empfehlung · Juni 2023",
+      "url": "https://www.linkedin.com/in/juan-lundahl/details/recommendations/"
+    },
+    "languages": [
+      { "name": "Spanisch", "level": "Muttersprache" },
+      { "name": "Englisch", "level": "Fließend" },
+      { "name": "Deutsch", "level": "Grundkenntnisse bis mittleres Niveau" }
+    ],
+    "contact": {
+      "email": "juanlundahl@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/juan-lundahl",
+      "location": "Buenos Aires, Argentinien",
+      "cta": "Kontakt aufnehmen",
+      "downloadCv": "Lebenslauf herunterladen (PDF)"
+    }
+  }
+}

@@ -1,0 +1,271 @@
+/* About: enamelled door nameplate (Marketing ID) + "Abierto / Vuelvo
+   enseguida" flip sign + bio. Plate and sign keep their enamel colours in
+   both themes, like real plates under a street lamp. */
+
+.about__grid {
+  display: grid;
+  gap: var(--space-7);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .about__grid { grid-template-columns: minmax(340px, 0.95fr) 1.05fr; gap: var(--space-8); }
+  .about__plate { position: sticky; top: 110px; }
+}
+
+.about__plate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+/* ---------- Nameplate ---------- */
+
+.nameplate {
+  position: relative;
+  overflow: hidden;
+  width: min(100%, 540px);
+  padding: 26px 30px 22px;
+  border-radius: 10px;
+  color: #f3ebda;
+  background: var(--enamel) linear-gradient(155deg, rgba(255, 255, 255, 0.12), transparent 40%, rgba(0, 0, 0, 0.12));
+  box-shadow:
+    inset 0 0 0 7px var(--enamel), inset 0 0 0 9px #f3ebda,
+    inset 0 0 0 13px var(--enamel), inset 0 0 0 14px rgba(243, 235, 218, 0.5),
+    0 22px 36px -18px rgba(40, 25, 10, 0.55);
+  transition: transform 400ms var(--ease-out);
+}
+.nameplate:hover { transform: translateY(-3px); }
+.nameplate__sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.16) 48%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 900ms var(--ease-out);
+}
+.nameplate:hover .nameplate__sheen { transform: translateX(100%); }
+
+/* Rivets */
+.nameplate__rv {
+  position: absolute;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f3ebda 0 1.5px, #9a907f 2.5px, #4a433b 4.5px);
+}
+.nameplate__rv--a { top: 20px; left: 20px; }
+.nameplate__rv--b { top: 20px; right: 20px; }
+.nameplate__rv--c { bottom: 20px; left: 20px; }
+.nameplate__rv--d { bottom: 20px; right: 20px; }
+
+/* Chipped enamel showing the iron */
+.nameplate__chip { position: absolute; background: var(--chip-tr) no-repeat top right / contain; }
+.nameplate__chip--tr { top: 0; right: 0; width: 46px; height: 32px; }
+.nameplate__chip--bl { bottom: 0; left: 0; width: 30px; height: 20px; transform: rotate(180deg); }
+
+.nameplate__body {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 10px 14px 0;
+}
+/* Portrait in an arched cream frame, like a door-plate window */
+.nameplate__photo {
+  height: auto;
+  aspect-ratio: 4 / 5;
+  padding: 3px;
+  border: 2px solid #f3ebda;
+  border-radius: 50% 50% 4px 4px / 40% 40% 4px 4px;
+  background: var(--enamel);
+}
+.nameplate__photo img {
+  border-radius: inherit;
+  filter: grayscale(1) contrast(1.08);
+  object-position: 50% 25%;
+}
+.nameplate__photo .photo__fallback { font-size: 2.4rem; border-radius: inherit; }
+
+.nameplate__kicker {
+  font: 700 0.72rem/1 var(--font-sign);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+}
+.nameplate__name {
+  margin: 8px 0 6px;
+  font: 900 clamp(1.7rem, 1.2rem + 1.6vw, 2.2rem)/1 var(--font-display);
+  color: #f3ebda;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.28);
+}
+.nameplate__role {
+  font: 600 0.92rem/1.3 var(--font-sign);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nameplate__facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+  margin: 16px 14px 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(243, 235, 218, 0.45);
+}
+.nameplate__facts dt {
+  font: 600 0.66rem/1.1 var(--font-sign);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c9dcd3;
+}
+.nameplate__facts dd {
+  margin-top: 4px;
+  font: 700 0.9rem/1.25 var(--font-sign);
+  letter-spacing: 0.02em;
+}
+.nameplate__facts dd.is-home { color: var(--gold-bright); }
+.nameplate__markets { grid-column: 1 / -1; order: 3; }
+.nameplate__num {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 14px 14px 0;
+  font: 600 0.72rem/1 var(--font-sign);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c9dcd3;
+}
+
+/* NA · EMEA · LATAM chips (generic; used here and by achievements) */
+.mkt { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; padding: 0; list-style: none; }
+.mkt__chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 3px 10px;
+  border: 1.5px solid currentColor;
+  border-radius: var(--radius-sm);
+  font: 700 0.74rem/1.4 var(--font-sign);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.mkt__chip small { font-size: 0.86em; font-weight: 600; letter-spacing: 0.04em; text-transform: none; opacity: 0.9; }
+.mkt__chip--home { background: var(--navy); border-color: var(--navy); color: var(--navy-ink); }
+/* On the green plate: cream outlines, home chip in sign gold */
+.nameplate .mkt__chip { border-color: rgba(243, 235, 218, 0.75); color: #f3ebda; }
+.nameplate .mkt__chip--home { background: var(--gold-bright); border-color: var(--gold-bright); color: #1c1b19; }
+
+/* ---------- Hanging shop sign: Abierto / Vuelvo enseguida ---------- */
+
+.cartelito {
+  margin-top: 2px;
+  padding: 0 0 4px;
+  border: 0;
+  background: none;
+  color: var(--ink-2);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  perspective: 600px;
+  -webkit-tap-highlight-color: transparent;
+}
+.cartelito:focus-visible { outline-offset: 4px; border-radius: var(--radius); }
+.cartelito__cuerda { width: 86px; height: 22px; }
+.cartelito__faces {
+  position: relative;
+  display: block;
+  width: 230px;
+  height: 64px;
+  transform-style: preserve-3d;
+  transition: transform 600ms var(--ease-out);
+}
+.cartelito[data-state="away"] .cartelito__faces { transform: rotateY(180deg); }
+.cartelito:hover .cartelito__faces { rotate: -2deg; }
+.cartelito__f {
+  --c: var(--enamel);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  border-radius: var(--radius);
+  background: var(--c);
+  color: #f3ebda;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: inset 0 0 0 3px var(--c), inset 0 0 0 4.5px rgba(243, 235, 218, 0.8), var(--shadow-md);
+}
+.cartelito__f b { font: 800 1.35rem/1 var(--font-accent); }
+.cartelito__f small {
+  margin-top: 5px;
+  font: 600 0.66rem/1 var(--font-sign);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.cartelito__f--back { --c: var(--enamel-red); transform: rotateY(180deg); }
+
+.cartelito__hint {
+  margin-top: var(--space-3);
+  font: 700 0.72rem/1.2 var(--font-sign);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Bio copy ---------- */
+
+.about__copy { display: grid; gap: var(--space-5); min-width: 0; }
+.about__copy .section-head { margin-bottom: 0; }
+.about__copy .section-head .about__headline {
+  font: 700 var(--fs-lg)/1.3 var(--font-sans);
+  color: var(--ink);
+  max-width: 34ch;
+}
+.about__quote {
+  position: relative;
+  margin: 0;
+  padding: 6px 0 6px 56px;
+}
+.about__quote::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -0.12em;
+  font: 800 4.6rem/1 var(--font-accent);
+  color: var(--oxblood);
+  text-shadow: 0.045em 0.045em 0 color-mix(in srgb, var(--ochre) 70%, transparent);
+}
+.about__quote p {
+  font: 800 clamp(1.5rem, 1.15rem + 1.4vw, 2.2rem)/1.15 var(--font-display);
+  color: var(--ink);
+}
+.about__text { display: grid; gap: var(--space-4); color: var(--ink-2); max-width: 62ch; }
+.about__langs { display: grid; gap: var(--space-3); }
+.about__langs ul { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; }
+.about__langs .chip { text-transform: none; letter-spacing: 0.04em; font-size: 0.86rem; }
+.about__langs .chip strong { font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+.about__langs .chip span { color: var(--muted); font-weight: 600; }
+.about__langs .chip span::before { content: "· "; }
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 640px) {
+  .nameplate { padding: 22px 18px 30px; }
+  .nameplate__rv--a, .nameplate__rv--b { top: 16px; }
+  .nameplate__rv--c, .nameplate__rv--d { bottom: 16px; }
+  .nameplate__rv--a, .nameplate__rv--c { left: 16px; }
+  .nameplate__rv--b, .nameplate__rv--d { right: 16px; }
+  .nameplate__body { grid-template-columns: 76px 1fr; gap: 14px; padding: 8px 6px 0; }
+  .nameplate__role { font-size: 0.8rem; }
+  .nameplate__facts { margin: 14px 6px 0; gap: 10px 12px; }
+  .nameplate__facts dd { font-size: 0.84rem; }
+  .nameplate__num { margin: 12px 14px 0; font-size: 0.66rem; letter-spacing: 0.12em; }
+  .about__quote { padding-left: 44px; }
+  .about__quote::before { font-size: 3.6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nameplate, .nameplate__sheen, .cartelito__faces { transition: none; }
+  .nameplate:hover { transform: none; }
+}

@@ -1,0 +1,694 @@
+/* ==========================================================================
+   Base: reset, layout primitives, typography, shared components
+   (floating nav pill, enamel buttons, chips, level pads, section labels,
+   baldosa dividers, plates, reveal-on-scroll). Porteño / board B2a.
+   Section-specific styles live in css/sections/<id>.css.
+
+   SHARED COMPONENTS (usable by any section):
+   .section-head > .eyebrow:first-child  colectivo line number + destination
+                                         sign. Number comes from --sec-n, set
+                                         per section id below ("01".."07").
+   .eyebrow (anywhere else)              condensed caps sub-label with a dot
+   .display / .display em                Sansita 900 + Swashed oxblood accent
+   .btn / .btn--ghost                    enamel plate button / ink outline
+   .chip, .chip--soft, .chip--active     condensed caps tag
+   .level / .level__dots i(.on)          vereda pads (4 rounded squares)
+   .chapa (.chapa--red, .chapa--cel)     small enamelled plate with rivets
+   .linea                                colectivo line-number box
+   .destino                              destination-sign strip
+   .baldosas                             sidewalk-tile divider strip
+   .filete (svg <use href="#f-rule">)    ornaments from the sprite in index.html
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  background-color: var(--bg);
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: var(--page-texture);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.03rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;          /* hard guarantee: no horizontal page scroll */
+  transition: background-color var(--dur) ease, color var(--dur) ease;
+}
+@supports (overflow: clip) {
+  body { overflow-x: clip; }
+}
+
+img, svg, video { display: block; max-width: 100%; }
+img { height: auto; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a { color: inherit; }
+h1, h2, h3, h4, p, ul, ol, figure, dl, dd { margin: 0; }
+ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 800; line-height: 1.08; }
+
+/* Focus: celeste ring with offset (works over enamel and paper alike) */
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+::selection { background: var(--navy); color: var(--navy-ink); }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 100;
+  background: var(--navy);
+  color: var(--navy-ink);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  font: 700 0.85rem/1.2 var(--font-sign);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.skip-link:focus { top: var(--space-3); }
+
+/* ---------- Layout ---------- */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--maxw) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--space-8);
+}
+@media (min-width: 900px) {
+  .section { padding-block: var(--space-9); }
+}
+.section--alt { background-color: var(--bg-alt); }
+
+/* Empty, not-yet-rendered sections should not take space */
+.section:empty { padding: 0; }
+
+/* Section numbers for the colectivo label (plain numerals, no glyphs) */
+#about { --sec-n: "01"; }
+#skills { --sec-n: "02"; }
+#work { --sec-n: "03"; }
+#range { --sec-n: "04"; }
+#certifications { --sec-n: "05"; }
+#achievements { --sec-n: "06"; }
+#contact { --sec-n: "07"; }
+
+/* ---------- Typography ---------- */
+
+/* Sub-label (any .eyebrow that is not a section's main label) */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sign);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--oxblood);
+}
+
+/* Section label: colectivo line number + destination sign.
+   <header class="section-head"><p class="eyebrow">Work</p> ... */
+.section-head > .eyebrow:first-child {
+  --linea-w: 50px;
+  position: relative;
+  justify-self: start;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 42px;
+  gap: 0;
+  padding: 0 16px 0 calc(var(--linea-w) + 10px + 26px);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  color: var(--sign-ink);
+  background: linear-gradient(var(--sign-bg), var(--sign-bg)) no-repeat right center / calc(100% - var(--linea-w) - 10px) 34px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.section-head > .eyebrow:first-child::before {
+  /* the line number */
+  content: var(--sec-n, "00");
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: var(--linea-w);
+  height: 40px;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: inset 0 -5px 0 var(--ochre), 2px 2px 0 var(--ink);
+  font: 800 1.3rem/1 var(--font-sign);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.section-head > .eyebrow:first-child::after {
+  /* the lamp dot on the destination sign */
+  content: "";
+  position: absolute;
+  left: calc(var(--linea-w) + 10px + 11px);
+  top: 50%;
+  width: 6px; height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--sign-ink);
+}
+
+/* Big painted-sign headline with a Swashed accent word:
+   <h2 class="display"><span>Things I've</span> <em>built.</em></h2> */
+.display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--fs-h2);
+  line-height: 1.02;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+.display em,
+.serif-accent {
+  font-family: var(--font-accent);
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+.display em {
+  color: var(--oxblood);
+  /* sign-painter's "sombra": ochre drop shadow */
+  text-shadow: 0.045em 0.045em 0 color-mix(in srgb, var(--ochre) 70%, transparent);
+}
+
+.section-head {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-7);
+  max-width: 820px;
+}
+.section-head p:not(.eyebrow) {
+  color: var(--ink-2);
+  font-size: var(--fs-md);
+  max-width: 60ch;
+}
+/* One sidewalk-tile strip closes every section heading */
+.section-head::after {
+  content: "";
+  display: block;
+  width: min(100%, 420px);
+  height: 30px;
+  margin-top: var(--space-2);
+  background: var(--tile) repeat-x left center / 30px 30px;
+  opacity: 0.6;
+  border-block: 1px solid var(--border);
+}
+
+.lead {
+  font-size: var(--fs-lg);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+/* ---------- Ornaments & small signage ---------- */
+
+/* Sidewalk-tile divider */
+.baldosas {
+  height: 34px;
+  background: var(--tile) repeat-x left center / 34px 34px;
+  opacity: 0.6;
+  border-block: 1px solid var(--border);
+}
+.filete { display: block; width: 100%; max-width: 420px; height: 26px; }
+
+/* Enamelled plate (small): rivets, cream inner line, chipped corner */
+.chapa {
+  --plate: var(--enamel);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.62em 1.55em 0.56em;
+  border-radius: var(--radius);
+  background-color: var(--plate);
+  background-image:
+    radial-gradient(circle at 9px 50%, #e9dec6 0 1.5px, #5a5148 1.6px 2.3px, transparent 2.5px),
+    radial-gradient(circle at calc(100% - 9px) 50%, #e9dec6 0 1.5px, #5a5148 1.6px 2.3px, transparent 2.5px),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.1), transparent 45%);
+  color: var(--enamel-ink);
+  font: 700 0.78rem/1 var(--font-sign);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: inset 0 0 0 3px var(--plate), inset 0 0 0 4.5px var(--enamel-ink), 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 8px -3px rgba(40, 25, 10, 0.4);
+}
+.chapa::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 20px; height: 14px;
+  background: var(--chip-tr) no-repeat top right / contain;
+}
+.chapa small { font-weight: 500; letter-spacing: 0.06em; opacity: 0.88; font-size: 0.86em; }
+.chapa--red { --plate: var(--enamel-red); }
+.chapa--cel { --plate: #2d5f8a; }
+
+/* Colectivo line number */
+.linea {
+  display: inline-grid;
+  place-items: center;
+  min-width: 46px;
+  height: 40px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: inset 0 -5px 0 var(--ochre), 2px 2px 0 var(--ink);
+  font: 800 1.3rem/1 var(--font-sign);
+  font-variant-numeric: tabular-nums;
+}
+/* Destination sign */
+.destino {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.5em 0.9em 0.45em;
+  border-radius: var(--radius-sm);
+  background: var(--sign-bg);
+  color: var(--sign-ink);
+  font: 700 0.8rem/1.2 var(--font-sign);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow: inset 0 0 0 1px #3b3833;
+}
+.destino b { color: #f3ebda; font-weight: 800; white-space: nowrap; }
+
+/* ---------- Buttons ---------- */
+/* Primary: green enamel plate with a cream inner line and an ochre offset
+   shadow. Ghost: ink outline, fills with ink on hover. */
+
+.btn {
+  --btn-bg: var(--enamel);
+  --btn-ink: var(--enamel-ink);
+  --btn-shadow: var(--ochre);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 48px;
+  padding: 0 1.45em;
+  border: 1.5px solid var(--btn-bg);
+  border-radius: var(--radius);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  font-family: var(--font-sign);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: inset 0 0 0 3px var(--btn-bg), inset 0 0 0 4.5px rgba(243, 235, 218, 0.75), 3px 3px 0 var(--btn-shadow);
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+.btn:hover {
+  transform: translate(-1px, -2px);
+  box-shadow: inset 0 0 0 3px var(--btn-bg), inset 0 0 0 4.5px rgba(243, 235, 218, 0.75), 5px 5px 0 var(--btn-shadow);
+}
+.btn:active { transform: translate(1px, 1px); box-shadow: inset 0 0 0 3px var(--btn-bg), inset 0 0 0 4.5px rgba(243, 235, 218, 0.75), 1px 1px 0 var(--btn-shadow); }
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-ink: var(--ink);
+  border-color: var(--ink);
+  box-shadow: none;
+}
+.btn--ghost:hover { background: var(--ink); color: var(--bg); box-shadow: 3px 3px 0 var(--ochre); }
+.btn--ghost:active { box-shadow: none; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+
+/* ---------- Chips ---------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.45em 0.8em 0.4em;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sign);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+.chip--soft { background: var(--accent-soft); border-color: var(--accent-soft); }
+.chip--active { background: var(--ink); color: var(--bg); }
+
+/* Level meter: four vereda pads + visual label (no percentages) */
+.level {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sign);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.level__dots { display: inline-flex; gap: 4px; }
+.level__dots i {
+  width: 10px; height: 10px;
+  border-radius: 3px;
+  border: 1.5px solid var(--border-strong);
+  background: transparent;
+}
+.level__dots i.on { background: var(--green); border-color: var(--green); }
+
+/* ---------- Photo with initials fallback (utils.photoHTML) ---------- */
+
+.photo {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.photo__fallback {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3rem, 2rem + 6vw, 7rem);
+  line-height: 1;
+  color: var(--enamel-ink);
+  background: var(--enamel);
+}
+.photo--missing img { display: none; }
+.photo--missing .photo__fallback { display: grid; }
+
+/* ---------- Floating nav pill ---------- */
+/* Enamel-black pill (cream in dark mode), condensed caps, JL roundel. */
+
+.site-nav {
+  position: fixed;
+  z-index: 50;
+  left: 50%;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  max-width: calc(100vw - 2 * var(--gutter));
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--nav-bg);
+  color: var(--nav-ink);
+  -webkit-backdrop-filter: saturate(1.2) blur(10px);
+  backdrop-filter: saturate(1.2) blur(10px);
+  box-shadow: var(--shadow-md), inset 0 0 0 1px rgba(235, 198, 110, 0.18);
+}
+@media (min-width: 900px) {
+  .site-nav { top: 18px; bottom: auto; }
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  margin: 0; padding: 0;
+  list-style: none;
+}
+.site-nav__links::-webkit-scrollbar { display: none; }
+
+.site-nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sign);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.88;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease, opacity var(--dur-fast) ease;
+}
+.site-nav__link:hover { opacity: 1; background: color-mix(in srgb, var(--nav-ink) 12%, transparent); }
+.site-nav__link[aria-current="true"] {
+  opacity: 1;
+  background: var(--nav-ink);
+  color: var(--nav-bg);
+}
+/* JL roundel: green enamel with a cream inner ring */
+.site-nav__link--home {
+  justify-content: center;
+  width: 38px;
+  padding: 0;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: var(--enamel);
+  color: var(--enamel-ink);
+  font: 900 0.95rem/1 var(--font-display);
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 1;
+  box-shadow: inset 0 0 0 2.5px var(--enamel), inset 0 0 0 3.8px rgba(243, 235, 218, 0.8);
+}
+.site-nav__link--home:hover,
+.site-nav__link--home[aria-current="true"] {
+  background: var(--enamel);
+  color: var(--enamel-ink);
+  box-shadow: inset 0 0 0 2.5px var(--enamel), inset 0 0 0 3.8px var(--gold-bright);
+}
+.site-nav :focus-visible { outline-color: var(--gold-bright); outline-offset: 1px; }
+:root[data-theme="dark"] .site-nav :focus-visible { outline-color: #2d5f8a; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .site-nav :focus-visible { outline-color: #2d5f8a; }
+}
+
+.site-nav__tools {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+  padding-left: 6px;
+  margin-left: 4px;
+  border-left: 1px solid color-mix(in srgb, var(--nav-ink) 25%, transparent);
+}
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-sign);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.icon-btn:hover { background: color-mix(in srgb, var(--nav-ink) 12%, transparent); }
+.icon-btn svg { width: 18px; height: 18px; }
+
+/* Theme icon swap */
+.theme-icon--dark { display: none; }
+:root[data-theme="dark"] .theme-icon--light { display: none; }
+:root[data-theme="dark"] .theme-icon--dark { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-icon--light { display: none; }
+  :root:not([data-theme="light"]) .theme-icon--dark { display: block; }
+}
+
+@media (max-width: 599px) {
+  .site-nav__link { padding: 0 10px; font-size: 0.74rem; letter-spacing: 0.08em; }
+  .site-nav__link--home { padding: 0; }
+}
+
+/* ---------- Language menu (EN / ES / DE) ---------- */
+.lang { position: relative; flex: none; }
+.lang__btn { gap: 4px; grid-auto-flow: column; padding: 0 8px 0 10px; min-width: 52px; }
+.lang__btn svg { flex: none; width: 12px; height: 12px; transition: transform var(--dur-fast) ease; }
+.lang__btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.lang__list {
+  position: absolute;
+  right: -6px;
+  bottom: calc(100% + 16px);
+  z-index: 60;
+  min-width: 176px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ochre), var(--shadow-md);
+}
+.lang__list[hidden] { display: none; }
+@media (min-width: 900px) {
+  .lang__list { bottom: auto; top: calc(100% + 16px); }
+}
+.lang__opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+.lang__opt b {
+  min-width: 2.2em;
+  font: 800 0.8rem/1 var(--font-sign);
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.lang__opt:hover { background: var(--ghost); }
+.lang__opt[aria-pressed="true"] { background: var(--enamel); color: var(--enamel-ink); }
+.lang__opt[aria-pressed="true"] b { color: var(--gold-bright); }
+.lang__opt:focus-visible { outline-offset: -2px; }
+
+/* ---------- Reveal on scroll ---------- */
+/* Add data-reveal to any element; main.js adds .is-visible when in view.
+   Optional stagger: style="--reveal-delay: 120ms". */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  position: relative;
+  padding: calc(var(--space-6) + 34px) 0 calc(var(--space-8) + 40px);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+.site-footer::before {
+  /* sidewalk strip as the page's last edge */
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 34px;
+  background: var(--tile) repeat-x left center / 34px 34px;
+  opacity: 0.5;
+  border-block: 1px solid var(--border);
+}
+@media (min-width: 900px) {
+  .site-footer { padding-bottom: var(--space-7); }
+}
+
+/* Boot state */
+.load-error {
+  margin: var(--space-8) auto;
+  max-width: 520px;
+  padding: var(--space-5);
+  border: 1.5px dashed var(--border-strong);
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--ink-2);
+}
+
+.site-footer__note {
+  display: block;
+  max-width: 46ch;
+  margin: var(--space-2) auto 0;
+  font-size: var(--fs-xs);
+  opacity: 0.9;
+}
+
+/* Long German compounds: hyphenate instead of overflowing on narrow screens */
+:lang(de) h1, :lang(de) h2, :lang(de) h3, :lang(de) h4,
+:lang(de) p, :lang(de) li, :lang(de) .chip, :lang(de) figcaption {
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}

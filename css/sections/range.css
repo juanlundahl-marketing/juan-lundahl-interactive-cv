@@ -1,0 +1,425 @@
+/* Range: industries, ways of working, collaboration, recommendation. B2a "Porteño": line numbers, enamel plates, destination signs, framed bill. */
+
+/* ---------- B2a "Porteño" local palette (scoped; global tokens win where they exist) ----------
+   Enamel colours are theme-independent (plates look the same day and night).
+   Text-weight colours have a lit variant for "Noche de bar notable". */
+.range {
+  --pt-enamel: #1F5C4A;          /* colectivo / bondi green enamel */
+  --pt-enamel-ink: #F3EBDA;      /* cream lettering on enamel */
+  --pt-enamel-red: #7A2430;      /* oxblood enamel */
+  --pt-enamel-cel: #2D5F8A;      /* celeste enamel */
+  --pt-enamel-soft: #C9DCD3;     /* secondary text on green enamel (6:1) */
+  --pt-sign: #1C1B19;            /* destination-sign black */
+  --pt-sign-gold: #EBC66E;       /* painted gold on black / green */
+  --pt-slate: #22302A;           /* café pizarra */
+  --pt-wood: #6B4A2A;
+  --pt-chalk: #F2E8D5;
+  --pt-iron: #2B2622;
+  --pt-paper-2: var(--paper-2, #E9DEC6);
+  --pt-green: #1F5C4A;           /* green as text / rules */
+  --pt-oxblood: #7A2430;
+  --pt-ochre: #C08A2E;           /* fills and shadows only */
+  --pt-gold: #8A6424;            /* filete hairline, readable */
+  --pt-celeste: #2D5F8A;         /* readable celeste: links */
+  --pt-shadow: rgba(60, 40, 10, 0.35);
+  --pt-display: var(--font-display, "Sansita", Georgia, serif);
+  --pt-accent: var(--font-accent, "Sansita Swashed", "Sansita", Georgia, serif);
+  --pt-signf: var(--font-sign, "Encode Sans Condensed", "Arial Narrow", system-ui, sans-serif);
+  --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%23E9DEC6'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%232B2622'/%3E%3C/svg%3E");
+  --pt-rivet: radial-gradient(circle at 35% 35%, #F3EBDA 0 1.5px, #9a907f 2.5px, #4a433b 4.5px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .range {
+    --pt-paper-2: var(--paper-2, #201C18);
+    --pt-green: #6FB59A; --pt-oxblood: #E0828A; --pt-ochre: #D7A64B; --pt-gold: #D7A64B; --pt-celeste: #8FB9DA;
+    --pt-shadow: rgba(0, 0, 0, 0.7);
+    --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%231A1714'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%23514940'/%3E%3C/svg%3E");
+  }
+}
+:root[data-theme="dark"] .range {
+  --pt-paper-2: var(--paper-2, #201C18);
+  --pt-green: #6FB59A; --pt-oxblood: #E0828A; --pt-ochre: #D7A64B; --pt-gold: #D7A64B; --pt-celeste: #8FB9DA;
+  --pt-shadow: rgba(0, 0, 0, 0.7);
+  --pt-chip: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%231A1714'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%23514940'/%3E%3C/svg%3E");
+}
+
+.range__block { display: grid; gap: var(--space-5); }
+.range__block + .range__block,
+.range__block + .rec { margin-top: var(--space-8); }
+
+/* Block heading: colectivo line letter + destination sign */
+.range__sub {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  font-family: var(--pt-signf);
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.range__line {
+  display: inline-grid;
+  place-items: center;
+  min-width: 40px;
+  height: 36px;
+  padding: 0 8px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  box-shadow: inset 0 -5px 0 var(--pt-ochre), 2px 2px 0 var(--ink);
+}
+
+/* ---------- (a) Industries: cream plates with a line number ---------- */
+.ind-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 640px) { .ind-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .ind-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.ind {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: 18px 20px 20px;
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+  background: var(--surface);
+  box-shadow: 4px 4px 0 var(--pt-paper-2), 4px 4px 0 1.5px var(--ink);
+  transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+}
+.ind:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--pt-ochre), 6px 6px 0 1.5px var(--ink); }
+.ind__n {
+  align-self: flex-start;
+  display: inline-grid;
+  place-items: center;
+  min-width: 40px;
+  height: 32px;
+  padding: 0 7px;
+  border-radius: 4px;
+  background: var(--pt-sign);
+  color: var(--pt-sign-gold);
+  font-family: var(--pt-signf);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  box-shadow: inset 0 0 0 1px #3B3833;
+}
+.ind__name {
+  font-family: var(--pt-display);
+  font-size: 1.4rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+.ind__text { color: var(--ink-2); font-size: var(--fs-sm); line-height: 1.55; }
+.ind__where {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: auto 0 0;
+  padding: var(--space-3) 0 0;
+  list-style: none;
+  border-top: 1px dashed var(--border-strong);
+}
+.ind__where .chip {
+  padding: 0.45em 0.7em 0.4em;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  background: var(--pt-paper-2);
+  color: var(--ink);
+  font-family: var(--pt-signf);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ---------- (b) Ways of working: three enamel plates ---------- */
+.modes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 720px) { .modes { grid-template-columns: repeat(3, 1fr); } }
+
+.mode {
+  --plate: var(--pt-enamel);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+  min-width: 0;
+  padding: 26px 26px 24px;
+  border-radius: 10px;
+  color: var(--pt-enamel-ink);
+  background: var(--plate) linear-gradient(155deg, rgba(255, 255, 255, 0.12), transparent 40%, rgba(0, 0, 0, 0.12));
+  box-shadow:
+    inset 0 0 0 6px var(--plate),
+    inset 0 0 0 7.5px rgba(243, 235, 218, 0.85),
+    0 14px 26px -16px var(--pt-shadow);
+}
+.mode--remote { --plate: var(--pt-enamel-cel); }
+.mode--hybrid { --plate: var(--pt-enamel-red); }
+.mode::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 20px;
+  background: var(--pt-chip) no-repeat top right / contain;
+}
+.mode__rivets {
+  position: absolute;
+  inset: 14px;
+  pointer-events: none;
+  background:
+    var(--pt-rivet) left top / 9px 9px no-repeat,
+    var(--pt-rivet) left bottom / 9px 9px no-repeat,
+    var(--pt-rivet) right bottom / 9px 9px no-repeat;
+}
+.mode__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(243, 235, 218, 0.8);
+  color: var(--pt-sign-gold);
+}
+.mode__icon .mode-icon { width: 22px; height: 22px; }
+.mode__name {
+  font-family: var(--pt-display);
+  font-size: 1.9rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--pt-enamel-ink);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.28);
+}
+.mode__list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-3) 0 0;
+  list-style: none;
+  border-top: 1px solid rgba(243, 235, 218, 0.4);
+}
+.mode__list li {
+  position: relative;
+  padding-left: 18px;
+  font-weight: 500;
+  color: var(--pt-enamel-ink);
+}
+.mode__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--pt-sign-gold);
+}
+.mode__note {
+  margin-left: 4px;
+  font-family: var(--pt-signf);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #E3ECE7;
+}
+.modes__note {
+  max-width: 52ch;
+  font-family: var(--pt-display);
+  font-weight: 800;
+  font-size: var(--fs-lg);
+  line-height: 1.25;
+  color: var(--pt-green);
+}
+
+/* ---------- (c) How I work: destination-sign labels ---------- */
+.collab__intro {
+  max-width: 62ch;
+  font-size: var(--fs-md);
+  color: var(--ink-2);
+}
+.pairs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 820px) { .pairs { grid-template-columns: repeat(3, 1fr); } }
+.pair {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+.pair__label {
+  justify-self: start;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7em;
+  max-width: 100%;
+  padding: 0.6em 0.95em 0.55em;
+  border-radius: 4px;
+  background: var(--pt-sign);
+  color: var(--pt-sign-gold);
+  box-shadow: inset 0 0 0 1px #3B3833;
+  font-family: var(--pt-signf);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.pair__label span { color: #F3EBDA; font-weight: 800; }
+.pair__label i {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pt-sign-gold);
+  font-size: 0;
+}
+.pair__label strong { font-weight: 800; color: var(--pt-sign-gold); }
+.pair__text { color: var(--ink-2); max-width: 44ch; }
+
+/* ---------- (d) Recommendation: framed bill (double rule) ---------- */
+.rec {
+  position: relative;
+  display: grid;
+  gap: var(--space-5);
+  margin: 0;
+  padding: var(--space-6) var(--space-5);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: var(--surface);
+  box-shadow: 8px 8px 0 var(--pt-paper-2), 8px 8px 0 2px var(--ink);
+}
+.rec::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--ink);
+  pointer-events: none;
+}
+@media (min-width: 820px) { .rec { padding: var(--space-7) var(--space-8); } }
+
+.rec__label {
+  justify-self: start;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.62em 1.5em 0.56em;
+  border-radius: 6px;
+  background: var(--pt-enamel-red);
+  color: var(--pt-enamel-ink);
+  font-family: var(--pt-signf);
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background-image:
+    radial-gradient(circle at 9px 50%, #E9DEC6 0 1.5px, #5a5148 1.6px 2.3px, transparent 2.5px),
+    radial-gradient(circle at calc(100% - 9px) 50%, #E9DEC6 0 1.5px, #5a5148 1.6px 2.3px, transparent 2.5px);
+  box-shadow: inset 0 0 0 3px var(--pt-enamel-red), inset 0 0 0 4.5px var(--pt-enamel-ink), 0 3px 8px -3px var(--pt-shadow);
+}
+
+.rec__quote { position: relative; margin: 0; padding-top: var(--space-7); max-width: 64ch; }
+.rec__quote::before {
+  content: "\201C";
+  position: absolute;
+  top: -0.12em;
+  left: -0.02em;
+  font-family: var(--pt-accent);
+  font-weight: 800;
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--pt-oxblood);
+  text-shadow: 0.045em 0.045em 0 color-mix(in srgb, var(--pt-ochre) 70%, transparent);
+}
+.rec__quote p {
+  font-family: var(--pt-display);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  line-height: 1.32;
+  color: var(--ink);
+}
+
+.rec__tr {
+  max-width: 62ch;
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--pt-ochre);
+  display: grid;
+  gap: var(--space-2);
+}
+.rec__tr-label {
+  font-family: var(--pt-signf);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.rec__tr p:last-child { color: var(--ink-2); }
+
+.rec__by {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--border-strong);
+}
+.rec__name { font-family: var(--pt-display); font-weight: 900; font-size: 1.35rem; line-height: 1.1; }
+.rec__role { color: var(--ink-2); font-size: var(--fs-sm); max-width: 48ch; }
+.rec__ctx {
+  margin-top: var(--space-1);
+  font-family: var(--pt-signf);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pt-green);
+}
+.rec__link { min-height: 44px; }
+
+@media (max-width: 560px) {
+  .mode { padding: 22px 20px 20px; }
+  .rec { padding: var(--space-6) 20px; box-shadow: 5px 5px 0 var(--pt-paper-2), 5px 5px 0 2px var(--ink); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ind, .ind:hover { transition: none; transform: none; }
+}
