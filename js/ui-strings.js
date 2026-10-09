@@ -199,7 +199,7 @@ export const UI = {
     themeToggle: 'Dunkelmodus umschalten',
     loadError: 'Der Inhalt konnte nicht geladen werden. Bitte lade die Seite neu.',
     footer: 'Mit Sorgfalt in Buenos Aires gebaut.',
-    footerNote: 'Diese Seite ist auch auf Deutsch verfügbar; Übersetzung zur Prüfung durch Muttersprachler.',
+    footerNote: 'Deutsche Übersetzung – Prüfung durch Muttersprachler ausstehend.',
 
     heroHello: 'Hallo, ich bin',
     heroScroll: 'Scrollen',
