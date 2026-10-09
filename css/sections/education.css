@@ -1,4 +1,4 @@
-/* Education: framed diploma plate (filete corners, gold double rule, ribbon
+/* Education: framed university plate (filete corners, gold double rule, prize ribbon
    medal) + "libreta" study log: ruled paper, red margin line with the years,
    matrícula cards dealt in on scroll, a school-timetable grid for modules.
    Uses global theme tokens only, so "Noche de bar notable" follows for free.
@@ -11,12 +11,12 @@
 }
 @media (min-width: 980px) {
   .edu-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: var(--space-7); }
-  .diploma { position: sticky; top: 110px; }
+  .uni { position: sticky; top: 110px; }
 }
 
-/* ---------- (a) Diploma plate ---------- */
-.diploma { min-width: 0; }
-.diploma__plate {
+/* ---------- (a) University plate ---------- */
+.uni { min-width: 0; }
+.uni__plate {
   position: relative;
   display: grid;
   justify-items: center;
@@ -32,29 +32,29 @@
   box-shadow: 6px 6px 0 var(--ochre), 6px 6px 0 2px var(--ink);
 }
 /* gold double rule inside the frame */
-.diploma__plate::before,
-.diploma__plate::after {
+.uni__plate::before,
+.uni__plate::after {
   content: "";
   position: absolute;
   pointer-events: none;
   border-radius: 2px;
 }
-.diploma__plate::before { inset: 9px; border: 1.5px solid var(--gold); }
-.diploma__plate::after { inset: 14px; border: 1px solid var(--gold); opacity: 0.55; }
+.uni__plate::before { inset: 9px; border: 1.5px solid var(--gold); }
+.uni__plate::after { inset: 14px; border: 1px solid var(--gold); opacity: 0.55; }
 
-.diploma__corner {
+.uni__corner {
   position: absolute;
   z-index: 1;
   width: clamp(40px, 6vw, 58px);
   height: clamp(40px, 6vw, 58px);
   pointer-events: none;
 }
-.diploma__corner--bl { left: 5px; bottom: 5px; }
-.diploma__corner--tl { left: 5px; top: 5px; transform: scaleY(-1); }
-.diploma__corner--tr { right: 5px; top: 5px; transform: scale(-1, -1); }
-.diploma__corner--br { right: 5px; bottom: 5px; transform: scaleX(-1); }
+.uni__corner--bl { left: 5px; bottom: 5px; }
+.uni__corner--tl { left: 5px; top: 5px; transform: scaleY(-1); }
+.uni__corner--tr { right: 5px; top: 5px; transform: scale(-1, -1); }
+.uni__corner--br { right: 5px; bottom: 5px; transform: scaleX(-1); }
 
-.diploma__kicker {
+.uni__kicker {
   position: relative;
   z-index: 2;
   font-family: var(--font-sign);
@@ -64,7 +64,7 @@
   text-transform: uppercase;
   color: var(--oxblood);
 }
-.diploma__inst {
+.uni__inst {
   max-width: 34ch;
   font-family: var(--font-sign);
   font-size: clamp(0.86rem, 0.8rem + 0.3vw, 1rem);
@@ -74,17 +74,17 @@
   text-transform: uppercase;
   color: var(--green);
 }
-.diploma__rule { width: min(100%, 240px); height: 24px; margin-block: 2px; }
-.diploma__degree {
-  max-width: 18ch;
+.uni__rule { width: min(100%, 240px); height: 24px; margin-block: 2px; }
+.uni__program {
+  max-width: 22ch;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(1.7rem, 1.15rem + 2.2vw, 2.65rem);
+  font-size: clamp(1.5rem, 1.05rem + 1.8vw, 2.25rem);
   line-height: 1.06;
   text-wrap: balance;
   color: var(--ink);
 }
-.diploma__years {
+.uni__years {
   margin-top: var(--space-2);
   padding: 0.42em 1em 0.36em;
   border-radius: var(--radius-sm);
@@ -95,9 +95,18 @@
   font-variant-numeric: tabular-nums;
   box-shadow: inset 0 0 0 1px #3b3833;
 }
+.uni__note,
+.mat__note {
+  font-family: var(--font-accent);
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  color: var(--oxblood);
+}
+.mat__note { font-size: 1rem; }
 
-/* Award: ribbon medal + text */
-.diploma__award {
+/* Award (prize won during his time at UCA): ribbon medal + text */
+.uni__award {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,7 +124,7 @@
   transform-origin: 50% 8%;
   filter: drop-shadow(2px 3px 0 color-mix(in srgb, var(--ink) 22%, transparent));
 }
-.diploma.is-visible .medal { animation: edu-swing 1.6s var(--ease-out) 0.45s both; }
+.uni.is-visible .medal { animation: edu-swing 1.6s var(--ease-out) 0.45s both; }
 @keyframes edu-swing {
   0% { transform: rotate(-16deg); }
   35% { transform: rotate(9deg); }
@@ -123,8 +132,8 @@
   80% { transform: rotate(2deg); }
   100% { transform: rotate(0); }
 }
-.diploma__award-text { display: grid; gap: 2px; min-width: 0; max-width: 30ch; }
-.diploma__award-tag {
+.uni__award-text { display: grid; gap: 2px; min-width: 0; max-width: 30ch; }
+.uni__award-tag {
   font-family: var(--font-sign);
   font-size: 0.74rem;
   font-weight: 800;
@@ -132,8 +141,17 @@
   text-transform: uppercase;
   color: var(--oxblood);
 }
-.diploma__award-text strong { font-size: 1.04rem; font-weight: 700; line-height: 1.25; color: var(--ink); }
-.diploma__award-issuer { font-size: var(--fs-sm); line-height: 1.35; color: var(--ink-2); }
+.uni__award-text strong { font-size: 1.04rem; font-weight: 700; line-height: 1.25; color: var(--ink); }
+.uni__award-issuer { font-size: var(--fs-sm); line-height: 1.35; color: var(--ink-2); }
+.uni__award-context {
+  margin-top: 4px;
+  font-family: var(--font-sign);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green);
+}
 
 /* ---------- (b) Libreta: ruled study log ---------- */
 .libreta { display: grid; gap: var(--space-4); min-width: 0; }
@@ -210,7 +228,7 @@
   border: 3px solid var(--oxblood);
   box-shadow: 0 0 0 3px var(--surface);
 }
-.tl__item--degree::before { background: var(--oxblood); }
+.tl__item--uni::before { background: var(--oxblood); }
 .tl__year {
   grid-column: 1;
   justify-self: center;
@@ -244,7 +262,7 @@
   transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
 }
 .mat:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ochre); }
-.tl__item--degree .mat { background-image: linear-gradient(var(--enamel-red), var(--enamel-red)); }
+.tl__item--uni .mat { background-image: linear-gradient(var(--enamel-red), var(--enamel-red)); }
 @media (max-width: 559px) {
   .mat { margin-left: 12px; padding: 16px 12px 14px; }
 }
@@ -264,7 +282,7 @@
   font-variant-numeric: tabular-nums;
   transform: rotate(-1.5deg);
 }
-.mat__degree {
+.mat__title {
   font-size: clamp(1.08rem, 1rem + 0.4vw, 1.3rem);
   font-weight: 800;
   line-height: 1.2;
@@ -365,7 +383,7 @@
 @media (prefers-reduced-motion: reduce) {
   .js .education .tl__item[data-reveal] { transform: none; }
   .js .tt__bar { transform: none; transition: none; }
-  .diploma.is-visible .medal { animation: none; }
+  .uni.is-visible .medal { animation: none; }
   .mat, .mat:hover { transition: none; transform: none; }
   .mat__when { transform: none; }
 }

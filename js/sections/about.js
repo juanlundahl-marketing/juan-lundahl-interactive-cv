@@ -23,6 +23,16 @@ const SIGN = {
 };
 const WORD = { open: 'Trabajando', away: 'Vuelvo enseguida' };
 
+/* Simple original flags (decorative; the language name carries the meaning).
+   es: Argentina (celeste-white-celeste + sun disc), en: United Kingdom
+   (simplified Union Jack), de: Germany (black-red-gold). */
+const flag = (inner) => `<svg class="lang-card__flag" viewBox="0 0 60 40" aria-hidden="true" focusable="false">${inner}</svg>`;
+const FLAGS = {
+  es: flag('<rect width="60" height="40" fill="#74ACDF"/><rect y="13.33" width="60" height="13.34" fill="#FFFFFF"/><circle cx="30" cy="20" r="4.2" fill="#F6B40E" stroke="#85340A" stroke-width=".6"/>'),
+  en: flag('<rect width="60" height="40" fill="#012169"/><path d="M0 0L60 40M60 0L0 40" stroke="#FFFFFF" stroke-width="8"/><path d="M0 0L60 40M60 0L0 40" stroke="#C8102E" stroke-width="2.6"/><path d="M30 0V40M0 20H60" stroke="#FFFFFF" stroke-width="12"/><path d="M30 0V40M0 20H60" stroke="#C8102E" stroke-width="7"/>'),
+  de: flag('<rect width="60" height="13.34" fill="#000000"/><rect y="13.33" width="60" height="13.34" fill="#DD0000"/><rect y="26.66" width="60" height="13.34" fill="#FFCE00"/>')
+};
+
 export default function render(el, ctx) {
   const { data, meta, ui, lang } = ctx;
   const s = SIGN[lang] || SIGN.en;
@@ -93,12 +103,20 @@ export default function render(el, ctx) {
         <div class="about__text">
           ${text.map((p, i) => `<p data-reveal style="--reveal-delay:${i * 70}ms">${esc(p)}</p>`).join('')}
         </div>
-        ${languages.length ? `<div class="about__langs" data-reveal>
-          <p class="eyebrow">${esc(ui.languagesLabel)}</p>
-          <ul role="list">
-            ${languages.map((l) => `<li class="chip"><strong>${esc(l.name)}</strong><span>${esc(l.level)}</span></li>`).join('')}
+        ${languages.length ? `<section class="about__langs" data-reveal aria-labelledby="about-langs-title">
+          <h3 class="eyebrow" id="about-langs-title">${esc(ui.languagesLabel)}</h3>
+          <ul class="lang-cards" role="list">
+            ${languages.map((l, i) => `
+            <li class="lang-card" style="--i:${i}">
+              ${FLAGS[l.code] || ''}
+              <span class="lang-card__text">
+                <strong class="lang-card__name">${esc(l.name)}</strong>
+                <span class="lang-card__level">${esc(l.level)}</span>
+                ${l.steps ? `<span class="level__dots lang-card__dots" aria-hidden="true">${[1, 2, 3, 4].map((n) => `<i${n <= l.steps ? ' class="on"' : ''}></i>`).join('')}</span>` : ''}
+              </span>
+            </li>`).join('')}
           </ul>
-        </div>` : ''}
+        </section>` : ''}
       </div>
     </div>
   `;

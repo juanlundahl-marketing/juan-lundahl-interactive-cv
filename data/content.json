@@ -30,7 +30,7 @@
       "text": [
         "My focus now is bringing AI and automation into marketing and sales processes and operations: optimizing CRMs and integrating a modern, advanced tech stack so teams can work with more clarity and speed.",
         "At VU Inc. I work on the martech stack, the automation infrastructure and the integration of AI into campaigns. At E-Planning I led lead generation on HubSpot CRM, building workflows aligned with Sales. Earlier work in paid media (US Ophthalmic) and in content and design (Onewater, Bordahl Analytics) gave me the full view of the funnel.",
-        "I started in communication, and a journalism degree is still a strength: I write clearly, listen to audiences and bring a structured, collaborative attitude to every team."
+        "I started in communication, and my background in journalism is still a strength: I write clearly, listen to audiences and bring a structured, collaborative attitude to every team."
       ],
       "facts": [
         { "label": "Experience", "value": "6+ years" },
@@ -217,7 +217,7 @@
         "featured": true,
         "award": "adepa",
         "institution": "Pontifical Catholic University of Argentina (UCA)",
-        "degree": "Bachelor's degree in Journalistic Communication",
+        "program": "Bachelor's in Journalistic Communication",
         "start": "2016",
         "end": "2020",
         "details": []
@@ -225,7 +225,7 @@
       {
         "id": "coderhouse",
         "institution": "Coderhouse",
-        "degree": "Digital Marketing",
+        "program": "Digital Marketing",
         "start": "2021-10",
         "end": "2022-06",
         "details": [
@@ -238,7 +238,7 @@
       {
         "id": "edx",
         "institution": "edX (Harvard University)",
-        "degree": "Rhetoric: The Art of Persuasive Writing and Public Speaking",
+        "program": "Rhetoric: The Art of Persuasive Writing and Public Speaking",
         "start": "2023-05",
         "end": "2023-07",
         "details": []
@@ -246,7 +246,7 @@
       {
         "id": "uca-cc",
         "institution": "UCA Cultural Center",
-        "degree": "Community Management",
+        "program": "Community Management",
         "start": "2020-09",
         "end": "2020-11",
         "details": []
@@ -262,7 +262,8 @@
       "awards": [
         {
           "title": "1st Prize, University Journalism",
-          "issuer": "Association of Argentine Journalistic Entities (ADEPA)"
+          "issuer": "Association of Argentine Journalistic Entities (ADEPA)",
+          "context": "Awarded during my time at UCA"
         }
       ]
     },
@@ -298,9 +299,9 @@
       "url": "https://www.linkedin.com/in/juan-lundahl/details/recommendations/"
     },
     "languages": [
-      { "name": "Spanish", "level": "Native" },
-      { "name": "English", "level": "Fluent" },
-      { "name": "German", "level": "Basic-intermediate" }
+      { "code": "es", "name": "Spanish", "level": "Native", "steps": 4 },
+      { "code": "en", "name": "English", "level": "Fluent", "steps": 3 },
+      { "code": "de", "name": "German", "level": "Basic-intermediate", "steps": 2 }
     ],
     "contact": {
       "email": "juanlundahl@gmail.com",
@@ -523,7 +524,7 @@
         "featured": true,
         "award": "adepa",
         "institution": "Pontificia Universidad Católica Argentina (UCA)",
-        "degree": "Licenciatura en Comunicación Periodística",
+        "program": "Licenciatura en Comunicación Periodística",
         "start": "2016",
         "end": "2020",
         "details": []
@@ -531,7 +532,7 @@
       {
         "id": "coderhouse",
         "institution": "Coderhouse",
-        "degree": "Marketing Digital",
+        "program": "Marketing Digital",
         "start": "2021-10",
         "end": "2022-06",
         "details": [
@@ -544,7 +545,7 @@
       {
         "id": "edx",
         "institution": "edX (Harvard University)",
-        "degree": "Retórica: el arte de escribir persuasivamente y hablar en público",
+        "program": "Retórica: el arte de escribir persuasivamente y hablar en público",
         "start": "2023-05",
         "end": "2023-07",
         "details": []
@@ -552,7 +553,7 @@
       {
         "id": "uca-cc",
         "institution": "Centro Cultural UCA",
-        "degree": "Community Management",
+        "program": "Community Management",
         "start": "2020-09",
         "end": "2020-11",
         "details": []
@@ -568,7 +569,8 @@
       "awards": [
         {
           "title": "1er Premio, Periodismo Universitario",
-          "issuer": "Asociación de Entidades Periodísticas Argentinas (ADEPA)"
+          "issuer": "Asociación de Entidades Periodísticas Argentinas (ADEPA)",
+          "context": "Otorgado durante mi paso por la UCA"
         }
       ]
     },
@@ -605,9 +607,9 @@
       "url": "https://www.linkedin.com/in/juan-lundahl/details/recommendations/"
     },
     "languages": [
-      { "name": "Español", "level": "Nativo" },
-      { "name": "Inglés", "level": "Fluido" },
-      { "name": "Alemán", "level": "Básico-intermedio" }
+      { "code": "es", "name": "Español", "level": "Nativo", "steps": 4 },
+      { "code": "en", "name": "Inglés", "level": "Fluido", "steps": 3 },
+      { "code": "de", "name": "Alemán", "level": "Básico-intermedio", "steps": 2 }
     ],
     "contact": {
       "email": "juanlundahl@gmail.com",
@@ -643,7 +645,7 @@
       "text": [
         "Mein Schwerpunkt liegt heute darauf, KI und Automatisierung in Marketing- und Vertriebsprozesse und -abläufe zu bringen: CRM-Systeme zu optimieren und einen modernen, fortschrittlichen Tech-Stack zu integrieren, damit Teams mit mehr Klarheit und Tempo arbeiten können.",
         "Bei VU Inc. arbeite ich am Martech-Stack, an der Automatisierungsinfrastruktur und an der Integration von KI in Kampagnen. Bei E-Planning habe ich die Leadgenerierung im HubSpot CRM geleitet und Workflows in enger Abstimmung mit dem Vertrieb aufgebaut. Frühere Tätigkeiten in Paid Media (US Ophthalmic) sowie in Content und Design (Onewater, Bordahl Analytics) haben mir den vollständigen Blick auf den Funnel verschafft.",
-        "Ich habe in der Kommunikation angefangen, und mein Journalismusstudium ist bis heute eine Stärke: Ich schreibe klar, höre Zielgruppen zu und bringe eine strukturierte, kooperative Haltung in jedes Team."
+        "Ich habe in der Kommunikation angefangen, und mein journalistischer Hintergrund ist bis heute eine Stärke: Ich schreibe klar, höre Zielgruppen zu und bringe eine strukturierte, kooperative Haltung in jedes Team."
       ],
       "facts": [
         { "label": "Erfahrung", "value": "6+ Jahre" },
@@ -830,7 +832,7 @@
         "featured": true,
         "award": "adepa",
         "institution": "Päpstliche Katholische Universität Argentiniens (UCA)",
-        "degree": "Bachelor in Journalistischer Kommunikation",
+        "program": "Bachelorstudiengang Journalistische Kommunikation",
         "start": "2016",
         "end": "2020",
         "details": []
@@ -838,7 +840,7 @@
       {
         "id": "coderhouse",
         "institution": "Coderhouse",
-        "degree": "Digitales Marketing",
+        "program": "Digitales Marketing",
         "start": "2021-10",
         "end": "2022-06",
         "details": [
@@ -851,7 +853,7 @@
       {
         "id": "edx",
         "institution": "edX (Harvard University)",
-        "degree": "Rhetorik: Die Kunst des überzeugenden Schreibens und öffentlichen Sprechens",
+        "program": "Rhetorik: Die Kunst des überzeugenden Schreibens und öffentlichen Sprechens",
         "start": "2023-05",
         "end": "2023-07",
         "details": []
@@ -859,7 +861,7 @@
       {
         "id": "uca-cc",
         "institution": "Kulturzentrum der UCA",
-        "degree": "Community-Management",
+        "program": "Community-Management",
         "start": "2020-09",
         "end": "2020-11",
         "details": []
@@ -875,7 +877,8 @@
       "awards": [
         {
           "title": "1. Preis, Universitätsjournalismus",
-          "issuer": "Vereinigung argentinischer Presseorganisationen (ADEPA)"
+          "issuer": "Vereinigung argentinischer Presseorganisationen (ADEPA)",
+          "context": "Verliehen während meiner Zeit an der UCA"
         }
       ]
     },
@@ -912,9 +915,9 @@
       "url": "https://www.linkedin.com/in/juan-lundahl/details/recommendations/"
     },
     "languages": [
-      { "name": "Spanisch", "level": "Muttersprache" },
-      { "name": "Englisch", "level": "Fließend" },
-      { "name": "Deutsch", "level": "Grundkenntnisse bis mittleres Niveau" }
+      { "code": "es", "name": "Spanisch", "level": "Muttersprache", "steps": 4 },
+      { "code": "en", "name": "Englisch", "level": "Fließend", "steps": 3 },
+      { "code": "de", "name": "Deutsch", "level": "Grundkenntnisse bis mittleres Niveau", "steps": 2 }
     ],
     "contact": {
       "email": "juanlundahl@gmail.com",

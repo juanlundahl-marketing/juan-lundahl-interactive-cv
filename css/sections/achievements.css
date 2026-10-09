@@ -145,6 +145,7 @@ ul.ach-strip {
   color: var(--pt-sign-gold);
 }
 .ach__award-issuer { font-size: var(--fs-sm); color: #DCD0BA; }
+.ach__award-context { margin-top: 4px; font-size: var(--fs-xs); font-style: italic; color: #DCD0BA; }
 
 /* ---------- Markets: colectivo route panel ending at Argentina ---------- */
 .ach.ach--markets {

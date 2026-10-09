@@ -241,12 +241,61 @@
   color: var(--ink);
 }
 .about__text { display: grid; gap: var(--space-4); color: var(--ink-2); max-width: 62ch; }
-.about__langs { display: grid; gap: var(--space-3); }
-.about__langs ul { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; }
-.about__langs .chip { text-transform: none; letter-spacing: 0.04em; font-size: 0.86rem; }
-.about__langs .chip strong { font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
-.about__langs .chip span { color: var(--muted); font-weight: 600; }
-.about__langs .chip span::before { content: "· "; }
+/* Languages: three small cream plates, each with a simple flag, the
+   language name, its level and four vereda pads (no percentages). */
+.about__langs {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-strong);
+}
+.about__langs > h3.eyebrow { font-family: var(--font-sign); font-size: 0.86rem; font-weight: 800; letter-spacing: 0.16em; color: var(--ink); }
+.lang-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lang-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px 14px 14px 12px;
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+  background: var(--surface);
+  box-shadow: 3px 3px 0 var(--ochre);
+}
+.lang-card__flag {
+  flex: none;
+  width: 42px;
+  height: 28px;
+  margin-top: 2px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1.5px var(--ink);
+}
+.lang-card__text { display: grid; gap: 3px; min-width: 0; }
+.lang-card__name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.lang-card__level {
+  font-family: var(--font-sign);
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.lang-card__dots { margin-top: 4px; }
 
 /* ---------- Small screens ---------- */
 

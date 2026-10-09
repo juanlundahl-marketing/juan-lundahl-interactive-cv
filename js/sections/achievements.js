@@ -56,7 +56,7 @@ export default function render(el, ctx) {
     <li class="ach${c.featured ? ' ach--featured' : ''}${isCerts ? ' ach--certs' : ''}" tabindex="-1" style="--i:${i}">
       ${c.text ? '' : `<p class="ach__num" aria-hidden="true"><span data-count="${val}" data-suffix="${esc(c.suffix || '')}">0${esc(c.suffix || '')}</span></p>`}
       ${c.text ? `<p class="ach__tag">${esc(ui.achAward)}</p>` : `<p class="ach__label"><span class="visually-hidden">${val}${esc(c.suffix || '')} </span>${esc(c.label)}</p>`}
-      ${c.award ? `<div class="ach__award"><p class="ach__award-title">${esc(c.award.title)}</p><p class="ach__award-issuer">${esc(c.award.issuer)}</p></div>` : ''}
+      ${c.award ? `<div class="ach__award"><p class="ach__award-title">${esc(c.award.title)}</p><p class="ach__award-issuer">${esc(c.award.issuer)}</p>${c.award.context ? `<p class="ach__award-context">${esc(c.award.context)}</p>` : ''}</div>` : ''}
       ${isCerts ? `<button class="ach__toggle" type="button" aria-expanded="false" aria-controls="${panelId}" data-show="${esc(ui.achShowCerts)}" data-hide="${esc(ui.achHideCerts)}"><span class="ach__toggle-text">${esc(ui.achShowCerts)}</span>${CHEV}</button>` : ''}
     </li>`;
   };
