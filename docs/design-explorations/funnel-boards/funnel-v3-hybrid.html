@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Funnel v3 Hybrid</title>
+  <meta name="description" content="Design board: the simple enamel-plate marketing funnel, with one stage open at a time to show what Juan does there and the tools he uses.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Encode+Sans+Condensed:wght@500;600;700;800&family=Sansita:ital,wght@0,700;0,800;0,900;1,800&family=Sansita+Swashed:wght@600;800&display=swap">
+  <link rel="stylesheet" href="../../../css/tokens.css">
+  <link rel="stylesheet" href="../../../css/base.css">
+  <style>
+    /* ---------- Board chrome ---------- */
+    .board-bar {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: var(--space-3); padding-top: var(--space-5);
+    }
+    .theme-switch { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+    .theme-switch button {
+      min-height: 40px; padding: 0 12px;
+      border: 1.5px solid var(--ink); border-radius: var(--radius-sm);
+      background: var(--surface); color: var(--ink);
+      font: 700 0.78rem/1 var(--font-sign); letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .theme-switch button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+    .board-note {
+      max-width: 820px; margin-top: var(--space-7); padding: var(--space-5);
+      border: 1.5px dashed var(--border-strong); border-radius: var(--radius);
+      color: var(--ink-2); font-size: var(--fs-sm);
+    }
+    .board-note h2 { font-size: 1.3rem; margin: var(--space-2) 0 var(--space-3); }
+    .board-note ul { padding-left: 1.2em; display: grid; gap: var(--space-2); }
+
+    .fn-dots { display: inline-flex; gap: 3px; }
+    .fn-dots i { width: 8px; height: 8px; border-radius: 2px; border: 1.3px solid var(--border-strong); }
+    .fn-dots i.on { background: var(--green); border-color: var(--green); }
+
+    /* ---------- Funnel + panel ---------- */
+    .fx {
+      --gap: 10px;
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: var(--gap);
+    }
+    .fx-head { margin: 0; font: inherit; }
+    .fx-plate {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 76px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--p-ink);
+      text-align: center;
+      transition: opacity var(--dur) ease, filter var(--dur) ease, transform var(--dur) var(--ease-out);
+    }
+    .fx-plate:focus-visible { outline-offset: 4px; }
+    .fx-plate .fx-plate__bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      overflow: visible; pointer-events: none;
+      filter: drop-shadow(0 2px 0 rgba(43, 38, 34, 0.32)) drop-shadow(0 10px 12px rgba(60, 40, 10, 0.16));
+    }
+    .fx-plate__text {
+      position: absolute; inset: 0;
+      display: grid; place-content: center; justify-items: center; gap: 3px;
+    }
+    .fx-plate__num {
+      font: 700 0.68rem/1 var(--font-sign); letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--p-num);
+    }
+    .fx-plate__name {
+      font: 900 clamp(1.12rem, 0.9rem + 0.8vw, 1.5rem)/1.05 var(--font-display);
+      text-wrap: balance;
+    }
+    .fx-plate__name em { font-family: var(--font-accent); font-style: normal; font-weight: 800; }
+    .fx-plate__chev {
+      position: absolute; right: var(--chev-x, 40px); top: 50%;
+      width: 14px; height: 14px; margin-top: -7px;
+      transition: transform var(--dur) var(--ease-out);
+    }
+    .fx-plate[aria-expanded="true"] .fx-plate__chev { transform: rotate(180deg); }
+
+    /* Highlight the open layer, dim the others */
+    .fx.has-active .fx-plate[aria-expanded="false"] { opacity: 0.55; filter: saturate(0.55); }
+    .fx.has-active .fx-plate[aria-expanded="false"]:hover,
+    .fx.has-active .fx-plate[aria-expanded="false"]:focus-visible { opacity: 0.85; filter: none; }
+    .fx-plate:hover { transform: translateY(-2px); }
+    .fx-plate[aria-expanded="true"] { transform: translateX(4px); }
+
+    /* Panel card */
+    .fx-panel { margin-bottom: var(--space-3); }
+    .fx-panel[hidden] { display: none; }
+    .fx-card {
+      position: relative;
+      display: grid; gap: var(--space-3);
+      padding: var(--space-5);
+      border: 2px solid var(--ink);
+      border-top: 8px solid var(--p-bg);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 4px 4px 0 var(--ochre);
+      animation: fx-in var(--dur) var(--ease-out);
+    }
+    @keyframes fx-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .fx-card .destino { justify-self: start; }
+    .fx-purpose {
+      font: 800 clamp(1.15rem, 1rem + 0.6vw, 1.4rem)/1.25 var(--font-display);
+      color: var(--ink);
+      text-wrap: pretty;
+    }
+    .fx-card h4 {
+      margin-top: var(--space-2);
+      font-family: var(--font-sign); font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+      display: inline-flex; align-items: center; gap: var(--space-2);
+    }
+    .fx-card h4::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--oxblood); }
+    .fx-doing { color: var(--ink-2); max-width: 60ch; }
+    .fx-tools { list-style: none; margin: 0; padding: 0; display: grid; }
+    .fx-tool {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 2px var(--space-3);
+      padding: 10px 0;
+      border-top: 1px solid var(--border);
+    }
+    .fx-tool:last-child { border-bottom: 1px solid var(--border); }
+    .fx-tool__name { font: 700 0.86rem/1.3 var(--font-sign); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
+    .fx-tool .level { justify-self: end; }
+    .fx-tool__note { grid-column: 1 / -1; font-size: var(--fs-sm); color: var(--muted); line-height: 1.45; }
+
+    .fx-hint { display: none; }
+
+    .fn-footer {
+      display: grid; gap: var(--space-2);
+      margin-top: var(--space-7); padding-top: var(--space-4);
+      border-top: 1px solid var(--border);
+      font-size: var(--fs-sm); color: var(--muted);
+    }
+    .fn-footer b {
+      font: 700 0.76rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink-2); margin-right: 0.5em;
+    }
+
+    /* Wide: funnel left, one panel right */
+    @media (min-width: 900px) {
+      .fx {
+        grid-template-columns: minmax(0, 480px) minmax(0, 1fr);
+        grid-template-rows: repeat(4, auto) 1fr;
+        column-gap: 56px;
+      }
+      .fx-head { grid-column: 1; grid-row: var(--row); }
+      .fx-plate { height: 96px; }
+      .fx-panel, .fx-hint { grid-column: 2; grid-row: 1 / span 5; align-self: start; margin: 0; }
+      .fx:not(.has-active) .fx-hint {
+        display: grid; place-items: center; min-height: 200px; padding: var(--space-5);
+        border: 1.5px dashed var(--border-strong); border-radius: var(--radius);
+        color: var(--muted); text-align: center;
+      }
+    }
+    @media (max-width: 899px) {
+      .fx-plate[aria-expanded="true"] { transform: none; }
+      .fx-card .destino { display: none; }   /* the plate right above already names the stage */
+    }
+    @media (max-width: 480px) {
+      .fx-card { padding: var(--space-4); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fx-card { animation: none; }
+      .fx-plate:hover, .fx-plate[aria-expanded="true"] { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container board-bar">
+    <span class="destino">Board <b>Funnel v3 &middot; Hybrid</b></span>
+    <div class="theme-switch" role="group" aria-label="Preview theme">
+      <button type="button" data-set-theme="auto" aria-pressed="true">Auto</button>
+      <button type="button" data-set-theme="light" aria-pressed="false">Light</button>
+      <button type="button" data-set-theme="dark" aria-pressed="false">Dark</button>
+    </div>
+  </div>
+
+  <main>
+    <section id="skills" class="section" aria-labelledby="fx-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Skills</p>
+          <h2 class="display" id="fx-title"><span>My marketing</span> <em>funnel.</em></h2>
+          <p>Four stages, from first impression to loyal customer. Open a stage to see what I do there and the tools I use.</p>
+        </header>
+
+        <div class="fx" id="fx">
+          <p class="load-error">Loading the funnel&hellip;</p>
+        </div>
+        <div class="fn-footer" id="fn-footer"></div>
+
+        <aside class="board-note" aria-labelledby="note-title">
+          <p class="eyebrow">Concept note</p>
+          <h2 id="note-title">The simple funnel, one stage at a time</h2>
+          <ul>
+            <li>The same four enamel plates as v1 (celeste, sign gold, bondi green, oxblood) form the funnel. Each plate is a button: open one and the others dim, so the eye stays on a single layer.</li>
+            <li>The open stage shows its purpose, "What I do here" and the tools with level pads and where they were used. Wide screens: a card beside the funnel. Phones: an accordion under the plate. Arrow keys, Home and End move between plates; motion is a short fade, removed under reduced motion.</li>
+            <li>Content is read live from <code>data/content.json</code> (en). Board-only curation: stage 4 reads "Retention &amp; Loyalty" with marketing-first copy; AI copilots, AI integration and Power Automate move to the small Stack line; Microsoft, Apple, Slack and Teams are work environments without levels.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    /* ---------- Theme preview ---------- */
+    (function () {
+      var btns = document.querySelectorAll('[data-set-theme]');
+      btns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          var v = b.getAttribute('data-set-theme');
+          if (v === 'auto') document.documentElement.removeAttribute('data-theme');
+          else document.documentElement.setAttribute('data-theme', v);
+          btns.forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+        });
+      });
+    })();
+
+    var LEVEL_RANK = { basic: 1, intermediate: 2, advanced: 3, expert: 4 };
+    var LEVEL_WORD = { expert: 'Expert', advanced: 'Advanced', intermediate: 'Intermediate', basic: 'Basic' };
+    var PLATES = [
+      { bg: '#2d5f8a', ink: '#f3ebda', num: '#f3ebda', line: 'rgba(243,235,218,.85)' },
+      { bg: '#ebc66e', ink: '#1c1b19', num: '#7a2430', line: 'rgba(28,27,25,.7)' },
+      { bg: '#1f5c4a', ink: '#f3ebda', num: '#ebc66e', line: 'rgba(243,235,218,.85)' },
+      { bg: '#7a2430', ink: '#f3ebda', num: '#ebc66e', line: 'rgba(243,235,218,.85)' }
+    ];
+    var MOVE_TO_STACK = ['Power Automate', 'AI integration'];
+    var OVERRIDE = {
+      retention: {
+        nameHTML: 'Retention <em>&amp; Loyalty</em>',
+        name: 'Retention & Loyalty',
+        description: 'Email marketing and CRM nurturing that keep customers engaged and coming back.',
+        doing: 'Ran B2B email marketing at US Ophthalmic and email campaigns at Onewater, and designed tailored HubSpot workflows at E-Planning to keep every contact nurtured.'
+      }
+    };
+    var WIDE = window.matchMedia('(min-width: 900px)');
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+    function dots(level) {
+      var r = LEVEL_RANK[level] || 0, out = '';
+      for (var i = 1; i <= 4; i++) out += '<i class="' + (i <= r ? 'on' : '') + '"></i>';
+      return '<span class="fn-dots" aria-hidden="true">' + out + '</span>';
+    }
+    function inFunnel(t) { return t.group !== 'ai' && MOVE_TO_STACK.indexOf(t.name) === -1; }
+
+    /* Compatibility shim (added when the board moved to docs/): these boards were written against an earlier data shape (funnel.stack.groups, stage.description). Map the current shape (funnel.across, stage.doing) onto it. */
+    function adapt(data) {
+      var f = data.en.funnel;
+      if (!f.stack) {
+        var a = f.across || {};
+        var envItems = [];
+        (a.env || []).forEach(function (g) { (g.items || []).forEach(function (n) { envItems.push({ name: n }); }); });
+        f.stack = { groups: [ { id: 'crm', tools: [] }, { id: 'ai', tools: a.ai || [] }, { id: 'env', tools: envItems } ] };
+      }
+      f.stages.forEach(function (s) { if (!s.description) s.description = s.doing || s.tagline || ''; });
+      return data;
+    }
+
+    function render(data) {
+      var en = data.en, stages = en.funnel.stages, groups = en.funnel.stack.groups;
+      var fx = document.getElementById('fx');
+      var chev = '<svg class="fx-plate__chev" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+      fx.innerHTML = stages.map(function (s, i) {
+        var o = OVERRIDE[s.id] || {}, p = PLATES[i];
+        var tools = s.tools.filter(inFunnel);
+        var rows = tools.map(function (t) {
+          return '<li class="fx-tool"><span class="fx-tool__name">' + esc(t.name) + '</span>' +
+            (t.level ? '<span class="level">' + dots(t.level) + esc(LEVEL_WORD[t.level] || t.level) + '</span>' : '<span></span>') +
+            (t.note ? '<span class="fx-tool__note">' + esc(t.note) + '</span>' : '') + '</li>';
+        }).join('');
+        return '<h3 class="fx-head" style="--row:' + (i + 1) + '">' +
+            '<button type="button" class="fx-plate" id="fx-btn-' + i + '" data-i="' + i + '" aria-expanded="false" aria-controls="fx-panel-' + i + '"' +
+            ' style="--p-ink:' + p.ink + ';--p-num:' + p.num + '">' +
+              '<svg class="fx-plate__bg" aria-hidden="true" focusable="false"></svg>' +
+              '<span class="fx-plate__text"><span class="fx-plate__num">Stage 0' + (i + 1) + '</span>' +
+              '<span class="fx-plate__name">' + (o.nameHTML || esc(s.name)) + '</span></span>' + chev +
+            '</button></h3>' +
+          '<div class="fx-panel" id="fx-panel-' + i + '" role="region" aria-labelledby="fx-btn-' + i + '" hidden>' +
+            '<div class="fx-card" style="--p-bg:' + p.bg + '">' +
+              '<span class="destino" aria-hidden="true">Stage 0' + (i + 1) + ' <b>' + esc(o.name || s.name) + '</b></span>' +
+              '<p class="fx-purpose">' + esc(o.description || s.description) + '</p>' +
+              '<h4>What I do here</h4><p class="fx-doing">' + esc(o.doing || s.doing) + '</p>' +
+              '<h4>Tools</h4><ul class="fx-tools">' + rows + '</ul>' +
+            '</div></div>';
+      }).join('') + '<p class="fx-hint">Pick a stage of the funnel to see what I do there.</p>';
+
+      /* Footer: light stack line + environments (no levels) */
+      var crm = groups.filter(function (g) { return g.id === 'crm'; })[0];
+      var ai = groups.filter(function (g) { return g.id === 'ai'; })[0];
+      var env = groups.filter(function (g) { return g.id === 'env'; })[0];
+      var stackLine = crm ? crm.tools.map(function (t) { return t.name; }) : [];
+      stages.forEach(function (s) { s.tools.forEach(function (t) { if (!inFunnel(t) && t.group !== 'ai' && stackLine.indexOf(t.name) === -1) stackLine.push(t.name); }); });
+      var aiLine = ai ? ai.tools.map(function (t) { return t.name; }).join(', ') : '';
+      document.getElementById('fn-footer').innerHTML =
+        '<p><b>Stack</b>' + esc(stackLine.join(', ')) + (aiLine ? '; AI copilots: ' + esc(aiLine) : '') + '.</p>' +
+        (env ? '<p><b>Work environments</b>' + esc(env.tools.map(function (t) { return t.name.replace(/ environment$/, ''); }).join(', ')) + '.</p>' : '');
+
+      var btns = Array.prototype.slice.call(fx.querySelectorAll('.fx-plate'));
+      btns.forEach(function (b, i) {
+        b.addEventListener('click', function () { setOpen(b.getAttribute('aria-expanded') === 'true' ? -1 : i); });
+        b.addEventListener('keydown', function (e) {
+          var j = null;
+          if (e.key === 'ArrowDown') j = Math.min(i + 1, btns.length - 1);
+          else if (e.key === 'ArrowUp') j = Math.max(i - 1, 0);
+          else if (e.key === 'Home') j = 0;
+          else if (e.key === 'End') j = btns.length - 1;
+          if (j !== null) { e.preventDefault(); btns[j].focus(); }
+        });
+      });
+
+      function setOpen(n) {
+        btns.forEach(function (b, i) {
+          var on = i === n;
+          b.setAttribute('aria-expanded', String(on));
+          document.getElementById('fx-panel-' + i).hidden = !on;
+        });
+        fx.classList.toggle('has-active', n >= 0);
+        drawAll();
+      }
+
+      setOpen(0);
+      if ('ResizeObserver' in window) new ResizeObserver(drawAll).observe(fx);
+      else window.addEventListener('resize', drawAll);
+    }
+
+    /* Plates are slices of one funnel. Wide: edges follow one straight line
+       down the column. Narrow (panels open between plates): equal steps. */
+    function drawAll() {
+      var fx = document.getElementById('fx');
+      var btns = fx.querySelectorAll('.fx-plate');
+      if (!btns.length) return;
+      var wide = WIDE.matches;
+      var gap = parseFloat(getComputedStyle(fx).rowGap) || 10;
+      btns.forEach(function (el) {
+        var i = +el.getAttribute('data-i');
+        var w = el.offsetWidth, h = el.offsetHeight;
+        if (!w || !h) return;
+        var ti, bi;
+        if (wide) {
+          /* layout positions (ignores the small hover/open transforms) */
+          var H = btns.length * h + (btns.length - 1) * gap, y = i * (h + gap), k = (w * 0.26) / H;
+          ti = y * k; bi = (y + h) * k;
+        } else { var step = w * 0.06; ti = i * step; bi = (i + 1) * step; }
+        var midIn = (ti + bi) / 2;
+        el.querySelector('.fx-plate__text').style.padding = '0 ' + Math.round(midIn + 40) + 'px';
+        el.style.setProperty('--chev-x', Math.round(midIn + 28) + 'px');
+        var open = el.getAttribute('aria-expanded') === 'true';
+        drawPlate(el.querySelector('.fx-plate__bg'), w, h, ti, bi, PLATES[i], i, wide && open ? 52 : 0);
+      });
+    }
+
+    function drawPlate(svg, w, h, ti, bi, p, i, leader) {
+      var m = (bi - ti) / h, sh = Math.sqrt(1 + m * m), t = 5;
+      function xl(y) { return ti + m * y; }
+      function xr(y) { return w - ti - m * y; }
+      function pt(x, y) { return x.toFixed(1) + ' ' + y.toFixed(1); }
+      var outer = 'M' + pt(xl(0), 0) + 'L' + pt(xr(0), 0) + 'L' + pt(xr(h), h) + 'L' + pt(xl(h), h) + 'Z';
+      var inner = 'M' + pt(xl(t) + t * sh, t) + 'L' + pt(xr(t) - t * sh, t) + 'L' + pt(xr(h - t) - t * sh, h - t) + 'L' + pt(xl(h - t) + t * sh, h - t) + 'Z';
+      var X = xr(0);
+      var chipA = 'M' + pt(X - 18, 0) + 'L' + pt(X, 0) + 'L' + pt(xr(12), 12) + 'L' + pt(xr(12) - 6, 9) + 'L' + pt(X - 9, 6) + 'L' + pt(X - 14, 2) + 'Z';
+      var chipB = 'M' + pt(X - 12, 0) + 'L' + pt(X, 0) + 'L' + pt(xr(8), 8) + 'L' + pt(X - 6, 4) + 'L' + pt(X - 9, 1.5) + 'Z';
+      var ry = h / 2, rl = xl(ry) + t * sh + 9, rr = xr(ry) - t * sh - 9;
+      function rivet(x) {
+        return '<circle cx="' + x.toFixed(1) + '" cy="' + ry + '" r="2.4" fill="#5a5148"/>' +
+               '<circle cx="' + x.toFixed(1) + '" cy="' + ry + '" r="1.5" fill="#e9dec6"/>';
+      }
+      var gid = 'gl' + i, lead = '';
+      if (leader) {
+        var x0 = xr(ry) + 8, x1 = w + leader - 6;
+        lead = '<line x1="' + x0.toFixed(1) + '" y1="' + ry + '" x2="' + x1.toFixed(1) + '" y2="' + ry + '" style="stroke:var(--gold)" stroke-width="1.5" stroke-dasharray="2 4" stroke-linecap="round"/>' +
+               '<circle cx="' + x1.toFixed(1) + '" cy="' + ry + '" r="3.5" style="fill:var(--oxblood)"/>';
+      }
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.innerHTML =
+        '<defs><linearGradient id="' + gid + '" x1="0" y1="0" x2="0.6" y2="1">' +
+        '<stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>' +
+        lead +
+        '<path d="' + outer + '" fill="' + p.bg + '" stroke="' + p.bg + '" stroke-width="3" stroke-linejoin="round"/>' +
+        '<path d="' + outer + '" fill="url(#' + gid + ')"/>' +
+        '<path d="' + inner + '" fill="none" stroke="' + p.line + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+        rivet(rl) + rivet(rr) +
+        '<path d="' + chipA + '" fill="#e9dec6"/><path d="' + chipB + '" fill="#2b2622"/>';
+    }
+
+    fetch('../../../data/content.json')
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(adapt)
+      .then(render)
+      .catch(function () {
+        document.getElementById('fx').innerHTML = '<p class="load-error">Could not load data/content.json. Open this board through the local server.</p>';
+      });
+    WIDE.addEventListener && WIDE.addEventListener('change', drawAll);
+  </script>
+</body>
+</html>

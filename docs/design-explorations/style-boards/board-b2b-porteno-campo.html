@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Board B2b · Porteño y campo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;800;900&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Sansita+Swashed:wght@800&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   STYLE BOARD B2b - "Porteño y campo"
+   Same everyday-porteño base as B2a, opened up to the countryside: almacén
+   de ramos generales lettering, an original guarda border, kilometre posts,
+   alambrado and pasture lines, leather, earth and yerba accents.
+   Proposed tokens for the real site (light = default).
+   ========================================================================== */
+:root {
+  color-scheme: light;
+  --paper: #F1E9D8;          /* whitewashed adobe */
+  --paper-2: #E7DCC5;
+  --surface: #FAF5EA;
+  --rule: #D6C8AC;
+  --rule-strong: #B9A684;
+
+  --ink: #1F1A16;
+  --ink-2: #3D352D;
+  --muted: #62574A;
+
+  --cuero: #7B4A2A;          /* leather: plates, primary, headings accents */
+  --tierra: #9E4F30;         /* earth / terracotta: accent word, guarda */
+  --yerba: #4F6B2F;          /* yerba / pasture green */
+  --trigo: #C9A24A;          /* straw: fills, shadows (non-text) */
+  --celeste: #7FA8C9;        /* weathered celeste (non-text) */
+  --celeste-ink: #2D5F8A;    /* links */
+  --line: #7B4A2A;           /* ornament line */
+
+  --plate: #7B4A2A; --plate-ink: #F1E9D8;
+  --wall-white: #FFFFFF;
+  --band-cel: #74ACDB;       /* wall celeste, used only under --arg-opacity */
+
+  /* Argentina background (worn celeste-white-celeste wall + cropped sun). ONE dial: */
+  --arg-opacity: 0.26;
+  --sol-a: #7B4A2A; --sol-b: #2D5F8A;
+
+  --nav-bg: rgba(31, 26, 22, 0.95); --nav-ink: #F1E9D8;
+  --shadow-md: 0 14px 30px -16px rgba(60, 35, 10, 0.38);
+  --shadow-lg: 0 30px 60px -28px rgba(60, 35, 10, 0.48);
+
+  --font-display: "Bitter", Georgia, serif;
+  --font-accent: "Sansita Swashed", Georgia, serif;
+  --font-sign: "Montserrat", "Segoe UI", system-ui, sans-serif;
+  --font-sans: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+
+  --radius-sm: 3px; --radius: 5px; --radius-lg: 10px; --radius-pill: 999px;
+  --gutter: 16px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .28 0 0 0 0 .14 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Guarda (original): stepped lozenge + small lozenge, thin rails. No crosses. */
+  --guarda: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='16' viewBox='0 0 40 16'%3E%3Cpath d='M0 .75H40M0 15.25H40' stroke='%231F1A16' stroke-width='1.5'/%3E%3Cpath d='M19 2H21V4H23V6H25V10H23V12H21V14H19V12H17V10H15V6H17V4H19Z' fill='%239E4F30'/%3E%3Cpath d='M20 5.6L22.4 8 20 10.4 17.6 8Z' fill='%23F1E9D8'/%3E%3Cpath d='M0 4.5L3.5 8 0 11.5ZM40 4.5L36.5 8 40 11.5Z' fill='%231F1A16'/%3E%3Ccircle cx='9' cy='8' r='1.1' fill='%23C9A24A'/%3E%3Ccircle cx='31' cy='8' r='1.1' fill='%23C9A24A'/%3E%3C/svg%3E");
+  --guarda-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='16' viewBox='0 0 40 16'%3E%3Cpath d='M0 .75H40M0 15.25H40' stroke='%23EFE6D2' stroke-width='1.5'/%3E%3Cpath d='M19 2H21V4H23V6H25V10H23V12H21V14H19V12H17V10H15V6H17V4H19Z' fill='%23D49A6A'/%3E%3Cpath d='M20 5.6L22.4 8 20 10.4 17.6 8Z' fill='%23171612'/%3E%3Cpath d='M0 4.5L3.5 8 0 11.5ZM40 4.5L36.5 8 40 11.5Z' fill='%23EFE6D2'/%3E%3Ccircle cx='9' cy='8' r='1.1' fill='%23D7A64B'/%3E%3Ccircle cx='31' cy='8' r='1.1' fill='%23D7A64B'/%3E%3C/svg%3E");
+}
+@media (min-width: 720px) { :root { --gutter: 32px; } }
+
+/* Dark: "Noche de campo" */
+.theme-dark {
+  color-scheme: dark;
+  --paper: #171612; --paper-2: #1D1B16; --surface: #221F19;
+  --rule: #38342B; --rule-strong: #4E483C;
+  --ink: #EFE6D2; --ink-2: #D8CDB6; --muted: #B1A68F;
+  --cuero: #D49A6A; --tierra: #E39B7B; --yerba: #A6BF6E; --trigo: #D7A64B;
+  --celeste: #8FB9DA; --celeste-ink: #8FB9DA; --line: #D49A6A;
+  --wall-white: #EFE6D2;
+  --band-cel: #8FB9DA;
+  --sol-a: #D7A64B; --sol-b: #8FB9DA;
+  --nav-bg: rgba(239, 230, 210, 0.96); --nav-ink: #171612;
+  --shadow-md: 0 14px 30px -16px rgba(0,0,0,.7); --shadow-lg: 0 30px 60px -28px rgba(0,0,0,.8);
+  --noise: none;
+  --guarda: var(--guarda-dark);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; color: var(--ink); font-family: var(--font-sans); font-size: 17.5px; line-height: 1.5; overflow-x: hidden; background-color: var(--paper); background-image: var(--noise); }
+img { max-width: 100%; display: block; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); font-weight: 900; line-height: 1.04; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: var(--celeste-ink); }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); }
+em.acc { font-family: var(--font-accent); font-style: normal; font-weight: 800; color: var(--tierra); text-shadow: 0.045em 0.045em 0 color-mix(in srgb, var(--trigo) 70%, transparent); letter-spacing: 0; }
+
+/* ---------- Signature: guarda strip ---------- */
+.guarda { height: 16px; background: var(--guarda) repeat-x left center / 40px 16px; }
+
+/* ---------- Signature: mojón (kilometre post) section number ---------- */
+.mojon { display: inline-grid; grid-template-rows: 13px 1fr; width: 46px; height: 52px; border: 2px solid var(--ink); border-radius: 20px 20px 4px 4px; background: var(--surface); text-align: center; overflow: hidden; box-shadow: 2px 2px 0 var(--rule-strong); flex: none; }
+.mojon small { background: var(--ink); color: var(--paper); font: 800 0.5rem/13px var(--font-sign); letter-spacing: 0.16em; }
+.mojon b { font: 800 1.15rem/1 var(--font-sign); align-self: center; font-variant-numeric: tabular-nums; }
+
+/* ---------- Plate (rural/route plate) ---------- */
+.chapa { position: relative; display: inline-flex; align-items: center; gap: 0.6em; background: var(--plate); color: var(--plate-ink); border-radius: 4px; padding: 0.62em 1.1em 0.58em; font: 700 0.72rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; box-shadow: inset 0 0 0 3px var(--plate), inset 0 0 0 4px rgba(241,233,216,.85), 0 2px 6px -2px rgba(40,25,10,.4); }
+.chapa small { font-weight: 500; letter-spacing: 0.06em; opacity: 0.88; }
+.chapa.is-yerba { --plate: #4F6B2F; }
+.chapa.is-cel { --plate: #2D5F8A; }
+.ruta { display: inline-grid; place-items: center; min-width: 54px; padding: 6px 10px 5px; border: 2px solid var(--ink); border-radius: 6px; background: var(--surface); color: var(--ink); text-align: center; box-shadow: inset 0 0 0 2px var(--surface), inset 0 0 0 3px var(--ink); }
+.ruta small { font: 700 0.5rem/1 var(--font-sign); letter-spacing: 0.2em; text-transform: uppercase; }
+.ruta b { font: 800 1.2rem/1.05 var(--font-sign); }
+
+/* Board chrome */
+.board-head { padding: 56px 0 0; }
+.board-head .tag { font: 600 0.74rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.board-head h1 { font-size: clamp(2.5rem, 1.4rem + 4.6vw, 5rem); margin: 18px 0 20px; }
+.board-head .why { max-width: 820px; color: var(--ink-2); font-size: 1.1rem; }
+.board-head .why + .why { margin-top: 10px; }
+.board-head .pills { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 34px; align-items: center; }
+
+.blk { padding: 56px 0; }
+.blk + .blk, .board-head + .blk { border-top: 1px solid var(--rule-strong); }
+.blk-label { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+.blk-label h2 { font-size: 1.65rem; }
+.blk-label .note { color: var(--muted); font-size: 1rem; flex-basis: 100%; }
+.subhead { font: 700 0.72rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 30px 0 12px; }
+
+/* Palette */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 14px; }
+.sw { background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); overflow: hidden; }
+.sw .chip-c { height: 88px; display: flex; align-items: flex-end; padding: 10px 12px; font: 900 1.5rem/1 var(--font-display); border-bottom: 1.5px solid var(--ink); }
+.sw .meta { padding: 12px 14px 14px; font-size: 0.9rem; }
+.sw .meta b { display: block; font: 700 0.78rem/1.3 var(--font-sign); }
+.sw .meta .hex { font: 500 0.76rem/1.2 var(--font-sign); color: var(--muted); }
+.sw .meta .role { color: var(--ink-2); margin-top: 6px; line-height: 1.3; }
+.sw .meta .aa { margin-top: 6px; font: 600 0.68rem/1.35 var(--font-sign); color: var(--ink-2); background: var(--paper-2); border-radius: 4px; padding: 4px 7px; display: inline-block; }
+
+/* Type */
+.type-grid { display: grid; gap: 14px; }
+.spec { background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 22px 24px; display: grid; grid-template-columns: 240px 1fr; gap: 20px; align-items: center; }
+.spec .who { font-size: 0.92rem; color: var(--muted); }
+.spec .who b { display: block; color: var(--ink); font: 700 0.8rem/1.3 var(--font-sign); margin-bottom: 4px; }
+.spec .s-display { font: 900 clamp(2rem, 1.2rem + 3vw, 3.6rem)/1 var(--font-display); }
+.spec .s-accent { font: 800 clamp(2.1rem, 1.3rem + 2.6vw, 3.4rem)/1 var(--font-accent); color: var(--tierra); text-shadow: 0.045em 0.045em 0 color-mix(in srgb, var(--trigo) 70%, transparent); }
+.spec .s-sign { font: 800 clamp(1.1rem, 0.9rem + 0.9vw, 1.6rem)/1.15 var(--font-sign); letter-spacing: 0.12em; text-transform: uppercase; }
+.spec .s-body { font-size: 1.12rem; max-width: 62ch; color: var(--ink-2); }
+.scale { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 10px; color: var(--muted); font: 600 0.7rem/1 var(--font-sign); }
+
+/* Components */
+.btn { position: relative; display: inline-flex; align-items: center; gap: 0.6em; border: 1.5px solid var(--ink); cursor: pointer; text-decoration: none; background: none; color: var(--ink); font: 700 0.8rem/1 var(--font-sign); letter-spacing: 0.1em; text-transform: uppercase; padding: 1em 1.45em; border-radius: var(--radius); transition: transform 160ms var(--ease), background-color 160ms, color 160ms, box-shadow 160ms; }
+/* leather with a stitched seam */
+.btn-primary { background: #7B4A2A; color: #F1E9D8; border-color: #5E3820; box-shadow: 0 3px 0 #5E3820; }
+.btn-primary::after { content: ""; position: absolute; inset: 4px; border: 1.2px dashed rgba(241,233,216,.6); border-radius: 3px; pointer-events: none; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 0 #5E3820; }
+.btn-secondary:hover { background: var(--ink); color: var(--paper); }
+.btn-ghost { border-color: transparent; color: var(--celeste-ink); padding-left: 0.2em; padding-right: 0.2em; text-decoration: underline; text-decoration-color: var(--trigo); text-underline-offset: 5px; text-decoration-thickness: 2px; }
+.btn-icon { width: 44px; height: 44px; padding: 0; justify-content: center; }
+.btn:focus-visible, .cert:focus-visible, .cartelito:focus-visible { outline: 2px solid var(--celeste-ink); outline-offset: 3px; }
+
+.chip { display: inline-flex; align-items: center; gap: 0.45em; padding: 0.5em 0.8em 0.45em; border-radius: var(--radius-sm); border: 1.5px solid var(--ink); color: var(--ink); background: var(--surface); font: 600 0.7rem/1.1 var(--font-sign); letter-spacing: 0.08em; text-transform: uppercase; }
+.chip.is-soft { background: #DCE6CB; border-color: #DCE6CB; color: #1F1A16; }
+.chip.is-active { background: var(--ink); color: var(--paper); }
+.chip .dot { width: 7px; height: 7px; transform: rotate(45deg); background: var(--tierra); }
+.dots { display: inline-flex; gap: 6px; }
+.dots i { width: 10px; height: 10px; transform: rotate(45deg); border: 1.5px solid var(--ink); }
+.dots i.on { background: var(--tierra); border-color: var(--tierra); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* ---------- Hero ---------- */
+.stage { position: relative; border: 1.5px solid var(--ink); border-radius: var(--radius-lg); overflow: hidden; background-color: var(--paper); background-image: var(--noise); color: var(--ink); }
+.stage + .stage { margin-top: 22px; }
+.stage > .guarda { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; }
+.hero { position: relative; padding: 70px 56px 150px; display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 48px; align-items: center; min-height: 660px; isolation: isolate; }
+/* Worn celeste-white-celeste wall (original SVG + turbulence filter) */
+.franjas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; opacity: var(--arg-opacity); pointer-events: none; }
+.franjas .cel { fill: var(--band-cel); }
+.franjas .bla { fill: var(--wall-white); }
+.theme-dark .franjas { opacity: calc(var(--arg-opacity) * 0.45); }
+.sol { position: absolute; z-index: -1; pointer-events: none; opacity: calc(var(--arg-opacity) * 1.3); overflow: visible; }
+.theme-dark .sol { opacity: calc(var(--arg-opacity) * 0.9); }
+.sol .rs { fill: none; stroke: var(--sol-a); stroke-width: 1.2; stroke-linejoin: round; }
+.sol .rw { fill: none; stroke: var(--sol-b); stroke-width: 1.4; stroke-linecap: round; }
+.sol .ring { fill: none; stroke: var(--sol-a); stroke-width: 1.2; }
+.hero .sol { width: 620px; height: 620px; top: -310px; right: -310px; }
+/* alambrado + pasture line along the bottom */
+.campo { position: absolute; left: 0; right: 0; bottom: 16px; height: 96px; z-index: -1; color: var(--ink); opacity: 0.22; pointer-events: none; }
+.hello { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.hello .who { font: 700 0.78rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+.hola { font: 800 1.35rem/1 var(--font-accent); color: #F1E9D8; background: #9E4F30; padding: 0.3em 0.8em 0.36em; border-radius: 3px; box-shadow: inset 0 0 0 3px #9E4F30, inset 0 0 0 4px rgba(241,233,216,.7); }
+.hero h1 { font-size: clamp(2.5rem, 1.3rem + 4vw, 4.9rem); margin: 22px 0 20px; }
+.hero .lede { font-size: 1.18rem; color: var(--ink-2); max-width: 46ch; }
+.hero .tags { list-style: none; padding: 0; margin: 22px 0 28px; display: flex; flex-wrap: wrap; gap: 8px; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+/* Portrait under an estancia gate (original line drawing) */
+.porton { position: relative; justify-self: center; width: min(100%, 330px); margin: 0; padding: 74px 26px 0; }
+.porton .arco { position: absolute; inset: 0 0 auto 0; width: 100%; height: 100%; overflow: visible; color: var(--ink); }
+.porton .tabla { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: var(--surface); border: 2px solid var(--ink); padding: 6px 14px 5px; font: 800 0.95rem/1 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--cuero); z-index: 1; }
+.porton .ph { position: relative; background: var(--surface); border: 2px solid var(--ink); padding: 8px; box-shadow: var(--shadow-lg); }
+.porton .ph img { width: 100%; aspect-ratio: 4 / 4.7; object-fit: cover; object-position: 50% 26%; filter: grayscale(1) contrast(1.08) sepia(0.1); }
+.porton figcaption { display: flex; justify-content: center; margin-top: -16px; position: relative; }
+
+.navpill { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); display: flex; align-items: center; gap: 2px; z-index: 3; background: var(--nav-bg); color: var(--nav-ink); border-radius: var(--radius-pill); padding: 6px; box-shadow: var(--shadow-md); white-space: nowrap; max-width: calc(100% - 24px); overflow: hidden; }
+.navpill .mark { width: 38px; height: 38px; border-radius: 50%; background: #7B4A2A; color: #F1E9D8; display: grid; place-items: center; font: 900 0.85rem/1 var(--font-display); flex: none; box-shadow: inset 0 0 0 3px #7B4A2A, inset 0 0 0 4.2px rgba(241,233,216,.6); }
+.navpill a { font: 600 0.72rem/1 var(--font-sign); letter-spacing: 0.08em; text-transform: uppercase; color: inherit; text-decoration: none; padding: 11px 12px; border-radius: var(--radius-pill); opacity: 0.88; }
+.navpill a.on { background: var(--nav-ink); color: var(--nav-bg); opacity: 1; }
+.theme-dark .navpill a.on { background: #171612; color: #EFE6D2; }
+.navpill .sep { width: 1px; height: 22px; background: currentColor; opacity: 0.25; margin: 0 6px; }
+.navpill .lang { font: 600 0.74rem/1 var(--font-sign); padding: 0 10px; }
+
+.dial { display: inline-flex; align-items: center; gap: 10px; font: 700 0.72rem/1 var(--font-sign); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius-pill); padding: 8px 14px; }
+.dial input { accent-color: #7B4A2A; width: 140px; }
+.dial output { font-variant-numeric: tabular-nums; min-width: 3ch; }
+
+/* ---------- Marketing ID: libreta de almacén ---------- */
+.id-wrap { display: grid; grid-template-columns: minmax(0, 580px) 1fr; gap: 48px; align-items: center; }
+.libreta { position: relative; background: var(--surface); border: 2px solid var(--ink); border-radius: 6px 10px 10px 6px; box-shadow: -6px 0 0 -2px #5E3820, var(--shadow-lg); transform: rotate(-1deg); transition: transform 400ms var(--ease); overflow: hidden; }
+.libreta:hover { transform: rotate(0) translateY(-3px); }
+.libreta .tapa { background: #7B4A2A; color: #F1E9D8; padding: 16px 22px 14px 30px; position: relative; }
+.libreta .tapa::after { content: ""; position: absolute; inset: 5px; border: 1.2px dashed rgba(241,233,216,.55); border-radius: 3px; pointer-events: none; }
+.libreta .tapa p { font: 700 0.66rem/1 var(--font-sign); letter-spacing: 0.22em; text-transform: uppercase; color: #E9CF8E; }
+.libreta .tapa h4 { font: 900 2.1rem/1 var(--font-display); margin-top: 8px; text-shadow: 2px 2px 0 rgba(0,0,0,.25); }
+.libreta .hojas { position: relative; padding: 18px 22px 18px 52px; background-image: linear-gradient(90deg, transparent 38px, #C77A5C 38px 39.5px, transparent 39.5px), repeating-linear-gradient(transparent 0 29px, #CFD9E2 29px 30px); }
+.libreta .body { display: grid; grid-template-columns: 92px 1fr; gap: 18px; align-items: start; }
+.libreta .ph { position: relative; padding: 4px; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.2); transform: rotate(-2deg); }
+.libreta .ph img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: 50% 25%; filter: grayscale(1) contrast(1.06); }
+.libreta .ph::before, .libreta .ph::after { content: ""; position: absolute; width: 16px; height: 16px; background: #1F1A16; opacity: .82; }
+.libreta .ph::before { top: -3px; left: -3px; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.libreta .ph::after { bottom: -3px; right: -3px; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.libreta .role { font: 700 1.02rem/30px var(--font-sans); color: var(--ink); }
+.libreta dl { margin: 0; }
+.libreta dl div { display: flex; align-items: baseline; gap: 8px; line-height: 30px; }
+.libreta dt { font: 600 0.66rem/30px var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.libreta dl div::after { content: ""; order: 1; flex: 1; border-bottom: 1.5px dotted var(--rule-strong); transform: translateY(-4px); }
+.libreta dd { order: 2; margin: 0; font: 700 0.98rem/30px var(--font-sans); }
+.libreta dd.home { color: var(--yerba); }
+.libreta .pie { display: flex; justify-content: space-between; margin-top: 4px; font: 600 0.66rem/30px var(--font-sign); letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; }
+.libreta > .guarda { position: relative; }
+.cartelito { margin-top: 26px; background: none; border: 0; padding: 0; cursor: pointer; display: inline-flex; flex-direction: column; align-items: center; perspective: 600px; color: inherit; }
+.cartelito .cuerda { width: 86px; height: 22px; }
+.cartelito .faces { position: relative; width: 210px; height: 62px; transform-style: preserve-3d; transition: transform 600ms var(--ease); }
+.cartelito[aria-pressed="true"] .faces { transform: rotateY(180deg); }
+.cartelito .f { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 5px; display: grid; place-content: center; text-align: center; color: #F1E9D8; background: var(--c); box-shadow: var(--shadow-md); }
+.cartelito .f::after { content: ""; position: absolute; inset: 4px; border: 1.2px dashed rgba(241,233,216,.6); border-radius: 3px; }
+.cartelito .f b { font: 800 1.3rem/1 var(--font-accent); }
+.cartelito .f small { font: 600 0.6rem/1 var(--font-sign); letter-spacing: 0.16em; text-transform: uppercase; margin-top: 5px; }
+.cartelito .front { --c: #4F6B2F; }
+.cartelito .back { --c: #7B4A2A; transform: rotateY(180deg); }
+.id-notes h3 { font-size: 1.5rem; margin-bottom: 10px; }
+.id-notes p { color: var(--ink-2); max-width: 52ch; }
+.id-notes ul { color: var(--ink-2); padding-left: 1.1em; margin: 14px 0 0; }
+.id-notes li { margin: 6px 0; }
+
+/* Section heading */
+.sec-head { max-width: 840px; }
+.sec-head .eyebrow { display: flex; align-items: center; gap: 12px; }
+.sec-head .eyebrow span { font: 700 0.76rem/1 var(--font-sign); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-2); }
+.sec-head h2 { font-size: clamp(2.4rem, 1.3rem + 4vw, 4.8rem); margin: 22px 0 16px; }
+.sec-head h2 em.acc { display: block; margin-top: 0.06em; }
+.sec-head p { color: var(--ink-2); font-size: 1.15rem; max-width: 56ch; }
+.sec-head .guarda { margin-top: 28px; max-width: 560px; }
+
+/* Work card: ramos-generales sign plank */
+.work { position: relative; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius-lg); overflow: hidden; transition: transform 220ms var(--ease), box-shadow 220ms; box-shadow: 6px 6px 0 var(--paper-2), 6px 6px 0 2px var(--ink); }
+.work:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--trigo), 8px 8px 0 2px var(--ink); }
+.work .tabla { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 22px 28px 18px; border-bottom: 1.5px solid var(--ink); }
+.work .tabla h3 { font-size: 2.5rem; color: var(--cuero); text-shadow: 2px 2px 0 color-mix(in srgb, var(--trigo) 60%, transparent); }
+.work .tabla .kick { display: block; font: 700 0.68rem/1 var(--font-sign); letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.work .stamp { font: 800 0.68rem/1.25 var(--font-sign); letter-spacing: 0.16em; text-transform: uppercase; color: var(--yerba); border: 2px solid currentColor; border-radius: 4px; padding: 8px 10px; transform: rotate(-5deg); box-shadow: inset 0 0 0 2px var(--surface), inset 0 0 0 3px currentColor; text-align: center; }
+.work .bd { padding: 20px 28px 24px; }
+.work .role { font: 700 1.15rem/1.3 var(--font-sans); }
+.work .sum { color: var(--ink-2); margin-top: 8px; max-width: 64ch; }
+.work ul { margin: 14px 0 0; padding: 0; list-style: none; }
+.work li { padding-left: 22px; position: relative; margin: 6px 0; color: var(--ink-2); }
+.work li::before { content: ""; position: absolute; left: 2px; top: 0.5em; width: 8px; height: 8px; background: var(--tierra); transform: rotate(45deg); }
+.work .ft { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px dashed var(--rule-strong); gap: 12px; flex-wrap: wrap; }
+
+/* Achievements: mojones */
+.mojones { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 0 10px; }
+.mojones::after { content: ""; position: absolute; left: 0; right: 0; top: 148px; height: 2px; background: var(--ink); }
+.km { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.km .post { position: relative; width: 132px; height: 150px; border: 2px solid var(--ink); border-radius: 60px 60px 4px 4px; background: var(--surface); display: grid; grid-template-rows: 34px 1fr; overflow: hidden; box-shadow: 4px 0 0 var(--paper-2) inset, -6px 0 0 rgba(0,0,0,.05) inset; }
+.km .post .cap { background: var(--ink); color: var(--paper); font: 800 0.62rem/34px var(--font-sign); letter-spacing: 0.2em; padding-top: 6px; }
+.km .post .v { font: 900 3.4rem/1 var(--font-display); align-self: center; }
+.km .post .v sup { font: 800 0.5em/1 var(--font-accent); color: var(--tierra); vertical-align: 0.6em; }
+.km .grass { width: 170px; height: 14px; color: var(--yerba); margin-top: -2px; }
+.km .l { font: 700 0.72rem/1.35 var(--font-sign); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); margin-top: 14px; max-width: 18ch; min-height: 2.7em; }
+.award { margin-top: 26px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.award .txt { color: var(--ink-2); }
+
+/* Certs: almacén drawer labels */
+.certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(205px, 1fr)); gap: 12px; }
+.cert { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 16px; min-height: 140px; text-decoration: none; color: var(--ink); background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); transition: transform 220ms var(--ease), background-color 220ms, color 220ms, box-shadow 220ms; }
+.cert .iss { align-self: flex-start; position: relative; font: 700 0.62rem/1 var(--font-sign); letter-spacing: 0.16em; text-transform: uppercase; color: #1F1A16; background: #EFE2C2; border: 1.5px solid #8A6A2E; border-radius: 2px; padding: 6px 16px 5px; }
+.cert .iss::before, .cert .iss::after { content: ""; position: absolute; top: 50%; width: 4px; height: 4px; margin-top: -2px; border-radius: 50%; background: #8A6A2E; }
+.cert .iss::before { left: 5px; } .cert .iss::after { right: 5px; }
+.cert .nm { font: 700 1.05rem/1.25 var(--font-sans); }
+.cert .dt { margin-top: auto; font: 600 0.68rem/1 var(--font-sign); letter-spacing: 0.06em; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+.cert .go { opacity: 0; transform: translateX(-4px); transition: 220ms var(--ease); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.cert:hover, .cert.demo-hover { background: #7B4A2A; border-color: #5E3820; color: #F1E9D8; transform: translateY(-4px); box-shadow: 0 6px 0 #5E3820, 0 16px 18px -14px rgba(0,0,0,.6); }
+.cert:hover::after, .cert.demo-hover::after { content: ""; position: absolute; inset: 4px; border: 1.2px dashed rgba(241,233,216,.55); border-radius: 3px; pointer-events: none; }
+.cert:hover .dt, .cert.demo-hover .dt { color: #E9DCC4; }
+.cert:hover .go, .cert.demo-hover .go { opacity: 1; transform: none; color: #E9CF8E; }
+
+/* Markets: alambrado */
+.alambrado { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); padding-top: 8px; }
+.alambrado::before { content: ""; position: absolute; left: 12.5%; right: calc(12.5% + 46px); top: 92px; height: 46px; background: linear-gradient(var(--ink-2), var(--ink-2)) 0 0 / 100% 1.5px no-repeat, linear-gradient(var(--ink-2), var(--ink-2)) 0 22px / 100% 1.5px no-repeat, linear-gradient(var(--ink-2), var(--ink-2)) 0 44px / 100% 1.5px no-repeat; opacity: 0.7; }
+.poste { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.poste .ruta { position: relative; z-index: 1; }
+.poste .palo { width: 14px; height: 104px; margin-top: -2px; background: linear-gradient(90deg, #9C6A43, #7B4A2A 60%, #5E3820); border-radius: 3px 3px 0 0; position: relative; z-index: 1; }
+.poste .txt { margin-top: 12px; }
+.poste b { display: block; font: 800 1.05rem/1.2 var(--font-sign); letter-spacing: 0.06em; }
+.poste small { color: var(--muted); font-size: 0.92rem; }
+.poste.home .gate { width: 120px; height: 106px; margin-top: -4px; color: var(--cuero); position: relative; z-index: 1; }
+.poste.home b { color: var(--yerba); }
+.markets-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; align-items: center; }
+
+/* Kit */
+.kit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.kit > div { background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 20px; }
+.kit h4 { font: 700 0.72rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.lv { display: grid; grid-template-columns: 1fr auto; gap: 10px 14px; align-items: center; font: 600 0.74rem/1 var(--font-sign); letter-spacing: 0.06em; text-transform: uppercase; }
+.icons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 10px; color: var(--ink); }
+.icons figure { margin: 0; display: grid; justify-items: center; gap: 6px; font: 600 0.62rem/1 var(--font-sign); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.icons svg { width: 44px; height: 44px; }
+
+/* Dark strip */
+.dark-strip { background: var(--paper); color: var(--ink); padding: 0 0 48px; }
+.dark-strip > .guarda { margin-bottom: 44px; }
+.dark-strip .grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
+.dark-strip .mini { position: relative; overflow: hidden; border: 1.5px solid var(--rule-strong); border-radius: var(--radius-lg); padding: 30px; background: var(--paper-2); }
+.dark-strip .mini h3 { font-size: 2.5rem; margin: 18px 0 18px; }
+.dark-strip .dsw { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 18px; }
+.dark-strip .dsw div { border-radius: 5px; padding: 34px 8px 8px; font: 600 0.64rem/1.3 var(--font-sign); border: 1px solid var(--rule-strong); }
+.dark-strip .side { display: grid; gap: 14px; align-content: start; }
+
+/* Mobile preview */
+.phone-row { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+.phone { width: 375px; max-width: 100%; border: 10px solid #1F1A16; border-radius: 44px; overflow: hidden; background-color: var(--paper); background-image: var(--noise); box-shadow: var(--shadow-lg); flex: none; }
+.phone .screen { position: relative; height: 820px; overflow: hidden; isolation: isolate; }
+.phone .sol { width: 420px; height: 420px; top: -210px; right: -210px; }
+.phone .campo { bottom: 0; height: 70px; }
+.phone .m-hero { padding: 36px 16px 0; }
+.phone .porton { width: 200px; padding: 52px 16px 0; margin: 0 0 18px; justify-self: auto; }
+.phone .porton .tabla { top: 14px; font-size: 0.7rem; padding: 5px 10px 4px; }
+.phone .porton .ph { padding: 5px; }
+.phone .porton figcaption .chapa { font-size: 0.6rem; }
+.phone h1 { font-size: 2.3rem; margin: 18px 0 12px; }
+.phone .lede { font-size: 1.04rem; color: var(--ink-2); }
+.phone .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 18px; }
+.phone .navpill { bottom: 22px; }
+.phone .navpill a { padding: 11px 9px; font-size: 0.68rem; }
+.phone .guarda.bottom { position: absolute; left: 0; right: 0; bottom: 0; }
+.phone-notes { flex: 1; min-width: 260px; }
+.phone-notes h3 { font-size: 1.4rem; }
+.phone-notes ul { padding-left: 1.1em; color: var(--ink-2); }
+.phone-notes li { margin: 8px 0; }
+
+/* Compare + changes */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.compare > div { background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 20px 22px; }
+.compare h4 { font: 800 0.8rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+.compare ul { margin: 0; padding-left: 1.1em; color: var(--ink-2); }
+.compare li { margin: 6px 0; }
+.table-scroll { overflow-x: auto; }
+.changes { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--surface); border: 1.5px solid var(--ink); }
+.changes th, .changes td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.changes th { font: 700 0.68rem/1.2 var(--font-sign); letter-spacing: 0.12em; text-transform: uppercase; color: #F1E9D8; background: #1F1A16; }
+.changes td code, .note code { font-family: ui-monospace, Consolas, monospace; font-size: 0.8rem; }
+.changes .sw-i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; border: 1px solid rgba(0,0,0,.2); }
+.list-cols { columns: 2; column-gap: 32px; color: var(--ink-2); padding-left: 1.1em; margin-top: 18px; }
+.list-cols li { margin: 0 0 8px; break-inside: avoid; }
+footer.board-foot { padding: 34px 0 60px; color: var(--muted); font-size: 0.95rem; }
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding: 60px 24px 150px; }
+  .hero .porton { order: -1; width: min(100%, 270px); justify-self: start; }
+  .id-wrap { grid-template-columns: 1fr; }
+  .mojones { grid-template-columns: repeat(2, 1fr); row-gap: 30px; }
+  .mojones::after { display: none; }
+  .alambrado { grid-template-columns: repeat(2, 1fr); row-gap: 30px; }
+  .alambrado::before { display: none; }
+  .kit { grid-template-columns: 1fr; }
+  .dark-strip .grid, .compare { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .spec { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
+  .hero { padding: 48px 18px 140px; min-height: 0; }
+  .hero h1 { font-size: 2.4rem; }
+  .hero .sol { width: 440px; height: 440px; top: -220px; right: -220px; }
+  .navpill a:not(.on) { display: none; }
+  .libreta { transform: none; }
+  .libreta .hojas { padding-left: 46px; padding-right: 14px; }
+  .libreta .body { grid-template-columns: 72px 1fr; gap: 14px; }
+  .libreta .tapa h4 { font-size: 1.7rem; }
+  .km .post { width: 116px; height: 136px; }
+  .km .post .v { font-size: 2.9rem; }
+  .km .grass { width: 140px; }
+  .list-cols { columns: 1; }
+  .phone { border-width: 6px; border-radius: 30px; }
+  .work .tabla, .work .bd { padding-left: 18px; padding-right: 18px; }
+  .work .tabla h3 { font-size: 2rem; }
+  .dial input { width: 100px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- Shared defs: worn-paint filter for the wall bands, grass tuft, alambrado line, estancia gate (all original drawings) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="worn" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.06" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="3" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.75" result="m"/>
+      <feComposite in="d" in2="m" operator="in"/>
+    </filter>
+    <symbol id="grass" viewBox="0 0 170 14" preserveAspectRatio="none">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M10 13l-2-7M14 13l1-9M18 13l3-6M40 13l-1-6M44 13l2-8M70 13l-3-7M75 13l0-9M79 13l3-6M110 13l-2-6M114 13l2-9M140 13l-1-7M145 13l3-8M160 13l1-6"/></g>
+    </symbol>
+    <symbol id="campo" viewBox="0 0 1200 96" preserveAspectRatio="none">
+      <g fill="none" stroke="currentColor" stroke-linecap="round">
+        <path d="M0 78 C200 70 420 84 640 76 S1020 70 1200 78" stroke-width="1.6"/>
+        <g stroke-width="2.4"><path d="M60 78V30M240 76V28M420 79V31M600 77V29M780 75V27M960 73V25M1140 77V29"/></g>
+        <g stroke-width="1"><path d="M60 40L1140 39M60 52L1140 51M60 64L1140 63"/></g>
+        <g stroke-width="1.2"><path d="M20 80l-3-8M26 80l1-10M130 79l-2-7M136 79l2-9M330 81l-3-8M336 81l1-9M510 79l-2-7M690 77l2-8M870 75l-3-8M876 75l1-9M1050 74l-2-7M1180 79l2-8"/></g>
+      </g>
+    </symbol>
+    <symbol id="gate" viewBox="0 0 120 106">
+      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 104V14M106 104V14" stroke-width="6"/>
+        <path d="M8 16 C40 2 80 2 112 16" stroke-width="4"/>
+        <g stroke-width="2.2"><path d="M20 40H100M20 56H100M20 72H100M20 88H100"/><path d="M20 88L100 40"/><path d="M60 40V88"/></g>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="board-head">
+  <div class="wrap">
+    <p class="tag">Style board B2b · Juan Lundahl portfolio · iteration on board B</p>
+    <h1>De la vereda <em class="acc">al campo</em></h1>
+    <p class="why"><strong>Rationale.</strong> The same everyday porteño base as B2a (plates, painted lettering, cream paper) opened up to the countryside an Argentine grows up with: the almacén de ramos generales sign, the kilometre post on the ruta, the alambrado running along a pasture, the estancia gate, mate and the pava, leather, earth and yerba. A single original guarda border carries the rural textile memory without copying any traditional design. Ornament stays at one per section; the layout stays clean for recruiters.</p>
+    <p class="why">Type: <strong>Bitter</strong> (Huerta Tipográfica) as a sturdy slab for sign-plank headings, <strong>Alegreya Sans</strong> (Huerta Tipográfica) for warm, readable body text, <strong>Montserrat</strong> (Julieta Ulanovsky) for plates, route numbers and labels, and <strong>Sansita Swashed</strong> (Omnibus-Type) for one painted accent word. Behind the hero: a faint, worn celeste-white-celeste painted wall with the sun cropped in the corner, on one dial.</p>
+    <div class="pills">
+      <span class="mojon"><small>KM</small><b>01</b></span>
+      <span class="ruta"><small>Ruta</small><b>JL</b></span>
+      <span class="chapa">Chapa <small>rural plate</small></span>
+      <span class="hola">¡Hola!</span>
+    </div>
+  </div>
+  <div class="guarda" aria-hidden="true"></div>
+</header>
+
+<!-- 01 PALETTE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>01</b></span><h2>Palette</h2><p class="note">WCAG 2.x contrast. Straw and weathered celeste are fills only. Leather, earth and yerba all pass AA as text on the paper.</p></div>
+    <div class="swatches" id="sw-light"></div>
+    <p class="subhead">Dark theme · "Noche de campo"</p>
+    <div class="swatches" id="sw-dark"></div>
+  </div>
+</section>
+
+<!-- 02 TYPE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>02</b></span><h2>Type specimen</h2><p class="note">A slab for the sign plank, a humanist sans for reading, geometric caps for plates and numbers, one swash accent. All four from Argentine designers.</p></div>
+    <div class="type-grid">
+      <div class="spec">
+        <div class="who"><b>Display · Bitter 800 / 900</b>Huerta Tipográfica (AR). <a href="https://fonts.google.com/specimen/Bitter" target="_blank" rel="noopener">Google Fonts</a><br>Ramos-generales plank lettering: square serifs, sturdy, very legible.</div>
+        <div><div class="s-display">Many industries.</div><div class="scale"><span>H1 4.9rem</span><span>H2 4.8rem</span><span>Post 3.4rem</span><span>Card 2.5rem</span></div></div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Accent · Sansita Swashed 800</b>Omnibus-Type (AR). <a href="https://fonts.google.com/specimen/Sansita+Swashed" target="_blank" rel="noopener">Google Fonts</a><br>One word per heading, earth red with a straw shadow. Shared with B2a.</div>
+        <div class="s-accent">One method.</div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Signage · Montserrat 600 / 800</b>Julieta Ulanovsky (AR). <a href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener">Google Fonts</a><br>Drawn from Buenos Aires shop signs: the porteño link in a rural board. Plates, KM posts, route numbers, metadata.</div>
+        <div class="s-sign">Ruta JL · KM 05 · Mar 2026</div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Body · Alegreya Sans 400 / 500 / 700</b>Huerta Tipográfica (AR). <a href="https://fonts.google.com/specimen/Alegreya+Sans" target="_blank" rel="noopener">Google Fonts</a><br>17.5px / 1.5 (it runs small, so one step up).</div>
+        <p class="s-body">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 HERO -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>03</b></span><h2>Hero · light and dark</h2>
+      <p class="note">Portrait under an estancia gate drawn in single lines, a painted plank above it. Behind everything: celeste-white-celeste bands like a worn painted wall (original SVG with a paint-wear filter), the sun's rays cropped in the top-right corner, and an alambrado along the bottom edge above the guarda.</p>
+      <label class="dial">Background intensity <input type="range" min="0" max="0.35" step="0.01" value="0.26" id="dial"> <output id="dial-out">0.26</output></label>
+    </div>
+
+    <div class="stage" id="hero-light">
+      <div class="hero">
+        <svg class="franjas" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true"><g filter="url(#worn)"><rect class="cel" x="-30" y="-30" width="1260" height="263"/><rect class="bla" x="-30" y="233" width="1260" height="234"/><rect class="cel" x="-30" y="467" width="1260" height="263"/></g></svg>
+        <svg class="sol" viewBox="-220 -220 440 440" aria-hidden="true"></svg>
+        <svg class="campo" aria-hidden="true"><use href="#campo"/></svg>
+        <div>
+          <p class="hello"><span class="hola">¡Hola!</span><span class="who">I'm Juan Lundahl</span></p>
+          <h1>AI &amp; Marketing <em class="acc">Automation</em> Specialist</h1>
+          <p class="lede">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+          <ul class="tags"><li class="chip">AI</li><li class="chip">Automation</li><li class="chip">CRM Optimization</li><li class="chip">Martech Stack</li><li class="chip">Sales &amp; Marketing Ops</li></ul>
+          <div class="ctas"><a class="btn btn-primary" href="#">Explore work →</a><a class="btn btn-secondary" href="#">Resume</a></div>
+        </div>
+        <figure class="porton">
+          <svg class="arco" viewBox="0 0 330 420" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round"><path d="M10 420V40M320 420V40" stroke-width="7"/><path d="M2 46 C80 6 250 6 328 46" stroke-width="4"/><path d="M10 62 C90 30 240 30 320 62" stroke-width="1.5"/></g></svg>
+          <span class="tabla">J. Lundahl</span>
+          <div class="ph"><img src="../../../assets/img/juan.jpg" alt="Portrait of Juan Lundahl"></div>
+          <figcaption><span class="chapa">Nº 2016 <small>· Argentina</small></span></figcaption>
+        </figure>
+      </div>
+      <nav class="navpill" aria-label="Sample navigation">
+        <span class="mark">JL</span>
+        <a href="#" class="on">About</a><a href="#">Skills</a><a href="#">Work</a><a href="#">Range</a><a href="#">Certifications</a><a href="#">Contact</a>
+        <span class="sep"></span><span class="lang">EN ▾</span>
+        <button class="btn btn-icon" style="width:36px;height:36px;border:0;color:inherit" aria-label="Toggle dark mode">◐</button>
+      </nav>
+      <div class="guarda" aria-hidden="true"></div>
+    </div>
+
+    <div class="stage theme-dark" id="hero-dark">
+      <div class="hero">
+        <svg class="franjas" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true"><g filter="url(#worn)"><rect class="cel" x="-30" y="-30" width="1260" height="263"/><rect class="bla" x="-30" y="233" width="1260" height="234"/><rect class="cel" x="-30" y="467" width="1260" height="263"/></g></svg>
+        <svg class="sol" viewBox="-220 -220 440 440" aria-hidden="true"></svg>
+        <svg class="campo" aria-hidden="true"><use href="#campo"/></svg>
+        <div>
+          <p class="hello"><span class="hola">¡Hola!</span><span class="who">I'm Juan Lundahl</span></p>
+          <h1>AI &amp; Marketing <em class="acc">Automation</em> Specialist</h1>
+          <p class="lede">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+          <ul class="tags"><li class="chip">AI</li><li class="chip">Automation</li><li class="chip">CRM Optimization</li><li class="chip">Martech Stack</li></ul>
+          <div class="ctas"><a class="btn btn-primary" href="#">Explore work →</a><a class="btn btn-secondary" href="#">Resume</a></div>
+        </div>
+        <figure class="porton">
+          <svg class="arco" viewBox="0 0 330 420" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round"><path d="M10 420V40M320 420V40" stroke-width="7"/><path d="M2 46 C80 6 250 6 328 46" stroke-width="4"/><path d="M10 62 C90 30 240 30 320 62" stroke-width="1.5"/></g></svg>
+          <span class="tabla">J. Lundahl</span>
+          <div class="ph"><img src="../../../assets/img/juan.jpg" alt="Portrait of Juan Lundahl"></div>
+          <figcaption><span class="chapa">Nº 2016 <small>· Argentina</small></span></figcaption>
+        </figure>
+      </div>
+      <nav class="navpill" aria-label="Sample navigation, dark">
+        <span class="mark">JL</span>
+        <a href="#" class="on">About</a><a href="#">Skills</a><a href="#">Work</a><a href="#">Range</a><a href="#">Certifications</a><a href="#">Contact</a>
+        <span class="sep"></span><span class="lang">EN ▾</span>
+        <button class="btn btn-icon" style="width:36px;height:36px;border:0;color:inherit" aria-label="Toggle light mode">◑</button>
+      </nav>
+      <div class="guarda" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 MARKETING ID -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>04</b></span><h2>Marketing ID · la libreta</h2><p class="note">The almacén's account book: leather cover with a stitched seam, ruled pages with a red margin, the photo held by paper corners, dotted leaders like a price list. No ID-card layout, no crest.</p></div>
+    <div class="id-wrap">
+      <div>
+        <article class="libreta" aria-label="Marketing ID: Juan Lundahl, AI and Marketing Automation Specialist">
+          <header class="tapa"><p>Ramos generales · Marketing ID</p><h4>Juan Lundahl</h4></header>
+          <div class="guarda" aria-hidden="true"></div>
+          <div class="hojas">
+            <div class="body">
+              <div class="ph"><img src="../../../assets/img/juan.jpg" alt=""></div>
+              <div>
+                <p class="role">AI &amp; Marketing Automation Specialist</p>
+                <dl>
+                  <div><dt>Experience</dt><dd>6+ years</dd></div>
+                  <div><dt>Focus</dt><dd>AI · Automation · CRM</dd></div>
+                  <div><dt>Markets</dt><dd>NA · EMEA · LATAM</dd></div>
+                  <div><dt>Home base</dt><dd class="home">Argentina</dd></div>
+                </dl>
+              </div>
+            </div>
+            <p class="pie"><span>Nº MKT-2016-JL</span><span>Buenos Aires</span></p>
+          </div>
+        </article>
+        <button class="cartelito" aria-pressed="false" aria-label="Availability sign. Click to flip.">
+          <svg class="cuerda" viewBox="0 0 86 22" aria-hidden="true"><path d="M4 22 L43 3 L82 22" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="43" cy="3" r="2.6" fill="currentColor"/></svg>
+          <span class="faces"><span class="f front"><b>Abierto</b><small>Open to opportunities</small></span><span class="f back"><b>Vuelvo enseguida</b><small>Back in five minutes</small></span></span>
+        </button>
+      </div>
+      <div class="id-notes">
+        <h3>What changes from today's card</h3>
+        <p>The lanyard becomes the almacén's libreta: a familiar object in every barrio and every pueblo. The leather tag below flips between "Abierto" and "Vuelvo enseguida"; hover straightens the book.</p>
+        <ul>
+          <li>Leather cover in Bitter 900 with a dashed stitch line.</li>
+          <li>Guarda strip as the book's spine band.</li>
+          <li>Fields as a price list with dotted leaders on ruled paper.</li>
+          <li>Argentina as home base in yerba green.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SECTION HEADING -->
+<section class="blk" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>05</b></span><h2>Section heading</h2></div>
+    <header class="sec-head">
+      <div class="eyebrow"><span class="ruta"><small>Ruta</small><b>05</b></span><span>Range</span></div>
+      <h2>Many industries. <em class="acc">One method.</em></h2>
+      <p>Every sector has its own language. My approach stays the same: understand the audience, build the right system and keep improving it.</p>
+      <div class="guarda" aria-hidden="true"></div>
+    </header>
+  </div>
+</section>
+
+<!-- 06 WORK -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>06</b></span><h2>Work card</h2><p class="note">A guarda strip as the top edge, the company name on a cream sign plank in leather-brown slab with a straw shadow, a double-ruled "Current role" stamp in yerba. Bullets are small earth lozenges.</p></div>
+    <article class="work">
+      <div class="guarda" aria-hidden="true"></div>
+      <header class="tabla">
+        <div><span class="kick">Ramos · Marketing &amp; Automation</span><h3>VU Inc.</h3></div>
+        <span class="stamp">Current<br>role</span>
+      </header>
+      <div class="bd">
+        <p class="role">Marketing &amp; Automation Specialist</p>
+        <p class="sum">Marketing and automation role focused on the martech stack and AI-driven campaigns.</p>
+        <ul><li>Martech stack and automation infrastructure</li><li>AI integration in campaigns</li></ul>
+        <div class="ft">
+          <div class="row"><span class="chip">Mar 2026 – Present</span><span class="chip">Hybrid</span><span class="chip is-soft">Cybersecurity &amp; digital identity</span></div>
+          <button class="btn btn-secondary">Details +</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 07 ACHIEVEMENTS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>07</b></span><h2>Achievements</h2><p class="note">Four kilometre posts standing on one ground line, a tuft of pasture at each foot. Original post shape, no official road-sign layout. No crosses.</p></div>
+    <div class="mojones">
+      <div class="km"><div class="post"><span class="cap">AÑOS</span><span class="v">6<sup>+</sup></span></div><svg class="grass" aria-hidden="true"><use href="#grass"/></svg><p class="l">Years of experience</p></div>
+      <div class="km"><div class="post"><span class="cap">MERCADOS</span><span class="v">3</span></div><svg class="grass" aria-hidden="true"><use href="#grass"/></svg><p class="l">Markets: NA · EMEA · LATAM</p></div>
+      <div class="km"><div class="post"><span class="cap">CERT.</span><span class="v">10</span></div><svg class="grass" aria-hidden="true"><use href="#grass"/></svg><p class="l">Certifications</p></div>
+      <div class="km"><div class="post"><span class="cap">PREMIO</span><span class="v">1</span></div><svg class="grass" aria-hidden="true"><use href="#grass"/></svg><p class="l">ADEPA Prize</p></div>
+    </div>
+    <div class="award"><span class="chapa">1st Prize · University Journalism</span><span class="txt">Association of Argentine Journalistic Entities (ADEPA)</span></div>
+  </div>
+</section>
+
+<!-- 08 CERTS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>08</b></span><h2>Certifications</h2><p class="note">Each issuer sits in a brass label-holder, like the drawers of an almacén. Hover pulls the drawer out: it lifts, turns to stitched leather and shows "View". First card pinned in hover state.</p></div>
+    <div class="certs" id="certs"></div>
+  </div>
+</section>
+
+<!-- 09 MARKETS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>09</b></span><h2>Markets</h2><p class="note">An alambrado: three wires strung between posts, each post tagged with a route plate. The line ends at the tranquera: Argentina, home base.</p></div>
+    <div class="alambrado" role="list">
+      <div class="poste" role="listitem"><span class="ruta"><small>Ruta</small><b>NA</b></span><span class="palo" aria-hidden="true"></span><span class="txt"><b>NA</b><small>North America</small></span></div>
+      <div class="poste" role="listitem"><span class="ruta"><small>Ruta</small><b>EMEA</b></span><span class="palo" aria-hidden="true"></span><span class="txt"><b>EMEA</b><small>Europe, Middle East &amp; Africa</small></span></div>
+      <div class="poste" role="listitem"><span class="ruta"><small>Ruta</small><b>LATAM</b></span><span class="palo" aria-hidden="true"></span><span class="txt"><b>LATAM</b><small>Latin America</small></span></div>
+      <div class="poste home" role="listitem"><span class="chapa is-yerba">Home base</span><svg class="gate" aria-hidden="true"><use href="#gate"/></svg><span class="txt"><b>Argentina</b><small>Based in Buenos Aires</small></span></div>
+    </div>
+    <div class="markets-chips">
+      <span class="chip">NA</span><span class="chip">EMEA</span><span class="chip is-active">LATAM</span>
+      <span class="chapa is-yerba">Argentina <small>home base</small></span>
+    </div>
+  </div>
+</section>
+
+<!-- 10 KIT -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>10</b></span><h2>Buttons, chips, level dots, icons</h2></div>
+    <div class="kit">
+      <div>
+        <h4>Buttons</h4>
+        <div class="row">
+          <a class="btn btn-primary" href="#">Get in touch →</a>
+          <a class="btn btn-secondary" href="#">Download CV (PDF)</a>
+          <a class="btn btn-ghost" href="#">See it on LinkedIn</a>
+          <button class="btn btn-icon" aria-label="Toggle dark mode">◐</button>
+        </div>
+        <h4 style="margin-top:22px">Chips &amp; plates</h4>
+        <div class="row">
+          <span class="chip">SEO</span>
+          <span class="chip is-soft"><span class="dot"></span>HubSpot CRM</span>
+          <span class="chip is-active">Retention &amp; Automation</span>
+          <span class="chip">Spanish · Native</span>
+          <span class="chapa">Work <small>Nº 03</small></span>
+          <span class="ruta"><small>Ruta</small><b>06</b></span>
+        </div>
+      </div>
+      <div>
+        <h4>Level · guarda lozenges</h4>
+        <div class="lv">
+          <span>Expert</span><span class="dots" aria-label="4 of 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+          <span>Advanced</span><span class="dots" aria-label="3 of 4"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+          <span>Intermediate</span><span class="dots" aria-label="2 of 4"><i class="on"></i><i class="on"></i><i></i><i></i></span>
+          <span>Basic</span><span class="dots" aria-label="1 of 4"><i class="on"></i><i></i><i></i><i></i></span>
+        </div>
+      </div>
+      <div>
+        <h4>Line icons (original)</h4>
+        <div class="icons">
+          <figure><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 18c-5 3-6 10-3 15 2 4 7 6 12 6s10-2 12-6c3-5 2-12-3-15"/><path d="M12 18c3-2 17-2 20 0"/><path d="M25 18L32 5"/><path d="M30.5 4.5l3 1.6"/><path d="M15 27c2 2 5 3 8 3"/></svg>Mate</figure>
+          <figure><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 37L12 20H30L33 37Z"/><path d="M16 20v-3h10v3"/><path d="M21 17v-2"/><path d="M14 16C14 8 28 8 28 16"/><path d="M31 25l7-7 2 1"/><path d="M7 37h28"/></svg>Pava</figure>
+          <figure><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 39V9M38 39V9"/><path d="M4 10C14 4 30 4 40 10"/><path d="M6 17H38M6 24H38M6 31H38M6 38H38"/><path d="M6 38L38 17"/></svg>Tranquera</figure>
+          <figure><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M6 36V12M22 36V12M38 36V12"/><path d="M6 17H38M6 23H38M6 29H38" stroke-width="1"/><path d="M3 36H41"/><path d="M11 36l-1-4M15 36l1-5M29 36l-1-4M33 36l1-5"/></svg>Alambrado</figure>
+          <figure><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M13 38V16a9 9 0 0 1 18 0v22Z"/><path d="M13 19H31"/><path d="M18 27h8M18 31h8" stroke-linecap="round"/><path d="M7 38H37" stroke-linecap="round"/></svg>Mojón</figure>
+          <figure><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3 30C14 26 30 26 41 30"/><path d="M3 37C14 34 30 34 41 37" stroke-width="1"/><path d="M9 30l-2-7M12 29l1-8M15 29l3-6M28 28l-2-6M31 28l1-8M34 29l3-6"/><path d="M20 14a5 5 0 0 1 10 0" /></svg>Pampa</figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 DARK -->
+<section class="theme-dark dark-strip">
+  <div class="guarda" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>11</b></span><h2>Dark mode strip</h2><p class="note">"Noche de campo": earth-black, cream text, lit straw, leather and yerba. The guarda inverts to cream rails; leather buttons and plates keep their daytime colour.</p></div>
+    <div class="grid">
+      <div class="mini">
+        <div class="eyebrow" style="display:flex;gap:12px;align-items:center"><span class="ruta"><small>Ruta</small><b>01</b></span><span style="font:700 .76rem/1 var(--font-sign);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2)">About</span></div>
+        <h3>Who I <em class="acc">am.</em></h3>
+        <div class="row">
+          <a class="btn btn-primary" href="#">Explore work →</a>
+          <a class="btn btn-secondary" href="#">Resume</a>
+          <span class="chip is-soft"><span class="dot"></span>HubSpot CRM</span>
+        </div>
+        <div class="dsw">
+          <div style="background:#171612;color:#EFE6D2">paper<br>#171612</div>
+          <div style="background:#221F19;color:#EFE6D2">surface<br>#221F19</div>
+          <div style="background:#D49A6A;color:#171612">cuero<br>#D49A6A</div>
+          <div style="background:#A6BF6E;color:#171612">yerba<br>#A6BF6E</div>
+        </div>
+      </div>
+      <div class="side">
+        <a class="cert" href="#"><span class="iss">HubSpot</span><span class="nm">HubSpot Inbound</span><span class="dt">Nov 2025 <span class="go">View →</span></span></a>
+        <a class="cert demo-hover" href="#"><span class="iss">Coderhouse</span><span class="nm">Growth Marketing</span><span class="dt">Jul 2022 <span class="go">View →</span></span></a>
+        <span class="chapa is-yerba" style="justify-self:start">Argentina <small>home base</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 MOBILE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>12</b></span><h2>Mobile · 375px</h2></div>
+    <div class="phone-row">
+      <div class="phone">
+        <div class="screen">
+          <svg class="franjas" viewBox="0 0 375 820" preserveAspectRatio="none" aria-hidden="true"><g filter="url(#worn)"><rect class="cel" x="-20" y="-20" width="415" height="293"/><rect class="bla" x="-20" y="273" width="415" height="274"/><rect class="cel" x="-20" y="547" width="415" height="293"/></g></svg>
+          <svg class="sol" viewBox="-220 -220 440 440" aria-hidden="true"></svg>
+          <svg class="campo" aria-hidden="true"><use href="#campo"/></svg>
+          <div class="m-hero">
+            <figure class="porton">
+              <svg class="arco" viewBox="0 0 330 420" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round"><path d="M10 420V40M320 420V40" stroke-width="7"/><path d="M2 46 C80 6 250 6 328 46" stroke-width="4"/></g></svg>
+              <span class="tabla">J. Lundahl</span>
+              <div class="ph"><img src="../../../assets/img/juan.jpg" alt="Portrait of Juan Lundahl"></div>
+              <figcaption><span class="chapa">Argentina</span></figcaption>
+            </figure>
+            <p class="hello"><span class="hola" style="font-size:1.1rem">¡Hola!</span><span class="who" style="font-size:.7rem">I'm Juan Lundahl</span></p>
+            <h1>AI &amp; Marketing <em class="acc">Automation</em> Specialist</h1>
+            <p class="lede">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+            <div class="tags"><span class="chip">AI</span><span class="chip">Automation</span><span class="chip">CRM Optimization</span><span class="chip">Martech Stack</span></div>
+            <div class="row"><a class="btn btn-primary" href="#">Explore work →</a><a class="btn btn-secondary" href="#">Resume</a></div>
+          </div>
+          <nav class="navpill" aria-label="Sample mobile navigation">
+            <span class="mark">JL</span><a href="#" class="on">About</a><a href="#">Skills</a><a href="#">Work</a><span class="sep"></span><span class="lang">EN</span>
+          </nav>
+          <div class="guarda bottom" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="phone-notes">
+        <h3>Mobile rules</h3>
+        <ul>
+          <li>The gate-framed portrait shrinks to 200px and sits above the greeting.</li>
+          <li>The bands stretch to the full screen height (one band per third); the sun stays a quarter-circle in the top-right corner.</li>
+          <li>16px gutter; H1 2.3rem Bitter 900 with the Swashed accent word.</li>
+          <li>The alambrado and guarda stay pinned to the bottom edge, behind the nav pill.</li>
+          <li>KM posts and the alambrado drop to 2 columns; the wires hide, posts remain.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 COMPARE -->
+<section class="blk" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>13</b></span><h2>Cómo se compara con B</h2><p class="note">B looked at Buenos Aires from a visitor's seat. B2b keeps the porteño base and adds the countryside as it is lived, not as a postcard.</p></div>
+    <div class="compare">
+      <div>
+        <h4>Out (traveller cues)</h4>
+        <ul>
+          <li>Transit "boleto" credential and punch holes.</li>
+          <li>Generic subte line diagram.</li>
+          <li>"Buenos Aires" souvenir plate under the portrait.</li>
+          <li>Generic vintage-travel cream and celeste.</li>
+          <li>Filete scroll corners on every card.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>In (porteño + campo)</h4>
+        <ul>
+          <li>Almacén libreta credential with a leather "Abierto / Vuelvo enseguida" tag.</li>
+          <li>KM posts for section numbers and achievements; route plates and an alambrado for markets, ending at the tranquera.</li>
+          <li>One original guarda as the only repeating ornament.</li>
+          <li>Leather, earth, yerba and straw beside ink and a weathered celeste; Huerta Tipográfica slab + sans.</li>
+          <li>Worn celeste-white-celeste wall and a cropped sun behind the hero, on one dial.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 CHANGES -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="mojon"><small>KM</small><b>14</b></span><h2>What would change in the real site</h2><p class="note"><code>css/tokens.css</code> values, the font link in <code>index.html</code>, plus reusable pieces: <code>.mojon</code>, <code>.ruta</code>, <code>.chapa</code>, the guarda data-URI, the SVG sprite (worn filter, gate, alambrado, grass), the sun burst and <code>--arg-opacity</code>.</p></div>
+    <div class="table-scroll">
+    <table class="changes">
+      <thead><tr><th>Token</th><th>Today (Danish)</th><th>B2b light</th><th>B2b dark</th></tr></thead>
+      <tbody>
+        <tr><td><code>--navy</code> (primary)</td><td><i class="sw-i" style="background:#c8102e"></i>#C8102E</td><td><i class="sw-i" style="background:#7B4A2A"></i>#7B4A2A (cuero)</td><td>#7B4A2A (unchanged)</td></tr>
+        <tr><td><code>--navy-ink</code></td><td>#FFFFFF</td><td><i class="sw-i" style="background:#F1E9D8"></i>#F1E9D8</td><td>#F1E9D8</td></tr>
+        <tr><td><code>--accent</code></td><td>#F0A3AF</td><td><i class="sw-i" style="background:#C9A24A"></i>#C9A24A (trigo)</td><td>#D7A64B</td></tr>
+        <tr><td><code>--accent-2</code> (accent word)</td><td>#C8102E</td><td><i class="sw-i" style="background:#9E4F30"></i>#9E4F30 (tierra)</td><td>#E39B7B</td></tr>
+        <tr><td><code>--accent-soft</code></td><td>#FBE3E6</td><td><i class="sw-i" style="background:#DCE6CB"></i>#DCE6CB (yerba wash)</td><td>#2E3522</td></tr>
+        <tr><td>new <code>--yerba</code></td><td>(none)</td><td><i class="sw-i" style="background:#4F6B2F"></i>#4F6B2F</td><td>#A6BF6E</td></tr>
+        <tr><td><code>--link</code> (new)</td><td>(accent-2)</td><td><i class="sw-i" style="background:#2D5F8A"></i>#2D5F8A</td><td>#8FB9DA</td></tr>
+        <tr><td><code>--bg / --bg-alt</code></td><td>#FBF8F7 / #F7EFEE</td><td>#F1E9D8 / #E7DCC5</td><td>#171612 / #1D1B16</td></tr>
+        <tr><td><code>--surface</code></td><td>#FFFFFF</td><td>#FAF5EA</td><td>#221F19</td></tr>
+        <tr><td><code>--border / --border-strong</code></td><td>#EEDCDC / #DBBCBF</td><td>#D6C8AC / #1F1A16</td><td>#38342B / #4E483C</td></tr>
+        <tr><td><code>--ink / --ink-2 / --muted</code></td><td>#3A0D15 / #5A2830 / #7A5359</td><td>#1F1A16 / #3D352D / #62574A</td><td>#EFE6D2 / #D8CDB6 / #B1A68F</td></tr>
+        <tr><td>new <code>--arg-opacity</code></td><td>(none)</td><td>0.26 (bands; sun ×1.3)</td><td>same dial (bands ×0.45, sun ×0.9)</td></tr>
+        <tr><td><code>--feature-bg</code></td><td>#8E0C22</td><td>#7B4A2A</td><td>#2E3522</td></tr>
+        <tr><td><code>--stage-1…4</code> (funnel)</td><td>pinks → oxblood</td><td>#E7DCC5 · #C9A24A · #4F6B2F · #7B4A2A</td><td>#2E3522 · #D7A64B · #A6BF6E · #D49A6A</td></tr>
+        <tr><td>fonts</td><td>Albert Sans · Cormorant · JetBrains Mono · Noto Sans Runic</td><td colspan="2">Alegreya Sans (body) · Bitter (display) · Sansita Swashed (accent) · Montserrat (plates, numbers, meta)</td></tr>
+        <tr><td><code>--cross-* / --rune*</code></td><td>Nordic cross, runes</td><td colspan="2">Removed. The guarda strip takes their slot (stage foot, card top, section rule); max one per section.</td></tr>
+        <tr><td><code>--radius / --radius-lg</code></td><td>12px / 20px</td><td>5px / 10px</td><td>same</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="list-cols">
+      <li>Eyebrows become KM posts (<code>.mojon</code>) or route plates (<code>.ruta</code>).</li>
+      <li>Headline *asterisk* accents: Sansita Swashed, earth red, straw shadow.</li>
+      <li>Hero: "Hej!" → "¡Hola!" plate; portrait under the gate; worn wall bands + cropped sun; alambrado + guarda at the foot.</li>
+      <li>About: lanyard → libreta + leather flip tag (reuses pointer/keyboard wiring).</li>
+      <li>Achievements: KM posts on a ground line.</li>
+      <li>Work cards: guarda top edge, sign-plank title, yerba stamp.</li>
+      <li>Markets/Range: alambrado ending at the tranquera.</li>
+      <li>Primary buttons: leather with a stitched seam.</li>
+      <li>Meta theme-color: #F1E9D8 (light) / #171612 (dark).</li>
+      <li>Drop Albert Sans, Cormorant, JetBrains Mono, Noto Sans Runic.</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="board-foot"><div class="wrap">Board B2b · Porteño y campo · standalone preview, not wired to the live site. All ornaments and icons are original drawings.</div></footer>
+
+<script>
+(function () {
+  var light = [
+    ['--ink', '#1F1A16', 'Text, outlines, KM caps', '14.3:1 on --paper · AAA', '#F1E9D8'],
+    ['--ink-2', '#3D352D', 'Lede, secondary text', '10.0:1 on --paper · AAA', '#F1E9D8'],
+    ['--muted', '#62574A', 'Meta, captions', '5.8:1 on --paper · 5.2:1 on --paper-2 · AA', '#F1E9D8'],
+    ['--cuero', '#7B4A2A', 'Primary button, plates, card titles', '6.1:1 on --paper; cream on it 6.1:1 · AA', '#F1E9D8'],
+    ['--tierra', '#9E4F30', 'Accent word, guarda lozenge, bullets', '4.8:1 on --paper · AA', '#F1E9D8'],
+    ['--yerba', '#4F6B2F', 'Home base, stamp, flip tag', '5.0:1 on --paper · 5.6:1 on --surface · AA', '#F1E9D8'],
+    ['--celeste-ink', '#2D5F8A', 'Links, focus ring', '5.6:1 on --paper · AA', '#F1E9D8'],
+    ['--trigo', '#C9A24A', 'Straw: shadows, underline (non-text)', '--ink on it 7.2:1 · AAA', '#1F1A16'],
+    ['--celeste', '#7FA8C9', 'Weathered celeste: wall bands (non-text)', '--ink on it 6.9:1 · AA', '#1F1A16'],
+    ['--paper', '#F1E9D8', 'Whitewashed page', 'Base for ratios above', '#1F1A16'],
+    ['--surface', '#FAF5EA', 'Cards, libreta pages, posts', '--ink on it 15.6:1', '#1F1A16']
+  ];
+  var dark = [
+    ['--paper', '#171612', 'Night background', '--ink on it 14.6:1', '#EFE6D2'],
+    ['--surface', '#221F19', 'Cards', '--muted on it 6.8:1', '#EFE6D2'],
+    ['--ink', '#EFE6D2', 'Cream text', '14.6:1 · AAA', '#171612'],
+    ['--muted', '#B1A68F', 'Meta', '7.5:1 on --paper · AAA', '#171612'],
+    ['--tierra (lit)', '#E39B7B', 'Accent word', '8.0:1 on --paper · AAA', '#171612'],
+    ['--cuero (lit)', '#D49A6A', 'Titles, guarda', '7.4:1 on --paper · AAA', '#171612'],
+    ['--yerba (lit)', '#A6BF6E', 'Home base, stamp', '8.9:1 on --paper · AAA', '#171612'],
+    ['--celeste', '#8FB9DA', 'Links, wall bands', '8.7:1 on --paper · AAA', '#171612']
+  ];
+  function render(list, id) {
+    document.getElementById(id).innerHTML = list.map(function (s) {
+      return '<div class="sw"><div class="chip-c" style="background:' + s[1] + ';color:' + s[4] + '">Aa</div><div class="meta"><b>' + s[0] + '</b><span class="hex">' + s[1] + '</span><p class="role">' + s[2] + '</p><span class="aa">' + s[3] + '</span></div></div>';
+    }).join('');
+  }
+  render(light, 'sw-light'); render(dark, 'sw-dark');
+
+  var certs = [
+    ['HubSpot Inbound', 'HubSpot', 'Nov 2025', 1], ['Programmatic Advertising', 'Udemy', '2024', 1],
+    ['Social Media Marketing: Strategy and Optimization', 'LinkedIn', 'Aug 2023', 1], ['Content Creation: Strategy and Tools', 'LinkedIn', 'Aug 2023', 1],
+    ['Content Marketing for Social Media', 'LinkedIn', 'Aug 2023', 1], ['Deutsch Intensiv Kompakt', 'Goethe-Institut', 'Aug 2022', 0],
+    ['Growth Marketing', 'Coderhouse', 'Jul 2022', 1], ['UX/UI Design', 'Coderhouse', 'Apr 2022', 1],
+    ['EF SET English Certificate', 'EF SET', 'Mar 2022', 1], ['Digital Marketing (Community Manager & Advertising)', 'Coderhouse', '2021 – 2022', 1]
+  ];
+  document.getElementById('certs').innerHTML = certs.map(function (c, i) {
+    var open = c[3] ? '<a href="#"' : '<div tabindex="0"', close = c[3] ? '</a>' : '</div>';
+    return open + ' class="cert' + (i === 0 ? ' demo-hover' : '') + '"><span class="iss">' + c[1] + '</span><span class="nm">' + c[0].replace('&', '&amp;') + '</span><span class="dt">' + c[2] + (c[3] ? '<span class="go" aria-hidden="true">View →</span>' : '') + '</span>' + close;
+  }).join('');
+
+  /* Sun: original line burst, 32 rays alternating straight and wavy */
+  function sol(svg) {
+    var out = '', N = 32, P = Math.PI;
+    function pt(r, a) { return (r * Math.cos(a)).toFixed(1) + ' ' + (r * Math.sin(a)).toFixed(1); }
+    for (var i = 0; i < N; i++) {
+      var a = i * 2 * P / N - P / 2;
+      if (i % 2 === 0) {
+        out += '<path class="rs" d="M' + pt(80, a - 0.045) + ' L' + pt(212, a) + ' L' + pt(80, a + 0.045) + '"/>';
+      } else {
+        var d = '', r0 = 82, r1 = 178;
+        for (var k = 0; k <= 24; k++) {
+          var t = k / 24, r = r0 + (r1 - r0) * t, off = Math.sin(t * P * 3) * 6.5 * (1 - t * 0.35);
+          d += (k ? ' L' : 'M') + (r * Math.cos(a) + off * Math.cos(a + P / 2)).toFixed(1) + ' ' + (r * Math.sin(a) + off * Math.sin(a + P / 2)).toFixed(1);
+        }
+        out += '<path class="rw" d="' + d + '"/>';
+      }
+    }
+    out += '<circle class="ring" r="66"/><circle class="ring" r="72" stroke-dasharray="2 4"/>';
+    svg.innerHTML = out;
+  }
+  document.querySelectorAll('svg.sol').forEach(sol);
+
+  var dial = document.getElementById('dial'), outv = document.getElementById('dial-out');
+  dial.addEventListener('input', function () { document.documentElement.style.setProperty('--arg-opacity', dial.value); outv.textContent = dial.value; });
+
+  var sign = document.querySelector('.cartelito');
+  sign.addEventListener('click', function () { sign.setAttribute('aria-pressed', sign.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); });
+})();
+</script>
+</body>
+</html>

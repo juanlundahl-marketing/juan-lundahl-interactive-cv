@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Funnel v1 Simple</title>
+  <meta name="description" content="Design board: a simple, classic marketing funnel drawn as four stacked enamel plates, in the Porteño style of the site.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Encode+Sans+Condensed:wght@500;600;700;800&family=Sansita:ital,wght@0,700;0,800;0,900;1,800&family=Sansita+Swashed:wght@600;800&display=swap">
+  <link rel="stylesheet" href="../../../css/tokens.css">
+  <link rel="stylesheet" href="../../../css/base.css">
+  <style>
+    /* ---------- Board chrome ---------- */
+    .board-bar {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: var(--space-3); padding-top: var(--space-5);
+    }
+    .theme-switch { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+    .theme-switch button {
+      min-height: 40px; padding: 0 12px;
+      border: 1.5px solid var(--ink); border-radius: var(--radius-sm);
+      background: var(--surface); color: var(--ink);
+      font: 700 0.78rem/1 var(--font-sign); letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .theme-switch button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+    .board-note {
+      max-width: 820px; margin-top: var(--space-7); padding: var(--space-5);
+      border: 1.5px dashed var(--border-strong); border-radius: var(--radius);
+      color: var(--ink-2); font-size: var(--fs-sm);
+    }
+    .board-note h2 { font-size: 1.3rem; margin: var(--space-2) 0 var(--space-3); }
+    .board-note ul { padding-left: 1.2em; display: grid; gap: var(--space-2); }
+
+    /* ---------- Level legend ---------- */
+    .fn-legend {
+      display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5);
+      margin-bottom: var(--space-6);
+    }
+    .fn-legend__title { font: 700 0.78rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+
+    /* Smaller vereda pads inside chips */
+    .fn-dots { display: inline-flex; gap: 3px; }
+    .fn-dots i { width: 7px; height: 7px; border-radius: 2px; border: 1.2px solid var(--border-strong); }
+    .fn-dots i.on { background: var(--green); border-color: var(--green); }
+
+    /* ---------- The funnel ---------- */
+    .funnel {
+      --fcol: min(44%, 450px);
+      --leader: 30px;
+      list-style: none; margin: 0; padding: 0;
+      display: grid; gap: 12px;
+    }
+    .fn-stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: var(--fcol) 1fr;
+      column-gap: var(--leader);
+      align-items: center;
+      border-radius: var(--radius);
+      outline-offset: 6px;
+    }
+    .fn-plate {
+      position: relative;
+      align-self: stretch;
+      min-height: 104px;
+      transition: transform var(--dur) var(--ease-out);
+    }
+    .fn-plate svg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 2px 0 rgba(43, 38, 34, 0.32)) drop-shadow(0 10px 12px rgba(60, 40, 10, 0.16));
+    }
+    .fn-plate__text {
+      position: absolute; inset: 0;
+      display: grid; place-content: center; justify-items: center;
+      gap: 3px; text-align: center;
+      color: var(--p-ink);
+    }
+    .fn-plate__num {
+      font: 700 0.7rem/1 var(--font-sign); letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--p-num);
+    }
+    .fn-plate__name {
+      font: 900 clamp(1.15rem, 0.9rem + 0.9vw, 1.55rem)/1.05 var(--font-display);
+      text-wrap: balance;
+    }
+    .fn-plate__name em { font-family: var(--font-accent); font-style: normal; font-weight: 800; }
+
+    .fn-info {
+      display: grid; gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      border-left: 3px solid transparent;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      transition: background-color var(--dur) ease, border-color var(--dur) ease;
+    }
+    .fn-info p { color: var(--ink-2); max-width: 52ch; line-height: 1.5; }
+    .fn-tools { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .fn-tools .chip { gap: 8px; padding: 0.42em 0.7em 0.38em; font-size: 0.74rem; }
+
+    /* Gentle highlight */
+    .fn-stage:hover .fn-plate,
+    .fn-stage:focus-visible .fn-plate { transform: translateY(-2px); }
+    .fn-stage:hover .fn-info,
+    .fn-stage:focus-visible .fn-info { background: var(--ghost); border-left-color: var(--ochre); }
+
+    .fn-footer {
+      display: grid; gap: var(--space-2);
+      margin-top: var(--space-7); padding-top: var(--space-4);
+      border-top: 1px solid var(--border);
+      font-size: var(--fs-sm); color: var(--muted);
+    }
+    .fn-footer b {
+      font: 700 0.76rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink-2); margin-right: 0.5em;
+    }
+
+    /* Narrow: vertical stack, plate then its text */
+    @media (max-width: 719px) {
+      .funnel { gap: var(--space-4); }
+      .fn-stage { grid-template-columns: 1fr; row-gap: var(--space-2); }
+      .fn-plate { min-height: 0; height: 74px; }
+      .fn-info { padding: var(--space-2) var(--space-3); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fn-stage:hover .fn-plate, .fn-stage:focus-visible .fn-plate { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container board-bar">
+    <span class="destino">Board <b>Funnel v1 &middot; Simple</b></span>
+    <div class="theme-switch" role="group" aria-label="Preview theme">
+      <button type="button" data-set-theme="auto" aria-pressed="true">Auto</button>
+      <button type="button" data-set-theme="light" aria-pressed="false">Light</button>
+      <button type="button" data-set-theme="dark" aria-pressed="false">Dark</button>
+    </div>
+  </div>
+
+  <main>
+    <section id="skills" class="section" aria-labelledby="fn-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Skills</p>
+          <h2 class="display" id="fn-title"><span>My marketing</span> <em>funnel.</em></h2>
+          <p>Four stages, from first impression to loyal customer, and the tools I use at each one.</p>
+        </header>
+
+        <div class="fn-legend" id="fn-legend" aria-label="Level key"></div>
+        <ol class="funnel" id="funnel" aria-label="Marketing funnel: Awareness, Interest, Conversion, Retention and Loyalty">
+          <li class="load-error">Loading the funnel&hellip;</li>
+        </ol>
+        <div class="fn-footer" id="fn-footer"></div>
+
+        <aside class="board-note" aria-labelledby="note-title">
+          <p class="eyebrow">Concept note</p>
+          <h2 id="note-title">A plain, classic funnel</h2>
+          <ul>
+            <li>Four enamel plates (celeste, sign gold, bondi green, oxblood) stack and narrow like a real funnel: the shape alone says "marketing funnel". Each plate keeps the site's chapa details: cream inner line, two rivets, a chipped corner.</li>
+            <li>Beside each plate (below it on phones): one line on the stage's purpose and the tools, each with the site's vereda level pads. No animation, no counters; only a soft hover or focus highlight.</li>
+            <li>Content is read live from <code>data/content.json</code> (en). Board-only curation: stage 4 is labelled "Retention &amp; Loyalty" with a marketing-first line; AI copilots, AI integration and Power Automate move to the small Stack line; Microsoft, Apple, Slack and Teams appear as work environments without levels.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    /* ---------- Theme preview ---------- */
+    (function () {
+      var btns = document.querySelectorAll('[data-set-theme]');
+      btns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          var v = b.getAttribute('data-set-theme');
+          if (v === 'auto') document.documentElement.removeAttribute('data-theme');
+          else document.documentElement.setAttribute('data-theme', v);
+          btns.forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+        });
+      });
+    })();
+
+    /* ---------- Funnel ---------- */
+    var LEVEL_RANK = { basic: 1, intermediate: 2, advanced: 3, expert: 4 };
+    var LEVEL_WORD = { expert: 'Expert', advanced: 'Advanced', intermediate: 'Intermediate', basic: 'Basic' };
+    /* Plates keep their colour in both themes, like the site's chapas */
+    var PLATES = [
+      { bg: '#2d5f8a', ink: '#f3ebda', num: '#f3ebda', line: 'rgba(243,235,218,.85)' },
+      { bg: '#ebc66e', ink: '#1c1b19', num: '#7a2430', line: 'rgba(28,27,25,.7)' },
+      { bg: '#1f5c4a', ink: '#f3ebda', num: '#ebc66e', line: 'rgba(243,235,218,.85)' },
+      { bg: '#7a2430', ink: '#f3ebda', num: '#ebc66e', line: 'rgba(243,235,218,.85)' }
+    ];
+    /* Board-level curation (see concept note) */
+    var MOVE_TO_STACK = ['Power Automate', 'AI integration'];
+    var OVERRIDE = {
+      retention: {
+        nameHTML: 'Retention <em>&amp; Loyalty</em>',
+        name: 'Retention & Loyalty',
+        description: 'Email marketing and CRM nurturing that keep customers engaged and coming back.'
+      }
+    };
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+    function dots(level) {
+      var r = LEVEL_RANK[level] || 0, out = '';
+      for (var i = 1; i <= 4; i++) out += '<i class="' + (i <= r ? 'on' : '') + '"></i>';
+      return '<span class="fn-dots" aria-hidden="true">' + out + '</span>';
+    }
+    function inFunnel(t) { return t.group !== 'ai' && MOVE_TO_STACK.indexOf(t.name) === -1; }
+
+    /* Compatibility shim (added when the board moved to docs/): these boards were written against an earlier data shape (funnel.stack.groups, stage.description). Map the current shape (funnel.across, stage.doing) onto it. */
+    function adapt(data) {
+      var f = data.en.funnel;
+      if (!f.stack) {
+        var a = f.across || {};
+        var envItems = [];
+        (a.env || []).forEach(function (g) { (g.items || []).forEach(function (n) { envItems.push({ name: n }); }); });
+        f.stack = { groups: [ { id: 'crm', tools: [] }, { id: 'ai', tools: a.ai || [] }, { id: 'env', tools: envItems } ] };
+      }
+      f.stages.forEach(function (s) { if (!s.description) s.description = s.doing || s.tagline || ''; });
+      return data;
+    }
+
+    function render(data) {
+      var en = data.en, stages = en.funnel.stages, groups = en.funnel.stack.groups;
+      var list = document.getElementById('funnel');
+
+      document.getElementById('fn-legend').innerHTML =
+        '<span class="fn-legend__title">Level</span>' +
+        ['expert', 'advanced', 'intermediate'].map(function (l) {
+          return '<span class="level">' + dots(l) + LEVEL_WORD[l] + '</span>';
+        }).join('');
+
+      list.innerHTML = stages.map(function (s, i) {
+        var o = OVERRIDE[s.id] || {};
+        var name = o.name || s.name;
+        var tools = s.tools.filter(inFunnel).map(function (t) {
+          var word = LEVEL_WORD[t.level] || '';
+          return '<li class="chip">' + esc(t.name) + (t.level ? dots(t.level) : '') +
+            (word ? '<span class="visually-hidden">, ' + word + '</span>' : '') + '</li>';
+        }).join('');
+        var p = PLATES[i];
+        return '<li class="fn-stage" tabindex="0" aria-labelledby="st-' + i + '">' +
+          '<div class="fn-plate" data-i="' + i + '" style="--p-ink:' + p.ink + ';--p-num:' + p.num + '">' +
+            '<svg aria-hidden="true" focusable="false"></svg>' +
+            '<div class="fn-plate__text"><span class="fn-plate__num">Stage 0' + (i + 1) + '</span>' +
+            '<h3 class="fn-plate__name" id="st-' + i + '">' + (o.nameHTML || esc(name)) + '</h3></div>' +
+          '</div>' +
+          '<div class="fn-info"><p>' + esc(o.description || s.description) + '</p>' +
+            '<ul class="fn-tools" aria-label="Tools">' + tools + '</ul></div>' +
+        '</li>';
+      }).join('');
+
+      /* Light stack line + environments without levels */
+      var stack = [];
+      stages.forEach(function (s) { s.tools.forEach(function (t) { if (!inFunnel(t) && t.group !== 'ai') stack.push(t.name); }); });
+      var crm = groups.filter(function (g) { return g.id === 'crm'; })[0];
+      var ai = groups.filter(function (g) { return g.id === 'ai'; })[0];
+      var env = groups.filter(function (g) { return g.id === 'env'; })[0];
+      var stackLine = (crm ? crm.tools.map(function (t) { return t.name; }) : []);
+      stack.forEach(function (n) { if (stackLine.indexOf(n) === -1) stackLine.push(n); });
+      var aiLine = ai ? ai.tools.map(function (t) { return t.name; }).join(', ') : '';
+      document.getElementById('fn-footer').innerHTML =
+        '<p><b>Stack</b>' + esc(stackLine.join(', ')) + (aiLine ? '; AI copilots: ' + esc(aiLine) : '') + '.</p>' +
+        (env ? '<p><b>Work environments</b>' + esc(env.tools.map(function (t) { return t.name.replace(/ environment$/, ''); }).join(', ')) + '.</p>' : '');
+
+      drawAll();
+      if ('ResizeObserver' in window) new ResizeObserver(drawAll).observe(list);
+      else window.addEventListener('resize', drawAll);
+    }
+
+    /* Draw each plate as a trapezoid slice of one funnel. Wide screens: the
+       side edges follow one straight line down the whole list (plates are as
+       tall as their row). Narrow screens: equal steps per plate. */
+    function drawAll() {
+      var list = document.getElementById('funnel');
+      var plates = list.querySelectorAll('.fn-plate');
+      var narrow = window.matchMedia('(max-width: 719px)').matches;
+      var top0 = list.getBoundingClientRect().top, H = list.clientHeight;
+      plates.forEach(function (el) {
+        var i = +el.getAttribute('data-i');
+        var w = el.clientWidth, h = el.clientHeight;
+        if (!w || !h) return;
+        var ti, bi;
+        if (narrow) { var step = w * 0.06; ti = i * step; bi = (i + 1) * step; }
+        else {
+          var y = el.getBoundingClientRect().top - top0, k = (w * 0.26) / H;
+          ti = y * k; bi = (y + h) * k;
+        }
+        el.querySelector('.fn-plate__text').style.padding = '0 ' + Math.round((ti + bi) / 2 + 22) + 'px';
+        drawPlate(el.querySelector('svg'), w, h, ti, bi, PLATES[i], i, narrow ? 0 : 30);
+      });
+    }
+
+    function drawPlate(svg, w, h, ti, bi, p, i, leader) {
+      var m = (bi - ti) / h, sh = Math.sqrt(1 + m * m), t = 5;
+      function xl(y) { return ti + m * y; }
+      function xr(y) { return w - ti - m * y; }
+      function pt(x, y) { return x.toFixed(1) + ' ' + y.toFixed(1); }
+      var outer = 'M' + pt(xl(0), 0) + 'L' + pt(xr(0), 0) + 'L' + pt(xr(h), h) + 'L' + pt(xl(h), h) + 'Z';
+      var inner = 'M' + pt(xl(t) + t * sh, t) + 'L' + pt(xr(t) - t * sh, t) + 'L' + pt(xr(h - t) - t * sh, h - t) + 'L' + pt(xl(h - t) + t * sh, h - t) + 'Z';
+      var X = xr(0);
+      var chipA = 'M' + pt(X - 18, 0) + 'L' + pt(X, 0) + 'L' + pt(xr(12), 12) + 'L' + pt(xr(12) - 6, 9) + 'L' + pt(X - 9, 6) + 'L' + pt(X - 14, 2) + 'Z';
+      var chipB = 'M' + pt(X - 12, 0) + 'L' + pt(X, 0) + 'L' + pt(xr(8), 8) + 'L' + pt(X - 6, 4) + 'L' + pt(X - 9, 1.5) + 'Z';
+      var ry = h / 2, rl = xl(ry) + t * sh + 9, rr = xr(ry) - t * sh - 9;
+      function rivet(x) {
+        return '<circle cx="' + x.toFixed(1) + '" cy="' + ry + '" r="2.4" fill="#5a5148"/>' +
+               '<circle cx="' + x.toFixed(1) + '" cy="' + ry + '" r="1.5" fill="#e9dec6"/>';
+      }
+      var gid = 'gl' + i;
+      var lead = '';
+      if (leader) {
+        var x0 = xr(ry) + 8, x1 = w + leader - 4;
+        lead = '<line x1="' + x0.toFixed(1) + '" y1="' + ry + '" x2="' + x1.toFixed(1) + '" y2="' + ry + '" style="stroke:var(--gold)" stroke-width="1.5" stroke-dasharray="2 4" stroke-linecap="round"/>' +
+               '<circle cx="' + x1.toFixed(1) + '" cy="' + ry + '" r="3" style="fill:var(--oxblood)"/>';
+      }
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.innerHTML =
+        '<defs><linearGradient id="' + gid + '" x1="0" y1="0" x2="0.6" y2="1">' +
+        '<stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>' +
+        lead +
+        '<path d="' + outer + '" fill="' + p.bg + '" stroke="' + p.bg + '" stroke-width="3" stroke-linejoin="round"/>' +
+        '<path d="' + outer + '" fill="url(#' + gid + ')"/>' +
+        '<path d="' + inner + '" fill="none" stroke="' + p.line + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+        rivet(rl) + rivet(rr) +
+        '<path d="' + chipA + '" fill="#e9dec6"/><path d="' + chipB + '" fill="#2b2622"/>';
+    }
+
+    fetch('../../../data/content.json')
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(adapt)
+      .then(render)
+      .catch(function () {
+        document.getElementById('funnel').innerHTML = '<li class="load-error">Could not load data/content.json. Open this board through the local server.</li>';
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Funnel v2b · Plate explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Encode+Sans+Condensed:wght@500;600;700;800&family=Sansita:ital,wght@0,700;0,800;0,900;1,800&family=Sansita+Swashed:wght@600;800&display=swap">
+<link rel="stylesheet" href="../../../css/tokens.css">
+<link rel="stylesheet" href="../../../css/base.css">
+<style>
+/* ==========================================================================
+   Funnel v2b - "La cajonera": the funnel as a rack of enamel plates you pull
+   out like drawers. Selecting a plate slides it out of the stack (the plates
+   around it part), lights it in its enamel colour and opens its contents in a
+   detail plate: what I do there + tool cards. A level filter shows where the
+   expertise sits along the funnel. Mobile: the same rack, and the detail
+   plate opens in place under the chosen layer (the plates below slide down).
+   ========================================================================== */
+:root {
+  --p1: #2d5f8a; --p1-ink: #f3ebda;   /* celeste enamel   5.7:1 */
+  --p2: #c08a2e; --p2-ink: #1c1b19;   /* ochre            5.7:1 */
+  --p3: #1f5c4a; --p3-ink: #f3ebda;   /* bondi green      7.1:1 */
+  --p4: #7a2430; --p4-ink: #f3ebda;   /* oxblood          9.6:1 */
+  --slant: 20px;
+}
+
+/* ---- Board chrome (same as the other boards) ---- */
+.board-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding-block: 14px; border-bottom: 1px solid var(--border); }
+.board-bar__title { font: 800 0.8rem/1.2 var(--font-sign); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-right: auto; }
+.board-bar nav { display: flex; flex-wrap: wrap; gap: 6px; }
+.board-bar nav a { font: 700 0.76rem/1 var(--font-sign); letter-spacing: .1em; text-transform: uppercase; padding: 8px 10px; border-radius: var(--radius-sm); border: 1.5px solid var(--border-strong); text-decoration: none; color: var(--ink); }
+.board-bar nav a[aria-current="page"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.theme-btn { min-height: 40px; padding: 0 14px; border-radius: var(--radius-pill); border: 1.5px solid var(--ink); background: var(--surface); color: var(--ink); font: 700 0.76rem/1 var(--font-sign); letter-spacing: .1em; text-transform: uppercase; }
+
+#skills { --sec-n: "02"; }
+
+/* ---- Level filter (segmented, enamel-black like a destination sign) ---- */
+.filter { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: var(--space-5); }
+.filter__label { font: 700 .76rem/1 var(--font-sign); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.filter__set { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: var(--radius); background: var(--sign-bg); box-shadow: inset 0 0 0 1px #3b3833; }
+.filter__btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  min-height: 36px; padding: 0 12px; border: 0; border-radius: var(--radius-sm);
+  background: transparent; color: #dcd0ba;
+  font: 700 .74rem/1 var(--font-sign); letter-spacing: .12em; text-transform: uppercase;
+}
+.filter__btn:hover { background: rgba(243, 235, 218, .1); }
+.filter__btn[aria-pressed="true"] { background: var(--sign-ink); color: var(--sign-bg); }
+.filter__btn:focus-visible { outline-color: var(--sign-ink); outline-offset: 1px; }
+.filter__btn .level__dots i { width: 8px; height: 8px; border-color: currentColor; }
+.filter__btn .level__dots i.on { background: currentColor; border-color: currentColor; }
+
+/* ---- Layout ---- */
+.v2b { display: grid; gap: var(--space-6); }
+@media (min-width: 900px) {
+  .v2b { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: var(--space-6); align-items: start; }
+  .v2b-detail-slot { position: sticky; top: 24px; }
+  .v2b > div:first-child { padding-right: 34px; }
+}
+
+/* ---- The rack ---- */
+.rack { margin: 0; padding: 4px 0 0; list-style: none; display: flex; flex-direction: column; align-items: center; }
+.rack__item {
+  position: relative;
+  width: var(--w);
+  margin-top: 8px;
+  transition: margin var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+}
+.rack__item:first-child { margin-top: 0; }
+/* the plates part around the open one */
+.rack__item.is-open { margin-block: 18px; }
+.rack__item.is-open:first-child { margin-top: 0; }
+@media (min-width: 900px) {
+  .rack__item.is-open { transform: translateX(26px); }
+}
+/* ochre offset shadow behind the pulled-out plate */
+.rack__item::before {
+  content: ""; position: absolute; inset: 0;
+  background: var(--shadow-c, var(--ochre));
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--slant)) 100%, var(--slant) 100%);
+  transform: translate(0, 0); opacity: 0;
+  transition: transform var(--dur) var(--ease-out), opacity var(--dur) ease;
+}
+.rack__item.is-open::before { opacity: 1; transform: translate(7px, 7px); }
+.rack__item:has(.plate:focus-visible) { outline: 2px solid var(--link); outline-offset: 5px; border-radius: var(--radius-sm); }
+
+.plate {
+  --c: var(--surface-2); --ink-c: var(--ink); --line: var(--stage-c);
+  position: relative; display: grid; width: 100%;
+  grid-template-columns: auto 1fr auto; align-items: center; gap: 4px 12px;
+  min-height: 92px; padding: 14px calc(var(--slant) + 16px) 14px calc(var(--slant) + 16px);
+  border: 0; background: var(--line); color: var(--ink-c); text-align: left;
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--slant)) 100%, var(--slant) 100%);
+  transition: background-color var(--dur) ease, color var(--dur) ease;
+}
+.plate:focus-visible { outline: none; }
+/* enamel layers: outer edge (--line) > cream inner line > plate colour */
+.plate::before, .plate::after {
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--slant) + 1px) 100%, calc(var(--slant) - 1px) 100%);
+}
+.plate::before { inset: 3px 4px; background: var(--c); }
+.plate::after {
+  inset: 7px 9px;
+  background:
+    radial-gradient(circle at 10px 8px, #e9dec6 0 1.6px, #5a5148 1.7px 2.4px, transparent 2.6px),
+    radial-gradient(circle at calc(100% - 10px) 8px, #e9dec6 0 1.6px, #5a5148 1.7px 2.4px, transparent 2.6px);
+  border-top: 1.5px solid color-mix(in srgb, var(--ink-c) 45%, transparent);
+  border-bottom: 1.5px solid color-mix(in srgb, var(--ink-c) 45%, transparent);
+  opacity: .8;
+}
+.plate > * { position: relative; z-index: 1; }
+.rack__item.is-open .plate { --c: var(--stage-c); --ink-c: var(--stage-ink); --line: var(--iron); }
+.plate:hover { --line: var(--ink); }
+.rack__item.is-open .plate:hover { --line: var(--iron); }
+.plate__num {
+  grid-row: span 2; display: grid; place-items: center;
+  min-width: 40px; height: 34px; padding: 0 6px; border-radius: 6px;
+  background: var(--surface); color: var(--ink); border: 2px solid var(--ink);
+  box-shadow: inset 0 -4px 0 var(--ochre);
+  font: 800 1.05rem/1 var(--font-sign); font-variant-numeric: tabular-nums;
+}
+.plate__name { font: 900 clamp(1.1rem, .95rem + .8vw, 1.5rem)/1.05 var(--font-display); }
+.plate__count { font: 700 .7rem/1 var(--font-sign); letter-spacing: .12em; text-transform: uppercase; opacity: .9; white-space: nowrap; }
+.plate__pills { grid-column: 2 / -1; display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.pill {
+  padding: 3px 6px 2px; border-radius: 3px;
+  border: 1.2px solid color-mix(in srgb, var(--ink-c) 55%, transparent);
+  font: 700 .66rem/1 var(--font-sign); letter-spacing: .08em;
+  transition: opacity var(--dur) ease, background-color var(--dur) ease;
+}
+.pill.is-match { background: color-mix(in srgb, var(--ink-c) 16%, transparent); border-color: var(--ink-c); }
+.pill.is-dim { opacity: .45; border-style: dashed; }
+
+.rack-foot { display: flex; justify-content: center; margin-top: 18px; }
+.rack-foot .destino { font-size: .72rem; }
+.rack-foot svg { width: 16px; height: 16px; flex: none; }
+
+/* ---- Detail plate ---- */
+.detail {
+  position: relative;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: 6px 6px 0 var(--stage-c), var(--shadow-md);
+  overflow: hidden;
+  transition: box-shadow var(--dur) ease;
+}
+.detail__head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px; background: var(--stage-c); color: var(--stage-ink);
+  transition: background-color var(--dur) ease, color var(--dur) ease;
+}
+.detail__head .destino { flex: 1; min-width: 0; }
+.detail__head .destino span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.detail__body { padding: var(--space-5); }
+@media (min-width: 900px) { .detail__body { padding: var(--space-6); } }
+.detail__body.is-swapping { animation: swap 380ms var(--ease-out); }
+@keyframes swap { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.detail h3 { font: 900 clamp(1.9rem, 1.4rem + 1.6vw, 2.6rem)/1.05 var(--font-display); margin: 6px 0 10px; }
+.detail__tag { color: var(--ink-2); font-size: var(--fs-md); margin-bottom: var(--space-4); }
+.doing { border-left: 3px solid var(--oxblood); padding: 2px 0 2px 14px; margin-bottom: var(--space-5); }
+.doing p:first-child, .label { font: 700 .74rem/1.2 var(--font-sign); letter-spacing: .14em; text-transform: uppercase; color: var(--oxblood); margin-bottom: 4px; }
+.doing p + p { color: var(--ink-2); font-size: .97rem; }
+.label { color: var(--ink-2); margin-bottom: var(--space-3); }
+
+.tools { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+@media (min-width: 560px) { .tools { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tool {
+  display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-items: center;
+  padding: 10px 12px; border-radius: var(--radius);
+  background: var(--surface-2); border: 1px solid var(--border);
+  transition: opacity var(--dur) ease, border-color var(--dur) ease;
+}
+/* dimmed by the filter: muted but still AA-readable (no opacity on text) */
+.tool.is-dim { background: transparent; border-style: dashed; }
+.tool.is-dim .tool__abbr { background: var(--border); color: var(--muted); box-shadow: none; }
+.tool.is-dim .tool__name { color: var(--muted); }
+.tool.is-dim .level__dots { opacity: .5; }
+.tool.is-match { border-color: var(--ink); }
+.tool__abbr {
+  grid-row: span 2; display: grid; place-items: center;
+  min-width: 46px; height: 34px; padding: 0 6px; border-radius: 6px;
+  background: var(--stage-c); color: var(--stage-ink);
+  font: 800 .78rem/1 var(--font-sign); letter-spacing: .06em;
+  box-shadow: inset 0 0 0 2px var(--stage-c), inset 0 0 0 3px color-mix(in srgb, var(--stage-ink) 55%, transparent);
+}
+.tool__name { font: 700 .98rem/1.2 var(--font-sans); color: var(--ink); }
+.tool__name small { font: 700 .66rem/1 var(--font-sign); letter-spacing: .1em; text-transform: uppercase; color: var(--oxblood); margin-left: 6px; white-space: nowrap; }
+.tool .level { font-size: .68rem; }
+.tool__note { grid-column: 2; font-size: .82rem; line-height: 1.35; color: var(--muted); }
+
+.detail__nav { display: flex; justify-content: space-between; gap: 10px; margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px dashed var(--border-strong); }
+.navbtn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
+  border: 1.5px solid var(--ink); border-radius: var(--radius); background: transparent; color: var(--ink);
+  font: 700 .76rem/1 var(--font-sign); letter-spacing: .12em; text-transform: uppercase;
+}
+.navbtn:hover { background: var(--ink); color: var(--bg); }
+.navbtn[disabled] { opacity: .35; pointer-events: none; }
+.navbtn svg { width: 14px; height: 14px; }
+
+/* Mobile: the detail plate opens in place under the chosen layer */
+@media (max-width: 899px) {
+  :root { --slant: 14px; }
+  .rack__item { width: calc(var(--w) * .5 + 50%); }
+  .rack .detail { width: calc(100vw - 2 * var(--gutter)); max-width: 640px; margin: 4px 0 6px; }
+  .rack__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 420ms var(--ease-out); justify-items: center; width: 100%; }
+  .rack__panel.is-open { grid-template-rows: 1fr; }
+  .rack__panel > div { overflow: hidden; display: flex; justify-content: center; padding: 0 8px 10px 0; }
+  .plate { min-height: 84px; padding-inline: calc(var(--slant) + 10px); gap: 4px 8px; }
+  .plate__count { display: none; }
+  .detail__nav { display: none; }
+}
+
+/* Across-the-funnel strip */
+.across { margin-top: var(--space-7); display: grid; gap: var(--space-4); padding: var(--space-5); border: 1.5px solid var(--border-strong); border-radius: var(--radius-lg); background: var(--surface); }
+@media (min-width: 900px) { .across { grid-template-columns: 1.2fr 1fr; align-items: start; } }
+.across h3 { font: 900 1.5rem/1.1 var(--font-display); margin: 6px 0 8px; }
+.across p { color: var(--ink-2); font-size: .97rem; }
+.ai-list { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 10px 0 0; padding: 0; list-style: none; }
+.ai-list li { display: inline-flex; align-items: center; gap: 8px; transition: opacity var(--dur) ease; }
+.ai-list li.is-dim .chip { border-style: dashed; color: var(--muted); border-color: var(--border-strong); }
+.ai-list li.is-dim .level__dots { opacity: .5; }
+.env { font-size: .9rem; color: var(--muted); }
+.env b { font: 700 .74rem/1 var(--font-sign); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); margin-right: 6px; }
+
+/* Board note */
+.note { margin-top: var(--space-8); padding: var(--space-5); border: 1.5px dashed var(--border-strong); border-radius: var(--radius); background: var(--surface-2); max-width: 860px; }
+.note h2 { font: 900 1.4rem/1.1 var(--font-display); margin: 8px 0 10px; }
+.note p, .note li { color: var(--ink-2); font-size: .95rem; }
+.note ul { padding-left: 1.1em; display: grid; gap: 6px; margin-top: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rack__item, .rack__item::before, .rack__panel, .plate, .detail, .detail__head, .pill, .tool { transition: none !important; }
+  .detail__body.is-swapping { animation: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#skills">Skip to the funnel</a>
+<header class="container board-bar">
+  <p class="board-bar__title">Funnel boards · v2b Plate explorer</p>
+  <nav aria-label="Funnel versions">
+    <a href="funnel-v1-simple.html">v1 Simple</a>
+    <a href="funnel-v2a-scroll.html">v2a Scroll</a>
+    <a href="funnel-v2b-explorer.html" aria-current="page">v2b Explorer</a>
+    <a href="funnel-v3-hybrid.html">v3 Hybrid</a>
+  </nav>
+  <button class="theme-btn" type="button" id="themeBtn" aria-pressed="false">Dark mode</button>
+</header>
+
+<main>
+  <section class="section" id="skills" aria-labelledby="skills-title">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">Skills</p>
+        <h2 class="display" id="skills-title"><span>My marketing</span> <em>funnel.</em></h2>
+        <p>Four stages, from first impression to loyal customer. Pull out any plate to see what I do at that stage and the tools I use there.</p>
+      </header>
+
+      <div class="filter" role="group" aria-labelledby="filter-label">
+        <span class="filter__label" id="filter-label">Show level</span>
+        <div class="filter__set" id="filter"></div>
+      </div>
+
+      <div class="v2b">
+        <div>
+          <ol class="rack" id="rack" role="list" aria-label="Marketing funnel, four stages"></ol>
+          <div class="rack-foot" aria-hidden="true">
+            <span class="destino"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 8a5 5 0 1 1-1.5-3.6M13 2.5V5h-2.5"/></svg><b>Loyal customers</b> feed awareness</span>
+          </div>
+        </div>
+        <div class="v2b-detail-slot" id="slot"></div>
+      </div>
+      <p class="visually-hidden" aria-live="polite" id="announce"></p>
+
+      <div class="across" id="across"></div>
+
+      <aside class="note" aria-labelledby="note-title">
+        <p class="eyebrow">Board note</p>
+        <h2 id="note-title">v2b: la cajonera, a funnel of plates you pull out</h2>
+        <p>The funnel is a rack of four enamel plates, each narrower than the one above, like the stacked street plates on a Buenos Aires corner. Choosing a plate pulls it out of the stack like a drawer: the plates around it part, it lights up in its enamel colour, and its contents open in a large detail plate with "what I do here" and tool cards (level dots, where I used it). Each plate already shows its tool abbreviations, so the whole funnel reads at a glance before anything is opened. A level filter (All / Expert / Advanced / Intermediate) lights the matching tools on every plate at once, so you can see where the expertise sits along the funnel without any invented numbers.</p>
+        <ul>
+          <li><strong>Why this one:</strong> it stays a recognisable funnel (four narrowing layers, loyalty feeding back to awareness), it reuses the page's own vocabulary (chapas with rivets and inner line, linea numbers, destination sign, offset ochre shadow), and it is honest: everything shown comes from the content file.</li>
+          <li><strong>Interaction:</strong> click/tap a plate, or use the keyboard: Tab to the rack, Up/Down (Home/End) moves between plates, Enter/Space opens. Prev/next buttons inside the detail plate on desktop. Screen readers hear the open stage.</li>
+          <li><strong>Mobile (&lt; 900px):</strong> the same rack full width; the detail plate opens in place under the chosen plate and the plates below slide down.</li>
+          <li><strong>Reduced motion:</strong> no sliding or fading; the open plate simply changes.</li>
+          <li><strong>Content:</strong> from <code>data/content.json</code> (en). Board proposals: stage 4 shown as <em>Retention &amp; Loyalty</em> (content says "Retention &amp; Automation"), new marketing-first one-line taglines, and the AI copilots moved to an "across the funnel" strip next to the work environments (environments without levels).</li>
+          <li><strong>Complexity / cost:</strong> medium, slightly above v2a. About 400 lines of JS + CSS, no libraries, no SVG geometry (the plates are CSS clip-paths, so they scale to any width and language). Needs care with focus rings on clipped shapes (handled on the list item) and with moving the detail plate on mobile. Porting to <code>js/sections/skills.js</code>: about a day including ES/DE.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+  <div class="baldosas" aria-hidden="true"></div>
+</main>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const themeBtn = document.getElementById('themeBtn');
+  const mq = matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : mq.matches;
+  const syncTheme = () => { themeBtn.setAttribute('aria-pressed', String(isDark())); themeBtn.textContent = isDark() ? 'Light mode' : 'Dark mode'; };
+  themeBtn.addEventListener('click', () => { root.dataset.theme = isDark() ? 'light' : 'dark'; syncTheme(); });
+  syncTheme();
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const desktopMQ = matchMedia('(min-width: 900px)');
+  const LEVEL_RANK = { basic: 1, intermediate: 2, advanced: 3, expert: 4 };
+  const LEVEL_WORD = { basic: 'Basic', intermediate: 'Intermediate', advanced: 'Advanced', expert: 'Expert' };
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const pad = (n) => String(n).padStart(2, '0');
+  const dots = (r) => `<span class="level__dots" aria-hidden="true">${[1, 2, 3, 4].map((i) => `<i class="${i <= r ? 'on' : ''}"></i>`).join('')}</span>`;
+  const levelHTML = (level) => level ? `<span class="level">${dots(LEVEL_RANK[level] || 0)}${esc(LEVEL_WORD[level] || level)}</span>` : '';
+
+  const NAME_OVERRIDE = { retention: 'Retention & Loyalty' };
+  const TAGLINE = {
+    awareness: 'Be found and be remembered: search, social, design and video.',
+    interest: 'Turn attention into consideration with paid campaigns and interactive design.',
+    conversion: 'Turn interest into customers, with a CRM shared with Sales and the analytics to see what works.',
+    retention: 'Keep customers close and coming back: email, nurturing and AI-assisted campaigns.'
+  };
+  const WIDTHS = [100, 86, 72, 58];
+  const ARROW_L = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>';
+  const ARROW_R = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg>';
+
+  fetch('../../../data/content.json')
+    .then((r) => r.json())
+    .then((json) => {
+      const f = json.en.funnel;
+      const ai = [];
+      const stages = f.stages.map((s) => {
+        const tools = [];
+        (s.tools || []).forEach((t) => (t.group === 'ai' ? ai : tools).push(t));
+        return { ...s, name: NAME_OVERRIDE[s.id] || s.name, tagline: TAGLINE[s.id] || s.description, tools };
+      });
+      const env = (f.stack && f.stack.groups || []).find((g) => g.id === 'env');
+      build(stages, ai, env);
+    })
+    .catch(() => {
+      document.getElementById('rack').innerHTML = '<li class="load-error">content.json could not be loaded. Open this board through the local server.</li>';
+    });
+
+  function build(stages, ai, env) {
+    const n = stages.length;
+    const state = { open: 0, level: 'all' };
+    const rack = document.getElementById('rack');
+    const slot = document.getElementById('slot');
+    const announce = document.getElementById('announce');
+
+    /* Level filter */
+    const LEVELS = [['all', 'All', 0], ['expert', 'Expert', 4], ['advanced', 'Advanced', 3], ['intermediate', 'Intermediate', 2]];
+    document.getElementById('filter').innerHTML = LEVELS.map(([k, w, r]) =>
+      `<button type="button" class="filter__btn" data-level="${k}" aria-pressed="${k === 'all'}">${r ? dots(r) : ''}${w}</button>`).join('');
+
+    /* Rack of plates */
+    rack.innerHTML = stages.map((s, i) => `
+      <li class="rack__item" data-i="${i}" style="--w:${WIDTHS[i]}%; --stage-c: var(--p${i + 1}); --stage-ink: var(--p${i + 1}-ink); ${i === 1 ? '--shadow-c: var(--oxblood);' : ''}">
+        <button type="button" class="plate" id="plate-${s.id}" aria-expanded="false" aria-controls="detail" tabindex="${i === 0 ? 0 : -1}">
+          <span class="plate__num" aria-hidden="true">${pad(i + 1)}</span>
+          <span class="plate__name">${esc(s.name)}<span class="visually-hidden">, stage ${i + 1} of ${n}, ${s.tools.length} tools</span></span>
+          <span class="plate__count" aria-hidden="true">${s.tools.length} tools</span>
+          <span class="plate__pills" aria-hidden="true">${s.tools.map((t) => `<span class="pill" data-level="${esc(t.level || '')}">${esc(t.abbr || t.name.slice(0, 3))}</span>`).join('')}</span>
+        </button>
+      </li>`).join('');
+
+    /* One detail plate, moved under the open plate on mobile */
+    const detail = document.createElement('article');
+    detail.className = 'detail';
+    detail.id = 'detail';
+    detail.setAttribute('role', 'region');
+    slot.appendChild(detail);
+    const panelLi = document.createElement('li');
+    panelLi.className = 'rack__panel';
+    panelLi.setAttribute('role', 'presentation');
+    const panelInner = document.createElement('div');
+    panelLi.appendChild(panelInner);
+
+    const items = [...rack.querySelectorAll('.rack__item')];
+    const plates = items.map((li) => li.querySelector('.plate'));
+
+    const toolHTML = (t) => `<li class="tool" data-level="${esc(t.level || '')}">
+      <span class="tool__abbr" aria-hidden="true">${esc(t.abbr || t.name.slice(0, 3))}</span>
+      <span class="tool__name">${esc(t.name)}${t.featured ? '<small>Core platform</small>' : ''}</span>
+      ${levelHTML(t.level)}
+      ${t.note ? `<span class="tool__note">${esc(t.note)}</span>` : ''}
+    </li>`;
+
+    const renderDetail = (i) => {
+      const s = stages[i];
+      detail.style.setProperty('--stage-c', `var(--p${i + 1})`);
+      detail.style.setProperty('--stage-ink', `var(--p${i + 1}-ink)`);
+      detail.setAttribute('aria-labelledby', `detail-title-${s.id}`);
+      const prev = stages[i - 1], next = stages[i + 1];
+      detail.innerHTML = `
+        <div class="detail__head">
+          <span class="linea" aria-hidden="true">${pad(i + 1)}</span>
+          <span class="destino"><span>Stage ${i + 1} of ${n} · <b>${esc(s.name)}</b></span></span>
+        </div>
+        <div class="detail__body${reduced ? '' : ' is-swapping'}">
+          <p class="eyebrow">${s.tools.length} tools</p>
+          <h3 id="detail-title-${s.id}">${esc(s.name)}</h3>
+          <p class="detail__tag">${esc(s.tagline)}</p>
+          ${s.doing ? `<div class="doing"><p>What I do here</p><p>${esc(s.doing)}</p></div>` : ''}
+          <p class="label" id="tk-${s.id}">Toolkit</p>
+          <ul class="tools" role="list" aria-labelledby="tk-${s.id}">${s.tools.map(toolHTML).join('')}</ul>
+          <div class="detail__nav">
+            <button type="button" class="navbtn" data-go="${i - 1}" ${prev ? '' : 'disabled'} aria-label="${prev ? `Previous stage: ${esc(prev.name)}` : 'No previous stage'}">${ARROW_L}${prev ? esc(prev.name) : 'Start'}</button>
+            <button type="button" class="navbtn" data-go="${i + 1}" ${next ? '' : 'disabled'} aria-label="${next ? `Next stage: ${esc(next.name)}` : 'No next stage'}">${next ? esc(next.name) : 'End'}${ARROW_R}</button>
+          </div>
+        </div>`;
+      applyFilter();
+    };
+
+    const placeDetail = () => {
+      if (desktopMQ.matches) {
+        if (detail.parentElement !== slot) slot.appendChild(detail);
+        panelLi.remove();
+      } else {
+        panelInner.appendChild(detail);
+        items[state.open].after(panelLi);
+        panelLi.classList.remove('is-open');
+        void panelLi.offsetHeight; // restart the slide-open
+        panelLi.classList.add('is-open');
+      }
+    };
+
+    const open = (i, { focus = false, speak = true } = {}) => {
+      i = Math.max(0, Math.min(n - 1, i));
+      state.open = i;
+      items.forEach((li, k) => li.classList.toggle('is-open', k === i));
+      plates.forEach((p, k) => { p.setAttribute('aria-expanded', String(k === i)); p.tabIndex = k === i ? 0 : -1; });
+      renderDetail(i);
+      placeDetail();
+      if (focus) plates[i].focus();
+      if (speak) announce.textContent = `Stage ${i + 1} of ${n}: ${stages[i].name} open`;
+    };
+
+    rack.addEventListener('click', (e) => {
+      const p = e.target.closest('.plate');
+      if (p) open(plates.indexOf(p));
+    });
+    rack.addEventListener('keydown', (e) => {
+      const p = e.target.closest('.plate');
+      if (!p) return;
+      const i = plates.indexOf(p);
+      const to = { ArrowDown: i + 1, ArrowRight: i + 1, ArrowUp: i - 1, ArrowLeft: i - 1, Home: 0, End: n - 1 }[e.key];
+      if (to === undefined) return;
+      e.preventDefault();
+      const k = (to + n) % n;
+      plates.forEach((pl, j) => { pl.tabIndex = j === k ? 0 : -1; });
+      plates[k].focus();
+    });
+    detail.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-go]');
+      if (b) open(Number(b.dataset.go), { focus: true });
+    });
+
+    /* Filter */
+    const applyFilter = () => {
+      const lv = state.level;
+      document.querySelectorAll('.pill, .tool, .ai-list li').forEach((el) => {
+        const match = lv !== 'all' && el.dataset.level === lv;
+        el.classList.toggle('is-match', match);
+        el.classList.toggle('is-dim', lv !== 'all' && !match);
+      });
+    };
+    document.getElementById('filter').addEventListener('click', (e) => {
+      const b = e.target.closest('.filter__btn');
+      if (!b) return;
+      state.level = b.dataset.level;
+      document.querySelectorAll('.filter__btn').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      applyFilter();
+      if (state.level === 'all') { announce.textContent = 'Showing all levels'; return; }
+      const word = LEVEL_WORD[state.level];
+      const per = stages.map((s) => s.tools.filter((t) => t.level === state.level).map((t) => t.name)).map((names, k) => names.length ? `${stages[k].name}: ${names.join(', ')}` : '').filter(Boolean);
+      announce.textContent = `${word} tools. ${per.join('. ')}`;
+    });
+
+    /* Across the funnel */
+    const envLine = env ? env.tools.map((t) => esc(t.name)).join(' · ') : '';
+    document.getElementById('across').innerHTML = `
+      <div>
+        <p class="eyebrow">Across the funnel</p>
+        <h3>AI copilots and a CRM at the centre</h3>
+        <p>HubSpot CRM connects conversion and retention, and I use AI copilots at every stage, in line with my work on AI integration in campaigns at VU Inc.</p>
+        <ul class="ai-list" role="list" aria-label="AI copilots">${ai.map((t) => `<li data-level="${esc(t.level)}"><span class="chip">${esc(t.name)}</span>${levelHTML(t.level)}</li>`).join('')}</ul>
+      </div>
+      ${envLine ? `<p class="env"><b>Work environments</b>${envLine}</p>` : ''}`;
+
+    desktopMQ.addEventListener('change', placeDetail);
+    open(0, { speak: false });
+  }
+})();
+</script>
+</body>
+</html>

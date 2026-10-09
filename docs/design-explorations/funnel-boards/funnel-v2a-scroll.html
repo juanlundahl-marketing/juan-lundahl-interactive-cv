@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Funnel v2a · Scroll story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Encode+Sans+Condensed:wght@500;600;700;800&family=Sansita:ital,wght@0,700;0,800;0,900;1,800&family=Sansita+Swashed:wght@600;800&display=swap">
+<link rel="stylesheet" href="../../../css/tokens.css">
+<link rel="stylesheet" href="../../../css/base.css">
+<style>
+/* ==========================================================================
+   Funnel v2a - Scroll story (design board, not wired into the site)
+   Pinned enamel-plate funnel (left) + stage cards (right). Each card fills
+   its funnel plate top-to-bottom as it scrolls past; a roller destination
+   sign shows the current stage. Mobile: sticky sign + cards with a narrowing
+   enamel band that fills left-to-right.
+   ========================================================================== */
+:root {
+  /* Lit plate colours: theme-independent enamel, like the real chapas */
+  --p1: #2d5f8a; --p1-ink: #f3ebda;   /* celeste enamel   5.7:1 */
+  --p2: #c08a2e; --p2-ink: #1c1b19;   /* ochre / painted gold 5.7:1 */
+  --p3: #1f5c4a; --p3-ink: #f3ebda;   /* bondi green      7.1:1 */
+  --p4: #7a2430; --p4-ink: #f3ebda;   /* oxblood          9.6:1 */
+}
+
+/* ---- Board chrome ---- */
+.board-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.board-bar__title { font: 800 0.8rem/1.2 var(--font-sign); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-right: auto; }
+.board-bar nav { display: flex; flex-wrap: wrap; gap: 6px; }
+.board-bar nav a {
+  font: 700 0.76rem/1 var(--font-sign); letter-spacing: .1em; text-transform: uppercase;
+  padding: 8px 10px; border-radius: var(--radius-sm); border: 1.5px solid var(--border-strong);
+  text-decoration: none; color: var(--ink);
+}
+.board-bar nav a[aria-current="page"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.theme-btn {
+  min-height: 40px; padding: 0 14px; border-radius: var(--radius-pill);
+  border: 1.5px solid var(--ink); background: var(--surface); color: var(--ink);
+  font: 700 0.76rem/1 var(--font-sign); letter-spacing: .1em; text-transform: uppercase;
+}
+
+/* ---- Section ---- */
+#skills { --sec-n: "02"; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
+.legend__title { font: 700 .74rem/1 var(--font-sign); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+
+.v2a {
+  display: grid;
+  gap: var(--space-6);
+}
+@media (min-width: 960px) {
+  .v2a { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: var(--space-7); align-items: start; }
+}
+
+/* ---- Pinned visual ---- */
+.v2a-visual { position: sticky; top: 0; z-index: 5; }
+@media (min-width: 960px) {
+  .v2a-visual {
+    top: 4vh; height: 92vh;
+    display: flex; flex-direction: column; justify-content: center; gap: 18px;
+  }
+}
+
+/* Roller destination sign: line number + rolling blind + progress pips */
+.v2a-sign {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%;
+}
+.v2a-sign .linea { flex: none; transition: transform var(--dur) var(--ease-spring); }
+.v2a-sign .linea.bump { transform: translateY(-3px); }
+.v2a-sign__blind {
+  flex: 1; min-width: 0;
+  display: flex; align-items: center; gap: 12px;
+  height: 44px; padding: 0 14px 0 12px;
+  border-radius: var(--radius-sm);
+  background: var(--sign-bg); color: var(--sign-ink);
+  box-shadow: inset 0 0 0 1px #3b3833, inset 0 8px 10px -8px rgba(0,0,0,.8), inset 0 -8px 10px -8px rgba(0,0,0,.8);
+}
+.v2a-sign__lamp { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--sign-ink); box-shadow: 0 0 6px rgba(235,198,110,.8); }
+.v2a-roll { flex: 1; min-width: 0; height: 1.4em; overflow: hidden; font: 800 1rem/1.4 var(--font-sign); letter-spacing: .16em; text-transform: uppercase; }
+.v2a-roll ul { margin: 0; padding: 0; list-style: none; transition: transform 520ms var(--ease-out); }
+.v2a-roll li { height: 1.4em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.v2a-sign__count { flex: none; font: 700 .76rem/1 var(--font-sign); letter-spacing: .12em; color: #f3ebda; font-variant-numeric: tabular-nums; }
+.v2a-pips { display: flex; gap: 6px; margin-top: 8px; }
+.v2a-pips span {
+  flex: 1; height: 6px; border-radius: 3px;
+  background: var(--border);
+  overflow: hidden; position: relative;
+}
+.v2a-pips span::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--pip, var(--green));
+  transform-origin: left; transform: scaleX(var(--p, 0));
+}
+.v2a-mini { display: none; flex: none; width: 34px; height: 30px; }
+
+/* The funnel drawing */
+.v2a-svgwrap { position: relative; }
+.v2a-svg { width: 100%; height: auto; max-height: calc(92vh - 110px); margin-inline: auto; overflow: visible; }
+.v2a-svg text { pointer-events: none; }
+.pl-base { fill: var(--surface); stroke: var(--border-strong); stroke-width: 1.5; stroke-linejoin: round; }
+.pl-base-inner { fill: none; stroke: var(--rule); stroke-width: 1; stroke-dasharray: 3 4; }
+.pl-num-off { font: 800 12px var(--font-sign); letter-spacing: .14em; fill: var(--muted); }
+.pl-name-off { font: 800 22px var(--font-display); fill: var(--muted); }
+.pl-tools-off { font: 700 11px var(--font-sign); letter-spacing: .1em; fill: var(--muted); }
+.pl-rivet-off { fill: var(--rule-strong); }
+.pl-shadow { fill: var(--ochre); opacity: 0; transition: opacity var(--dur) ease, transform var(--dur) var(--ease-out); }
+.pl.is-active .pl-shadow { opacity: 1; transform: translate(6px, 6px); }
+.pl-lit { stroke: var(--iron); stroke-width: 2; stroke-linejoin: round; }
+.pl-lit-inner { fill: none; stroke-width: 1.4; opacity: .85; }
+.pl-num-on { font: 800 12px var(--font-sign); letter-spacing: .14em; }
+.pl-name-on { font: 800 22px var(--font-display); }
+.pl-tools-on { font: 700 11px var(--font-sign); letter-spacing: .1em; opacity: .92; }
+.pl-chip { fill: var(--iron); }
+.pl-chip-edge { fill: #e9dec6; }
+.pl-link { cursor: pointer; }
+.pl-link:focus { outline: none; }
+.pl-link:focus-visible .pl-focus { stroke: var(--link); stroke-width: 3; }
+.pl-focus { fill: none; stroke: transparent; stroke-linejoin: round; }
+.pl-link:hover .pl-base { stroke: var(--ink); }
+.v2a-spout { fill: none; stroke: var(--border-strong); stroke-width: 2; stroke-linecap: round; }
+.v2a-spout.is-lit { stroke: var(--iron); }
+:root[data-theme="dark"] .v2a-spout.is-lit { stroke: var(--ink-2); }
+.v2a-out rect { fill: var(--surface); stroke: var(--border-strong); stroke-width: 1.5; transition: fill var(--dur) ease; }
+.v2a-out text { font: 800 11px var(--font-sign); letter-spacing: .16em; fill: var(--muted); }
+.v2a-out.is-lit rect { fill: var(--sign-bg); stroke: var(--sign-bg); }
+.v2a-out.is-lit text { fill: var(--sign-ink); }
+.v2a-loop { fill: none; stroke: var(--rule-strong); stroke-width: 1.5; stroke-dasharray: 5 6; }
+.v2a-loop.is-lit { stroke: var(--oxblood); }
+.v2a-loop-arrow { fill: var(--rule-strong); }
+.v2a-loop-arrow.is-lit { fill: var(--oxblood); }
+.v2a-loop-label { font: 700 10.5px var(--font-sign); letter-spacing: .14em; fill: var(--muted); }
+
+/* ---- Stage cards ---- */
+.v2a-steps { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-5); }
+@media (min-width: 960px) {
+  .v2a-steps { gap: 0; padding-block: 18vh 30vh; }
+  .v2a-step { min-height: 78vh; display: flex; align-items: center; }
+}
+.v2a-card {
+  position: relative;
+  width: 100%;
+  padding: var(--space-5);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--dur) ease, box-shadow var(--dur) ease, opacity var(--dur) ease;
+  scroll-margin-top: 90px;
+}
+@media (min-width: 960px) {
+  .v2a-card { padding: var(--space-6); opacity: .55; }
+  .v2a-step.is-active .v2a-card { opacity: 1; }
+}
+.v2a-step.is-active .v2a-card { border-color: var(--ink); box-shadow: 5px 5px 0 var(--stage-c), var(--shadow-md); }
+.v2a-card:focus-visible { outline-offset: 4px; }
+.v2a-card__eyebrow { margin-bottom: var(--space-2); }
+.v2a-card__title { font: 900 clamp(1.9rem, 1.4rem + 1.6vw, 2.6rem)/1.05 var(--font-display); margin-bottom: var(--space-3); }
+.v2a-card__tag { color: var(--ink-2); font-size: var(--fs-md); margin-bottom: var(--space-4); }
+.v2a-doing { border-left: 3px solid var(--oxblood); padding: 2px 0 2px 14px; margin-bottom: var(--space-5); }
+.v2a-doing p:first-child, .v2a-label { font: 700 .74rem/1.2 var(--font-sign); letter-spacing: .14em; text-transform: uppercase; color: var(--oxblood); margin-bottom: 4px; }
+.v2a-doing p + p { color: var(--ink-2); font-size: .97rem; }
+.v2a-label { color: var(--ink-2); margin-bottom: var(--space-3); }
+
+.tools { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+@media (min-width: 560px) { .tools { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tool {
+  display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-items: center;
+  padding: 10px 12px; border-radius: var(--radius);
+  background: var(--surface-2); border: 1px solid var(--border);
+}
+.tool__abbr {
+  grid-row: span 2; display: grid; place-items: center;
+  min-width: 46px; height: 34px; padding: 0 6px; border-radius: 6px;
+  background: var(--stage-c); color: var(--stage-ink);
+  font: 800 .78rem/1 var(--font-sign); letter-spacing: .06em;
+  box-shadow: inset 0 0 0 2px var(--stage-c), inset 0 0 0 3px color-mix(in srgb, var(--stage-ink) 55%, transparent);
+}
+.tool__name { font: 700 .98rem/1.2 var(--font-sans); color: var(--ink); }
+.tool__name small { font: 700 .66rem/1 var(--font-sign); letter-spacing: .1em; text-transform: uppercase; color: var(--oxblood); margin-left: 6px; white-space: nowrap; }
+.tool .level { font-size: .68rem; }
+.tool__note { grid-column: 2; font-size: .82rem; line-height: 1.35; color: var(--muted); }
+
+/* Mobile enamel band on each card (fills left to right) */
+.v2a-band { display: none; }
+@media (max-width: 959px) {
+  .v2a-visual { padding: 10px 0 8px; background: var(--bg); box-shadow: 0 10px 14px -12px rgba(0,0,0,.35); margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
+  .v2a-svgwrap { display: none; }
+  .v2a-mini { display: block; }
+  .v2a-roll { font-size: .9rem; letter-spacing: .12em; }
+  .v2a-band {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    height: 40px; margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-5)) var(--space-4);
+    padding: 0 22px; margin-inline: auto;
+    width: var(--band-w, 100%);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 14px 100%);
+    background:
+      linear-gradient(90deg, var(--stage-c) calc(var(--p, 0) * 100%), var(--paper-2) 0);
+    color: var(--ink);
+    font: 800 .76rem/1 var(--font-sign); letter-spacing: .14em; text-transform: uppercase;
+  }
+  .v2a-step.is-lit .v2a-band { color: var(--stage-ink); }
+  .v2a-band span:first-child { padding: 4px 7px; border-radius: 3px; background: var(--surface); color: var(--ink); }
+  .v2a-card { padding-top: var(--space-5); }
+  .v2a-band { margin-top: 0; }
+}
+
+/* Across-the-funnel strip */
+.across {
+  margin-top: var(--space-7);
+  display: grid; gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1.5px solid var(--border-strong); border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+@media (min-width: 900px) { .across { grid-template-columns: 1.2fr 1fr; align-items: start; } }
+.across h3 { font: 900 1.5rem/1.1 var(--font-display); margin: 6px 0 8px; }
+.across p { color: var(--ink-2); font-size: .97rem; }
+.ai-list { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 10px 0 0; padding: 0; list-style: none; }
+.ai-list li { display: inline-flex; align-items: center; gap: 8px; }
+.env { font-size: .9rem; color: var(--muted); }
+.env b { font: 700 .74rem/1 var(--font-sign); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); margin-right: 6px; }
+
+/* Board note */
+.note {
+  margin-top: var(--space-8);
+  padding: var(--space-5);
+  border: 1.5px dashed var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  max-width: 860px;
+}
+.note h2 { font: 900 1.4rem/1.1 var(--font-display); margin: 8px 0 10px; }
+.note p, .note li { color: var(--ink-2); font-size: .95rem; }
+.note ul { padding-left: 1.1em; display: grid; gap: 6px; margin-top: 8px; }
+
+/* Reduced motion: static drawing, everything lit, no roller animation */
+@media (prefers-reduced-motion: reduce) {
+  .v2a-roll ul, .pl-shadow, .v2a-card { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#skills">Skip to the funnel</a>
+<header class="container board-bar">
+  <p class="board-bar__title">Funnel boards · v2a Scroll story</p>
+  <nav aria-label="Funnel versions">
+    <a href="funnel-v1-simple.html">v1 Simple</a>
+    <a href="funnel-v2a-scroll.html" aria-current="page">v2a Scroll</a>
+    <a href="funnel-v2b-explorer.html">v2b Explorer</a>
+    <a href="funnel-v3-hybrid.html">v3 Hybrid</a>
+  </nav>
+  <button class="theme-btn" type="button" id="themeBtn" aria-pressed="false">Dark mode</button>
+</header>
+
+<main>
+  <section class="section" id="skills" aria-labelledby="skills-title">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">Skills</p>
+        <h2 class="display" id="skills-title"><span>My marketing</span> <em>funnel.</em></h2>
+        <p>Four stages, from first impression to loyal customer. Scroll on and the funnel fills plate by plate with the tools I use at each stage.</p>
+        <div class="legend" aria-hidden="true">
+          <span class="legend__title">Level</span>
+          <span class="level"><span class="level__dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>Expert</span>
+          <span class="level"><span class="level__dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>Advanced</span>
+          <span class="level"><span class="level__dots"><i class="on"></i><i class="on"></i><i></i><i></i></span>Intermediate</span>
+        </div>
+      </header>
+
+      <div class="v2a" id="v2a">
+        <div class="v2a-visual">
+          <div>
+            <div class="v2a-sign" role="status" aria-live="polite" aria-atomic="true">
+              <span class="linea" aria-hidden="true" id="signNum">01</span>
+              <div class="v2a-sign__blind">
+                <span class="v2a-sign__lamp" aria-hidden="true"></span>
+                <span class="visually-hidden" id="signSr"></span>
+                <div class="v2a-roll" aria-hidden="true"><ul id="roll"></ul></div>
+                <svg class="v2a-mini" id="mini" viewBox="0 0 34 30" aria-hidden="true"></svg>
+                <span class="v2a-sign__count" aria-hidden="true" id="signCount">1 / 4</span>
+              </div>
+            </div>
+            <div class="v2a-pips" aria-hidden="true" id="pips"></div>
+          </div>
+          <div class="v2a-svgwrap" id="svgwrap"></div>
+        </div>
+        <ol class="v2a-steps" id="steps" role="list"></ol>
+      </div>
+
+      <div class="across" id="across"></div>
+
+      <aside class="note" aria-labelledby="note-title">
+        <p class="eyebrow">Board note</p>
+        <h2 id="note-title">v2a: the funnel as a scroll story</h2>
+        <p>A large funnel drawn as four stacked enamel plates stays pinned on the left while the stage cards scroll by on the right. Each card fills its plate from the top as you read it, so the funnel is "built" stage by stage; a colectivo roller sign (line number + rolling destination blind + four pips) always says where you are. Click or tab to any plate to jump to its card. Loyalty closes the loop back to awareness with one dashed arrow: no lead dots, no counters.</p>
+        <ul>
+          <li><strong>Mobile (&lt; 960px):</strong> the big drawing is replaced by the sticky roller sign with a mini four-plate funnel; each card carries its own narrowing enamel band that fills left to right.</li>
+          <li><strong>Reduced motion:</strong> every plate is drawn lit, the blind changes without rolling; the sign still tracks the stage.</li>
+          <li><strong>Content:</strong> stages, "what I do here", tools, levels and notes come from <code>data/content.json</code> (en). Board proposals: stage 4 is shown as <em>Retention &amp; Loyalty</em> (content says "Retention &amp; Automation"), the one-line stage taglines are new marketing-first copy, and the AI copilots move from stage 4 to an "across the funnel" strip with the work environments (no levels for environments).</li>
+          <li><strong>Complexity / cost:</strong> medium. About 350 lines of JS + CSS on top of the site tokens: one SVG built from data, a scroll handler (rAF-throttled, no scroll hijacking) and CSS variables for the fills. Risk is low: no libraries, the sticky column is plain CSS. Porting to <code>js/sections/skills.js</code>: roughly half a day, plus ES/DE stage names on the plates (long German names need the two-line plate label already supported).</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+  <div class="baldosas" aria-hidden="true"></div>
+</main>
+
+<script>
+(() => {
+  /* ---------- Theme toggle (previews light/dark on the real tokens) ---------- */
+  const root = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  const mq = matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : mq.matches;
+  const syncBtn = () => { btn.setAttribute('aria-pressed', String(isDark())); btn.textContent = isDark() ? 'Light mode' : 'Dark mode'; };
+  btn.addEventListener('click', () => { root.dataset.theme = isDark() ? 'light' : 'dark'; syncBtn(); });
+  syncBtn();
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const LEVEL_RANK = { basic: 1, intermediate: 2, advanced: 3, expert: 4 };
+  const LEVEL_WORD = { basic: 'Basic', intermediate: 'Intermediate', advanced: 'Advanced', expert: 'Expert' };
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const pad = (n) => String(n).padStart(2, '0');
+
+  /* Board proposals layered over the real content (see board note) */
+  const NAME_OVERRIDE = { retention: 'Retention & Loyalty' };
+  const TAGLINE = {
+    awareness: 'Be found and be remembered: search, social, design and video.',
+    interest: 'Turn attention into consideration with paid campaigns and interactive design.',
+    conversion: 'Turn interest into customers, with a CRM shared with Sales and the analytics to see what works.',
+    retention: 'Keep customers close and coming back: email, nurturing and AI-assisted campaigns.'
+  };
+
+  const levelHTML = (level) => {
+    if (!level) return '';
+    const r = LEVEL_RANK[level] || 0;
+    return `<span class="level"><span class="level__dots" aria-hidden="true">${[1, 2, 3, 4].map((i) => `<i class="${i <= r ? 'on' : ''}"></i>`).join('')}</span>${esc(LEVEL_WORD[level] || level)}</span>`;
+  };
+
+  /* ---------- Geometry (SVG user units) ---------- */
+  const W = 500, CX = 262;
+  const L = [
+    { y0: 22, y1: 118, w0: 214, w1: 184 },
+    { y0: 130, y1: 216, w0: 176, w1: 146 },
+    { y0: 228, y1: 310, w0: 138, w1: 110 },
+    { y0: 322, y1: 402, w0: 102, w1: 76 }
+  ];
+  const wAt = (l, y) => l.w0 + (l.w1 - l.w0) * ((y - l.y0) / (l.y1 - l.y0));
+  const trap = (y0, y1, w0, w1) => `${CX - w0},${y0} ${CX + w0},${y0} ${CX + w1},${y1} ${CX - w1},${y1}`;
+  const plate = (l) => trap(l.y0, l.y1, l.w0, l.w1);
+  const inner = (l) => { const a = l.y0 + 6, b = l.y1 - 6; return trap(a, b, wAt(l, a) - 9, wAt(l, b) - 9); };
+
+  function plateSVG(s, i) {
+    const l = L[i];
+    const cy = (l.y0 + l.y1) / 2;
+    const wm = wAt(l, cy);
+    const c = `var(--p${i + 1})`, ink = `var(--p${i + 1}-ink)`;
+    const abbrs = s.tools.map((t) => t.abbr || t.name.slice(0, 3)).join(' · ');
+    const nm = esc(s.name);
+    const ry = l.y0 + 14, rw = wAt(l, ry) - 22;
+    const rivets = (fill, ring) => [CX - rw, CX + rw].map((x) =>
+      `<circle cx="${x}" cy="${ry}" r="3.2" fill="${fill}" ${ring ? `stroke="${ring}" stroke-width="1.4"` : ''}/>`).join('');
+    const texts = (cls, fill) => `
+      <text class="pl-num-${cls}" x="${CX}" y="${cy - 16}" text-anchor="middle" ${fill ? `fill="${fill}"` : ''}>${pad(i + 1)}</text>
+      <text class="pl-name-${cls}" x="${CX}" y="${cy + 6}" text-anchor="middle" style="font-size:${[25, 23, 20, 16][i]}px" ${fill ? `fill="${fill}"` : ''}>${nm}</text>
+      <text class="pl-tools-${cls}" x="${CX}" y="${cy + 26}" text-anchor="middle" ${fill ? `fill="${fill}"` : ''}>${esc(abbrs)}</text>`;
+    // chipped enamel at the top-right corner of the lit plate
+    const cx0 = CX + l.w0 - 4, cy0 = l.y0;
+    const chip = `<path class="pl-chip-edge" d="M${cx0 - 26},${cy0} C${cx0 - 22},${cy0 + 5} ${cx0 - 15},${cy0 + 3} ${cx0 - 11},${cy0 + 8} C${cx0 - 7},${cy0 + 12} ${cx0 - 2},${cy0 + 9} ${cx0 + 2},${cy0 + 14} L${cx0 + 4},${cy0} Z"/>
+      <path class="pl-chip" d="M${cx0 - 20},${cy0} C${cx0 - 17},${cy0 + 3} ${cx0 - 12},${cy0 + 2} ${cx0 - 9},${cy0 + 5} C${cx0 - 6},${cy0 + 8} ${cx0 - 2},${cy0 + 6} ${cx0 + 2},${cy0 + 9} L${cx0 + 3},${cy0} Z"/>`;
+    return `<a class="pl-link" href="#stage-${s.id}" aria-label="Stage ${i + 1} of 4: ${nm}. ${s.tools.length} tools. Go to stage">
+      <g class="pl" data-i="${i}">
+        <polygon class="pl-shadow" points="${plate(l)}" ${i === 1 ? 'style="fill: var(--oxblood)"' : ''}/>
+        <polygon class="pl-base" points="${plate(l)}"/>
+        <polygon class="pl-base-inner" points="${inner(l)}"/>
+        ${rivets('var(--rule-strong)')}
+        ${texts('off')}
+        <clipPath id="clip-${i}"><rect x="0" y="${l.y0 - 3}" width="${W}" height="${l.y1 - l.y0 + 6}" class="clip-rect" data-y0="${l.y0 - 3}" data-h="${l.y1 - l.y0 + 6}"/></clipPath>
+        <g clip-path="url(#clip-${i})">
+          <polygon class="pl-lit" points="${plate(l)}" fill="${c}"/>
+          <polygon class="pl-lit-inner" points="${inner(l)}" stroke="${ink}"/>
+          ${chip}
+          ${rivets('#e9dec6', '#5a5148')}
+          ${texts('on', ink)}
+        </g>
+        <polygon class="pl-focus" points="${plate(l)}" transform="translate(0 0)"/>
+      </g>
+    </a>`;
+  }
+
+  function funnelSVG(stages) {
+    const last = L[3];
+    const yS = last.y1, yE = 448;
+    const spout = `M${CX - last.w1 + 6},${yS} C${CX - 40},${yS + 22} ${CX - 22},${yE - 18} ${CX - 22},${yE} M${CX + last.w1 - 6},${yS} C${CX + 40},${yS + 22} ${CX + 22},${yE - 18} ${CX + 22},${yE}`;
+    const loop = `M${CX - 92},${474} C 40 474, 14 420, 14 300 L 14 92 C 14 60, 22 44, ${CX - 224},${40}`;
+    return `<svg class="v2a-svg" viewBox="0 0 ${W} 500" role="group" aria-label="Marketing funnel in four stages">
+      <path class="v2a-loop" id="loop" d="${loop}"/>
+      <path class="v2a-loop-arrow" id="loopArrow" d="M${CX - 224},40 l-9,-5 l1,10 z"/>
+      <text class="v2a-loop-label" transform="translate(30 300) rotate(-90)" text-anchor="middle" aria-hidden="true">LOYALTY FEEDS AWARENESS</text>
+      <path class="v2a-spout" id="spout" d="${spout}"/>
+      <g class="v2a-out" id="out" aria-hidden="true">
+        <rect x="${CX - 90}" y="458" width="180" height="32" rx="5"/>
+        <text x="${CX}" y="478" text-anchor="middle">LOYAL CUSTOMERS</text>
+      </g>
+      ${stages.map(plateSVG).join('')}
+    </svg>`;
+  }
+
+  function miniSVG() {
+    const ws = [[2, 32], [5, 29], [8, 26], [11, 23]];
+    return ws.map(([a, b], i) => `<polygon data-mi="${i}" points="${a},${i * 7.5} ${b},${i * 7.5} ${b - 3},${i * 7.5 + 6} ${a + 3},${i * 7.5 + 6}" fill="var(--border-strong)"/>`).join('');
+  }
+
+  function toolHTML(t) {
+    return `<li class="tool">
+      <span class="tool__abbr" aria-hidden="true">${esc(t.abbr || t.name.slice(0, 3))}</span>
+      <span class="tool__name">${esc(t.name)}${t.featured ? '<small>Core platform</small>' : ''}</span>
+      ${t.level ? levelHTML(t.level) : ''}
+      ${t.note ? `<span class="tool__note">${esc(t.note)}</span>` : ''}
+    </li>`;
+  }
+
+  function stepHTML(s, i) {
+    return `<li class="v2a-step" data-i="${i}" style="--stage-c: var(--p${i + 1}); --stage-ink: var(--p${i + 1}-ink); --band-w: ${100 - i * 12}%">
+      <article class="v2a-card" id="stage-${s.id}" tabindex="-1" aria-labelledby="t-${s.id}">
+        <div class="v2a-band" aria-hidden="true"><span>${pad(i + 1)}</span><span>${esc(s.name)}</span></div>
+        <p class="eyebrow v2a-card__eyebrow">Stage ${i + 1} of 4 · ${s.tools.length} tools</p>
+        <h3 class="v2a-card__title" id="t-${s.id}">${esc(s.name)}</h3>
+        <p class="v2a-card__tag">${esc(s.tagline)}</p>
+        ${s.doing ? `<div class="v2a-doing"><p>What I do here</p><p>${esc(s.doing)}</p></div>` : ''}
+        <p class="v2a-label" id="tl-${s.id}">Toolkit</p>
+        <ul class="tools" role="list" aria-labelledby="tl-${s.id}">${s.tools.map(toolHTML).join('')}</ul>
+      </article>
+    </li>`;
+  }
+
+  function acrossHTML(ai, envGroup) {
+    const env = envGroup ? envGroup.tools.map((t) => esc(t.name)).join(' · ') : '';
+    return `<div>
+        <p class="eyebrow">Across the funnel</p>
+        <h3>AI copilots and a CRM at the centre</h3>
+        <p>HubSpot CRM connects conversion and retention, and I use AI copilots at every stage, in line with my work on AI integration in campaigns at VU Inc.</p>
+        <ul class="ai-list" role="list" aria-label="AI copilots">${ai.map((t) => `<li><span class="chip">${esc(t.name)}</span>${levelHTML(t.level)}</li>`).join('')}</ul>
+      </div>
+      ${env ? `<p class="env"><b>Work environments</b>${env}</p>` : ''}`;
+  }
+
+  /* ---------- Boot ---------- */
+  fetch('../../../data/content.json')
+    .then((r) => r.json())
+    .then((json) => {
+      const f = json.en.funnel;
+      const ai = [];
+      const stages = f.stages.map((s) => {
+        const tools = [];
+        (s.tools || []).forEach((t) => (t.group === 'ai' ? ai : tools).push(t));
+        return { ...s, name: NAME_OVERRIDE[s.id] || s.name, tagline: TAGLINE[s.id] || s.description, tools };
+      });
+      const envGroup = (f.stack && f.stack.groups || []).find((g) => g.id === 'env');
+      build(stages, ai, envGroup);
+    })
+    .catch(() => {
+      document.getElementById('v2a').innerHTML = '<p class="load-error">content.json could not be loaded. Open this board through the local server.</p>';
+    });
+
+  function build(stages, ai, envGroup) {
+    const n = stages.length;
+    document.getElementById('svgwrap').innerHTML = funnelSVG(stages);
+    document.getElementById('steps').innerHTML = stages.map(stepHTML).join('');
+    document.getElementById('across').innerHTML = acrossHTML(ai, envGroup);
+    document.getElementById('roll').innerHTML = stages.map((s) => `<li>${esc(s.name)}</li>`).join('');
+    document.getElementById('pips').innerHTML = stages.map((s, i) => `<span style="--pip: var(--p${i + 1})"></span>`).join('');
+    document.getElementById('mini').innerHTML = miniSVG();
+
+    const steps = [...document.querySelectorAll('.v2a-step')];
+    const plates = [...document.querySelectorAll('.pl')];
+    const clips = [...document.querySelectorAll('.clip-rect')];
+    const pips = [...document.querySelectorAll('#pips span')];
+    const mini = [...document.querySelectorAll('[data-mi]')];
+    const roll = document.getElementById('roll');
+    const signNum = document.getElementById('signNum');
+    const signSr = document.getElementById('signSr');
+    const signCount = document.getElementById('signCount');
+    const spout = document.getElementById('spout');
+    const out = document.getElementById('out');
+    const loop = document.getElementById('loop');
+    const loopArrow = document.getElementById('loopArrow');
+    let active = -1;
+
+    const setProgress = (i, p) => {
+      const r = clips[i];
+      r.setAttribute('height', (Number(r.dataset.h) * p).toFixed(1));
+      pips[i].style.setProperty('--p', p.toFixed(3));
+      steps[i].style.setProperty('--p', p.toFixed(3));
+      steps[i].classList.toggle('is-lit', p > 0.45);
+      mini[i].setAttribute('fill', p > 0.02 ? `var(--p${i + 1})` : 'var(--border-strong)');
+    };
+
+    const setActive = (i) => {
+      if (i === active) return;
+      active = i;
+      plates.forEach((pl, k) => pl.classList.toggle('is-active', k === i));
+      steps.forEach((s, k) => s.classList.toggle('is-active', k === i));
+      roll.style.transform = `translateY(${-1.4 * i}em)`;
+      signNum.textContent = pad(i + 1);
+      signNum.classList.add('bump'); setTimeout(() => signNum.classList.remove('bump'), 220);
+      signCount.textContent = `${i + 1} / ${n}`;
+      signSr.textContent = `Stage ${i + 1} of ${n}: ${stages[i].name}`;
+    };
+
+    const update = () => {
+      const vh = innerHeight;
+      const line = vh * 0.6;
+      let act = 0;
+      steps.forEach((s, i) => {
+        const card = s.querySelector('.v2a-card');
+        const r = card.getBoundingClientRect();
+        const p = reduced ? 1 : Math.max(0, Math.min(1, (line - r.top) / (r.height * 0.85)));
+        setProgress(i, p);
+        if (r.top < line) act = i;
+      });
+      const done = reduced || Number(steps[n - 1].style.getPropertyValue('--p')) > 0.7;
+      spout.classList.toggle('is-lit', done);
+      out.classList.toggle('is-lit', done);
+      loop.classList.toggle('is-lit', done);
+      loopArrow.classList.toggle('is-lit', done);
+      setActive(act);
+    };
+
+    let ticking = false;
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; update(); }); } };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll);
+
+    /* Plate links: move focus to the card after the jump */
+    document.querySelectorAll('.pl-link').forEach((a) => a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const card = document.querySelector(a.getAttribute('href'));
+      card.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      card.focus({ preventScroll: true });
+    }));
+
+    update();
+  }
+})();
+</script>
+</body>
+</html>

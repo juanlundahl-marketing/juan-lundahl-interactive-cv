@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Board A · Celeste y blanco</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Chivo+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   STYLE BOARD A - "Celeste y blanco sobrio"
+   Proposed tokens for the real site (light = default).
+   ========================================================================== */
+:root {
+  color-scheme: light;
+  /* Core */
+  --celeste: #74ACDF;        /* sky blue: fills, rules, backdrops (decorative, 2.4:1 on white) */
+  --celeste-deep: #1E5A8E;   /* primary: buttons, links, italic accent (7.2:1 with white) */
+  --celeste-soft: #DCEBF7;   /* washes, chip fills */
+  --white: #FFFFFF;
+
+  /* Surfaces */
+  --bg: #F7FAFC;
+  --bg-alt: #EAF3FA;
+  --surface: #FFFFFF;
+  --border: #D6E4EF;
+  --border-strong: #B7CDE0;
+
+  /* Ink */
+  --ink: #0F2A44;
+  --ink-2: #2B4560;
+  --muted: #5A7189;
+  --ghost: rgba(116, 172, 223, 0.18);
+
+  /* Roles */
+  --primary: var(--celeste-deep);
+  --on-primary: #FFFFFF;
+  --accent: var(--celeste);
+  --accent-ink: var(--celeste-deep);
+  --nav-bg: rgba(255, 255, 255, 0.86);
+
+  --shadow-sm: 0 1px 2px rgba(15, 42, 68, 0.06);
+  --shadow-md: 0 12px 30px -14px rgba(15, 42, 68, 0.22);
+  --shadow-lg: 0 30px 70px -30px rgba(15, 42, 68, 0.35);
+
+  --font-display: "Alegreya", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Chivo Mono", ui-monospace, Consolas, monospace;
+
+  --radius-sm: 6px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --gutter: 16px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (min-width: 720px) { :root { --gutter: 32px; } }
+
+/* Dark tokens, scoped to the dark strip on this board (in the real site: prefers-color-scheme + [data-theme]) */
+.theme-dark {
+  color-scheme: dark;
+  --bg: #0B1A2A;
+  --bg-alt: #0F2236;
+  --surface: #12263B;
+  --border: #1F3A55;
+  --border-strong: #2C4D6E;
+  --ink: #EEF5FB;
+  --ink-2: #C9D9E8;
+  --muted: #9FB3C8;
+  --ghost: rgba(142, 193, 234, 0.07);
+  --celeste: #8EC1EA;
+  --celeste-deep: #8EC1EA;
+  --celeste-soft: #183452;
+  --primary: #8EC1EA;
+  --on-primary: #0B1A2A;
+  --accent-ink: #8EC1EA;
+  --nav-bg: rgba(18, 38, 59, 0.86);
+  --shadow-md: 0 12px 30px -14px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 30px 70px -30px rgba(0, 0, 0, 0.75);
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); font-weight: 500; line-height: 1.05; letter-spacing: -0.01em; }
+p { margin: 0; }
+em.acc { font-style: italic; color: var(--accent-ink); font-weight: 400; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); }
+.mono { font-family: var(--font-mono); }
+.eyebrow {
+  font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted); display: inline-flex; align-items: center; gap: 0.6em;
+}
+.eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--celeste); }
+
+/* Board chrome */
+.board-head { padding: 56px 0 36px; border-bottom: 1px solid var(--border); }
+.board-head .tag { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--celeste-deep); }
+.board-head h1 { font-size: clamp(2.4rem, 1.5rem + 4vw, 4.4rem); margin: 12px 0 18px; }
+.board-head .why { max-width: 780px; color: var(--ink-2); font-size: 1.1rem; }
+.board-head .why + .why { margin-top: 10px; }
+.board-head .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+
+.blk { padding: 56px 0; border-bottom: 1px solid var(--border); }
+.blk-label { display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+.blk-label .n { font-family: var(--font-mono); font-size: 0.8rem; color: var(--celeste-deep); }
+.blk-label h2 { font-size: 1.7rem; }
+.blk-label .note { color: var(--muted); font-size: 0.95rem; flex-basis: 100%; }
+
+/* ---------- Palette ---------- */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 14px; }
+.sw { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.sw .chip-c { height: 92px; display: flex; align-items: flex-end; padding: 10px 12px; font-family: var(--font-display); font-size: 1.6rem; }
+.sw .meta { padding: 12px 14px 14px; font-size: 0.86rem; }
+.sw .meta b { display: block; font-family: var(--font-mono); font-weight: 500; font-size: 0.8rem; color: var(--ink); }
+.sw .meta .hex { font-family: var(--font-mono); color: var(--muted); font-size: 0.78rem; }
+.sw .meta .role { color: var(--ink-2); margin-top: 6px; }
+.sw .meta .aa { margin-top: 6px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-2); background: var(--bg-alt); border-radius: 6px; padding: 4px 7px; display: inline-block; }
+.subhead { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 28px 0 12px; }
+
+/* ---------- Type ---------- */
+.type-grid { display: grid; gap: 14px; }
+.spec { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: center; }
+.spec .who { font-size: 0.85rem; color: var(--muted); }
+.spec .who b { display: block; color: var(--ink); font-family: var(--font-mono); font-weight: 500; font-size: 0.8rem; margin-bottom: 4px; }
+.spec .who a { color: var(--celeste-deep); }
+.spec .sample-display { font-family: var(--font-display); font-size: clamp(2.2rem, 1.4rem + 3vw, 3.8rem); line-height: 1; font-weight: 500; }
+.spec .sample-italic { font-family: var(--font-display); font-style: italic; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem); color: var(--celeste-deep); }
+.spec .sample-body { font-size: 1.08rem; max-width: 62ch; color: var(--ink-2); }
+.spec .sample-mono { font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.06em; }
+.scale { display: flex; flex-wrap: wrap; gap: 18px; align-items: baseline; margin-top: 10px; color: var(--muted); font-family: var(--font-mono); font-size: 0.72rem; }
+
+/* ---------- Shared components ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.55em; border: 1px solid transparent; cursor: pointer;
+  font: 600 0.98rem/1 var(--font-sans); padding: 0.85em 1.35em; border-radius: var(--radius-pill);
+  transition: transform 160ms var(--ease), background-color 160ms, box-shadow 160ms, border-color 160ms; text-decoration: none;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); box-shadow: var(--shadow-md); }
+.btn-primary:hover { transform: translateY(-2px); }
+.btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--border-strong); }
+.btn-secondary:hover { border-color: var(--celeste); background: var(--celeste-soft); }
+.btn-ghost { background: transparent; color: var(--accent-ink); padding-left: 0.4em; padding-right: 0.4em; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--celeste); }
+.btn-icon { width: 44px; height: 44px; padding: 0; justify-content: center; background: var(--surface); border-color: var(--border-strong); color: var(--ink); }
+.btn:focus-visible, .cert:focus-visible { outline: 2px solid var(--celeste-deep); outline-offset: 3px; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 0.45em; padding: 0.42em 0.85em; border-radius: var(--radius-pill);
+  background: var(--surface); border: 1px solid var(--border); color: var(--ink-2); font-size: 0.88rem; line-height: 1.2;
+}
+.chip.is-soft { background: var(--celeste-soft); border-color: transparent; color: var(--ink); }
+.chip.is-active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--celeste); }
+
+.dots { display: inline-flex; gap: 4px; }
+.dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--border-strong); }
+.dots i.on { background: var(--celeste-deep); }
+
+/* ---------- Hero sample ---------- */
+.stage { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.hero { position: relative; padding: 64px 48px 120px; display: grid; grid-template-columns: 1.25fr 0.9fr; gap: 48px; align-items: center; min-height: 600px; isolation: isolate; }
+.hero .ghost {
+  position: absolute; z-index: -1; left: -0.04em; bottom: 0.02em; font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(6rem, 2rem + 14vw, 15rem); line-height: 0.8; color: var(--ghost); letter-spacing: -0.03em; pointer-events: none; white-space: nowrap;
+}
+.hero .horizon { position: absolute; z-index: -1; left: 0; right: 0; top: 0; height: 46%; background: linear-gradient(180deg, var(--bg-alt), transparent); }
+.hero .hello { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: flex; gap: 0.7em; align-items: center; }
+.hero .hello em { font-family: var(--font-display); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 1.35rem; color: var(--celeste-deep); }
+.hero .hello::before { content: ""; width: 34px; height: 1px; background: var(--celeste); }
+.hero h3.name { font-family: var(--font-sans); font-weight: 800; font-size: 1.05rem; letter-spacing: 0.02em; margin-top: 22px; color: var(--ink-2); }
+.hero h1 { font-size: clamp(2.6rem, 1.4rem + 4.2vw, 5.2rem); margin: 10px 0 20px; font-weight: 500; }
+.hero .lede { font-size: 1.15rem; color: var(--ink-2); max-width: 44ch; }
+.hero .tags { list-style: none; padding: 0; margin: 22px 0 28px; display: flex; flex-wrap: wrap; gap: 8px; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.portrait { position: relative; justify-self: center; width: min(100%, 360px); }
+.portrait .arch {
+  position: relative; aspect-ratio: 4 / 5; border-radius: 999px 999px var(--radius) var(--radius); overflow: hidden;
+  background: var(--celeste-soft); box-shadow: var(--shadow-lg);
+}
+.portrait .arch img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: grayscale(1) contrast(1.04); mix-blend-mode: multiply; }
+.portrait .backdrop { position: absolute; inset: 18px -18px -18px 18px; border-radius: 999px 999px var(--radius) var(--radius); border: 1px solid var(--celeste); z-index: -1; }
+.portrait .cap { position: absolute; left: -14px; bottom: 26px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-pill); padding: 8px 14px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--ink-2); box-shadow: var(--shadow-md); display: flex; gap: 8px; align-items: center; }
+.portrait .cap .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--celeste); box-shadow: 0 0 0 4px var(--celeste-soft); }
+
+.navpill {
+  position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); display: flex; align-items: center; gap: 4px;
+  background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border);
+  border-radius: var(--radius-pill); padding: 6px; box-shadow: var(--shadow-md); white-space: nowrap; max-width: calc(100% - 24px); overflow: hidden;
+}
+.navpill .mark { width: 38px; height: 38px; border-radius: 50%; background: var(--ink); color: var(--bg); display: grid; place-items: center; font-family: var(--font-display); font-style: italic; font-size: 1.05rem; flex: none; }
+.navpill a { font-size: 0.9rem; color: var(--ink-2); text-decoration: none; padding: 8px 12px; border-radius: var(--radius-pill); }
+.navpill a.on { background: var(--celeste-soft); color: var(--ink); font-weight: 600; }
+.navpill .sep { width: 1px; height: 22px; background: var(--border); margin: 0 4px; }
+.navpill .lang { font-family: var(--font-mono); font-size: 0.78rem; padding: 0 10px; color: var(--ink); }
+
+/* ---------- Credential (carnet) ---------- */
+.id-wrap { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: start; }
+.lanyard { position: relative; width: 360px; max-width: 100%; display: flex; flex-direction: column; align-items: center; }
+.strap { width: 34px; height: 120px; background: var(--celeste); position: relative; overflow: hidden; border-radius: 0 0 4px 4px; }
+.strap span { position: absolute; left: 50%; top: 0; transform-origin: 0 0; transform: rotate(90deg) translate(6px, -50%); white-space: nowrap; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.22em; color: var(--ink); }
+.clip { width: 54px; height: 20px; border: 2px solid var(--border-strong); border-top: 0; border-radius: 0 0 10px 10px; margin-top: -2px; background: var(--surface); }
+.carnet {
+  margin-top: 6px; width: 100%; background: var(--surface); border-radius: 18px; border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg); overflow: hidden; position: relative; transform: rotate(-1.5deg); transition: transform 400ms var(--ease);
+}
+.carnet:hover { transform: rotate(0deg) translateY(-4px); }
+.carnet .slot { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 46px; height: 7px; border-radius: 4px; background: var(--bg-alt); border: 1px solid var(--border); }
+.carnet .band { background: var(--celeste); padding: 30px 20px 14px; display: flex; justify-content: space-between; align-items: end; color: var(--ink); }
+.carnet .band b { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: 0.01em; }
+.carnet .band small { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; display: block; }
+.carnet .status { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--surface); border-radius: 999px; padding: 4px 9px; display: inline-flex; gap: 6px; align-items: center; }
+.carnet .status i { width: 7px; height: 7px; border-radius: 50%; background: #2E8B57; }
+.carnet .body { display: grid; grid-template-columns: 104px 1fr; gap: 16px; padding: 18px 20px 6px; }
+.carnet .photo { width: 104px; height: 128px; border-radius: 10px; overflow: hidden; background: var(--celeste-soft); }
+.carnet .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; filter: grayscale(1); }
+.carnet h4 { font-size: 1.55rem; font-weight: 500; }
+.carnet .role { font-size: 0.92rem; color: var(--ink-2); margin-top: 4px; line-height: 1.3; }
+.carnet .sig { font-family: var(--font-display); font-style: italic; color: var(--celeste-deep); font-size: 1.1rem; margin-top: 10px; border-top: 1px solid var(--border); padding-top: 6px; }
+.carnet dl { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; margin: 10px 20px 14px; padding: 12px 0 0; border-top: 1px dashed var(--border-strong); }
+.carnet dt { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.carnet dd { margin: 2px 0 0; font-size: 0.9rem; font-weight: 600; line-height: 1.25; }
+.carnet dd.home { color: var(--celeste-deep); }
+.carnet .foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 20px 16px; }
+.carnet .foot svg { width: 140px; height: 26px; color: var(--celeste); }
+.carnet .foot p { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-2); }
+.carnet .foot p span { color: var(--muted); }
+.id-notes h3 { font-size: 1.6rem; margin-bottom: 10px; }
+.id-notes p { color: var(--ink-2); max-width: 52ch; }
+.id-notes ul { color: var(--ink-2); padding-left: 1.1em; margin: 14px 0 0; }
+.id-notes li { margin: 6px 0; }
+
+/* ---------- Section heading ---------- */
+.sec-head { max-width: 760px; }
+.sec-head h2 { font-size: clamp(2.4rem, 1.5rem + 3.6vw, 4.6rem); margin: 14px 0 16px; }
+.sec-head p { color: var(--ink-2); font-size: 1.12rem; max-width: 56ch; }
+.sec-head .rule { height: 1px; background: linear-gradient(90deg, var(--celeste) 0 72px, var(--border) 72px); margin-top: 26px; }
+
+/* ---------- Work card ---------- */
+.work { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; display: grid; grid-template-columns: 180px 1fr auto; gap: 28px; box-shadow: var(--shadow-sm); transition: box-shadow 200ms, border-color 200ms; position: relative; overflow: hidden; }
+.work::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--celeste); }
+.work:hover { box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+.work .when { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+.work .when .now { display: inline-block; margin-top: 8px; color: var(--celeste-deep); background: var(--celeste-soft); border-radius: 999px; padding: 3px 9px; }
+.work h3 { font-size: 2rem; }
+.work .role { font-weight: 700; color: var(--ink-2); margin-top: 4px; }
+.work .sum { color: var(--ink-2); margin-top: 10px; max-width: 60ch; }
+.work ul { margin: 14px 0 0; padding: 0; list-style: none; }
+.work li { padding-left: 22px; position: relative; margin: 6px 0; color: var(--ink-2); }
+.work li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 12px; height: 1px; background: var(--celeste-deep); }
+.work .side { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+
+/* ---------- Achievements ---------- */
+.ach { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+.stat .v { font-family: var(--font-display); font-size: 3.6rem; line-height: 1; font-weight: 500; }
+.stat .v sup { font-size: 0.5em; color: var(--celeste-deep); vertical-align: 0.6em; }
+.stat .l { color: var(--ink-2); margin-top: 8px; font-size: 0.95rem; }
+.stat .bar { height: 3px; width: 36px; background: var(--celeste); border-radius: 2px; margin-bottom: 18px; }
+.award { margin-top: 14px; background: var(--bg-alt); border-radius: var(--radius); padding: 18px 22px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.award b { font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; }
+.award span { color: var(--ink-2); }
+
+/* ---------- Certifications ---------- */
+.certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+.cert {
+  display: flex; flex-direction: column; gap: 6px; padding: 16px 16px 14px; border-radius: var(--radius); text-decoration: none; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--border); position: relative; transition: transform 200ms var(--ease), border-color 200ms, background-color 200ms, box-shadow 200ms; min-height: 132px;
+}
+.cert .iss { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.cert .nm { font-family: var(--font-display); font-size: 1.12rem; line-height: 1.2; font-weight: 500; }
+.cert .dt { margin-top: auto; font-size: 0.82rem; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+.cert .go { opacity: 0; transform: translateX(-4px); transition: 200ms var(--ease); color: var(--celeste-deep); font-weight: 700; }
+.cert:hover, .cert.demo-hover { transform: translateY(-3px); border-color: var(--celeste); background: linear-gradient(180deg, var(--celeste-soft), var(--surface) 70%); box-shadow: var(--shadow-md); }
+.cert:hover .go, .cert.demo-hover .go { opacity: 1; transform: none; }
+.hint { font-size: 0.85rem; color: var(--muted); margin-top: 10px; }
+
+/* ---------- Markets ---------- */
+.markets { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.mk { display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: var(--radius-pill); border: 1px solid var(--border-strong); background: var(--surface); font-weight: 600; }
+.mk small { font-family: var(--font-mono); font-weight: 400; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; }
+.mk.home { background: var(--ink); color: var(--bg); border-color: var(--ink); padding-right: 8px; }
+.mk.home small { color: var(--celeste); }
+.mk .base { background: var(--celeste); color: var(--ink); border-radius: var(--radius-pill); padding: 5px 10px; font-size: 0.82rem; display: inline-flex; gap: 6px; align-items: center; }
+.mk .base i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
+.mk-sep { color: var(--celeste); font-size: 1.2rem; }
+
+/* ---------- Components sheet ---------- */
+.kit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.kit > div { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.kit h4 { font-family: var(--font-mono); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.lv { display: grid; grid-template-columns: 1fr auto; gap: 10px 14px; align-items: center; font-size: 0.92rem; }
+
+/* ---------- Dark strip ---------- */
+.dark-strip { background: var(--bg); color: var(--ink); padding: 40px 0; }
+.dark-strip .grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; align-items: stretch; }
+.dark-strip .mini-hero { position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px; background: var(--bg-alt); isolation: isolate; }
+.dark-strip .mini-hero .ghost { position: absolute; z-index: -1; right: -10px; bottom: -14px; font-family: var(--font-display); font-weight: 700; font-size: 7rem; color: var(--ghost); line-height: 1; }
+.dark-strip .mini-hero h3 { font-size: 2.2rem; margin: 10px 0 16px; }
+.dark-strip .dsw { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+.dark-strip .dsw div { border-radius: 10px; padding: 34px 8px 8px; font-family: var(--font-mono); font-size: 0.66rem; border: 1px solid var(--border); }
+.dark-strip .side { display: grid; gap: 14px; }
+
+/* ---------- Mobile preview ---------- */
+.phone-row { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+.phone { width: 375px; max-width: 100%; border: 10px solid #0F2A44; border-radius: 44px; overflow: hidden; background: var(--bg); box-shadow: var(--shadow-lg); flex: none; }
+.phone .screen { position: relative; height: 760px; overflow: hidden; isolation: isolate; }
+.phone .m-hero { padding: 52px 16px 0; }
+.phone .m-ghost { position: absolute; z-index: -1; left: -6px; top: 598px; font-family: var(--font-display); font-weight: 700; font-size: 6.2rem; color: var(--ghost); line-height: 1; }
+.phone .m-photo { width: 150px; aspect-ratio: 4/5; border-radius: 999px 999px 12px 12px; overflow: hidden; background: var(--celeste-soft); box-shadow: var(--shadow-md); margin-bottom: 22px; }
+.phone .m-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; filter: grayscale(1); mix-blend-mode: multiply; }
+.phone h1 { font-size: 2.45rem; margin: 8px 0 12px; }
+.phone .lede { font-size: 1rem; color: var(--ink-2); }
+.phone .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 18px; }
+.phone .tags .chip { font-size: 0.8rem; }
+.phone .navpill { bottom: 16px; }
+.phone .navpill a { padding: 8px 9px; font-size: 0.84rem; }
+.phone-notes { flex: 1; min-width: 260px; }
+.phone-notes ul { padding-left: 1.1em; color: var(--ink-2); }
+.phone-notes li { margin: 8px 0; }
+
+/* ---------- Changes table ---------- */
+.changes { width: 100%; border-collapse: collapse; font-size: 0.92rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.changes th, .changes td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.changes th { font-family: var(--font-mono); font-weight: 500; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--bg-alt); }
+.changes td code { font-family: var(--font-mono); font-size: 0.8rem; }
+.changes .sw-i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; border: 1px solid rgba(0,0,0,.12); }
+.table-scroll { overflow-x: auto; }
+.list-cols { columns: 2; column-gap: 32px; color: var(--ink-2); padding-left: 1.1em; margin-top: 18px; }
+.list-cols li { margin: 0 0 8px; break-inside: avoid; }
+footer.board-foot { padding: 34px 0 60px; color: var(--muted); font-size: 0.9rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding: 48px 24px 120px; }
+  .portrait { order: -1; width: min(100%, 260px); justify-self: start; }
+  .id-wrap { grid-template-columns: 1fr; }
+  .work { grid-template-columns: 1fr; }
+  .work .side { align-items: flex-start; flex-direction: row; }
+  .ach { grid-template-columns: repeat(2, 1fr); }
+  .kit { grid-template-columns: 1fr; }
+  .dark-strip .grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .spec { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
+  .hero { padding: 36px 18px 110px; min-height: 0; }
+  .navpill a:not(.on) { display: none; }
+  .navpill a.on { display: inline-block; }
+  .list-cols { columns: 1; }
+  .stat .v { font-size: 2.8rem; }
+  .phone { border-width: 6px; border-radius: 30px; }
+  .lanyard { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Original "río" wave lines: calm horizontal sine rules, used as a quiet security-print texture -->
+    <pattern id="waves" width="40" height="8" patternUnits="userSpaceOnUse">
+      <path d="M0 4 C10 0 10 0 20 4 S30 8 40 4" fill="none" stroke="#74ACDF" stroke-width="1.2"/>
+    </pattern>
+  </defs>
+</svg>
+
+<header class="board-head">
+  <div class="wrap">
+    <p class="tag">Style board A of 2 · Juan Lundahl portfolio</p>
+    <h1>Celeste y blanco, <em class="acc">sobrio.</em></h1>
+    <p class="why"><strong>Rationale.</strong> The national colours, read as light rather than as symbols: a Buenos Aires sky over white paper, with a deep ink-blue doing the heavy lifting for text. No suns, flags or emblems; the identity comes from proportion, a single celeste band and calm editorial type.</p>
+    <p class="why">All three typefaces are Argentine-made and free on Google Fonts: <strong>Alegreya</strong> and <strong>Alegreya Sans</strong> (Huerta Tipográfica) and <strong>Chivo Mono</strong> (Omnibus-Type, Buenos Aires). Celeste is used for surfaces and rules; anything that has to be read sits in ink or deep celeste, so every text pair passes WCAG AA.</p>
+    <div class="pills">
+      <span class="chip is-soft"><span class="dot"></span>Calm · editorial · modern</span>
+      <span class="chip">Serif display + humanist sans</span>
+      <span class="chip">Single accent hue</span>
+    </div>
+  </div>
+</header>
+
+<!-- 01 PALETTE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">01</span><h2>Palette</h2><p class="note">Contrast ratios computed with the WCAG 2.x formula. Celeste itself is never used for text on white.</p></div>
+    <div class="swatches" id="sw-light"></div>
+    <p class="subhead">Dark theme tokens</p>
+    <div class="swatches" id="sw-dark"></div>
+  </div>
+</section>
+
+<!-- 02 TYPE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">02</span><h2>Type specimen</h2><p class="note">One superfamily (Alegreya serif + sans) keeps the page coherent; Chivo Mono handles labels, dates and IDs.</p></div>
+    <div class="type-grid">
+      <div class="spec">
+        <div class="who"><b>Display · Alegreya 500</b>Huerta Tipográfica (AR). <a href="https://fonts.google.com/specimen/Alegreya" target="_blank" rel="noopener">Google Fonts</a><br>Headlines, name, numbers. Tracking -1%.</div>
+        <div><div class="sample-display">Many industries.</div>
+          <div class="scale"><span>H1 5.2rem</span><span>H2 4.6rem</span><span>H3 2rem</span><span>Stat 3.6rem</span></div></div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Italic accent · Alegreya Italic 400</b>Same family. Used for one or two words per headline, always in --celeste-deep.</div>
+        <div class="sample-italic">One method.</div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Body · Alegreya Sans 400 / 700 / 800</b>Huerta Tipográfica (AR). <a href="https://fonts.google.com/specimen/Alegreya+Sans" target="_blank" rel="noopener">Google Fonts</a><br>17px / 1.55. Bold for roles and UI.</div>
+        <p class="sample-body">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Mono · Chivo Mono 400 / 500</b>Omnibus-Type (Buenos Aires). <a href="https://fonts.google.com/specimen/Chivo+Mono" target="_blank" rel="noopener">Google Fonts</a><br>Eyebrows, dates, IDs. Uppercase +14%.</div>
+        <p class="sample-mono">MAR 2026 – PRESENT · ID NO. MKT-2016-JL · BUENOS AIRES</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 HERO -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">03</span><h2>Hero</h2><p class="note">The Danish "Hej!" greeting becomes a Spanish "¡Hola!". Portrait sits in an arch over a celeste wash (the B&amp;W photo is multiplied onto it). Faint LUNDAHL in the serif behind.</p></div>
+    <div class="stage">
+      <div class="hero">
+        <div class="horizon" aria-hidden="true"></div>
+        <div class="ghost" aria-hidden="true">LUNDAHL</div>
+        <div>
+          <p class="hello"><em>¡Hola!</em> I'm Juan Lundahl</p>
+          <h1>AI &amp; Marketing <em class="acc">Automation</em> Specialist</h1>
+          <p class="lede">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+          <ul class="tags">
+            <li class="chip">AI</li><li class="chip">Automation</li><li class="chip">CRM Optimization</li><li class="chip">Martech Stack</li><li class="chip">Sales &amp; Marketing Ops</li>
+          </ul>
+          <div class="ctas">
+            <a class="btn btn-primary" href="#">Explore work <span aria-hidden="true">→</span></a>
+            <a class="btn btn-secondary" href="#">Resume</a>
+          </div>
+        </div>
+        <figure class="portrait" style="margin:0">
+          <div class="backdrop" aria-hidden="true"></div>
+          <div class="arch"><img src="../../../assets/img/juan.jpg" alt="Portrait of Juan Lundahl"></div>
+          <figcaption class="cap"><span class="dot"></span>BUENOS AIRES · AR</figcaption>
+        </figure>
+      </div>
+      <nav class="navpill" aria-label="Sample navigation">
+        <span class="mark">JL</span>
+        <a href="#" class="on">About</a><a href="#">Skills</a><a href="#">Work</a><a href="#">Range</a><a href="#">Certifications</a><a href="#">Contact</a>
+        <span class="sep"></span><span class="lang">EN ▾</span>
+        <button class="btn btn-icon" style="width:36px;height:36px;border:0;background:transparent" aria-label="Toggle dark mode">◐</button>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- 04 MARKETING ID -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">04</span><h2>Marketing ID · the carnet</h2><p class="note">A professional credential (like a press or conference pass), not an official document: no crest, no national ID fields, no numbers that look governmental.</p></div>
+    <div class="id-wrap">
+      <div class="lanyard">
+        <div class="strap" aria-hidden="true"><span>JUAN LUNDAHL · MARKETING ID · JUAN LUNDAHL · MARKETING ID</span></div>
+        <div class="clip" aria-hidden="true"></div>
+        <article class="carnet" aria-label="Marketing ID: Juan Lundahl, AI &amp; Marketing Automation Specialist">
+          <span class="slot" aria-hidden="true"></span>
+          <header class="band">
+            <div><small>Credencial profesional</small><b>Marketing ID</b></div>
+            <span class="status"><i></i>Active</span>
+          </header>
+          <div class="body">
+            <div class="photo"><img src="../../../assets/img/juan.jpg" alt=""></div>
+            <div>
+              <h4>Juan Lundahl</h4>
+              <p class="role">AI &amp; Marketing Automation Specialist</p>
+              <p class="sig">Juan Lundahl</p>
+            </div>
+          </div>
+          <dl>
+            <div><dt>Experience</dt><dd>6+ years</dd></div>
+            <div><dt>Focus</dt><dd>AI · Automation · CRM</dd></div>
+            <div><dt>Markets</dt><dd>NA · EMEA · LATAM</dd></div>
+            <div><dt>Based in</dt><dd class="home">Buenos Aires, Argentina</dd></div>
+          </dl>
+          <footer class="foot">
+            <svg viewBox="0 0 140 26" aria-hidden="true"><rect width="140" height="26" fill="url(#waves)"/></svg>
+            <p><span>ID No.</span> MKT-2016-JL</p>
+          </footer>
+        </article>
+      </div>
+      <div class="id-notes">
+        <h3>What changes from today's card</h3>
+        <p>Same lanyard interaction (drop-in, spring swing, drag) but a calmer object: white card, one celeste header band, a signature line in Alegreya italic instead of the runes, and a wave-line texture in place of the barcode.</p>
+        <ul>
+          <li>Strap: solid --celeste with ink mono text.</li>
+          <li>"Based in" value in --celeste-deep marks Argentina as home base.</li>
+          <li>Hover / drag straightens the card (rotate to 0).</li>
+          <li>Wave pattern is original geometry: evokes the Río de la Plata, not any emblem.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SECTION HEADING -->
+<section class="blk" style="background:var(--bg-alt)">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">05</span><h2>Section heading</h2></div>
+    <header class="sec-head">
+      <p class="eyebrow">Range</p>
+      <h2>Many industries. <em class="acc">One method.</em></h2>
+      <p>Every sector has its own language. My approach stays the same: understand the audience, build the right system and keep improving it.</p>
+      <div class="rule" aria-hidden="true"></div>
+    </header>
+  </div>
+</section>
+
+<!-- 06 WORK CARD -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">06</span><h2>Work card</h2><p class="note">Celeste left rule marks the card; "Current role" is a soft celeste badge.</p></div>
+    <article class="work">
+      <div class="when">Mar 2026 – Present<br>Hybrid<br><span class="now">Current role</span></div>
+      <div>
+        <h3>VU Inc.</h3>
+        <p class="role">Marketing &amp; Automation Specialist</p>
+        <p class="sum">Marketing and automation role focused on the martech stack and AI-driven campaigns.</p>
+        <ul><li>Martech stack and automation infrastructure</li><li>AI integration in campaigns</li></ul>
+      </div>
+      <div class="side">
+        <span class="chip is-soft">Cybersecurity &amp; digital identity</span>
+        <button class="btn btn-secondary">Details <span aria-hidden="true">+</span></button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 07 ACHIEVEMENTS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">07</span><h2>Achievements</h2><p class="note">Clean counters: a short celeste bar replaces the decorative crosses.</p></div>
+    <div class="ach">
+      <div class="stat"><div class="bar"></div><div class="v">6<sup>+</sup></div><p class="l">Years of experience</p></div>
+      <div class="stat"><div class="bar"></div><div class="v">3</div><p class="l">Markets: NA · EMEA · LATAM</p></div>
+      <div class="stat"><div class="bar"></div><div class="v">10</div><p class="l">Certifications</p></div>
+      <div class="stat"><div class="bar"></div><div class="v">1</div><p class="l">ADEPA Prize</p></div>
+    </div>
+    <div class="award"><b>1st Prize, University Journalism</b><span>Association of Argentine Journalistic Entities (ADEPA)</span></div>
+  </div>
+</section>
+
+<!-- 08 CERTIFICATIONS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">08</span><h2>Certifications</h2><p class="note">Hover (or focus) lifts the card, fills it with a celeste wash and reveals the arrow. The first card is pinned in its hover state for reference.</p></div>
+    <div class="certs" id="certs"></div>
+  </div>
+</section>
+
+<!-- 09 MARKETS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">09</span><h2>Markets</h2><p class="note">LATAM is the inverted (ink) chip and carries the "Home base" marker for Argentina.</p></div>
+    <div class="markets" role="list">
+      <span class="mk" role="listitem">NA <small>North America</small></span>
+      <span class="mk-sep" aria-hidden="true">·</span>
+      <span class="mk" role="listitem">EMEA <small>Europe, Middle East &amp; Africa</small></span>
+      <span class="mk-sep" aria-hidden="true">·</span>
+      <span class="mk home" role="listitem">LATAM <small>Latin America</small><span class="base"><i></i>Argentina · home base</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- 10 KIT -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">10</span><h2>Buttons, chips, level dots</h2></div>
+    <div class="kit">
+      <div>
+        <h4>Buttons</h4>
+        <div class="row">
+          <a class="btn btn-primary" href="#">Get in touch</a>
+          <a class="btn btn-secondary" href="#">Download CV (PDF)</a>
+          <a class="btn btn-ghost" href="#">See it on LinkedIn</a>
+          <button class="btn btn-icon" aria-label="Toggle dark mode">◐</button>
+        </div>
+      </div>
+      <div>
+        <h4>Chips</h4>
+        <div class="row">
+          <span class="chip">SEO</span>
+          <span class="chip is-soft"><span class="dot"></span>HubSpot CRM</span>
+          <span class="chip is-active">Retention &amp; Automation</span>
+          <span class="chip"><strong>Spanish</strong>&nbsp;Native</span>
+          <span class="chip">Hybrid</span>
+        </div>
+      </div>
+      <div>
+        <h4>Level dots</h4>
+        <div class="lv">
+          <span>Expert</span><span class="dots" aria-label="4 of 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+          <span>Advanced</span><span class="dots" aria-label="3 of 4"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+          <span>Intermediate</span><span class="dots" aria-label="2 of 4"><i class="on"></i><i class="on"></i><i></i><i></i></span>
+          <span>Basic</span><span class="dots" aria-label="1 of 4"><i class="on"></i><i></i><i></i><i></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 DARK STRIP -->
+<section class="theme-dark dark-strip">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">11</span><h2>Dark mode strip</h2><p class="note">"Noche porteña": deep navy night, celeste becomes the light. Primary buttons invert to celeste with ink text (9.2:1).</p></div>
+    <div class="grid">
+      <div class="mini-hero">
+        <div class="ghost" aria-hidden="true">LUNDAHL</div>
+        <p class="eyebrow">About</p>
+        <h3>Who I <em class="acc">am.</em></h3>
+        <div class="row">
+          <a class="btn btn-primary" href="#">Explore work →</a>
+          <a class="btn btn-secondary" href="#">Resume</a>
+          <span class="chip is-soft"><span class="dot"></span>HubSpot CRM</span>
+        </div>
+        <div class="dsw">
+          <div style="background:#0B1A2A">bg<br>#0B1A2A</div>
+          <div style="background:#12263B">surface<br>#12263B</div>
+          <div style="background:#8EC1EA;color:#0B1A2A">celeste<br>#8EC1EA</div>
+          <div style="background:#EEF5FB;color:#0B1A2A">ink<br>#EEF5FB</div>
+        </div>
+      </div>
+      <div class="side">
+        <div class="stat"><div class="bar"></div><div class="v">10</div><p class="l">Certifications</p></div>
+        <a class="cert demo-hover" href="#"><span class="iss">HubSpot</span><span class="nm">HubSpot Inbound</span><span class="dt">Nov 2025 <span class="go">→</span></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 MOBILE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">12</span><h2>Mobile · 375px</h2></div>
+    <div class="phone-row">
+      <div class="phone">
+        <div class="screen">
+          <div class="m-ghost" aria-hidden="true">LUNDAHL</div>
+          <div class="m-hero">
+            <div class="m-photo"><img src="../../../assets/img/juan.jpg" alt="Portrait of Juan Lundahl"></div>
+            <p class="hello" style="font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)"><em style="font-family:var(--font-display);font-style:italic;text-transform:none;letter-spacing:0;font-size:1.2rem;color:var(--celeste-deep)">¡Hola!</em> I'm Juan Lundahl</p>
+            <h1>AI &amp; Marketing <em class="acc">Automation</em> Specialist</h1>
+            <p class="lede">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+            <div class="tags"><span class="chip">AI</span><span class="chip">Automation</span><span class="chip">CRM Optimization</span><span class="chip">Martech Stack</span></div>
+            <div class="row"><a class="btn btn-primary" href="#">Explore work →</a><a class="btn btn-secondary" href="#">Resume</a></div>
+          </div>
+          <nav class="navpill" aria-label="Sample mobile navigation">
+            <span class="mark">JL</span><a href="#" class="on">About</a><a href="#">Skills</a><a href="#">Work</a><span class="sep"></span><span class="lang">EN</span>
+          </nav>
+        </div>
+      </div>
+      <div class="phone-notes">
+        <h3 style="font-size:1.6rem">Mobile rules</h3>
+        <ul>
+          <li>Portrait moves above the headline and shrinks to a 150px arch.</li>
+          <li>16px side gutter; headline 2.45rem Alegreya; tags wrap, max four.</li>
+          <li>Nav pill keeps mark + 3 links + language; the rest scroll inside the pill.</li>
+          <li>Faint LUNDAHL sits behind the copy at 6rem so it never causes horizontal scroll.</li>
+          <li>Carnet goes full width; the lanyard strap shortens to 80px.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 CHANGES -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="n">13</span><h2>What would change in the real site</h2><p class="note">Only <code>css/tokens.css</code> values, the font link in <code>index.html</code> and a few decorative hooks. Component CSS keeps working through the legacy names.</p></div>
+    <div class="table-scroll">
+    <table class="changes">
+      <thead><tr><th>Token</th><th>Today (Danish)</th><th>Board A (light)</th><th>Board A (dark)</th></tr></thead>
+      <tbody>
+        <tr><td><code>--navy</code> (primary)</td><td><i class="sw-i" style="background:#c8102e"></i>#C8102E</td><td><i class="sw-i" style="background:#1E5A8E"></i>#1E5A8E</td><td><i class="sw-i" style="background:#8EC1EA"></i>#8EC1EA</td></tr>
+        <tr><td><code>--navy-ink</code></td><td>#FFFFFF</td><td>#FFFFFF</td><td><i class="sw-i" style="background:#0B1A2A"></i>#0B1A2A</td></tr>
+        <tr><td><code>--accent</code></td><td>#F0A3AF</td><td><i class="sw-i" style="background:#74ACDF"></i>#74ACDF</td><td>#8EC1EA</td></tr>
+        <tr><td><code>--accent-2</code></td><td>#C8102E</td><td>#1E5A8E</td><td>#8EC1EA</td></tr>
+        <tr><td><code>--accent-soft</code></td><td>#FBE3E6</td><td><i class="sw-i" style="background:#DCEBF7"></i>#DCEBF7</td><td>#183452</td></tr>
+        <tr><td><code>--bg / --bg-alt</code></td><td>#FBF8F7 / #F7EFEE</td><td>#F7FAFC / #EAF3FA</td><td>#0B1A2A / #0F2236</td></tr>
+        <tr><td><code>--surface / --surface-2</code></td><td>#FFFFFF / #FCF4F4</td><td>#FFFFFF / #F2F7FB</td><td>#12263B / #163049</td></tr>
+        <tr><td><code>--border / --border-strong</code></td><td>#EEDCDC / #DBBCBF</td><td>#D6E4EF / #B7CDE0</td><td>#1F3A55 / #2C4D6E</td></tr>
+        <tr><td><code>--ink / --ink-2 / --muted</code></td><td>#3A0D15 / #5A2830 / #7A5359</td><td>#0F2A44 / #2B4560 / #5A7189</td><td>#EEF5FB / #C9D9E8 / #9FB3C8</td></tr>
+        <tr><td><code>--ghost</code></td><td>rgba(200,16,46,.07)</td><td>rgba(116,172,223,.18)</td><td>rgba(142,193,234,.07)</td></tr>
+        <tr><td><code>--feature-bg</code></td><td>#8E0C22</td><td>#0F2A44 (ink)</td><td>#1E5A8E</td></tr>
+        <tr><td><code>--stage-1…4</code> (funnel)</td><td>pinks → oxblood</td><td>#DCEBF7 · #A9CDEE · #74ACDF · #1E5A8E</td><td>#183452 · #2C5F8C · #8EC1EA · #EEF5FB</td></tr>
+        <tr><td><code>--font-sans</code></td><td>Albert Sans</td><td>Alegreya Sans</td><td>same</td></tr>
+        <tr><td><code>--font-serif</code></td><td>Cormorant Garamond</td><td>Alegreya (display + italic)</td><td>same</td></tr>
+        <tr><td><code>--font-mono</code></td><td>JetBrains Mono</td><td>Chivo Mono</td><td>same</td></tr>
+        <tr><td><code>--cross-line / --cross-band / --rune / --font-rune</code></td><td>Nordic cross, runes</td><td colspan="2">Removed (set to transparent, then delete the hooks)</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="list-cols">
+      <li>Replace the Google Fonts link: Alegreya (400/500/700 + italic), Alegreya Sans (400/500/700/800), Chivo Mono (400/500). Drop Albert Sans, Cormorant, JetBrains Mono and Noto Sans Runic.</li>
+      <li>Hero greeting: "Hej!" + gloss becomes "¡Hola!" (no gloss needed); update ui-strings in en/es/de.</li>
+      <li>Hero portrait: arch mask (border-radius 999px 999px 14px 14px) over --accent-soft with multiply blend; offset celeste outline behind.</li>
+      <li>Remove runes from the ID card and contact section; add the signature line and the wave-pattern footer.</li>
+      <li>Remove the Nordic cross background bands; the hero gets a soft --bg-alt "horizon" gradient instead.</li>
+      <li>Achievements: replace cross ornaments with a 36px celeste bar above each counter.</li>
+      <li>Work cards: 4px celeste left rule; "Current role" badge uses --accent-soft.</li>
+      <li>Markets: NA · EMEA · LATAM chips with LATAM inverted and an "Argentina · home base" pill.</li>
+      <li>Headline italics keep the *asterisk* syntax; they now render in Alegreya Italic, --accent-2.</li>
+      <li>Meta theme-color: #F7FAFC (light) / #0B1A2A (dark).</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="board-foot"><div class="wrap">Board A · Celeste y blanco sobrio · standalone preview, not wired to the live site.</div></footer>
+
+<script>
+(function () {
+  var light = [
+    ['--ink', '#0F2A44', 'Text, headings, inverted chips', '13.9:1 on --bg · AAA', '#fff'],
+    ['--ink-2', '#2B4560', 'Secondary text, lede', '9.4:1 on --bg · AAA', '#fff'],
+    ['--muted', '#5A7189', 'Meta, captions, eyebrows', '4.8:1 on --bg · AA (on --bg-alt use --ink-2)', '#fff'],
+    ['--celeste-deep', '#1E5A8E', 'Primary buttons, links, italic accent', 'White on it 7.2:1 · AAA', '#fff'],
+    ['--celeste', '#74ACDF', 'Bands, rules, strap, dots (non-text)', 'Decorative only on white (2.4:1). --ink on it 6.1:1 AA', '#0F2A44'],
+    ['--celeste-soft', '#DCEBF7', 'Chip fills, hover washes, photo backdrop', '--ink on it 12.0:1 · AAA', '#0F2A44'],
+    ['--bg', '#F7FAFC', 'Page background', 'Base for all ratios above', '#0F2A44'],
+    ['--bg-alt', '#EAF3FA', 'Alternate bands, award strip', '--ink on it 13.0:1', '#0F2A44'],
+    ['--surface', '#FFFFFF', 'Cards, nav pill', '--ink on it 14.6:1', '#0F2A44'],
+    ['--border', '#D6E4EF', 'Hairlines (non-text)', 'UI boundary only', '#0F2A44']
+  ];
+  var dark = [
+    ['--bg', '#0B1A2A', 'Page background (night)', '--ink on it 16.0:1', '#EEF5FB'],
+    ['--surface', '#12263B', 'Cards', '--muted on it 7.1:1', '#EEF5FB'],
+    ['--ink', '#EEF5FB', 'Text', '16.0:1 on --bg · AAA', '#0B1A2A'],
+    ['--muted', '#9FB3C8', 'Meta text', '8.2:1 on --bg · AAA', '#0B1A2A'],
+    ['--celeste', '#8EC1EA', 'Primary, links, accents', '9.2:1 on --bg; --bg text on it 9.2:1', '#0B1A2A'],
+    ['--celeste-soft', '#183452', 'Chip fills, washes', '--ink on it 12+:1', '#EEF5FB']
+  ];
+  function render(list, id) {
+    document.getElementById(id).innerHTML = list.map(function (s) {
+      return '<div class="sw"><div class="chip-c" style="background:' + s[1] + ';color:' + s[4] + ';' + (s[1] === '#FFFFFF' || s[1] === '#F7FAFC' ? 'border-bottom:1px solid #D6E4EF' : '') + '">Aa</div>' +
+        '<div class="meta"><b>' + s[0] + '</b><span class="hex">' + s[1] + '</span><p class="role">' + s[2] + '</p><span class="aa">' + s[3] + '</span></div></div>';
+    }).join('');
+  }
+  render(light, 'sw-light');
+  render(dark, 'sw-dark');
+
+  var certs = [
+    ['HubSpot Inbound', 'HubSpot', 'Nov 2025', 1],
+    ['Programmatic Advertising', 'Udemy', '2024', 1],
+    ['Social Media Marketing: Strategy and Optimization', 'LinkedIn', 'Aug 2023', 1],
+    ['Content Creation: Strategy and Tools', 'LinkedIn', 'Aug 2023', 1],
+    ['Content Marketing for Social Media', 'LinkedIn', 'Aug 2023', 1],
+    ['Deutsch Intensiv Kompakt', 'Goethe-Institut', 'Aug 2022', 0],
+    ['Growth Marketing', 'Coderhouse', 'Jul 2022', 1],
+    ['UX/UI Design', 'Coderhouse', 'Apr 2022', 1],
+    ['EF SET English Certificate', 'EF SET', 'Mar 2022', 1],
+    ['Digital Marketing (Community Manager & Advertising)', 'Coderhouse', '2021 – 2022', 1]
+  ];
+  document.getElementById('certs').innerHTML = certs.map(function (c, i) {
+    var tag = c[3] ? 'a href="#"' : 'div tabindex="0"';
+    var end = c[3] ? 'a' : 'div';
+    return '<' + tag + ' class="cert' + (i === 0 ? ' demo-hover' : '') + '"><span class="iss">' + c[1] + '</span><span class="nm">' + c[0].replace('&', '&amp;') + '</span>' +
+      '<span class="dt">' + c[2] + (c[3] ? '<span class="go" aria-hidden="true">View →</span>' : '') + '</span></' + end + '>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

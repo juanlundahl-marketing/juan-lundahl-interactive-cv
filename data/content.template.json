@@ -1,0 +1,810 @@
+{
+  "meta": {
+    "name": "Your Name",
+    "email": "you@example.com",
+    "linkedin": "https://www.linkedin.com/in/your-profile"
+  },
+  "en": {
+    "nav": {
+      "about": "About",
+      "funnel": "Skills",
+      "work": "Work",
+      "range": "Range",
+      "education": "Education",
+      "certifications": "Certifications",
+      "achievements": "Achievements",
+      "contact": "Contact",
+      "resume": "Resume"
+    },
+    "hero": {
+      "title": "Your Role & Specialty",
+      "lede": "One or two sentences about what you do and the value you bring. Replace this placeholder text with your own words.",
+      "subtitle": "Skill One, Skill Two, Skill Three, Skill Four · Your City",
+      "cta": {
+        "work": "Explore work",
+        "resume": "Resume"
+      }
+    },
+    "about": {
+      "headline": "One line that sums up what you do, with a measurable result",
+      "text": [
+        "First paragraph: your current focus and what you are working on right now. Replace with your own text.",
+        "Second paragraph: your most relevant experience, mentioning companies or projects (use the example names only as placeholders).",
+        "Third paragraph: your background, what makes you different, and how you work with people."
+      ],
+      "facts": [
+        { "label": "Experience", "value": "5+ years" },
+        { "label": "Focus", "value": "Topic A · Topic B" },
+        { "id": "markets", "label": "Markets", "value": "NA · EMEA · LATAM" },
+        { "label": "Based in", "value": "Your City, Your Country" },
+        { "label": "Languages", "value": "Language One · Language Two (level)" }
+      ],
+      "quote": "A short sentence that sounds like you."
+    },
+    "funnel": {
+      "stages": [
+        {
+          "id": "awareness",
+          "name": "Awareness",
+          "tagline": "A one-line summary of what this stage is about.",
+          "doing": "What you do at this stage and where you did it (for example at Company A and Company B).",
+          "tools": [
+            { "name": "Tool One", "abbr": "T1", "level": "expert", "note": "Company A" },
+            { "name": "Tool Two", "abbr": "T2", "level": "advanced", "note": "" },
+            { "name": "Tool Three", "abbr": "T3", "level": "intermediate", "note": "Used for example projects" }
+          ]
+        },
+        {
+          "id": "consideration",
+          "name": "Consideration",
+          "tagline": "A one-line summary of the second stage.",
+          "doing": "What you do at this stage and the results you get.",
+          "tools": [
+            { "name": "Tool Four", "abbr": "T4", "level": "expert", "note": "Company A, Company B" },
+            { "name": "Tool Five", "abbr": "T5", "level": "advanced", "note": "" }
+          ]
+        },
+        {
+          "id": "conversion",
+          "name": "Conversion",
+          "tagline": "A one-line summary of the third stage.",
+          "doing": "What you do at this stage to turn interest into action.",
+          "tools": [
+            { "name": "Main Platform", "abbr": "MP", "level": "expert", "note": "Core platform of my daily work", "featured": true },
+            { "name": "Tool Six", "abbr": "T6", "level": "intermediate", "note": "" }
+          ]
+        },
+        {
+          "id": "retention",
+          "name": "Retention & Loyalty",
+          "tagline": "A one-line summary of the fourth stage.",
+          "doing": "What you do after the first sale to keep people coming back.",
+          "tools": [
+            { "name": "Tool Seven", "abbr": "T7", "level": "advanced", "note": "Company B" },
+            { "name": "Tool Eight", "abbr": "T8", "level": "intermediate", "note": "" }
+          ]
+        }
+      ],
+      "across": {
+        "eyebrow": "Across the funnel",
+        "title": "Tools that work at *every stage.*",
+        "intro": "A short paragraph about tools or practices you use at every stage.",
+        "aiLabel": "AI copilots",
+        "ai": [
+          { "name": "Assistant One", "abbr": "A1", "level": "expert" },
+          { "name": "Assistant Two", "abbr": "A2", "level": "intermediate", "note": "for research" }
+        ],
+        "toolsLabel": "Automation & AI",
+        "tools": [
+          { "name": "Automation Tool", "abbr": "AT", "level": "intermediate", "note": "What you use it for" }
+        ],
+        "crmLabel": "CRM",
+        "crm": "One or two sentences about the CRM or core system you rely on.",
+        "envLabel": "Work environments",
+        "env": [
+          { "label": "Environments", "items": ["Environment One", "Environment Two"] },
+          { "label": "Channels", "items": ["Channel One", "Channel Two"] }
+        ],
+        "envLine": "One sentence about how you keep communication fluid across teams."
+      }
+    },
+    "work": [
+      {
+        "company": "Company A",
+        "role": "Your Current Role",
+        "period": "Jan 2025 – Present",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "One or two sentences describing the role.",
+        "bullets": [
+          "Achievement or responsibility number one.",
+          "Achievement or responsibility number two.",
+          "Achievement or responsibility number three."
+        ]
+      },
+      {
+        "company": "Company B",
+        "role": "Your Previous Role",
+        "period": "Jun 2022 – Dec 2024",
+        "mode": "remote",
+        "location": "",
+        "summary": "One or two sentences describing the role.",
+        "bullets": [
+          "Achievement or responsibility number one.",
+          "Achievement or responsibility number two."
+        ],
+        "projects": [
+          "Example Deliverable One",
+          "Example Deliverable Two"
+        ]
+      },
+      {
+        "company": "Company C",
+        "role": "Your First Role",
+        "period": "Mar 2020 – May 2022",
+        "mode": "onsite",
+        "location": "Example City",
+        "summary": "One or two sentences describing the role.",
+        "bullets": [
+          "Achievement or responsibility number one."
+        ]
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Example Certification One",
+        "issuer": "Example Issuer",
+        "date": "Nov 2025",
+        "url": "https://example.com/credential"
+      },
+      {
+        "name": "Example Certification Two",
+        "issuer": "Example Issuer",
+        "date": "Mar 2024",
+        "url": "https://example.com/credential"
+      },
+      {
+        "name": "Example Certification Three",
+        "issuer": "Example Academy",
+        "date": "Jul 2022",
+        "url": ""
+      }
+    ],
+    "education": [
+      {
+        "id": "university",
+        "featured": true,
+        "award": "example competition",
+        "institution": "Example University",
+        "program": "Your Degree or Program Name",
+        "start": "2014",
+        "end": "2018",
+        "details": []
+      },
+      {
+        "id": "course-a",
+        "institution": "Example Institute",
+        "program": "Example Course With Modules",
+        "start": "2021-03",
+        "end": "2021-08",
+        "details": [
+          { "name": "Module One", "start": "2021-03", "end": "2021-05" },
+          { "name": "Module Two", "start": "2021-05", "end": "2021-08" }
+        ]
+      },
+      {
+        "id": "course-b",
+        "institution": "Example Online Academy",
+        "program": "Example Short Course",
+        "start": "2023-05",
+        "end": "2023-07",
+        "details": []
+      }
+    ],
+    "achievements": {
+      "counters": [
+        { "value": 5, "suffix": "+", "label": "Years of experience" },
+        { "type": "markets", "value": 3, "suffix": "", "label": "Markets" },
+        { "type": "certs", "value": 3, "suffix": "", "label": "Certifications" }
+      ],
+      "awards": [
+        {
+          "title": "1st Prize, Example Competition",
+          "issuer": "Example Association",
+          "context": "Awarded during my studies"
+        }
+      ]
+    },
+    "range": {
+      "industries": [
+        {
+          "id": "industry-a",
+          "name": "Industry A",
+          "text": "What you did in this industry, in one or two sentences.",
+          "where": ["Company A", "Company B"]
+        },
+        {
+          "id": "industry-b",
+          "name": "Industry B",
+          "text": "What you did in this industry, in one or two sentences.",
+          "where": ["Company C"]
+        },
+        {
+          "id": "industry-c",
+          "name": "Industry C",
+          "text": "What you did in this industry, in one or two sentences.",
+          "where": ["Company D"]
+        }
+      ],
+      "modes": [
+        { "id": "onsite", "companies": [ { "name": "Company C", "note": "Example City" } ] },
+        { "id": "remote", "companies": [ { "name": "Company B" } ] },
+        { "id": "hybrid", "companies": [ { "name": "Company A" }, { "name": "Company D" } ] }
+      ],
+      "modesNote": "One sentence about how you adapt to each team's way of working.",
+      "collab": {
+        "intro": "One sentence about how you work with other teams.",
+        "items": [
+          { "team": "Design", "text": "How you work with this team." },
+          { "team": "Sales", "text": "How you work with this team." },
+          { "team": "Product", "text": "How you work with this team." }
+        ]
+      }
+    },
+    "recommendation": {
+      "quote": "Example recommendation text. Only publish a real recommendation if the author gave you permission.",
+      "author": "Example Person",
+      "role": "Example Job Title | Example Company",
+      "context": "Managed me directly · LinkedIn recommendation · June 2023",
+      "url": "https://example.com/recommendation"
+    },
+    "languages": [
+      { "code": "es", "name": "Spanish", "level": "Native", "steps": 4 },
+      { "code": "en", "name": "English", "level": "Fluent", "steps": 3 },
+      { "code": "de", "name": "German", "level": "Basic-intermediate", "steps": 2 }
+    ],
+    "contact": {
+      "email": "you@example.com",
+      "linkedin": "https://www.linkedin.com/in/your-profile",
+      "location": "Your City, Your Country",
+      "cta": "Get in touch",
+      "downloadCv": "Download CV (PDF)"
+    }
+  },
+  "es": {
+    "nav": {
+      "about": "Sobre mí",
+      "funnel": "Habilidades",
+      "work": "Experiencia",
+      "range": "Rango",
+      "education": "Educación",
+      "certifications": "Certificaciones",
+      "achievements": "Logros",
+      "contact": "Contacto",
+      "resume": "CV"
+    },
+    "hero": {
+      "title": "Tu Rol y Especialidad",
+      "lede": "Una o dos frases sobre lo que hacés y el valor que aportás. Reemplazá este texto de ejemplo por tus propias palabras.",
+      "subtitle": "Habilidad Uno, Habilidad Dos, Habilidad Tres, Habilidad Cuatro · Tu Ciudad",
+      "cta": {
+        "work": "Ver trabajo",
+        "resume": "CV"
+      }
+    },
+    "about": {
+      "headline": "Una línea que resume lo que hacés, con un resultado medible",
+      "text": [
+        "Primer párrafo: tu foco actual y en qué estás trabajando ahora. Reemplazalo por tu propio texto.",
+        "Segundo párrafo: tu experiencia más relevante, mencionando empresas o proyectos (los nombres de ejemplo son solo marcadores).",
+        "Tercer párrafo: tu formación, qué te diferencia y cómo trabajás con la gente."
+      ],
+      "facts": [
+        { "label": "Experiencia", "value": "5+ años" },
+        { "label": "Foco", "value": "Tema A · Tema B" },
+        { "id": "markets", "label": "Mercados", "value": "NA · EMEA · LATAM" },
+        { "label": "Base", "value": "Tu Ciudad, Tu País" },
+        { "label": "Idiomas", "value": "Idioma Uno · Idioma Dos (nivel)" }
+      ],
+      "quote": "Una frase corta que suene a vos."
+    },
+    "funnel": {
+      "stages": [
+        {
+          "id": "awareness",
+          "name": "Awareness",
+          "tagline": "Un resumen de una línea de esta etapa.",
+          "doing": "Qué hacés en esta etapa y dónde lo hiciste (por ejemplo en Empresa A y Empresa B).",
+          "tools": [
+            { "name": "Herramienta Uno", "abbr": "H1", "level": "expert", "note": "Empresa A" },
+            { "name": "Herramienta Dos", "abbr": "H2", "level": "advanced", "note": "" },
+            { "name": "Herramienta Tres", "abbr": "H3", "level": "intermediate", "note": "Usada en proyectos de ejemplo" }
+          ]
+        },
+        {
+          "id": "consideration",
+          "name": "Consideración",
+          "tagline": "Un resumen de una línea de la segunda etapa.",
+          "doing": "Qué hacés en esta etapa y los resultados que lográs.",
+          "tools": [
+            { "name": "Herramienta Cuatro", "abbr": "H4", "level": "expert", "note": "Empresa A, Empresa B" },
+            { "name": "Herramienta Cinco", "abbr": "H5", "level": "advanced", "note": "" }
+          ]
+        },
+        {
+          "id": "conversion",
+          "name": "Conversión",
+          "tagline": "Un resumen de una línea de la tercera etapa.",
+          "doing": "Qué hacés en esta etapa para convertir el interés en acción.",
+          "tools": [
+            { "name": "Plataforma Principal", "abbr": "PP", "level": "expert", "note": "Plataforma central de mi trabajo diario", "featured": true },
+            { "name": "Herramienta Seis", "abbr": "H6", "level": "intermediate", "note": "" }
+          ]
+        },
+        {
+          "id": "retention",
+          "name": "Retención y Fidelidad",
+          "tagline": "Un resumen de una línea de la cuarta etapa.",
+          "doing": "Qué hacés después de la primera venta para que la gente vuelva.",
+          "tools": [
+            { "name": "Herramienta Siete", "abbr": "H7", "level": "advanced", "note": "Empresa B" },
+            { "name": "Herramienta Ocho", "abbr": "H8", "level": "intermediate", "note": "" }
+          ]
+        }
+      ],
+      "across": {
+        "eyebrow": "A lo largo del embudo",
+        "title": "Herramientas que funcionan en *cada etapa.*",
+        "intro": "Un párrafo corto sobre herramientas o prácticas que usás en todas las etapas.",
+        "aiLabel": "Copilotos de IA",
+        "ai": [
+          { "name": "Asistente Uno", "abbr": "A1", "level": "expert" },
+          { "name": "Asistente Dos", "abbr": "A2", "level": "intermediate", "note": "para investigar" }
+        ],
+        "toolsLabel": "Automatización e IA",
+        "tools": [
+          { "name": "Herramienta de Automatización", "abbr": "HA", "level": "intermediate", "note": "Para qué la usás" }
+        ],
+        "crmLabel": "CRM",
+        "crm": "Una o dos frases sobre el CRM o sistema central en el que te apoyás.",
+        "envLabel": "Entornos de trabajo",
+        "env": [
+          { "label": "Entornos", "items": ["Entorno Uno", "Entorno Dos"] },
+          { "label": "Canales", "items": ["Canal Uno", "Canal Dos"] }
+        ],
+        "envLine": "Una frase sobre cómo mantenés la comunicación fluida entre equipos."
+      }
+    },
+    "work": [
+      {
+        "company": "Empresa A",
+        "role": "Tu Rol Actual",
+        "period": "Ene 2025 – Actualidad",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "Una o dos frases que describan el rol.",
+        "bullets": [
+          "Logro o responsabilidad número uno.",
+          "Logro o responsabilidad número dos.",
+          "Logro o responsabilidad número tres."
+        ]
+      },
+      {
+        "company": "Empresa B",
+        "role": "Tu Rol Anterior",
+        "period": "Jun 2022 – Dic 2024",
+        "mode": "remote",
+        "location": "",
+        "summary": "Una o dos frases que describan el rol.",
+        "bullets": [
+          "Logro o responsabilidad número uno.",
+          "Logro o responsabilidad número dos."
+        ],
+        "projects": [
+          "Entregable de Ejemplo Uno",
+          "Entregable de Ejemplo Dos"
+        ]
+      },
+      {
+        "company": "Empresa C",
+        "role": "Tu Primer Rol",
+        "period": "Mar 2020 – May 2022",
+        "mode": "onsite",
+        "location": "Ciudad de Ejemplo",
+        "summary": "Una o dos frases que describan el rol.",
+        "bullets": [
+          "Logro o responsabilidad número uno."
+        ]
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Certificación de Ejemplo Uno",
+        "issuer": "Emisor de Ejemplo",
+        "date": "Nov 2025",
+        "url": "https://example.com/credential"
+      },
+      {
+        "name": "Certificación de Ejemplo Dos",
+        "issuer": "Emisor de Ejemplo",
+        "date": "Mar 2024",
+        "url": "https://example.com/credential"
+      },
+      {
+        "name": "Certificación de Ejemplo Tres",
+        "issuer": "Academia de Ejemplo",
+        "date": "Jul 2022",
+        "url": ""
+      }
+    ],
+    "education": [
+      {
+        "id": "university",
+        "featured": true,
+        "award": "concurso de ejemplo",
+        "institution": "Universidad de Ejemplo",
+        "program": "Nombre de Tu Carrera o Programa",
+        "start": "2014",
+        "end": "2018",
+        "details": []
+      },
+      {
+        "id": "course-a",
+        "institution": "Instituto de Ejemplo",
+        "program": "Curso de Ejemplo con Módulos",
+        "start": "2021-03",
+        "end": "2021-08",
+        "details": [
+          { "name": "Módulo Uno", "start": "2021-03", "end": "2021-05" },
+          { "name": "Módulo Dos", "start": "2021-05", "end": "2021-08" }
+        ]
+      },
+      {
+        "id": "course-b",
+        "institution": "Academia Online de Ejemplo",
+        "program": "Curso Corto de Ejemplo",
+        "start": "2023-05",
+        "end": "2023-07",
+        "details": []
+      }
+    ],
+    "achievements": {
+      "counters": [
+        { "value": 5, "suffix": "+", "label": "Años de experiencia" },
+        { "type": "markets", "value": 3, "suffix": "", "label": "Mercados" },
+        { "type": "certs", "value": 3, "suffix": "", "label": "Certificaciones" }
+      ],
+      "awards": [
+        {
+          "title": "1.er Premio, Concurso de Ejemplo",
+          "issuer": "Asociación de Ejemplo",
+          "context": "Otorgado durante mis estudios"
+        }
+      ]
+    },
+    "range": {
+      "industries": [
+        {
+          "id": "industry-a",
+          "name": "Industria A",
+          "text": "Qué hiciste en esta industria, en una o dos frases.",
+          "where": ["Empresa A", "Empresa B"]
+        },
+        {
+          "id": "industry-b",
+          "name": "Industria B",
+          "text": "Qué hiciste en esta industria, en una o dos frases.",
+          "where": ["Empresa C"]
+        },
+        {
+          "id": "industry-c",
+          "name": "Industria C",
+          "text": "Qué hiciste en esta industria, en una o dos frases.",
+          "where": ["Empresa D"]
+        }
+      ],
+      "modes": [
+        { "id": "onsite", "companies": [ { "name": "Empresa C", "note": "Ciudad de Ejemplo" } ] },
+        { "id": "remote", "companies": [ { "name": "Empresa B" } ] },
+        { "id": "hybrid", "companies": [ { "name": "Empresa A" }, { "name": "Empresa D" } ] }
+      ],
+      "modesNote": "Una frase sobre cómo te adaptás a la forma de trabajar de cada equipo.",
+      "collab": {
+        "intro": "Una frase sobre cómo trabajás con otros equipos.",
+        "items": [
+          { "team": "Diseño", "text": "Cómo trabajás con este equipo." },
+          { "team": "Ventas", "text": "Cómo trabajás con este equipo." },
+          { "team": "Producto", "text": "Cómo trabajás con este equipo." }
+        ]
+      }
+    },
+    "recommendation": {
+      "quote": "Example recommendation text. Only publish a real recommendation if the author gave you permission.",
+      "translation": "Texto de recomendación de ejemplo. Publicá una recomendación real solo si el autor te dio permiso.",
+      "author": "Example Person",
+      "role": "Example Job Title | Example Company",
+      "context": "Fue mi jefe directo · Recomendación de LinkedIn · junio de 2023",
+      "url": "https://example.com/recommendation"
+    },
+    "languages": [
+      { "code": "es", "name": "Español", "level": "Nativo", "steps": 4 },
+      { "code": "en", "name": "Inglés", "level": "Fluido", "steps": 3 },
+      { "code": "de", "name": "Alemán", "level": "Básico-intermedio", "steps": 2 }
+    ],
+    "contact": {
+      "email": "you@example.com",
+      "linkedin": "https://www.linkedin.com/in/your-profile",
+      "location": "Tu Ciudad, Tu País",
+      "cta": "Escribime",
+      "downloadCv": "Descargar CV (PDF)"
+    }
+  },
+  "de": {
+    "nav": {
+      "about": "Über mich",
+      "funnel": "Kompetenzen",
+      "work": "Erfahrung",
+      "range": "Bandbreite",
+      "education": "Ausbildung",
+      "certifications": "Zertifikate",
+      "achievements": "Erfolge",
+      "contact": "Kontakt",
+      "resume": "Lebenslauf"
+    },
+    "hero": {
+      "title": "Deine Rolle & Spezialität",
+      "lede": "Ein oder zwei Sätze darüber, was du machst und welchen Wert du bringst. Ersetze diesen Beispieltext durch deine eigenen Worte.",
+      "subtitle": "Kompetenz Eins, Kompetenz Zwei, Kompetenz Drei, Kompetenz Vier · Deine Stadt",
+      "cta": {
+        "work": "Arbeit ansehen",
+        "resume": "Lebenslauf"
+      }
+    },
+    "about": {
+      "headline": "Eine Zeile, die zusammenfasst, was du machst, mit messbarem Ergebnis",
+      "text": [
+        "Erster Absatz: dein aktueller Schwerpunkt und woran du gerade arbeitest. Ersetze ihn durch deinen eigenen Text.",
+        "Zweiter Absatz: deine relevanteste Erfahrung, mit Firmen oder Projekten (die Beispielnamen sind nur Platzhalter).",
+        "Dritter Absatz: dein Hintergrund, was dich auszeichnet und wie du mit Menschen zusammenarbeitest."
+      ],
+      "facts": [
+        { "label": "Erfahrung", "value": "5+ Jahre" },
+        { "label": "Fokus", "value": "Thema A · Thema B" },
+        { "id": "markets", "label": "Märkte", "value": "NA · EMEA · LATAM" },
+        { "label": "Standort", "value": "Deine Stadt, Dein Land" },
+        { "label": "Sprachen", "value": "Sprache Eins · Sprache Zwei (Niveau)" }
+      ],
+      "quote": "Ein kurzer Satz, der nach dir klingt."
+    },
+    "funnel": {
+      "stages": [
+        {
+          "id": "awareness",
+          "name": "Awareness",
+          "tagline": "Eine Zeile zu dieser Phase.",
+          "doing": "Was du in dieser Phase machst und wo du es gemacht hast (zum Beispiel bei Firma A und Firma B).",
+          "tools": [
+            { "name": "Tool Eins", "abbr": "T1", "level": "expert", "note": "Firma A" },
+            { "name": "Tool Zwei", "abbr": "T2", "level": "advanced", "note": "" },
+            { "name": "Tool Drei", "abbr": "T3", "level": "intermediate", "note": "Eingesetzt in Beispielprojekten" }
+          ]
+        },
+        {
+          "id": "consideration",
+          "name": "Consideration",
+          "tagline": "Eine Zeile zur zweiten Phase.",
+          "doing": "Was du in dieser Phase machst und welche Ergebnisse du erzielst.",
+          "tools": [
+            { "name": "Tool Vier", "abbr": "T4", "level": "expert", "note": "Firma A, Firma B" },
+            { "name": "Tool Fünf", "abbr": "T5", "level": "advanced", "note": "" }
+          ]
+        },
+        {
+          "id": "conversion",
+          "name": "Conversion",
+          "tagline": "Eine Zeile zur dritten Phase.",
+          "doing": "Was du in dieser Phase tust, um Interesse in Handeln zu verwandeln.",
+          "tools": [
+            { "name": "Hauptplattform", "abbr": "HP", "level": "expert", "note": "Kernplattform meiner täglichen Arbeit", "featured": true },
+            { "name": "Tool Sechs", "abbr": "T6", "level": "intermediate", "note": "" }
+          ]
+        },
+        {
+          "id": "retention",
+          "name": "Bindung & Loyalität",
+          "tagline": "Eine Zeile zur vierten Phase.",
+          "doing": "Was du nach dem ersten Verkauf tust, damit die Leute wiederkommen.",
+          "tools": [
+            { "name": "Tool Sieben", "abbr": "T7", "level": "advanced", "note": "Firma B" },
+            { "name": "Tool Acht", "abbr": "T8", "level": "intermediate", "note": "" }
+          ]
+        }
+      ],
+      "across": {
+        "eyebrow": "Über den ganzen Funnel",
+        "title": "Tools, die in *jeder Phase* wirken.",
+        "intro": "Ein kurzer Absatz über Tools oder Methoden, die du in jeder Phase einsetzt.",
+        "aiLabel": "KI-Copiloten",
+        "ai": [
+          { "name": "Assistent Eins", "abbr": "A1", "level": "expert" },
+          { "name": "Assistent Zwei", "abbr": "A2", "level": "intermediate", "note": "für Recherche" }
+        ],
+        "toolsLabel": "Automatisierung & KI",
+        "tools": [
+          { "name": "Automatisierungs-Tool", "abbr": "AT", "level": "intermediate", "note": "Wofür du es nutzt" }
+        ],
+        "crmLabel": "CRM",
+        "crm": "Ein oder zwei Sätze über das CRM oder Kernsystem, auf das du dich stützt.",
+        "envLabel": "Arbeitsumgebungen",
+        "env": [
+          { "label": "Umgebungen", "items": ["Umgebung Eins", "Umgebung Zwei"] },
+          { "label": "Kanäle", "items": ["Kanal Eins", "Kanal Zwei"] }
+        ],
+        "envLine": "Ein Satz dazu, wie du die Kommunikation zwischen Teams im Fluss hältst."
+      }
+    },
+    "work": [
+      {
+        "company": "Firma A",
+        "role": "Deine aktuelle Rolle",
+        "period": "Jan 2025 – Heute",
+        "mode": "hybrid",
+        "location": "",
+        "summary": "Ein oder zwei Sätze zur Rolle.",
+        "bullets": [
+          "Erfolg oder Verantwortung Nummer eins.",
+          "Erfolg oder Verantwortung Nummer zwei.",
+          "Erfolg oder Verantwortung Nummer drei."
+        ]
+      },
+      {
+        "company": "Firma B",
+        "role": "Deine vorherige Rolle",
+        "period": "Jun 2022 – Dez 2024",
+        "mode": "remote",
+        "location": "",
+        "summary": "Ein oder zwei Sätze zur Rolle.",
+        "bullets": [
+          "Erfolg oder Verantwortung Nummer eins.",
+          "Erfolg oder Verantwortung Nummer zwei."
+        ],
+        "projects": [
+          "Beispiel-Ergebnis Eins",
+          "Beispiel-Ergebnis Zwei"
+        ]
+      },
+      {
+        "company": "Firma C",
+        "role": "Deine erste Rolle",
+        "period": "Mär 2020 – Mai 2022",
+        "mode": "onsite",
+        "location": "Beispielstadt",
+        "summary": "Ein oder zwei Sätze zur Rolle.",
+        "bullets": [
+          "Erfolg oder Verantwortung Nummer eins."
+        ]
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Beispiel-Zertifikat Eins",
+        "issuer": "Beispiel-Aussteller",
+        "date": "Nov 2025",
+        "url": "https://example.com/credential"
+      },
+      {
+        "name": "Beispiel-Zertifikat Zwei",
+        "issuer": "Beispiel-Aussteller",
+        "date": "Mär 2024",
+        "url": "https://example.com/credential"
+      },
+      {
+        "name": "Beispiel-Zertifikat Drei",
+        "issuer": "Beispiel-Akademie",
+        "date": "Jul 2022",
+        "url": ""
+      }
+    ],
+    "education": [
+      {
+        "id": "university",
+        "featured": true,
+        "award": "beispiel-wettbewerb",
+        "institution": "Beispiel-Universität",
+        "program": "Name deines Studiengangs oder Programms",
+        "start": "2014",
+        "end": "2018",
+        "details": []
+      },
+      {
+        "id": "course-a",
+        "institution": "Beispiel-Institut",
+        "program": "Beispielkurs mit Modulen",
+        "start": "2021-03",
+        "end": "2021-08",
+        "details": [
+          { "name": "Modul Eins", "start": "2021-03", "end": "2021-05" },
+          { "name": "Modul Zwei", "start": "2021-05", "end": "2021-08" }
+        ]
+      },
+      {
+        "id": "course-b",
+        "institution": "Beispiel-Online-Akademie",
+        "program": "Beispiel-Kurzkurs",
+        "start": "2023-05",
+        "end": "2023-07",
+        "details": []
+      }
+    ],
+    "achievements": {
+      "counters": [
+        { "value": 5, "suffix": "+", "label": "Jahre Erfahrung" },
+        { "type": "markets", "value": 3, "suffix": "", "label": "Märkte" },
+        { "type": "certs", "value": 3, "suffix": "", "label": "Zertifikate" }
+      ],
+      "awards": [
+        {
+          "title": "1. Preis, Beispiel-Wettbewerb",
+          "issuer": "Beispiel-Verband",
+          "context": "Verliehen während meines Studiums"
+        }
+      ]
+    },
+    "range": {
+      "industries": [
+        {
+          "id": "industry-a",
+          "name": "Branche A",
+          "text": "Was du in dieser Branche gemacht hast, in ein oder zwei Sätzen.",
+          "where": ["Firma A", "Firma B"]
+        },
+        {
+          "id": "industry-b",
+          "name": "Branche B",
+          "text": "Was du in dieser Branche gemacht hast, in ein oder zwei Sätzen.",
+          "where": ["Firma C"]
+        },
+        {
+          "id": "industry-c",
+          "name": "Branche C",
+          "text": "Was du in dieser Branche gemacht hast, in ein oder zwei Sätzen.",
+          "where": ["Firma D"]
+        }
+      ],
+      "modes": [
+        { "id": "onsite", "companies": [ { "name": "Firma C", "note": "Beispielstadt" } ] },
+        { "id": "remote", "companies": [ { "name": "Firma B" } ] },
+        { "id": "hybrid", "companies": [ { "name": "Firma A" }, { "name": "Firma D" } ] }
+      ],
+      "modesNote": "Ein Satz dazu, wie du dich auf die Arbeitsweise jedes Teams einstellst.",
+      "collab": {
+        "intro": "Ein Satz dazu, wie du mit anderen Teams zusammenarbeitest.",
+        "items": [
+          { "team": "Design", "text": "Wie du mit diesem Team arbeitest." },
+          { "team": "Vertrieb", "text": "Wie du mit diesem Team arbeitest." },
+          { "team": "Produkt", "text": "Wie du mit diesem Team arbeitest." }
+        ]
+      }
+    },
+    "recommendation": {
+      "quote": "Example recommendation text. Only publish a real recommendation if the author gave you permission.",
+      "translation": "Beispieltext für eine Empfehlung. Veröffentliche eine echte Empfehlung nur, wenn die Person es erlaubt hat.",
+      "author": "Example Person",
+      "role": "Example Job Title | Example Company",
+      "context": "Direkte Führungskraft · LinkedIn-Empfehlung · Juni 2023",
+      "url": "https://example.com/recommendation"
+    },
+    "languages": [
+      { "code": "es", "name": "Spanisch", "level": "Muttersprache", "steps": 4 },
+      { "code": "en", "name": "Englisch", "level": "Fließend", "steps": 3 },
+      { "code": "de", "name": "Deutsch", "level": "Grundkenntnisse bis mittel", "steps": 2 }
+    ],
+    "contact": {
+      "email": "you@example.com",
+      "linkedin": "https://www.linkedin.com/in/your-profile",
+      "location": "Deine Stadt, Dein Land",
+      "cta": "Schreib mir",
+      "downloadCv": "Lebenslauf herunterladen (PDF)"
+    }
+  }
+}

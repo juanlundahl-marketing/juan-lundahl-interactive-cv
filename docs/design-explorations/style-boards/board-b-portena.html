@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Board B · Cartelería porteña</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Sansita:ital,wght@1,700;1,800&family=Archivo:ital,wght@0,400;0,500;0,700;1,400&family=Chivo+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   STYLE BOARD B - "Cartelería porteña"
+   Street-sign plates, kiosk lettering and subte-ticket layouts on cream paper.
+   Proposed tokens for the real site (light = default).
+   ========================================================================== */
+:root {
+  color-scheme: light;
+  /* Paper */
+  --paper: #F4ECDC;          /* cream paper (page) */
+  --paper-2: #EADFC8;        /* aged band */
+  --surface: #FBF6EC;        /* cards */
+  --rule: #D8CBB0;           /* hairlines */
+  --rule-strong: #BFAE8C;
+
+  /* Ink */
+  --ink: #1B1B1F;            /* street-sign black */
+  --ink-2: #3D3A36;
+  --muted: #625B51;
+
+  /* Celeste, weathered */
+  --celeste: #6E9FC4;        /* faded sign blue: fills, rails, ornaments (non-text) */
+  --celeste-ink: #2E5E86;    /* readable celeste: links, italic accent */
+  --celeste-pale: #A8C8E0;   /* washes, hover fills */
+
+  /* Filete line */
+  --filete: #9A7232;         /* old-gold ornament line (non-text) */
+
+  /* Roles */
+  --primary: var(--ink);
+  --on-primary: var(--paper);
+  --plate-bg: var(--ink);
+  --plate-ink: var(--paper);
+  --ghost-stroke: rgba(46, 94, 134, 0.22);
+  --nav-bg: rgba(27, 27, 31, 0.94);
+  --nav-ink: #F4ECDC;
+
+  --shadow-sm: 0 1px 0 rgba(27, 27, 31, 0.08);
+  --shadow-md: 0 14px 30px -16px rgba(60, 40, 10, 0.35);
+  --shadow-lg: 0 30px 60px -28px rgba(60, 40, 10, 0.45);
+
+  --font-display: "Montserrat", "Segoe UI", system-ui, sans-serif;
+  --font-accent: "Sansita", "Georgia", serif;
+  --font-sans: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Chivo Mono", ui-monospace, Consolas, monospace;
+
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+  --gutter: 16px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (min-width: 720px) { :root { --gutter: 32px; } }
+
+/* Dark tokens: "Noche en Corrientes" (scoped to the dark strip on this board) */
+.theme-dark {
+  color-scheme: dark;
+  --paper: #16171B;
+  --paper-2: #1C1D22;
+  --surface: #202227;
+  --rule: #34363D;
+  --rule-strong: #4A4C55;
+  --ink: #F1E8D6;
+  --ink-2: #D9CFBC;
+  --muted: #A9A193;
+  --celeste: #8DB8DA;
+  --celeste-ink: #8DB8DA;
+  --celeste-pale: #2A3D4F;
+  --filete: #C9A35A;
+  --primary: #F1E8D6;
+  --on-primary: #16171B;
+  --plate-bg: #F1E8D6;
+  --plate-ink: #16171B;
+  --ghost-stroke: rgba(141, 184, 218, 0.16);
+  --nav-bg: rgba(241, 232, 214, 0.96);
+  --nav-ink: #16171B;
+  --shadow-md: 0 14px 30px -16px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 30px 60px -28px rgba(0, 0, 0, 0.8);
+  --noise: none;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; color: var(--ink); font-family: var(--font-sans); font-size: 16.5px; line-height: 1.55; overflow-x: hidden;
+  background-color: var(--paper); background-image: var(--noise);
+}
+img { max-width: 100%; display: block; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); font-weight: 800; line-height: 1.02; letter-spacing: -0.015em; }
+p { margin: 0; }
+em.acc { font-family: var(--font-accent); font-style: italic; font-weight: 800; color: var(--celeste-ink); letter-spacing: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); }
+.mono { font-family: var(--font-mono); }
+
+/* Street-sign plate (signature element) */
+.plate {
+  display: inline-flex; align-items: center; gap: 0.7em; position: relative;
+  background: var(--plate-bg); color: var(--plate-ink); border-radius: 5px; padding: 0.55em 0.95em 0.5em;
+  font: 700 0.74rem/1 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase;
+}
+.plate::after { content: ""; position: absolute; inset: 3px; border: 1px solid currentColor; border-radius: 3px; opacity: 0.55; pointer-events: none; }
+.plate small { font-family: var(--font-mono); font-weight: 400; letter-spacing: 0.04em; font-size: 0.85em; opacity: 0.8; }
+.plate.is-celeste { background: var(--celeste-ink); color: #FBF6EC; }
+
+.filete { display: block; color: var(--filete); }
+.filete-rule { width: 100%; height: 22px; }
+
+/* Board chrome */
+.board-head { padding: 56px 0 40px; border-bottom: 1.5px solid var(--ink); position: relative; }
+.board-head .tag { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.board-head h1 { font-size: clamp(2.3rem, 1.3rem + 4.4vw, 4.6rem); margin: 16px 0 20px; text-transform: uppercase; letter-spacing: 0.01em; }
+.board-head h1 em.acc { text-transform: none; font-size: 1.05em; }
+.board-head .why { max-width: 800px; color: var(--ink-2); font-size: 1.08rem; }
+.board-head .why + .why { margin-top: 10px; }
+.board-head .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+
+.blk { padding: 56px 0; border-bottom: 1px solid var(--rule-strong); }
+.blk-label { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+.blk-label h2 { font-size: 1.45rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.blk-label .note { color: var(--muted); font-size: 0.95rem; flex-basis: 100%; }
+
+/* ---------- Palette ---------- */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 14px; }
+.sw { background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); overflow: hidden; }
+.sw .chip-c { height: 92px; display: flex; align-items: flex-end; padding: 10px 12px; font-family: var(--font-display); font-weight: 900; font-size: 1.5rem; border-bottom: 1.5px solid var(--ink); }
+.sw .meta { padding: 12px 14px 14px; font-size: 0.86rem; }
+.sw .meta b { display: block; font-family: var(--font-mono); font-weight: 500; font-size: 0.8rem; }
+.sw .meta .hex { font-family: var(--font-mono); color: var(--muted); font-size: 0.78rem; }
+.sw .meta .role { color: var(--ink-2); margin-top: 6px; }
+.sw .meta .aa { margin-top: 6px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-2); background: var(--paper-2); border-radius: 4px; padding: 4px 7px; display: inline-block; }
+.subhead { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 28px 0 12px; }
+
+/* ---------- Type ---------- */
+.type-grid { display: grid; gap: 14px; }
+.spec { background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 22px 24px; display: grid; grid-template-columns: 230px 1fr; gap: 20px; align-items: center; }
+.spec .who { font-size: 0.85rem; color: var(--muted); }
+.spec .who b { display: block; color: var(--ink); font-family: var(--font-mono); font-weight: 500; font-size: 0.8rem; margin-bottom: 4px; }
+.spec .who a { color: var(--celeste-ink); }
+.spec .s-display { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: clamp(2rem, 1.2rem + 3vw, 3.6rem); line-height: 0.95; letter-spacing: 0; }
+.spec .s-accent { font-family: var(--font-accent); font-style: italic; font-weight: 800; font-size: clamp(2rem, 1.3rem + 2.4vw, 3.2rem); color: var(--celeste-ink); line-height: 1; }
+.spec .s-body { font-size: 1.06rem; max-width: 62ch; color: var(--ink-2); }
+.spec .s-mono { font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.06em; }
+.scale { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 10px; color: var(--muted); font-family: var(--font-mono); font-size: 0.72rem; }
+
+/* ---------- Shared components ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.6em; border: 1.5px solid var(--ink); cursor: pointer; text-decoration: none;
+  font: 700 0.86rem/1 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; padding: 0.95em 1.4em; border-radius: var(--radius-pill);
+  transition: transform 160ms var(--ease), background-color 160ms, color 160ms, box-shadow 160ms;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); border-color: var(--primary); box-shadow: 0 3px 0 var(--celeste); }
+.btn-primary .arw { width: 22px; height: 22px; border-radius: 50%; background: var(--celeste); color: #1B1B1F; display: grid; place-items: center; font-size: 0.8rem; margin-right: -0.5em; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 0 var(--celeste); }
+.btn-secondary { background: transparent; color: var(--ink); }
+.btn-secondary:hover { background: var(--ink); color: var(--paper); }
+.btn-ghost { border-color: transparent; color: var(--celeste-ink); padding-left: 0.3em; padding-right: 0.3em; text-decoration: underline; text-decoration-color: var(--filete); text-underline-offset: 5px; text-decoration-thickness: 1.5px; }
+.btn-icon { width: 44px; height: 44px; padding: 0; justify-content: center; background: transparent; color: var(--ink); }
+.btn:focus-visible, .cert:focus-visible, .stub:focus-visible { outline: 2px solid var(--celeste-ink); outline-offset: 3px; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 0.45em; padding: 0.5em 0.8em 0.45em; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--ink); color: var(--ink); background: var(--surface);
+  font: 600 0.72rem/1.1 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.chip.is-soft { background: var(--celeste-pale); border-color: var(--celeste-pale); color: #1B1B1F; }
+.chip.is-active { background: var(--ink); color: var(--paper); }
+.chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--celeste); }
+.theme-dark .chip.is-soft { color: var(--ink); }
+
+.dots { display: inline-flex; gap: 5px; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--ink); }
+.dots i.on { background: var(--celeste-ink); border-color: var(--celeste-ink); }
+
+/* ---------- Hero ---------- */
+.stage { position: relative; border: 1.5px solid var(--ink); border-radius: var(--radius-lg); overflow: hidden; background-color: var(--paper); background-image: var(--noise); }
+.stage-corners .c { position: absolute; width: 56px; height: 56px; color: var(--filete); opacity: 0.8; z-index: 2; pointer-events: none; }
+.stage-corners .tl { top: 10px; left: 10px; }
+.stage-corners .tr { top: 10px; right: 10px; transform: scaleX(-1); }
+.hero { position: relative; padding: 70px 56px 128px; display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 48px; align-items: center; min-height: 620px; isolation: isolate; }
+.hero .ghost {
+  position: absolute; z-index: -1; left: 50%; bottom: 64px; transform: translateX(-50%); white-space: nowrap; pointer-events: none;
+  font-family: var(--font-display); font-weight: 900; font-size: clamp(5rem, 1rem + 13vw, 13.5rem); line-height: 0.8; letter-spacing: 0.02em;
+  color: transparent; -webkit-text-stroke: 1.5px var(--ghost-stroke);
+}
+.hero .hello { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.hero .hello .plate { font-size: 0.86rem; }
+.hero .hello span:not(.plate) { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+.hero h1 { font-size: clamp(2.5rem, 1.3rem + 4.3vw, 5.2rem); margin: 22px 0 20px; }
+.hero h1 em.acc { display: inline-block; font-size: 1.04em; transform: rotate(-2deg); }
+.hero .lede { font-size: 1.12rem; color: var(--ink-2); max-width: 46ch; }
+.hero .tags { list-style: none; padding: 0; margin: 22px 0 28px; display: flex; flex-wrap: wrap; gap: 8px; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+.poster { position: relative; justify-self: center; width: min(100%, 340px); }
+.poster .frame { position: relative; background: var(--surface); border: 1.5px solid var(--ink); padding: 14px; box-shadow: var(--shadow-lg); transform: rotate(1.2deg); }
+.poster .frame::before { content: ""; position: absolute; inset: 7px; border: 1px solid var(--filete); pointer-events: none; }
+.poster .frame img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 28%; filter: grayscale(1) contrast(1.08) sepia(0.12); }
+.poster .frame .c { position: absolute; width: 38px; height: 38px; color: var(--filete); }
+.poster .frame .c.tl { top: 2px; left: 2px; }
+.poster .frame .c.tr { top: 2px; right: 2px; transform: scaleX(-1); }
+.poster .frame .c.bl { bottom: 2px; left: 2px; transform: scaleY(-1); }
+.poster .frame .c.br { bottom: 2px; right: 2px; transform: scale(-1, -1); }
+.poster .sign { position: absolute; left: 50%; bottom: -20px; transform: translateX(-50%) rotate(-1deg); white-space: nowrap; font-size: 0.82rem; padding: 0.7em 1.1em 0.65em; box-shadow: var(--shadow-md); }
+
+.navpill {
+  position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); display: flex; align-items: center; gap: 2px; z-index: 3;
+  background: var(--nav-bg); color: var(--nav-ink); border-radius: var(--radius-pill); padding: 6px; box-shadow: var(--shadow-md);
+  white-space: nowrap; max-width: calc(100% - 24px); overflow: hidden;
+}
+.navpill .mark { width: 38px; height: 38px; border-radius: 50%; background: var(--celeste); color: #1B1B1F; display: grid; place-items: center; font: 900 0.85rem/1 var(--font-display); flex: none; box-shadow: inset 0 0 0 2px #1B1B1F, inset 0 0 0 3.5px var(--celeste); }
+.navpill a { font: 600 0.74rem/1 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; color: inherit; text-decoration: none; padding: 11px 12px; border-radius: var(--radius-pill); opacity: 0.86; }
+.navpill a.on { background: var(--nav-ink); color: var(--nav-bg); opacity: 1; }
+.theme-dark .navpill a.on { color: #F1E8D6; background: #16171B; }
+.navpill .sep { width: 1px; height: 22px; background: currentColor; opacity: 0.25; margin: 0 6px; }
+.navpill .lang { font-family: var(--font-mono); font-size: 0.76rem; padding: 0 10px; }
+
+/* ---------- Boleto (Marketing ID) ---------- */
+.id-wrap { display: grid; grid-template-columns: minmax(0, 560px) 1fr; gap: 48px; align-items: center; }
+.boleto { display: flex; filter: drop-shadow(0 18px 24px rgba(60, 40, 10, 0.22)); transform: rotate(-1.5deg); transition: transform 400ms var(--ease); }
+.boleto:hover { transform: rotate(0) translateY(-3px); }
+.boleto .main {
+  flex: 1; min-width: 0; background: var(--surface); border-radius: 12px 0 0 12px; position: relative; overflow: hidden;
+  -webkit-mask: radial-gradient(circle 10px at 100% 0, transparent 9.5px, #000 10px) top right / 100% 51% no-repeat, radial-gradient(circle 10px at 100% 100%, transparent 9.5px, #000 10px) bottom right / 100% 51% no-repeat;
+          mask: radial-gradient(circle 10px at 100% 0, transparent 9.5px, #000 10px) top right / 100% 51% no-repeat, radial-gradient(circle 10px at 100% 100%, transparent 9.5px, #000 10px) bottom right / 100% 51% no-repeat;
+}
+.boleto .top { background: var(--celeste); color: #1B1B1F; display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; gap: 12px; }
+.boleto .top b { font: 900 0.95rem/1 var(--font-display); letter-spacing: 0.16em; text-transform: uppercase; }
+.boleto .top span { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; }
+.boleto .body { display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding: 16px 18px 12px; }
+.boleto .ph { border: 1.5px solid var(--ink); padding: 3px; background: var(--surface); }
+.boleto .ph img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: 50% 25%; filter: grayscale(1) contrast(1.06); }
+.boleto h4 { font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.02em; }
+.boleto .role { font-size: 0.9rem; color: var(--ink-2); margin-top: 4px; line-height: 1.3; }
+.boleto .route { margin-top: 10px; display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-2); flex-wrap: wrap; }
+.boleto .route .ln { flex: 1; min-width: 30px; height: 4px; background: var(--celeste); border-radius: 2px; position: relative; }
+.boleto .route .ln::before, .boleto .route .ln::after { content: ""; position: absolute; top: -3px; width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 2px solid #1B1B1F; }
+.theme-dark .boleto .route .ln::before, .theme-dark .boleto .route .ln::after { border-color: var(--ink); }
+.boleto .route .ln::before { left: -2px; } .boleto .route .ln::after { right: -2px; }
+.boleto dl { display: grid; grid-template-columns: repeat(4, auto); gap: 8px 14px; margin: 0; padding: 10px 18px 14px; border-top: 1px dashed var(--rule-strong); }
+.boleto dt { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.boleto dd { margin: 2px 0 0; font: 700 0.8rem/1.25 var(--font-display); }
+.boleto dd.home { color: var(--celeste-ink); }
+.boleto .stripe { height: 12px; background: repeating-linear-gradient(90deg, #1B1B1F 0 18px, #2a2a30 18px 20px); }
+.stub {
+  width: 128px; flex: none; background: var(--surface); border-radius: 0 12px 12px 0; position: relative; padding: 14px 12px; cursor: pointer;
+  border-left: 2px dashed var(--rule-strong);
+  -webkit-mask: radial-gradient(circle 10px at 0 0, transparent 9.5px, #000 10px) top left / 100% 51% no-repeat, radial-gradient(circle 10px at 0 100%, transparent 9.5px, #000 10px) bottom left / 100% 51% no-repeat;
+          mask: radial-gradient(circle 10px at 0 0, transparent 9.5px, #000 10px) top left / 100% 51% no-repeat, radial-gradient(circle 10px at 0 100%, transparent 9.5px, #000 10px) bottom left / 100% 51% no-repeat;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 10px;
+}
+.stub .valid { font: 800 0.66rem/1 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--celeste-ink); border: 1.5px solid currentColor; border-radius: 4px; padding: 5px 6px; transform: rotate(-6deg); }
+.stub .num { white-space: nowrap; writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.14em; }
+.stub .holes { display: grid; grid-template-columns: repeat(3, 12px); gap: 6px; }
+.stub .holes i { width: 12px; height: 12px; border-radius: 50%; border: 1px dashed var(--rule-strong); }
+.stub .holes i.p { background: var(--paper); border: 1.5px solid var(--ink-2); box-shadow: inset 0 2px 2px rgba(0,0,0,.18); }
+.stub .lbl { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; text-align: center; }
+.id-notes h3 { font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 10px; }
+.id-notes p { color: var(--ink-2); max-width: 52ch; }
+.id-notes ul { color: var(--ink-2); padding-left: 1.1em; margin: 14px 0 0; }
+.id-notes li { margin: 6px 0; }
+
+/* ---------- Section heading ---------- */
+.sec-head { max-width: 820px; }
+.sec-head h2 { font-size: clamp(2.3rem, 1.2rem + 4vw, 4.8rem); margin: 20px 0 16px; text-transform: uppercase; font-weight: 900; letter-spacing: 0; }
+.sec-head h2 em.acc { display: block; text-transform: none; font-size: 1.02em; transform: rotate(-1.5deg); transform-origin: left; margin-top: 0.08em; }
+.sec-head p { color: var(--ink-2); font-size: 1.1rem; max-width: 56ch; }
+.sec-head .filete-rule { margin-top: 26px; max-width: 520px; }
+
+/* ---------- Work card ---------- */
+.work { position: relative; background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius-lg); padding: 30px 30px 26px; box-shadow: 6px 6px 0 var(--paper-2), 6px 6px 0 1.5px var(--ink); transition: transform 200ms var(--ease), box-shadow 200ms; }
+.work:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--celeste-pale), 8px 8px 0 1.5px var(--ink); }
+.work .hd { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.work h3 { font-size: 2.2rem; text-transform: uppercase; font-weight: 900; letter-spacing: 0.01em; }
+.work .role { font-weight: 700; color: var(--ink-2); margin-top: 6px; }
+.work .meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.work .stamp { font: 800 0.7rem/1 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--celeste-ink); border: 2px solid currentColor; border-radius: 6px; padding: 7px 9px; transform: rotate(-4deg); }
+.work .sum { color: var(--ink-2); margin-top: 14px; max-width: 64ch; }
+.work ul { margin: 14px 0 0; padding: 0; list-style: none; }
+.work li { padding-left: 22px; position: relative; margin: 6px 0; color: var(--ink-2); }
+.work li::before { content: ""; position: absolute; left: 2px; top: 0.55em; width: 8px; height: 8px; background: var(--celeste); transform: rotate(45deg); }
+.work .ft { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px dashed var(--rule-strong); gap: 12px; flex-wrap: wrap; }
+.work .c { position: absolute; width: 34px; height: 34px; color: var(--filete); opacity: 0.75; }
+.work .c.tr { top: 6px; right: 6px; transform: scaleX(-1); }
+
+/* ---------- Achievements ---------- */
+.ach { display: grid; grid-template-columns: repeat(4, 1fr); border: 4px double var(--ink); border-radius: var(--radius); background: var(--surface); }
+.stat { padding: 24px 22px; position: relative; }
+.stat + .stat { border-left: 1.5px solid var(--ink); }
+.stat .v { font: 900 3.8rem/0.9 var(--font-display); letter-spacing: -0.02em; }
+.stat .v sup { font-family: var(--font-accent); font-style: italic; font-size: 0.55em; color: var(--celeste-ink); vertical-align: 0.5em; margin-left: 2px; }
+.stat .l { font: 600 0.74rem/1.35 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); margin-top: 12px; }
+.award { margin-top: 16px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.award .txt { color: var(--ink-2); }
+
+/* ---------- Certifications ---------- */
+.certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(205px, 1fr)); gap: 12px; }
+.cert {
+  display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; min-height: 132px; text-decoration: none; color: var(--ink);
+  background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius);
+  transition: transform 220ms var(--ease), background-color 220ms, color 220ms, box-shadow 220ms;
+}
+.cert .iss { font: 700 0.64rem/1 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--celeste-ink); border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
+.cert .nm { font: 700 1rem/1.25 var(--font-sans); }
+.cert .dt { margin-top: auto; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+.cert .go { opacity: 0; transform: translateX(-4px); transition: 220ms var(--ease); font: 800 0.7rem/1 var(--font-display); letter-spacing: 0.1em; }
+.cert:hover, .cert.demo-hover { background: var(--ink); color: var(--paper); transform: translateY(-3px) rotate(-0.6deg); box-shadow: 0 4px 0 var(--celeste); }
+.cert:hover .iss, .cert.demo-hover .iss { color: var(--celeste-pale); border-color: rgba(244,236,220,.25); }
+.cert:hover .dt, .cert.demo-hover .dt { color: var(--paper-2); }
+.cert:hover .go, .cert.demo-hover .go { opacity: 1; transform: none; color: var(--celeste-pale); }
+.theme-dark .cert:hover .iss, .theme-dark .cert.demo-hover .iss { color: var(--celeste-ink); }
+.theme-dark .cert.demo-hover { background: var(--ink); color: #16171B; }
+.theme-dark .cert.demo-hover .iss { color: #2E5E86; border-color: rgba(0,0,0,.15); }
+.theme-dark .cert.demo-hover .dt, .theme-dark .cert.demo-hover .go { color: #3D3A36; }
+
+/* ---------- Markets: subte line ---------- */
+.line { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); padding: 34px 0 6px; }
+.line::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 52px; height: 8px; border-radius: 4px; background: var(--celeste); }
+.st { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+.st .dotc { width: 44px; height: 44px; border-radius: 50%; background: var(--surface); border: 4px solid var(--ink); position: relative; z-index: 1; display: grid; place-items: center; font: 900 0.62rem/1 var(--font-display); letter-spacing: 0.04em; }
+.st b { font: 900 1.15rem/1 var(--font-display); letter-spacing: 0.06em; }
+.st .txt { display: flex; flex-direction: column; gap: 5px; align-items: inherit; }
+.st small { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); }
+.st.home .dotc { width: 56px; height: 56px; margin-top: -6px; background: var(--ink); color: var(--paper); border-color: var(--ink); box-shadow: 0 0 0 5px var(--paper), 0 0 0 7px var(--celeste-ink); }
+.st.home b { color: var(--celeste-ink); }
+.markets-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; align-items: center; }
+
+/* ---------- Kit ---------- */
+.kit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.kit > div { background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 20px; }
+.kit h4 { font-family: var(--font-mono); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.lv { display: grid; grid-template-columns: 1fr auto; gap: 10px 14px; align-items: center; font: 600 0.78rem/1 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* ---------- Dark strip ---------- */
+.dark-strip { background: var(--paper); color: var(--ink); padding: 44px 0; }
+.dark-strip .grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
+.dark-strip .mini { position: relative; overflow: hidden; border: 1.5px solid var(--rule-strong); border-radius: var(--radius-lg); padding: 30px; background: var(--paper-2); isolation: isolate; }
+.dark-strip .mini .ghost { position: absolute; z-index: -1; right: -8px; bottom: -12px; font: 900 6.5rem/1 var(--font-display); color: transparent; -webkit-text-stroke: 1.5px var(--ghost-stroke); }
+.dark-strip .mini h3 { font-size: 2.3rem; text-transform: uppercase; margin: 16px 0 18px; font-weight: 900; }
+.dark-strip .mini h3 em.acc { text-transform: none; }
+.dark-strip .dsw { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px; }
+.dark-strip .dsw div { border-radius: 6px; padding: 34px 8px 8px; font-family: var(--font-mono); font-size: 0.66rem; border: 1px solid var(--rule-strong); }
+.dark-strip .side { display: grid; gap: 14px; align-content: start; }
+.dark-strip .ach { grid-template-columns: 1fr 1fr; }
+.dark-strip .stat .v { font-size: 3rem; }
+
+/* ---------- Mobile preview ---------- */
+.phone-row { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+.phone { width: 375px; max-width: 100%; border: 10px solid #1B1B1F; border-radius: 44px; overflow: hidden; background-color: var(--paper); background-image: var(--noise); box-shadow: var(--shadow-lg); flex: none; }
+.phone .screen { position: relative; height: 780px; overflow: hidden; isolation: isolate; }
+.phone .m-hero { padding: 44px 16px 0; }
+.phone .m-ghost { position: absolute; z-index: -1; left: -4px; top: 655px; font: 900 5.6rem/1 var(--font-display); color: transparent; -webkit-text-stroke: 1.2px var(--ghost-stroke); }
+.phone .m-top { display: flex; gap: 14px; align-items: flex-end; margin-bottom: 20px; }
+.phone .m-photo { width: 128px; flex: none; background: var(--surface); border: 1.5px solid var(--ink); padding: 8px; transform: rotate(1.5deg); position: relative; box-shadow: var(--shadow-md); }
+.phone .m-photo::before { content: ""; position: absolute; inset: 4px; border: 1px solid var(--filete); }
+.phone .m-photo img { aspect-ratio: 4/5; width: 100%; object-fit: cover; object-position: 50% 28%; filter: grayscale(1) contrast(1.08) sepia(.12); }
+.phone h1 { font-size: 2.3rem; margin: 14px 0 12px; }
+.phone h1 em.acc { display: inline-block; transform: rotate(-2deg); }
+.phone .lede { font-size: 0.98rem; color: var(--ink-2); }
+.phone .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 18px; }
+.phone .navpill { bottom: 16px; }
+.phone .navpill a { padding: 11px 9px; font-size: 0.68rem; }
+.phone-notes { flex: 1; min-width: 260px; }
+.phone-notes h3 { font-size: 1.3rem; text-transform: uppercase; }
+.phone-notes ul { padding-left: 1.1em; color: var(--ink-2); }
+.phone-notes li { margin: 8px 0; }
+
+/* ---------- Changes ---------- */
+.table-scroll { overflow-x: auto; }
+.changes { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: var(--surface); border: 1.5px solid var(--ink); }
+.changes th, .changes td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.changes th { font-family: var(--font-mono); font-weight: 500; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper); background: var(--ink); }
+.changes td code { font-family: var(--font-mono); font-size: 0.8rem; }
+.changes .sw-i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; border: 1px solid rgba(0,0,0,.2); }
+.list-cols { columns: 2; column-gap: 32px; color: var(--ink-2); padding-left: 1.1em; margin-top: 18px; }
+.list-cols li { margin: 0 0 8px; break-inside: avoid; }
+footer.board-foot { padding: 34px 0 60px; color: var(--muted); font-size: 0.9rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding: 56px 24px 130px; }
+  .poster { order: -1; width: min(100%, 250px); justify-self: start; }
+  .id-wrap { grid-template-columns: 1fr; }
+  .ach { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(3) { border-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1.5px solid var(--ink); }
+  .kit { grid-template-columns: 1fr; }
+  .dark-strip .grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .spec { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
+  .hero { padding: 48px 18px 120px; min-height: 0; }
+  .stage-corners .c { width: 40px; height: 40px; }
+  .navpill a:not(.on) { display: none; }
+  .boleto { flex-direction: column; transform: none; }
+  .boleto .main { border-radius: 12px 12px 0 0; -webkit-mask: none; mask: none; }
+  .stub { width: 100%; flex-direction: row; border-left: 0; border-top: 2px dashed var(--rule-strong); border-radius: 0 0 12px 12px; -webkit-mask: none; mask: none; }
+  .stub .num { writing-mode: horizontal-tb; transform: none; }
+  .boleto dl { grid-template-columns: repeat(2, auto); }
+  .boleto .body { grid-template-columns: 80px 1fr; }
+  .line { grid-template-columns: 1fr; gap: 18px; padding: 0 0 0 4px; }
+  .line::before { left: 24px; right: auto; top: 22px; bottom: 30px; width: 8px; height: auto; }
+  .st { flex-direction: row; text-align: left; gap: 14px; }
+  .st .txt { align-items: flex-start; }
+  .st.home .dotc { margin-left: -6px; margin-top: 0; }
+  .stat .v { font-size: 2.8rem; }
+  .list-cols { columns: 1; }
+  .phone { border-width: 6px; border-radius: 30px; }
+  .work { padding: 24px 20px 20px; }
+  .work h3 { font-size: 1.8rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- Original filete-inspired ornaments (own geometry: a whip line ending in a spiral, a single leaf, a lozenge rule) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="f-corner" viewBox="0 0 60 60">
+      <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M4 56 C4 32 16 14 38 8 C50 5 57 12 54 20 C51 27 42 26 43 20 C44 16 49 16 50 19"/>
+        <path d="M4 56 L4 40 M4 56 L20 56"/>
+        <path d="M14 36 C10 27 15 19 25 16 C24 25 20 31 14 36 Z" fill="currentColor" fill-opacity="0.12"/>
+        <path d="M16 33 C18 27 20 23 24 19" stroke-width="0.9"/>
+      </g>
+      <circle cx="4" cy="56" r="2.2" fill="currentColor"/>
+    </symbol>
+    <symbol id="f-rule" viewBox="0 0 240 22" preserveAspectRatio="xMinYMid meet">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+        <path d="M0 11 H96"/>
+        <path d="M144 11 H240"/>
+        <path d="M96 11 C100 3 109 3 109 9 C109 13 104 13 104 10"/>
+        <path d="M144 11 C140 19 131 19 131 13 C131 9 136 9 136 12"/>
+        <path d="M120 3 L127 11 L120 19 L113 11 Z" fill="currentColor" fill-opacity="0.15"/>
+      </g>
+      <circle cx="120" cy="11" r="1.8" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="board-head">
+  <div class="wrap">
+    <p class="tag">Style board B of 2 · Juan Lundahl portfolio</p>
+    <h1>Cartelería <em class="acc">porteña</em></h1>
+    <p class="why"><strong>Rationale.</strong> Buenos Aires as a reading experience: black enamel street plates, kiosk lettering, subte tickets and the thin gold scroll-lines of sign painters, all on cream paper with a celeste that looks a little sun-faded. Warm and urban, but kept to three colours and generous white space so it still reads as a professional portfolio.</p>
+    <p class="why">Type is local too: <strong>Montserrat</strong> (Julieta Ulanovsky, drawn from the old signs of the Montserrat neighbourhood), <strong>Sansita</strong> and <strong>Archivo</strong> (Omnibus-Type) and <strong>Chivo Mono</strong> (Omnibus-Type). The ornament is original geometry inspired by the filete tradition (a whip line, one spiral, one leaf), never copied from any painter's work.</p>
+    <div class="pills">
+      <span class="plate">Plate <small>eyebrows</small></span>
+      <span class="chip is-soft"><span class="dot"></span>Ink · cream · celeste</span>
+      <span class="chip">Filete as hairline only</span>
+    </div>
+    <svg class="filete filete-rule" style="max-width:420px;margin-top:26px" aria-hidden="true"><use href="#f-rule"/></svg>
+  </div>
+</header>
+
+<!-- 01 PALETTE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">01</span><h2>Palette</h2><p class="note">WCAG 2.x ratios. Weathered celeste and filete gold are non-text colours; readable celeste is --celeste-ink.</p></div>
+    <div class="swatches" id="sw-light"></div>
+    <p class="subhead">Dark theme tokens · "Noche en Corrientes"</p>
+    <div class="swatches" id="sw-dark"></div>
+  </div>
+</section>
+
+<!-- 02 TYPE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">02</span><h2>Type specimen</h2><p class="note">Signage caps for display, a painted italic for one accent word, a sturdy grotesk for reading.</p></div>
+    <div class="type-grid">
+      <div class="spec">
+        <div class="who"><b>Display · Montserrat 800 / 900</b>Julieta Ulanovsky (AR). <a href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener">Google Fonts</a><br>Uppercase for plates and section titles, sentence case for the hero.</div>
+        <div><div class="s-display">Many industries.</div><div class="scale"><span>H1 5.2rem</span><span>H2 4.8rem</span><span>Plate .74rem +14%</span><span>Stat 3.8rem</span></div></div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Accent · Sansita ExtraBold Italic</b>Omnibus-Type (AR). <a href="https://fonts.google.com/specimen/Sansita" target="_blank" rel="noopener">Google Fonts</a><br>Kiosk / hand-painted voice. One word per heading, tilted -2°.</div>
+        <div class="s-accent">One method.</div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Body · Archivo 400 / 500 / 700</b>Omnibus-Type (AR). <a href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Google Fonts</a><br>16.5px / 1.55.</div>
+        <p class="s-body">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Mono · Chivo Mono 400 / 500</b>Omnibus-Type (AR). <a href="https://fonts.google.com/specimen/Chivo+Mono" target="_blank" rel="noopener">Google Fonts</a><br>Ticket numbers, dates, metadata.</div>
+        <p class="s-mono">Nº MKT-2016-JL · MAR 2026 – PRESENT · BUENOS AIRES</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 HERO -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">03</span><h2>Hero</h2><p class="note">Greeting as a street plate. Portrait framed like a kiosk poster with a gold inner line and four filete corners; "Buenos Aires" plate below. LUNDAHL behind, as an outlined sign-painter's sketch.</p></div>
+    <div class="stage">
+      <div class="stage-corners" aria-hidden="true">
+        <svg class="c tl"><use href="#f-corner"/></svg><svg class="c tr"><use href="#f-corner"/></svg>
+      </div>
+      <div class="hero">
+        <div class="ghost" aria-hidden="true">LUNDAHL</div>
+        <div>
+          <p class="hello"><span class="plate">¡Hola!</span><span>I'm Juan Lundahl</span></p>
+          <h1>AI &amp; Marketing <em class="acc">Automation</em> Specialist</h1>
+          <p class="lede">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+          <ul class="tags">
+            <li class="chip">AI</li><li class="chip">Automation</li><li class="chip">CRM Optimization</li><li class="chip">Martech Stack</li><li class="chip">Sales &amp; Marketing Ops</li>
+          </ul>
+          <div class="ctas">
+            <a class="btn btn-primary" href="#">Explore work <span class="arw" aria-hidden="true">→</span></a>
+            <a class="btn btn-secondary" href="#">Resume</a>
+          </div>
+        </div>
+        <figure class="poster" style="margin:0">
+          <div class="frame">
+            <img src="../../../assets/img/juan.jpg" alt="Portrait of Juan Lundahl">
+            <svg class="c tl" aria-hidden="true"><use href="#f-corner"/></svg><svg class="c tr" aria-hidden="true"><use href="#f-corner"/></svg>
+            <svg class="c bl" aria-hidden="true"><use href="#f-corner"/></svg><svg class="c br" aria-hidden="true"><use href="#f-corner"/></svg>
+          </div>
+          <figcaption class="plate sign">Buenos Aires <small>AR</small></figcaption>
+        </figure>
+      </div>
+      <nav class="navpill" aria-label="Sample navigation">
+        <span class="mark">JL</span>
+        <a href="#" class="on">About</a><a href="#">Skills</a><a href="#">Work</a><a href="#">Range</a><a href="#">Certifications</a><a href="#">Contact</a>
+        <span class="sep"></span><span class="lang">EN ▾</span>
+        <button class="btn btn-icon" style="width:36px;height:36px;border:0;color:inherit" aria-label="Toggle dark mode">◐</button>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- 04 MARKETING ID -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">04</span><h2>Marketing ID · the boleto</h2><p class="note">Inspired by a generic transit ticket (perforated stub, route line, punch holes). No national ID layout, no crest, no official card design.</p></div>
+    <div class="id-wrap">
+      <article class="boleto" aria-label="Marketing ID: Juan Lundahl, AI &amp; Marketing Automation Specialist">
+        <div class="main">
+          <header class="top"><b>Boleto · Marketing ID</b><span>Nº 2016</span></header>
+          <div class="body">
+            <div class="ph"><img src="../../../assets/img/juan.jpg" alt=""></div>
+            <div>
+              <h4>Juan Lundahl</h4>
+              <p class="role">AI &amp; Marketing Automation Specialist</p>
+              <div class="route"><span>BUENOS AIRES</span><span class="ln" aria-hidden="true"></span><span>NA · EMEA · LATAM</span></div>
+            </div>
+          </div>
+          <dl>
+            <div><dt>Experience</dt><dd>6+ years</dd></div>
+            <div><dt>Focus</dt><dd>AI · Automation · CRM</dd></div>
+            <div><dt>Markets</dt><dd>NA · EMEA · LATAM</dd></div>
+            <div><dt>Based in</dt><dd class="home">Buenos Aires, AR</dd></div>
+          </dl>
+          <div class="stripe" aria-hidden="true"></div>
+        </div>
+        <div class="stub" tabindex="0" role="button" aria-label="Punch the ticket">
+          <span class="valid">Active</span>
+          <span class="num">MKT-2016-JL</span>
+          <div class="holes" aria-hidden="true"><i class="p"></i><i class="p"></i><i></i><i></i><i></i><i></i></div>
+          <span class="lbl">Tap to punch</span>
+        </div>
+      </article>
+      <div class="id-notes">
+        <h3>What changes from today's card</h3>
+        <p>The lanyard becomes a ticket pinned at a slight angle. Same "play with it" idea, new gesture: tapping the stub punches a hole (try it), and hover straightens it.</p>
+        <ul>
+          <li>Celeste header band with ticket title in spaced Montserrat caps.</li>
+          <li>Route line: Buenos Aires → NA · EMEA · LATAM, Argentina as origin and home base.</li>
+          <li>Runes and barcode replaced by the stub number and a dark magnetic stripe.</li>
+          <li>On mobile the stub drops below the ticket (horizontal tear line).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SECTION HEADING -->
+<section class="blk" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">05</span><h2>Section heading</h2></div>
+    <header class="sec-head">
+      <span class="plate">Range <small>Nº 05</small></span>
+      <h2>Many industries. <em class="acc">One method.</em></h2>
+      <p>Every sector has its own language. My approach stays the same: understand the audience, build the right system and keep improving it.</p>
+      <svg class="filete filete-rule" aria-hidden="true"><use href="#f-rule"/></svg>
+    </header>
+  </div>
+</section>
+
+<!-- 06 WORK -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">06</span><h2>Work card</h2><p class="note">Ink outline with an offset "printed" shadow; "Current role" is a rubber stamp; hover shifts the shadow to celeste.</p></div>
+    <article class="work">
+      <svg class="c tr" aria-hidden="true"><use href="#f-corner"/></svg>
+      <div class="hd">
+        <div>
+          <h3>VU Inc.</h3>
+          <p class="role">Marketing &amp; Automation Specialist</p>
+        </div>
+        <div class="meta" style="margin-right:36px"><span class="stamp">Current role</span></div>
+      </div>
+      <p class="sum">Marketing and automation role focused on the martech stack and AI-driven campaigns.</p>
+      <ul><li>Martech stack and automation infrastructure</li><li>AI integration in campaigns</li></ul>
+      <div class="ft">
+        <div class="row"><span class="chip">Mar 2026 – Present</span><span class="chip">Hybrid</span><span class="chip is-soft">Cybersecurity &amp; digital identity</span></div>
+        <button class="btn btn-secondary">Details +</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 07 ACHIEVEMENTS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">07</span><h2>Achievements</h2><p class="note">A kiosk price board: double ink frame, single dividers, no ornaments inside the numbers.</p></div>
+    <div class="ach">
+      <div class="stat"><div class="v">6<sup>+</sup></div><p class="l">Years of experience</p></div>
+      <div class="stat"><div class="v">3</div><p class="l">Markets: NA · EMEA · LATAM</p></div>
+      <div class="stat"><div class="v">10</div><p class="l">Certifications</p></div>
+      <div class="stat"><div class="v">1</div><p class="l">ADEPA Prize</p></div>
+    </div>
+    <div class="award"><span class="plate is-celeste">1st Prize · University Journalism</span><span class="txt">Association of Argentine Journalistic Entities (ADEPA)</span></div>
+  </div>
+</section>
+
+<!-- 08 CERTS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">08</span><h2>Certifications</h2><p class="note">Hover flips the label to an ink plate, tilts it slightly and adds a celeste underline shadow. First card pinned in hover state.</p></div>
+    <div class="certs" id="certs"></div>
+  </div>
+</section>
+
+<!-- 09 MARKETS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">09</span><h2>Markets</h2><p class="note">Drawn as a generic subte line diagram; Buenos Aires is the terminal station and home base. Chip version below for compact spots.</p></div>
+    <div class="line" role="list">
+      <div class="st" role="listitem"><span class="dotc">NA</span><span class="txt"><b>NA</b><small>North America</small></span></div>
+      <div class="st" role="listitem"><span class="dotc">EMEA</span><span class="txt"><b>EMEA</b><small>Europe, Middle East &amp; Africa</small></span></div>
+      <div class="st" role="listitem"><span class="dotc">LA</span><span class="txt"><b>LATAM</b><small>Latin America</small></span></div>
+      <div class="st home" role="listitem"><span class="dotc">BA</span><span class="txt"><b>Argentina</b><small>Home base · Buenos Aires</small></span></div>
+    </div>
+    <div class="markets-chips">
+      <span class="chip">NA</span><span class="chip">EMEA</span><span class="chip is-active">LATAM</span>
+      <span class="plate is-celeste">Argentina <small>home base</small></span>
+    </div>
+  </div>
+</section>
+
+<!-- 10 KIT -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">10</span><h2>Buttons, chips, level dots</h2></div>
+    <div class="kit">
+      <div>
+        <h4>Buttons</h4>
+        <div class="row">
+          <a class="btn btn-primary" href="#">Get in touch <span class="arw" aria-hidden="true">→</span></a>
+          <a class="btn btn-secondary" href="#">Download CV (PDF)</a>
+          <a class="btn btn-ghost" href="#">See it on LinkedIn</a>
+          <button class="btn btn-icon" aria-label="Toggle dark mode">◐</button>
+        </div>
+      </div>
+      <div>
+        <h4>Chips &amp; plates</h4>
+        <div class="row">
+          <span class="chip">SEO</span>
+          <span class="chip is-soft"><span class="dot"></span>HubSpot CRM</span>
+          <span class="chip is-active">Retention &amp; Automation</span>
+          <span class="chip">Spanish · Native</span>
+          <span class="plate">Work <small>Nº 03</small></span>
+        </div>
+      </div>
+      <div>
+        <h4>Level dots</h4>
+        <div class="lv">
+          <span>Expert</span><span class="dots" aria-label="4 of 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+          <span>Advanced</span><span class="dots" aria-label="3 of 4"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+          <span>Intermediate</span><span class="dots" aria-label="2 of 4"><i class="on"></i><i class="on"></i><i></i><i></i></span>
+          <span>Basic</span><span class="dots" aria-label="1 of 4"><i class="on"></i><i></i><i></i><i></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 DARK -->
+<section class="theme-dark dark-strip">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">11</span><h2>Dark mode strip</h2><p class="note">"Noche en Corrientes": asphalt black, cream lettering, lit celeste, brighter gold filete. Plates invert to cream with ink text.</p></div>
+    <div class="grid">
+      <div class="mini">
+        <div class="ghost" aria-hidden="true">LUNDAHL</div>
+        <span class="plate">About <small>Nº 01</small></span>
+        <h3>Who I <em class="acc">am.</em></h3>
+        <div class="row">
+          <a class="btn btn-primary" href="#">Explore work <span class="arw" aria-hidden="true">→</span></a>
+          <a class="btn btn-secondary" href="#">Resume</a>
+          <span class="chip is-soft"><span class="dot"></span>HubSpot CRM</span>
+        </div>
+        <svg class="filete filete-rule" style="max-width:300px;margin-top:18px" aria-hidden="true"><use href="#f-rule"/></svg>
+        <div class="dsw">
+          <div style="background:#16171B">paper<br>#16171B</div>
+          <div style="background:#202227">surface<br>#202227</div>
+          <div style="background:#8DB8DA;color:#16171B">celeste<br>#8DB8DA</div>
+          <div style="background:#F1E8D6;color:#16171B">ink<br>#F1E8D6</div>
+        </div>
+      </div>
+      <div class="side">
+        <div class="ach"><div class="stat"><div class="v">10</div><p class="l">Certifications</p></div><div class="stat"><div class="v">6<sup>+</sup></div><p class="l">Years</p></div></div>
+        <a class="cert" href="#"><span class="iss">HubSpot</span><span class="nm">HubSpot Inbound</span><span class="dt">Nov 2025 <span class="go">View →</span></span></a>
+        <a class="cert demo-hover" href="#"><span class="iss">Coderhouse</span><span class="nm">Growth Marketing</span><span class="dt">Jul 2022 <span class="go">View →</span></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 MOBILE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">12</span><h2>Mobile · 375px</h2></div>
+    <div class="phone-row">
+      <div class="phone">
+        <div class="screen">
+          <div class="m-ghost" aria-hidden="true">LUNDAHL</div>
+          <div class="m-hero">
+            <div class="m-top">
+              <div class="m-photo"><img src="../../../assets/img/juan.jpg" alt="Portrait of Juan Lundahl"></div>
+              <span class="plate" style="font-size:.66rem">Buenos Aires <small>AR</small></span>
+            </div>
+            <p style="display:flex;gap:10px;align-items:center"><span class="plate">¡Hola!</span><span class="mono" style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)">I'm Juan Lundahl</span></p>
+            <h1>AI &amp; Marketing <em class="acc">Automation</em> Specialist</h1>
+            <p class="lede">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+            <div class="tags"><span class="chip">AI</span><span class="chip">Automation</span><span class="chip">CRM Optimization</span><span class="chip">Martech Stack</span></div>
+            <div class="row"><a class="btn btn-primary" href="#">Explore work <span class="arw" aria-hidden="true">→</span></a><a class="btn btn-secondary" href="#">Resume</a></div>
+          </div>
+          <nav class="navpill" aria-label="Sample mobile navigation">
+            <span class="mark">JL</span><a href="#" class="on">About</a><a href="#">Skills</a><a href="#">Work</a><span class="sep"></span><span class="lang">EN</span>
+          </nav>
+        </div>
+      </div>
+      <div class="phone-notes">
+        <h3>Mobile rules</h3>
+        <ul>
+          <li>Poster portrait shrinks to 128px and sits beside the "Buenos Aires" plate, above the headline.</li>
+          <li>16px gutter; H1 2.3rem Montserrat 800 with the Sansita accent word.</li>
+          <li>Filete corners shrink to 40px and appear only on the hero frame and featured cards.</li>
+          <li>Boleto stacks: stub tears off below; subte line turns vertical.</li>
+          <li>Outlined LUNDAHL sits low and is clipped, so it never causes horizontal scroll.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 CHANGES -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="plate">13</span><h2>What would change in the real site</h2><p class="note"><code>css/tokens.css</code> values, the font link in <code>index.html</code>, plus three new reusable pieces: <code>.plate</code>, the filete SVG sprite and the paper noise background.</p></div>
+    <div class="table-scroll">
+    <table class="changes">
+      <thead><tr><th>Token</th><th>Today (Danish)</th><th>Board B (light)</th><th>Board B (dark)</th></tr></thead>
+      <tbody>
+        <tr><td><code>--navy</code> (primary)</td><td><i class="sw-i" style="background:#c8102e"></i>#C8102E</td><td><i class="sw-i" style="background:#1B1B1F"></i>#1B1B1F (ink plate)</td><td><i class="sw-i" style="background:#F1E8D6"></i>#F1E8D6</td></tr>
+        <tr><td><code>--navy-ink</code></td><td>#FFFFFF</td><td><i class="sw-i" style="background:#F4ECDC"></i>#F4ECDC</td><td>#16171B</td></tr>
+        <tr><td><code>--accent</code></td><td>#F0A3AF</td><td><i class="sw-i" style="background:#6E9FC4"></i>#6E9FC4</td><td>#8DB8DA</td></tr>
+        <tr><td><code>--accent-2</code></td><td>#C8102E</td><td><i class="sw-i" style="background:#2E5E86"></i>#2E5E86</td><td>#8DB8DA</td></tr>
+        <tr><td><code>--accent-soft</code></td><td>#FBE3E6</td><td><i class="sw-i" style="background:#A8C8E0"></i>#A8C8E0</td><td>#2A3D4F</td></tr>
+        <tr><td><code>--bg / --bg-alt</code></td><td>#FBF8F7 / #F7EFEE</td><td>#F4ECDC / #EADFC8</td><td>#16171B / #1C1D22</td></tr>
+        <tr><td><code>--surface / --surface-2</code></td><td>#FFFFFF / #FCF4F4</td><td>#FBF6EC / #F7F0E2</td><td>#202227 / #26282E</td></tr>
+        <tr><td><code>--border / --border-strong</code></td><td>#EEDCDC / #DBBCBF</td><td>#D8CBB0 / #1B1B1F (ink outlines)</td><td>#34363D / #4A4C55</td></tr>
+        <tr><td><code>--ink / --ink-2 / --muted</code></td><td>#3A0D15 / #5A2830 / #7A5359</td><td>#1B1B1F / #3D3A36 / #625B51</td><td>#F1E8D6 / #D9CFBC / #A9A193</td></tr>
+        <tr><td><code>--ghost</code></td><td>rgba(200,16,46,.07) fill</td><td>transparent fill + 1.5px stroke rgba(46,94,134,.22)</td><td>stroke rgba(141,184,218,.16)</td></tr>
+        <tr><td><code>--feature-bg</code></td><td>#8E0C22</td><td>#1B1B1F</td><td>#2E5E86</td></tr>
+        <tr><td><code>--stage-1…4</code> (funnel)</td><td>pinks → oxblood</td><td>#EADFC8 · #A8C8E0 · #6E9FC4 · #1B1B1F</td><td>#2A3D4F · #3F6688 · #8DB8DA · #F1E8D6</td></tr>
+        <tr><td>new <code>--filete</code></td><td>(none)</td><td><i class="sw-i" style="background:#9A7232"></i>#9A7232</td><td>#C9A35A</td></tr>
+        <tr><td><code>--font-sans</code></td><td>Albert Sans</td><td>Archivo (body)</td><td>same</td></tr>
+        <tr><td><code>--font-serif</code> → <code>--font-accent</code></td><td>Cormorant Garamond italic</td><td>Sansita ExtraBold Italic</td><td>same</td></tr>
+        <tr><td>new <code>--font-display</code></td><td>(Albert Sans)</td><td>Montserrat 700–900</td><td>same</td></tr>
+        <tr><td><code>--font-mono</code></td><td>JetBrains Mono</td><td>Chivo Mono</td><td>same</td></tr>
+        <tr><td><code>--cross-line / --cross-band / --rune / --font-rune</code></td><td>Nordic cross, runes</td><td colspan="2">Removed; filete corners/rules take their decorative slot (max 1 per section)</td></tr>
+        <tr><td><code>--radius / --radius-lg</code></td><td>12px / 20px</td><td>8px / 14px (sign-plate corners)</td><td>same</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="list-cols">
+      <li>Fonts: Montserrat (500–900), Sansita (italic 700/800), Archivo (400/500/700 + italic), Chivo Mono (400/500). Drop Albert Sans, Cormorant, JetBrains Mono, Noto Sans Runic.</li>
+      <li>Eyebrows become <code>.plate</code> street signs with an optional "Nº" section number.</li>
+      <li>Headline *asterisk* accents render in Sansita italic, --accent-2, rotated -2°.</li>
+      <li>Hero: "Hej!" → "¡Hola!" plate; portrait in poster frame with filete corners and a "Buenos Aires" plate; outlined LUNDAHL.</li>
+      <li>About: lanyard card → boleto with a punchable stub (reuses the existing pointer/keyboard wiring).</li>
+      <li>Achievements: kiosk board with double ink frame; no crosses or ornaments.</li>
+      <li>Work cards: ink outline + offset print shadow, rubber-stamp "Current role".</li>
+      <li>Markets/Range: subte line diagram (NA → EMEA → LATAM → Argentina home base).</li>
+      <li>Body background: cream + inline SVG noise (≈1 KB, disabled in dark).</li>
+      <li>Meta theme-color: #F4ECDC (light) / #16171B (dark).</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="board-foot"><div class="wrap">Board B · Cartelería porteña · standalone preview, not wired to the live site.</div></footer>
+
+<script>
+(function () {
+  var light = [
+    ['--ink', '#1B1B1F', 'Text, plates, outlines, primary button', '14.6:1 on --paper · AAA', '#F4ECDC'],
+    ['--ink-2', '#3D3A36', 'Secondary text, lede', '9.6:1 on --paper · AAA', '#F4ECDC'],
+    ['--muted', '#625B51', 'Meta, captions', '5.7:1 on --paper · 5.1:1 on --paper-2 · AA', '#F4ECDC'],
+    ['--celeste-ink', '#2E5E86', 'Accent word, links, stamps, celeste plate', '5.8:1 on --paper · cream on it 5.8:1 · AA', '#FBF6EC'],
+    ['--celeste', '#6E9FC4', 'Rails, ticket band, dots (non-text)', 'Decorative (2.4:1). --ink on it 6.1:1 AA', '#1B1B1F'],
+    ['--celeste-pale', '#A8C8E0', 'Soft chips, hover shadows', '--ink on it 9.8:1 · AAA', '#1B1B1F'],
+    ['--filete', '#9A7232', 'Ornament hairlines, ghost-gold rules', '3.7:1: lines / large only, never body text', '#FBF6EC'],
+    ['--paper', '#F4ECDC', 'Page background (cream)', 'Base for all ratios above', '#1B1B1F'],
+    ['--paper-2', '#EADFC8', 'Aged bands', '--ink on it 13.0:1', '#1B1B1F'],
+    ['--surface', '#FBF6EC', 'Cards, ticket, poster mat', '--ink on it 15.9:1', '#1B1B1F'],
+    ['--rule', '#D8CBB0', 'Hairlines (non-text)', 'UI boundary only; key outlines use --ink', '#1B1B1F']
+  ];
+  var dark = [
+    ['--paper', '#16171B', 'Asphalt background', '--ink on it 14.7:1', '#F1E8D6'],
+    ['--surface', '#202227', 'Cards', '--muted on it 6.2:1', '#F1E8D6'],
+    ['--ink', '#F1E8D6', 'Cream text, inverted plates', '14.7:1 on --paper · AAA', '#16171B'],
+    ['--muted', '#A9A193', 'Meta text', '7.0:1 on --paper · AAA', '#16171B'],
+    ['--celeste', '#8DB8DA', 'Accent, links (lit celeste)', '8.5:1 on --paper · AAA', '#16171B'],
+    ['--filete', '#C9A35A', 'Ornament lines', '7.6:1 on --paper', '#16171B']
+  ];
+  function render(list, id) {
+    document.getElementById(id).innerHTML = list.map(function (s) {
+      return '<div class="sw"><div class="chip-c" style="background:' + s[1] + ';color:' + s[4] + '">Aa</div>' +
+        '<div class="meta"><b>' + s[0] + '</b><span class="hex">' + s[1] + '</span><p class="role">' + s[2] + '</p><span class="aa">' + s[3] + '</span></div></div>';
+    }).join('');
+  }
+  render(light, 'sw-light');
+  render(dark, 'sw-dark');
+
+  var certs = [
+    ['HubSpot Inbound', 'HubSpot', 'Nov 2025', 1],
+    ['Programmatic Advertising', 'Udemy', '2024', 1],
+    ['Social Media Marketing: Strategy and Optimization', 'LinkedIn', 'Aug 2023', 1],
+    ['Content Creation: Strategy and Tools', 'LinkedIn', 'Aug 2023', 1],
+    ['Content Marketing for Social Media', 'LinkedIn', 'Aug 2023', 1],
+    ['Deutsch Intensiv Kompakt', 'Goethe-Institut', 'Aug 2022', 0],
+    ['Growth Marketing', 'Coderhouse', 'Jul 2022', 1],
+    ['UX/UI Design', 'Coderhouse', 'Apr 2022', 1],
+    ['EF SET English Certificate', 'EF SET', 'Mar 2022', 1],
+    ['Digital Marketing (Community Manager & Advertising)', 'Coderhouse', '2021 – 2022', 1]
+  ];
+  document.getElementById('certs').innerHTML = certs.map(function (c, i) {
+    var open = c[3] ? '<a href="#"' : '<div tabindex="0"';
+    var close = c[3] ? '</a>' : '</div>';
+    return open + ' class="cert' + (i === 0 ? ' demo-hover' : '') + '"><span class="iss">' + c[1] + '</span><span class="nm">' + c[0].replace('&', '&amp;') + '</span>' +
+      '<span class="dt">' + c[2] + (c[3] ? '<span class="go" aria-hidden="true">View →</span>' : '') + '</span>' + close;
+  }).join('');
+
+  /* Boleto: tap / Enter on the stub punches the next hole */
+  var stub = document.querySelector('.stub');
+  function punch() {
+    var next = stub.querySelector('.holes i:not(.p)');
+    if (next) next.classList.add('p');
+    else stub.querySelectorAll('.holes i').forEach(function (h, i) { if (i > 1) h.classList.remove('p'); });
+  }
+  stub.addEventListener('click', punch);
+  stub.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); punch(); } });
+})();
+</script>
+</body>
+</html>

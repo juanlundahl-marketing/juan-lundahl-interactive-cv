@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Board B2a · Porteño</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sansita:wght@700;800;900&family=Sansita+Swashed:wght@600;800&family=Encode+Sans+Condensed:wght@500;600;700;800&family=Archivo:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   STYLE BOARD B2a - "Porteño"
+   Everyday Buenos Aires vernacular: enamelled shop/street plates, painted
+   shop-front lettering, restrained original filete, sidewalk tiles,
+   colectivo numbering, café warmth on newsprint cream.
+   Proposed tokens for the real site (light = default).
+   ========================================================================== */
+:root {
+  color-scheme: light;
+  --paper: #F3EBDA;          /* newsprint cream */
+  --paper-2: #E9DEC6;        /* aged band */
+  --surface: #FBF6EA;        /* cards */
+  --rule: #D9CCB1;
+  --rule-strong: #BDAA87;
+
+  --ink: #1C1B19;            /* enamel black */
+  --ink-2: #3B3833;
+  --muted: #5F584D;
+
+  --bondi: #1F5C4A;          /* colectivo green: enamel plates, link-weight text */
+  --oxblood: #7A2430;        /* bar-notable oxblood: accent word */
+  --ochre: #C08A2E;          /* painted gold: fills, shadows (non-text) */
+  --gold-line: #8A6424;      /* filete hairline, readable at 4.5:1 */
+  --celeste: #7FA8C9;        /* weathered celeste: fills, rays (non-text) */
+  --celeste-ink: #2D5F8A;    /* readable celeste: links */
+  --iron: #2B2622;           /* metal under chipped enamel */
+
+  /* Theme-independent enamel (plates look the same day and night) */
+  --enamel: #1F5C4A;
+  --enamel-ink: #F3EBDA;
+  --enamel-red: #7A2430;
+  --slate: #22302A;          /* café pizarra */
+  --wood: #6B4A2A;
+
+  /* Argentina background (Sol de Mayo line burst). ONE dial: */
+  --arg-opacity: 0.22;
+  --sol-a: var(--gold-line); /* straight rays */
+  --sol-b: var(--celeste-ink); /* wavy rays */
+
+  --nav-bg: rgba(28, 27, 25, 0.95);
+  --nav-ink: #F3EBDA;
+  --ghost-stroke: rgba(122, 36, 48, 0.16);
+  --shadow-md: 0 14px 30px -16px rgba(60, 40, 10, 0.35);
+  --shadow-lg: 0 30px 60px -28px rgba(60, 40, 10, 0.45);
+
+  --font-display: "Sansita", Georgia, serif;
+  --font-accent: "Sansita Swashed", "Sansita", Georgia, serif;
+  --font-sign: "Encode Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-sans: "Archivo", "Segoe UI", system-ui, sans-serif;
+
+  --radius-sm: 4px; --radius: 6px; --radius-lg: 12px; --radius-pill: 999px;
+  --gutter: 16px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .27 0 0 0 0 .15 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Baldosa (original calcáreo tile: quarter circles + four-petal flower) */
+  --baldosa: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cg fill='none' stroke='%238A6424' stroke-width='.8'%3E%3Crect x='.4' y='.4' width='27.2' height='27.2'/%3E%3Cpath d='M0 7A7 7 0 0 0 7 0M21 0A7 7 0 0 0 28 7M28 21A7 7 0 0 0 21 28M7 28A7 7 0 0 0 0 21'/%3E%3Ccircle cx='14' cy='14' r='5.2'/%3E%3C/g%3E%3Cg fill='%23C08A2E' fill-opacity='.7'%3E%3Ccircle cx='23.0' cy='14.0' r='1.2'/%3E%3Ccircle cx='20.4' cy='20.4' r='1.2'/%3E%3Ccircle cx='14.0' cy='23.0' r='1.2'/%3E%3Ccircle cx='7.6' cy='20.4' r='1.2'/%3E%3Ccircle cx='5.0' cy='14.0' r='1.2'/%3E%3Ccircle cx='7.6' cy='7.6' r='1.2'/%3E%3Ccircle cx='14.0' cy='5.0' r='1.2'/%3E%3Ccircle cx='20.4' cy='7.6' r='1.2'/%3E%3C/g%3E%3Ccircle cx='14' cy='14' r='2.3' fill='%237A2430'/%3E%3Cg fill='%237FA8C9'%3E%3Ccircle cx='0' cy='0' r='3.6'/%3E%3Ccircle cx='28' cy='0' r='3.6'/%3E%3Ccircle cx='0' cy='28' r='3.6'/%3E%3Ccircle cx='28' cy='28' r='3.6'/%3E%3C/g%3E%3C/svg%3E");
+  /* Vereda "vainilla" (nine raised pads) */
+  --vainilla: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cg fill='none' stroke='%23F2E8D5' stroke-opacity='.07'%3E%3Crect x='.5' y='.5' width='23' height='23'/%3E%3Crect x='3.5' y='3.5' width='4' height='4' rx='1'/%3E%3Crect x='10' y='3.5' width='4' height='4' rx='1'/%3E%3Crect x='16.5' y='3.5' width='4' height='4' rx='1'/%3E%3Crect x='3.5' y='10' width='4' height='4' rx='1'/%3E%3Crect x='10' y='10' width='4' height='4' rx='1'/%3E%3Crect x='16.5' y='10' width='4' height='4' rx='1'/%3E%3Crect x='3.5' y='16.5' width='4' height='4' rx='1'/%3E%3Crect x='10' y='16.5' width='4' height='4' rx='1'/%3E%3Crect x='16.5' y='16.5' width='4' height='4' rx='1'/%3E%3C/g%3E%3C/svg%3E");
+  /* Chipped enamel corner */
+  --chip-tr: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cpath d='M22 0H5C6 3 3 4 5.5 6.5 8 9 11 6.5 12.5 9.5 14 12.5 18 11 22 15Z' fill='%23E9DEC6'/%3E%3Cpath d='M22 0H8.5C9.5 2 7.5 3.2 9.2 4.8 11 6.5 13.4 5.2 14.6 7.8 15.8 10 18.5 9.6 22 11.5Z' fill='%232B2622'/%3E%3C/svg%3E");
+}
+@media (min-width: 720px) { :root { --gutter: 32px; } }
+
+/* Dark: "Noche de bar notable" */
+.theme-dark {
+  color-scheme: dark;
+  --paper: #1A1714; --paper-2: #201C18; --surface: #24201B;
+  --rule: #3A342C; --rule-strong: #514940;
+  --ink: #F2E8D5; --ink-2: #DCD0BA; --muted: #B0A592;
+  --bondi: #6FB59A; --oxblood: #E0828A; --ochre: #D7A64B; --gold-line: #D7A64B;
+  --celeste: #8FB9DA; --celeste-ink: #8FB9DA;
+  --sol-a: #D7A64B; --sol-b: #8FB9DA;
+  --nav-bg: rgba(242, 232, 213, 0.96); --nav-ink: #1A1714;
+  --ghost-stroke: rgba(224, 130, 138, 0.14);
+  --shadow-md: 0 14px 30px -16px rgba(0,0,0,.7); --shadow-lg: 0 30px 60px -28px rgba(0,0,0,.8);
+  --noise: none;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; color: var(--ink); font-family: var(--font-sans); font-size: 16.5px; line-height: 1.55; overflow-x: hidden; background-color: var(--paper); background-image: var(--noise); }
+img { max-width: 100%; display: block; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); font-weight: 900; line-height: 1.02; letter-spacing: -0.005em; }
+p { margin: 0; }
+a { color: var(--celeste-ink); }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); }
+.sign { font-family: var(--font-sign); }
+/* Painted accent word: oxblood with an ochre drop shadow (sign-painter's "sombra") */
+em.acc { font-family: var(--font-accent); font-style: normal; font-weight: 800; color: var(--oxblood); text-shadow: 0.045em 0.045em 0 color-mix(in srgb, var(--ochre) 70%, transparent); letter-spacing: 0; }
+
+/* ---------- Signature 1: chapa esmaltada (enamelled plate) ---------- */
+.chapa {
+  position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 0.6em;
+  background-color: var(--enamel); color: var(--enamel-ink); border-radius: 6px; padding: 0.62em 1.55em 0.56em;
+  font: 700 0.78rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase;
+  box-shadow: inset 0 0 0 3px var(--enamel), inset 0 0 0 4.5px var(--enamel-ink), 0 1px 0 rgba(0,0,0,.25), 0 3px 8px -3px rgba(40,25,10,.4);
+  background-image:
+    radial-gradient(circle at 9px 50%, #E9DEC6 0 1.5px, #5a5148 1.6px 2.3px, transparent 2.5px),
+    radial-gradient(circle at calc(100% - 9px) 50%, #E9DEC6 0 1.5px, #5a5148 1.6px 2.3px, transparent 2.5px),
+    linear-gradient(160deg, rgba(255,255,255,.10), transparent 45%);
+}
+.chapa::before { content: ""; position: absolute; top: 0; right: 0; width: 20px; height: 14px; background: var(--chip-tr) no-repeat top right / contain; }
+.chapa small { font-weight: 500; letter-spacing: 0.06em; opacity: 0.85; font-size: 0.86em; }
+.chapa.is-red { --enamel: var(--enamel-red); }
+.chapa.is-cel { --enamel: #2D5F8A; }
+
+/* ---------- Signature 2: colectivo line number + destination sign ---------- */
+.linea {
+  display: inline-grid; place-items: center; min-width: 46px; height: 40px; padding: 0 8px; border-radius: 8px;
+  background: var(--surface); color: var(--ink); border: 2px solid var(--ink);
+  font: 800 1.35rem/1 var(--font-sign); letter-spacing: 0.02em; font-variant-numeric: tabular-nums;
+  box-shadow: inset 0 -5px 0 var(--ochre), 2px 2px 0 var(--ink);
+}
+.destino {
+  display: inline-flex; align-items: center; gap: 0.7em; background: #1C1B19; color: #EBC66E; border-radius: 4px; padding: 0.5em 0.9em 0.45em;
+  font: 700 0.8rem/1 var(--font-sign); letter-spacing: 0.16em; text-transform: uppercase; box-shadow: inset 0 0 0 1px #3B3833;
+}
+.destino b { color: #F3EBDA; font-weight: 800; white-space: nowrap; }
+.destino i { flex: none; }
+.destino i { width: 5px; height: 5px; border-radius: 50%; background: #EBC66E; font-style: normal; }
+
+/* ---------- Signature 3: baldosa divider ---------- */
+.baldosas { height: 38px; background: var(--baldosa) repeat-x left center / 38px 38px; opacity: 0.6; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+
+/* Filete ornament sizing */
+.fil { display: block; }
+.fil-rule { width: 100%; max-width: 420px; height: 26px; }
+
+/* Board chrome */
+.board-head { padding: 56px 0 40px; position: relative; }
+.board-head .tag { font: 600 0.8rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.board-head h1 { font-size: clamp(2.6rem, 1.4rem + 5vw, 5.4rem); margin: 18px 0 20px; }
+.board-head .why { max-width: 820px; color: var(--ink-2); font-size: 1.06rem; }
+.board-head .why + .why { margin-top: 10px; }
+.board-head .pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 26px; align-items: center; }
+
+.blk { padding: 56px 0; border-top: 1px solid var(--rule-strong); }
+.blk-label { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+.blk-label h2 { font-size: 1.7rem; }
+.blk-label .note { color: var(--muted); font-size: 0.95rem; flex-basis: 100%; }
+.subhead { font: 700 0.78rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 30px 0 12px; }
+
+/* ---------- Palette ---------- */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 14px; }
+.sw { background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); overflow: hidden; }
+.sw .chip-c { height: 88px; display: flex; align-items: flex-end; padding: 10px 12px; font: 900 1.6rem/1 var(--font-display); border-bottom: 1.5px solid var(--ink); }
+.sw .meta { padding: 12px 14px 14px; font-size: 0.86rem; }
+.sw .meta b { display: block; font: 700 0.86rem/1.2 var(--font-sign); letter-spacing: 0.04em; }
+.sw .meta .hex { font: 500 0.82rem/1.2 var(--font-sign); color: var(--muted); }
+.sw .meta .role { color: var(--ink-2); margin-top: 6px; line-height: 1.35; }
+.sw .meta .aa { margin-top: 6px; font: 600 0.74rem/1.3 var(--font-sign); color: var(--ink-2); background: var(--paper-2); border-radius: 4px; padding: 4px 7px; display: inline-block; }
+
+/* ---------- Type ---------- */
+.type-grid { display: grid; gap: 14px; }
+.spec { background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 22px 24px; display: grid; grid-template-columns: 240px 1fr; gap: 20px; align-items: center; }
+.spec .who { font-size: 0.86rem; color: var(--muted); }
+.spec .who b { display: block; color: var(--ink); font: 700 0.86rem/1.2 var(--font-sign); letter-spacing: 0.04em; margin-bottom: 4px; }
+.spec .s-display { font: 900 clamp(2.1rem, 1.2rem + 3.2vw, 3.8rem)/0.98 var(--font-display); }
+.spec .s-accent { font: 800 clamp(2.1rem, 1.3rem + 2.6vw, 3.4rem)/1 var(--font-accent); color: var(--oxblood); text-shadow: 0.045em 0.045em 0 color-mix(in srgb, var(--ochre) 70%, transparent); }
+.spec .s-sign { font: 800 clamp(1.3rem, 1rem + 1vw, 1.8rem)/1.1 var(--font-sign); letter-spacing: 0.12em; text-transform: uppercase; }
+.spec .s-body { font-size: 1.06rem; max-width: 62ch; color: var(--ink-2); }
+.scale { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 10px; color: var(--muted); font: 600 0.74rem/1 var(--font-sign); letter-spacing: 0.06em; }
+
+/* ---------- Components ---------- */
+.btn {
+  position: relative; display: inline-flex; align-items: center; gap: 0.6em; border: 1.5px solid var(--ink); cursor: pointer; text-decoration: none; background: none;
+  font: 700 0.9rem/1 var(--font-sign); letter-spacing: 0.12em; text-transform: uppercase; padding: 0.95em 1.45em; border-radius: var(--radius); color: var(--ink);
+  transition: transform 160ms var(--ease), background-color 160ms, color 160ms, box-shadow 160ms;
+}
+.btn-primary { background: var(--enamel); color: var(--enamel-ink); border-color: var(--enamel); box-shadow: inset 0 0 0 3px var(--enamel), inset 0 0 0 4.5px rgba(243,235,218,.75), 3px 3px 0 var(--ochre); }
+.btn-primary:hover { transform: translate(-1px, -2px); box-shadow: inset 0 0 0 3px var(--enamel), inset 0 0 0 4.5px rgba(243,235,218,.75), 5px 5px 0 var(--ochre); }
+.btn-secondary:hover { background: var(--ink); color: var(--paper); }
+.btn-ghost { border-color: transparent; color: var(--celeste-ink); padding-left: 0.2em; padding-right: 0.2em; text-decoration: underline; text-decoration-color: var(--ochre); text-underline-offset: 5px; text-decoration-thickness: 2px; }
+.btn-icon { width: 44px; height: 44px; padding: 0; justify-content: center; }
+.btn:focus-visible, .cert:focus-visible, .cartelito:focus-visible { outline: 2px solid var(--celeste-ink); outline-offset: 3px; }
+
+.chip { display: inline-flex; align-items: center; gap: 0.45em; padding: 0.5em 0.8em 0.45em; border-radius: var(--radius-sm); border: 1.5px solid var(--ink); color: var(--ink); background: var(--surface); font: 700 0.76rem/1.1 var(--font-sign); letter-spacing: 0.1em; text-transform: uppercase; }
+.chip.is-soft { background: #D3E2EE; border-color: #D3E2EE; color: #1C1B19; }
+.chip.is-active { background: var(--ink); color: var(--paper); }
+.chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--oxblood); }
+/* level: vainilla pads */
+.dots { display: inline-flex; gap: 4px; }
+.dots i { width: 11px; height: 11px; border-radius: 3px; border: 1.5px solid var(--ink); }
+.dots i.on { background: var(--bondi); border-color: var(--bondi); }
+
+/* ---------- Hero ---------- */
+.stage { position: relative; border: 1.5px solid var(--ink); border-radius: var(--radius-lg); overflow: hidden; background-color: var(--paper); background-image: var(--noise); color: var(--ink); }
+.stage + .stage { margin-top: 22px; }
+.stage .fil-corner { position: absolute; width: 64px; height: 64px; z-index: 2; pointer-events: none; }
+.stage .fil-corner.tl { top: 10px; left: 10px; }
+.stage .fil-corner.tr { top: 10px; right: 10px; transform: scaleX(-1); }
+.stage-tag { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); z-index: 3; }
+.hero { position: relative; padding: 76px 56px 132px; display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 48px; align-items: center; min-height: 640px; isolation: isolate; }
+/* Sol de Mayo line burst, behind the poster */
+.sol { position: absolute; z-index: -1; pointer-events: none; opacity: var(--arg-opacity); overflow: visible; }
+.theme-dark .sol { opacity: calc(var(--arg-opacity) * 0.7); } /* lit lines read stronger on dark: same dial, scaled */
+.sol .rs { fill: none; stroke: var(--sol-a); stroke-width: 1.1; stroke-linejoin: round; }
+.sol .rw { fill: none; stroke: var(--sol-b); stroke-width: 1.4; stroke-linecap: round; }
+.sol .ring { fill: none; stroke: var(--sol-a); stroke-width: 1.1; }
+.hero .sol { width: 820px; height: 820px; right: -150px; top: 50%; transform: translateY(-50%); }
+.hero .ghost { position: absolute; z-index: -1; left: 50%; bottom: 58px; transform: translateX(-50%); white-space: nowrap; pointer-events: none; font: 900 clamp(5rem, 1rem + 13vw, 13rem)/0.8 var(--font-display); color: transparent; -webkit-text-stroke: 1.5px var(--ghost-stroke); }
+.hello { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.hello .who { font: 700 0.86rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+/* cinta: a painted ribbon with swallowtails */
+.cinta { position: relative; display: inline-block; isolation: isolate; background: var(--enamel-red); color: #FBF6EA; padding: 0.32em 1em 0.38em; font: 800 1.2rem/1 var(--font-accent); margin: 0 14px; box-shadow: inset 0 1.5px 0 rgba(255,255,255,.18), inset 0 -1.5px 0 rgba(0,0,0,.2); }
+.cinta::before, .cinta::after { content: ""; position: absolute; z-index: -1; top: 7px; width: 26px; height: 100%; background: #571820; }
+.cinta::before { left: -16px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 38% 50%); }
+.cinta::after { right: -16px; clip-path: polygon(0 0, 100% 0, 62% 50%, 100% 100%, 0 100%); }
+.hero h1 { font-size: clamp(2.6rem, 1.3rem + 4.4vw, 5.4rem); margin: 24px 0 20px; }
+.hero .lede { font-size: 1.12rem; color: var(--ink-2); max-width: 46ch; }
+.hero .tags { list-style: none; padding: 0; margin: 22px 0 28px; display: flex; flex-wrap: wrap; gap: 8px; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+/* Cartel (milonga / theatre bill composition) */
+.cartel { position: relative; justify-self: center; width: min(100%, 340px); background: var(--surface); border: 2px solid var(--ink); padding: 10px; box-shadow: var(--shadow-lg); transform: rotate(1deg); }
+.cartel::before { content: ""; position: absolute; inset: 5px; border: 1px solid var(--ink); pointer-events: none; }
+.cartel .top { text-align: center; padding: 8px 6px 10px; font: 700 0.72rem/1.2 var(--font-sign); letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-2); }
+.cartel .top b { display: block; font: 800 1.02rem/1.1 var(--font-sign); letter-spacing: 0.18em; color: var(--ink); margin-top: 4px; }
+.cartel .ph { position: relative; border: 1.5px solid var(--ink); }
+.cartel .ph img { width: 100%; aspect-ratio: 4 / 4.6; object-fit: cover; object-position: 50% 26%; filter: grayscale(1) contrast(1.1); }
+.cartel .name { text-align: center; padding: 12px 4px 4px; font: 900 2.05rem/0.95 var(--font-display); color: var(--ink); text-shadow: 2px 2px 0 color-mix(in srgb, var(--ochre) 65%, transparent); }
+.cartel .fil-rule { margin: 4px auto 6px; height: 20px; max-width: 220px; }
+.cartel .band { background: var(--enamel-red); color: #FBF6EA; text-align: center; padding: 8px 6px 7px; font: 700 0.72rem/1.2 var(--font-sign); letter-spacing: 0.18em; text-transform: uppercase; }
+.cartel .c { position: absolute; width: 42px; height: 42px; }
+.cartel .c.tl { top: -4px; left: -4px; } .cartel .c.tr { top: -4px; right: -4px; transform: scaleX(-1); }
+
+.navpill { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); display: flex; align-items: center; gap: 2px; z-index: 3; background: var(--nav-bg); color: var(--nav-ink); border-radius: var(--radius-pill); padding: 6px; box-shadow: var(--shadow-md); white-space: nowrap; max-width: calc(100% - 24px); overflow: hidden; }
+.navpill .mark { width: 38px; height: 38px; border-radius: 50%; background: var(--enamel); color: var(--enamel-ink); display: grid; place-items: center; font: 900 0.95rem/1 var(--font-display); flex: none; box-shadow: inset 0 0 0 2.5px var(--enamel), inset 0 0 0 3.8px rgba(243,235,218,.8); }
+.navpill a { font: 700 0.8rem/1 var(--font-sign); letter-spacing: 0.12em; text-transform: uppercase; color: inherit; text-decoration: none; padding: 11px 12px; border-radius: var(--radius-pill); opacity: 0.88; }
+.navpill a.on { background: var(--nav-ink); color: var(--nav-bg); opacity: 1; }
+.theme-dark .navpill a.on { background: #1A1714; color: #F2E8D5; }
+.navpill .sep { width: 1px; height: 22px; background: currentColor; opacity: 0.25; margin: 0 6px; }
+.navpill .lang { font: 700 0.8rem/1 var(--font-sign); padding: 0 10px; }
+
+.dial { display: inline-flex; align-items: center; gap: 10px; font: 700 0.78rem/1 var(--font-sign); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius-pill); padding: 8px 14px; }
+.dial input { accent-color: #1F5C4A; width: 140px; }
+.dial output { font-variant-numeric: tabular-nums; min-width: 3ch; }
+
+/* ---------- Marketing ID: chapa de profesional ---------- */
+.id-wrap { display: grid; grid-template-columns: minmax(0, 580px) 1fr; gap: 48px; align-items: center; }
+.chapa-id {
+  position: relative; overflow: hidden; border-radius: 10px; padding: 26px 30px 22px; color: #F3EBDA;
+  background: #1F5C4A linear-gradient(155deg, rgba(255,255,255,.12), transparent 40%, rgba(0,0,0,.12));
+  box-shadow: inset 0 0 0 7px #1F5C4A, inset 0 0 0 9px #F3EBDA, inset 0 0 0 13px #1F5C4A, inset 0 0 0 14px rgba(243,235,218,.5), 0 22px 36px -18px rgba(40,25,10,.55);
+  transition: transform 400ms var(--ease);
+}
+.chapa-id:hover { transform: translateY(-3px); }
+.chapa-id .sheen { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.16) 48%, transparent 60%); transform: translateX(-100%); transition: transform 900ms var(--ease); pointer-events: none; }
+.chapa-id:hover .sheen { transform: translateX(100%); }
+.chapa-id .rv { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #F3EBDA 0 1.5px, #9a907f 2.5px, #4a433b 4.5px); }
+.chapa-id .rv.a { top: 20px; left: 20px; } .chapa-id .rv.b { top: 20px; right: 20px; } .chapa-id .rv.c { bottom: 20px; left: 20px; } .chapa-id .rv.d { bottom: 20px; right: 20px; }
+.chapa-id .chip1 { position: absolute; top: 0; right: 0; width: 46px; height: 32px; background: var(--chip-tr) no-repeat top right / contain; }
+.chapa-id .chip2 { position: absolute; bottom: 0; left: 0; width: 30px; height: 20px; background: var(--chip-tr) no-repeat top right / contain; transform: rotate(180deg); }
+.chapa-id .body { display: grid; grid-template-columns: 100px 1fr; gap: 20px; align-items: center; padding: 10px 14px 0; }
+.chapa-id .ph { border: 2px solid #F3EBDA; padding: 3px; border-radius: 50% 50% 4px 4px / 40% 40% 4px 4px; overflow: hidden; }
+.chapa-id .ph img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: 50% 25%; filter: grayscale(1) contrast(1.08); border-radius: inherit; }
+.chapa-id .kicker { font: 700 0.7rem/1 var(--font-sign); letter-spacing: 0.22em; text-transform: uppercase; color: #EBC66E; }
+.chapa-id h4 { font: 900 2.2rem/1 var(--font-display); margin: 8px 0 6px; text-shadow: 2px 2px 0 rgba(0,0,0,.28); }
+.chapa-id .role { font: 600 0.92rem/1.3 var(--font-sign); letter-spacing: 0.08em; text-transform: uppercase; }
+.chapa-id dl { display: grid; grid-template-columns: repeat(4, auto); gap: 8px 16px; margin: 16px 14px 0; padding-top: 12px; border-top: 1px solid rgba(243,235,218,.45); }
+.chapa-id dt { font: 600 0.64rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; color: #C9DCD3; }
+.chapa-id dd { margin: 4px 0 0; font: 700 0.86rem/1.25 var(--font-sign); }
+.chapa-id dd.home { color: #EBC66E; }
+.chapa-id .num { margin: 12px 14px 0; display: flex; justify-content: space-between; font: 600 0.7rem/1 var(--font-sign); letter-spacing: 0.16em; color: #C9DCD3; }
+/* Hanging shop sign: Abierto / Vuelvo enseguida */
+.cartelito { margin-top: 26px; background: none; border: 0; padding: 0; cursor: pointer; display: inline-flex; flex-direction: column; align-items: center; perspective: 600px; color: inherit; }
+.cartelito .cuerda { width: 86px; height: 22px; }
+.cartelito .faces { position: relative; width: 210px; height: 62px; transform-style: preserve-3d; transition: transform 600ms var(--ease); }
+.cartelito[aria-pressed="true"] .faces { transform: rotateY(180deg); }
+.cartelito .f { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 6px; display: grid; place-content: center; text-align: center; color: #F3EBDA; box-shadow: inset 0 0 0 3px var(--c), inset 0 0 0 4.5px rgba(243,235,218,.8), var(--shadow-md); background: var(--c); }
+.cartelito .f b { font: 800 1.35rem/1 var(--font-accent); }
+.cartelito .f small { font: 600 0.66rem/1 var(--font-sign); letter-spacing: 0.16em; text-transform: uppercase; margin-top: 5px; }
+.cartelito .front { --c: #1F5C4A; }
+.cartelito .back { --c: #7A2430; transform: rotateY(180deg); }
+.id-notes h3 { font-size: 1.6rem; margin-bottom: 10px; }
+.id-notes p { color: var(--ink-2); max-width: 52ch; }
+.id-notes ul { color: var(--ink-2); padding-left: 1.1em; margin: 14px 0 0; }
+.id-notes li { margin: 6px 0; }
+
+/* ---------- Section heading ---------- */
+.sec-head { max-width: 840px; }
+.sec-head h2 { font-size: clamp(2.5rem, 1.3rem + 4.4vw, 5.2rem); margin: 22px 0 16px; }
+.sec-head h2 em.acc { display: block; margin-top: 0.04em; }
+.sec-head p { color: var(--ink-2); font-size: 1.1rem; max-width: 56ch; }
+.sec-head .baldosas { margin-top: 28px; max-width: 560px; }
+
+/* ---------- Work card: shop-front fascia ---------- */
+.work { position: relative; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius-lg); overflow: hidden; transition: transform 220ms var(--ease), box-shadow 220ms; box-shadow: 6px 6px 0 var(--paper-2), 6px 6px 0 2px var(--ink); }
+.work:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ochre), 8px 8px 0 2px var(--ink); }
+.work .fascia { position: relative; background: #1F5C4A linear-gradient(180deg, rgba(255,255,255,.08), transparent 60%); color: #F3EBDA; padding: 22px 28px 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid var(--ink); box-shadow: inset 0 0 0 5px #1F5C4A, inset 0 0 0 6.5px rgba(235,198,110,.75); }
+.work .fascia h3 { display: flex; align-items: center; gap: 14px; font-size: 2.5rem; color: #F3EBDA; text-shadow: 2px 2px 0 #B07E2A, 3.5px 3.5px 0 rgba(0,0,0,.35); }
+.work .fascia h3 svg { width: 44px; height: 22px; flex: none; }
+.work .stamp { font: 800 0.74rem/1 var(--font-sign); letter-spacing: 0.16em; text-transform: uppercase; color: #F3EBDA; border: 2px solid #EBC66E; border-radius: 50%; padding: 14px 12px; transform: rotate(-8deg); text-align: center; }
+.work .bd { padding: 22px 28px 24px; }
+.work .role { font: 700 1.05rem/1.3 var(--font-sign); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); }
+.work .sum { color: var(--ink-2); margin-top: 10px; max-width: 64ch; }
+.work ul { margin: 14px 0 0; padding: 0; list-style: none; }
+.work li { padding-left: 24px; position: relative; margin: 6px 0; color: var(--ink-2); }
+.work li::before { content: ""; position: absolute; left: 0; top: 0.3em; width: 14px; height: 14px; background: var(--baldosa) center / 28px 28px; border: 1px solid var(--gold-line); }
+.work .ft { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px dashed var(--rule-strong); gap: 12px; flex-wrap: wrap; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* ---------- Achievements: café pizarra ---------- */
+.pizarra { position: relative; background: var(--slate) var(--vainilla); color: #F2E8D5; border: 9px solid var(--wood); border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.4), inset 0 0 40px rgba(0,0,0,.35), var(--shadow-md); padding: 18px 8px 8px; }
+.pizarra .hoy { text-align: center; font: 800 1.35rem/1 var(--font-accent); color: #EBC66E; }
+.pizarra .hoy small { display: block; font: 600 0.66rem/1 var(--font-sign); letter-spacing: 0.22em; text-transform: uppercase; color: #C9C1B0; margin-top: 6px; }
+.ach { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 8px; }
+.stat { padding: 20px 20px 22px; position: relative; text-align: center; }
+.stat + .stat { border-left: 1.5px dashed rgba(242,232,213,.35); }
+.stat .v { font: 900 3.9rem/0.9 var(--font-display); color: #F2E8D5; }
+.stat .v sup { font: 800 0.5em/1 var(--font-accent); color: #EBC66E; vertical-align: 0.6em; margin-left: 2px; }
+.stat .l { font: 700 0.8rem/1.35 var(--font-sign); letter-spacing: 0.12em; text-transform: uppercase; color: #DCD0BA; margin-top: 10px; }
+.award { margin-top: 18px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.award .txt { color: var(--ink-2); }
+
+/* ---------- Certifications: hover becomes an enamel plate ---------- */
+.certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(205px, 1fr)); gap: 12px; }
+.cert { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 8px; padding: 16px 18px; min-height: 134px; text-decoration: none; color: var(--ink); background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); transition: transform 220ms var(--ease), background-color 220ms, color 220ms, box-shadow 220ms; }
+.cert .iss { font: 800 0.72rem/1 var(--font-sign); letter-spacing: 0.16em; text-transform: uppercase; color: var(--bondi); border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
+.cert .nm { font: 700 1rem/1.25 var(--font-sans); }
+.cert .dt { margin-top: auto; font: 600 0.78rem/1 var(--font-sign); letter-spacing: 0.06em; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+.cert .go { opacity: 0; transform: translateX(-4px); transition: 220ms var(--ease); font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.cert::before { content: ""; position: absolute; top: 0; right: 0; width: 22px; height: 15px; background: var(--chip-tr) no-repeat top right / contain; opacity: 0; transition: opacity 220ms; }
+.cert:hover, .cert.demo-hover { background: #1F5C4A; color: #F3EBDA; border-color: #1F5C4A; transform: translateY(-3px); box-shadow: inset 0 0 0 4px #1F5C4A, inset 0 0 0 5.5px rgba(243,235,218,.8), 0 5px 0 var(--ochre); }
+.cert:hover::before, .cert.demo-hover::before { opacity: 1; }
+.cert:hover .iss, .cert.demo-hover .iss { color: #EBC66E; border-color: rgba(243,235,218,.3); }
+.cert:hover .dt, .cert.demo-hover .dt { color: #C9DCD3; }
+.cert:hover .go, .cert.demo-hover .go { opacity: 1; transform: none; color: #EBC66E; }
+
+/* ---------- Markets: colectivo route panel ---------- */
+.recorrido { border: 2px solid var(--ink); border-radius: var(--radius-lg); background: var(--surface); overflow: hidden; }
+.recorrido .hd { display: flex; align-items: center; gap: 14px; padding: 12px 14px; background: #1C1B19; flex-wrap: wrap; }
+.recorrido .hd .linea { background: #EBC66E; color: #1C1B19; border-color: #EBC66E; box-shadow: none; }
+.recorrido .hd .destino { background: none; box-shadow: none; padding: 0; font-size: 0.9rem; }
+.paradas { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
+.parada { padding: 22px 22px 24px; position: relative; }
+.parada + .parada { border-left: 1.5px dashed var(--rule-strong); }
+.parada .n { font: 700 0.7rem/1 var(--font-sign); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+.parada b { display: block; font: 900 2.3rem/1 var(--font-display); margin: 10px 0 6px; }
+.parada small { color: var(--ink-2); font-size: 0.9rem; }
+.parada .arw { position: absolute; right: -12px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--ink); display: grid; place-items: center; font-size: 0.75rem; z-index: 1; }
+.parada.cabecera { background: #1F5C4A; color: #F3EBDA; box-shadow: inset 0 0 0 5px #1F5C4A, inset 0 0 0 6.5px rgba(243,235,218,.75); }
+.parada.cabecera .n { color: #EBC66E; }
+.parada.cabecera small { color: #DDE9E3; }
+.markets-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; align-items: center; }
+
+/* ---------- Kit ---------- */
+.kit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.kit > div { background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 20px; }
+.kit h4 { font: 700 0.78rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.lv { display: grid; grid-template-columns: 1fr auto; gap: 10px 14px; align-items: center; font: 700 0.84rem/1 var(--font-sign); letter-spacing: 0.08em; text-transform: uppercase; }
+.icons { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 18px; color: var(--ink); }
+.icons figure { margin: 0; display: grid; justify-items: center; gap: 6px; font: 600 0.68rem/1 var(--font-sign); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.icons svg { width: 40px; height: 40px; }
+
+/* ---------- Dark strip ---------- */
+.dark-strip { background: var(--paper) var(--vainilla); color: var(--ink); padding: 48px 0; }
+.dark-strip .grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
+.dark-strip .mini { position: relative; overflow: hidden; border: 1.5px solid var(--rule-strong); border-radius: var(--radius-lg); padding: 30px; background: var(--paper-2); isolation: isolate; }
+.dark-strip .mini h3 { font-size: 2.6rem; margin: 18px 0 18px; }
+.dark-strip .dsw { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 18px; }
+.dark-strip .dsw div { border-radius: 6px; padding: 34px 8px 8px; font: 600 0.7rem/1.3 var(--font-sign); border: 1px solid var(--rule-strong); }
+.dark-strip .side { display: grid; gap: 14px; align-content: start; }
+
+/* ---------- Mobile preview ---------- */
+.phone-row { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+.phone { width: 375px; max-width: 100%; border: 10px solid #1C1B19; border-radius: 44px; overflow: hidden; background-color: var(--paper); background-image: var(--noise); box-shadow: var(--shadow-lg); flex: none; }
+.phone .screen { position: relative; height: 800px; overflow: hidden; isolation: isolate; }
+.phone .sol { width: 520px; height: 520px; right: -230px; top: -120px; }
+.phone .m-hero { padding: 40px 16px 0; }
+.phone .m-top { display: flex; gap: 14px; align-items: flex-end; margin-bottom: 22px; }
+.phone .cartel { width: 150px; padding: 6px; margin: 0; justify-self: auto; }
+.phone .cartel::before { inset: 3px; }
+.phone .cartel .top { font-size: 0.5rem; padding: 4px 2px 6px; letter-spacing: 0.16em; }
+.phone .cartel .top b { font-size: 0.66rem; }
+.phone .cartel .name { font-size: 1.15rem; padding: 7px 2px 4px; }
+.phone .cartel .band { font-size: 0.5rem; padding: 5px 2px; }
+.phone .cartel .c { width: 28px; height: 28px; }
+.phone .cinta { font-size: 1rem; margin: 0 12px; }
+.phone h1 { font-size: 2.45rem; margin: 18px 0 12px; }
+.phone .lede { font-size: 0.98rem; color: var(--ink-2); }
+.phone .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 18px; }
+.phone .navpill { bottom: 16px; }
+.phone .navpill a { padding: 11px 9px; }
+.phone-notes { flex: 1; min-width: 260px; }
+.phone-notes h3 { font-size: 1.5rem; }
+.phone-notes ul { padding-left: 1.1em; color: var(--ink-2); }
+.phone-notes li { margin: 8px 0; }
+
+/* ---------- Compare + changes ---------- */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.compare > div { background: var(--surface); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 20px 22px; }
+.compare h4 { font: 800 0.86rem/1 var(--font-sign); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+.compare ul { margin: 0; padding-left: 1.1em; color: var(--ink-2); }
+.compare li { margin: 6px 0; }
+.table-scroll { overflow-x: auto; }
+.changes { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: var(--surface); border: 1.5px solid var(--ink); }
+.changes th, .changes td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.changes th { font: 700 0.74rem/1.2 var(--font-sign); letter-spacing: 0.12em; text-transform: uppercase; color: #F3EBDA; background: #1C1B19; }
+.changes td code, .note code { font-family: ui-monospace, Consolas, monospace; font-size: 0.8rem; }
+.changes .sw-i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; border: 1px solid rgba(0,0,0,.2); }
+.list-cols { columns: 2; column-gap: 32px; color: var(--ink-2); padding-left: 1.1em; margin-top: 18px; }
+.list-cols li { margin: 0 0 8px; break-inside: avoid; }
+footer.board-foot { padding: 34px 0 60px; color: var(--muted); font-size: 0.9rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding: 64px 24px 132px; }
+  .hero .cartel { order: -1; width: min(100%, 260px); justify-self: start; }
+  .hero .sol { width: 640px; height: 640px; right: auto; left: -120px; top: -150px; transform: none; }
+  .id-wrap { grid-template-columns: 1fr; }
+  .ach { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(3) { border-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1.5px dashed rgba(242,232,213,.35); }
+  .paradas { grid-template-columns: repeat(2, 1fr); }
+  .parada:nth-child(3) { border-left: 0; }
+  .parada:nth-child(n+3) { border-top: 1.5px dashed var(--rule-strong); }
+  .parada:nth-child(2) .arw { display: none; }
+  .kit { grid-template-columns: 1fr; }
+  .dark-strip .grid, .compare { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .spec { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
+  .hero { padding: 56px 18px 120px; min-height: 0; }
+  .hero h1 { font-size: 2.6rem; }
+  .stage .fil-corner { width: 44px; height: 44px; }
+  .stage-tag { top: 12px; }
+  .navpill a:not(.on) { display: none; }
+  .chapa-id { padding: 22px 18px 18px; }
+  .chapa-id .body { grid-template-columns: 76px 1fr; gap: 14px; padding: 8px 6px 0; }
+  .chapa-id h4 { font-size: 1.7rem; }
+  .chapa-id dl { grid-template-columns: repeat(2, auto); margin: 14px 6px 0; }
+  .chapa-id .num { margin: 12px 6px 0; }
+  .stat .v { font-size: 3rem; }
+  .paradas { grid-template-columns: 1fr; }
+  .parada + .parada { border-left: 0; border-top: 1.5px dashed var(--rule-strong); }
+  .parada .arw { display: none; }
+  .list-cols { columns: 1; }
+  .phone { border-width: 6px; border-radius: 30px; }
+  .work .fascia, .work .bd { padding-left: 18px; padding-right: 18px; }
+  .work .fascia h3 { font-size: 2rem; }
+  .dial input { width: 100px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- Original ornaments (own geometry, filete-inspired: a whip stem, one acanthus-like leaf, a spiral, a lozenge; no copied work) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="f-corner" viewBox="0 0 64 64">
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 60 C6 40 14 24 30 14 C42 7 56 8 58 18 C60 26 50 30 46 24 C43 20 47 16 50 18" style="stroke:var(--gold-line)" stroke-width="1.6"/>
+        <path d="M10 44 C4 34 8 24 20 20 C22 30 18 38 10 44 Z" style="fill:var(--celeste);stroke:var(--celeste-ink)" fill-opacity=".4" stroke-width="1"/>
+        <path d="M12 41 C14 33 16 28 19 23" style="stroke:var(--celeste-ink)" stroke-width=".8"/>
+        <path d="M24 17 C27 25 34 29 41 27 C37 21 31 17 24 17 Z" style="fill:var(--ochre);stroke:var(--gold-line)" fill-opacity=".45" stroke-width="1"/>
+        <path d="M4 60 H22 C26 60 28 57 26 55 C24 53 21 55 23 57" style="stroke:var(--gold-line)" stroke-width="1.3"/>
+      </g>
+      <circle cx="4" cy="60" r="2.6" style="fill:var(--oxblood)"/>
+    </symbol>
+    <symbol id="f-rule" viewBox="0 0 260 26" preserveAspectRatio="xMinYMid meet">
+      <g fill="none" stroke-linecap="round" style="stroke:var(--gold-line)" stroke-width="1.3">
+        <path d="M0 13 H92"/><path d="M168 13 H260"/>
+        <path d="M92 13 C98 3 110 3 110 10 C110 15 104 15 104 11"/>
+        <path d="M168 13 C162 23 150 23 150 16 C150 11 156 11 156 15"/>
+      </g>
+      <path d="M118 13 C122 6 128 5 130 13 C128 21 122 20 118 13 Z" style="fill:var(--celeste);stroke:var(--celeste-ink)" fill-opacity=".45" stroke-width="1"/>
+      <path d="M142 13 C138 6 132 5 130 13 C132 21 138 20 142 13 Z" style="fill:var(--ochre);stroke:var(--gold-line)" fill-opacity=".45" stroke-width="1"/>
+      <circle cx="130" cy="13" r="2.3" style="fill:var(--oxblood)"/>
+    </symbol>
+    <symbol id="f-flick" viewBox="0 0 44 22">
+      <g fill="none" stroke="#EBC66E" stroke-width="1.5" stroke-linecap="round"><path d="M42 11 H18 C10 11 4 6 8 3 C11 1 14 4 12 6"/><path d="M30 11 C26 17 18 19 16 15"/></g>
+      <path d="M22 11 C25 6 30 6 32 11 C30 15 25 15 22 11 Z" fill="#EBC66E" fill-opacity=".35" stroke="#EBC66E" stroke-width=".9"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="board-head">
+  <div class="wrap">
+    <p class="tag">Style board B2a · Juan Lundahl portfolio · iteration on board B</p>
+    <h1>Lo <em class="acc">porteño</em>, de todos los días</h1>
+    <p class="why"><strong>Rationale.</strong> Not the Buenos Aires of postcards: the one you walk past every morning. Enamelled plates screwed to a door frame, the painted fascia of an almacén or a bar notable, the green of a colectivo, gold drop-shadow lettering on a kiosk window, sidewalk tiles under your feet, newsprint cream and a café with medialunas. All of it is redrawn as original geometry and used sparingly (one ornament per section) so the portfolio still reads clean and professional to a recruiter.</p>
+    <p class="why">Type is Argentine: <strong>Sansita</strong> and <strong>Sansita Swashed</strong> (Omnibus-Type) carry the painted-sign voice, <strong>Encode Sans Condensed</strong> (Impallari Type, Rosario) does colectivo numbers, plates and destination signs, and <strong>Archivo</strong> (Omnibus-Type) keeps body text calm. Behind the hero, a faint original line drawing of the Sol de Mayo rays, dialled by one variable.</p>
+    <div class="pills">
+      <span class="chapa">Chapa <small>section plates</small></span>
+      <span class="linea">152</span>
+      <span class="destino"><b>Ramal JL</b><i></i>Paleta · Tipografía · Componentes</span>
+      <span class="cinta">¡Hola!</span>
+    </div>
+    <svg class="fil fil-rule" aria-hidden="true"><use href="#f-rule"/></svg>
+  </div>
+</header>
+
+<!-- 01 PALETTE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">01</span><h2>Palette</h2><p class="note">WCAG 2.x contrast. Ochre and weathered celeste are fills only; readable versions are --gold-line and --celeste-ink. Enamel plates keep their colours in both themes.</p></div>
+    <div class="swatches" id="sw-light"></div>
+    <p class="subhead">Dark theme · "Noche de bar notable"</p>
+    <div class="swatches" id="sw-dark"></div>
+  </div>
+</section>
+
+<!-- 02 TYPE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">02</span><h2>Type specimen</h2><p class="note">Painted-sign display, a swash accent for one word, condensed signage for numbers and labels, a sturdy grotesk for reading. All four from Argentine designers.</p></div>
+    <div class="type-grid">
+      <div class="spec">
+        <div class="who"><b>Display · Sansita 800 / 900</b>Omnibus-Type (AR). <a href="https://fonts.google.com/specimen/Sansita" target="_blank" rel="noopener">Google Fonts</a><br>Fat, warm terminals like shop-window lettering. Headings in sentence case.</div>
+        <div><div class="s-display">Many industries.</div><div class="scale"><span>H1 5.4rem</span><span>H2 5.2rem</span><span>Stat 3.9rem</span><span>Card 2.5rem</span></div></div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Accent · Sansita Swashed 800</b>Omnibus-Type (AR). <a href="https://fonts.google.com/specimen/Sansita+Swashed" target="_blank" rel="noopener">Google Fonts</a><br>The fileteador's flourish: one word per heading, oxblood with an ochre "sombra".</div>
+        <div class="s-accent">One method.</div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Signage · Encode Sans Condensed 600 / 800</b>Impallari Type (AR). <a href="https://fonts.google.com/specimen/Encode+Sans+Condensed" target="_blank" rel="noopener">Google Fonts</a><br>Colectivo numbers, destination signs, plates, dates and metadata (tabular figures).</div>
+        <div class="s-sign">Ramal 05 · Mar 2026 – Present</div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>Body · Archivo 400 / 500 / 700</b>Omnibus-Type (AR). <a href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Google Fonts</a><br>16.5px / 1.55.</div>
+        <p class="s-body">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 HERO -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">03</span><h2>Hero · light and dark</h2>
+      <p class="note">Greeting on a painted ribbon (cinta). Portrait composed like a milonga / theatre bill: double rule, condensed billing line, name with a gold drop shadow, oxblood band. Behind it, an original line burst of the Sol de Mayo (32 rays, straight and wavy alternating), cropped by the stage and kept faint so every text pair stays AA.</p>
+      <label class="dial">Sol intensity <input type="range" min="0" max="0.5" step="0.01" value="0.22" id="dial"> <output id="dial-out">0.22</output></label>
+    </div>
+
+    <div class="stage" id="hero-light">
+      <svg class="fil-corner tl" aria-hidden="true"><use href="#f-corner"/></svg><svg class="fil-corner tr" aria-hidden="true"><use href="#f-corner"/></svg>
+      <div class="hero">
+        <svg class="sol" viewBox="-220 -220 440 440" aria-hidden="true"></svg>
+        <div class="ghost" aria-hidden="true">LUNDAHL</div>
+        <div>
+          <p class="hello"><span class="cinta">¡Hola!</span><span class="who">I'm Juan Lundahl</span></p>
+          <h1>AI &amp; Marketing <em class="acc">Automation</em> Specialist</h1>
+          <p class="lede">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+          <ul class="tags"><li class="chip">AI</li><li class="chip">Automation</li><li class="chip">CRM Optimization</li><li class="chip">Martech Stack</li><li class="chip">Sales &amp; Marketing Ops</li></ul>
+          <div class="ctas"><a class="btn btn-primary" href="#">Explore work →</a><a class="btn btn-secondary" href="#">Resume</a></div>
+        </div>
+        <figure class="cartel" style="margin:0">
+          <svg class="c tl" aria-hidden="true"><use href="#f-corner"/></svg><svg class="c tr" aria-hidden="true"><use href="#f-corner"/></svg>
+          <div class="top">Marketing · Automatización · IA<b>Función diaria</b></div>
+          <div class="ph"><img src="../../../assets/img/juan.jpg" alt="Portrait of Juan Lundahl"></div>
+          <figcaption class="name">Juan Lundahl</figcaption>
+          <svg class="fil fil-rule" aria-hidden="true"><use href="#f-rule"/></svg>
+          <div class="band">NA · EMEA · LATAM — desde Argentina</div>
+        </figure>
+      </div>
+      <nav class="navpill" aria-label="Sample navigation">
+        <span class="mark">JL</span>
+        <a href="#" class="on">About</a><a href="#">Skills</a><a href="#">Work</a><a href="#">Range</a><a href="#">Certifications</a><a href="#">Contact</a>
+        <span class="sep"></span><span class="lang">EN ▾</span>
+        <button class="btn btn-icon" style="width:36px;height:36px;border:0;color:inherit" aria-label="Toggle dark mode">◐</button>
+      </nav>
+    </div>
+
+    <div class="stage theme-dark" id="hero-dark">
+      <svg class="fil-corner tl" aria-hidden="true"><use href="#f-corner"/></svg><svg class="fil-corner tr" aria-hidden="true"><use href="#f-corner"/></svg>
+      <div class="hero">
+        <svg class="sol" viewBox="-220 -220 440 440" aria-hidden="true"></svg>
+        <div class="ghost" aria-hidden="true">LUNDAHL</div>
+        <div>
+          <p class="hello"><span class="cinta">¡Hola!</span><span class="who">I'm Juan Lundahl</span></p>
+          <h1>AI &amp; Marketing <em class="acc">Automation</em> Specialist</h1>
+          <p class="lede">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+          <ul class="tags"><li class="chip">AI</li><li class="chip">Automation</li><li class="chip">CRM Optimization</li><li class="chip">Martech Stack</li></ul>
+          <div class="ctas"><a class="btn btn-primary" href="#">Explore work →</a><a class="btn btn-secondary" href="#">Resume</a></div>
+        </div>
+        <figure class="cartel" style="margin:0">
+          <svg class="c tl" aria-hidden="true"><use href="#f-corner"/></svg><svg class="c tr" aria-hidden="true"><use href="#f-corner"/></svg>
+          <div class="top">Marketing · Automatización · IA<b>Función diaria</b></div>
+          <div class="ph"><img src="../../../assets/img/juan.jpg" alt="Portrait of Juan Lundahl"></div>
+          <figcaption class="name">Juan Lundahl</figcaption>
+          <svg class="fil fil-rule" aria-hidden="true"><use href="#f-rule"/></svg>
+          <div class="band">NA · EMEA · LATAM — desde Argentina</div>
+        </figure>
+      </div>
+      <nav class="navpill" aria-label="Sample navigation, dark">
+        <span class="mark">JL</span>
+        <a href="#" class="on">About</a><a href="#">Skills</a><a href="#">Work</a><a href="#">Range</a><a href="#">Certifications</a><a href="#">Contact</a>
+        <span class="sep"></span><span class="lang">EN ▾</span>
+        <button class="btn btn-icon" style="width:36px;height:36px;border:0;color:inherit" aria-label="Toggle light mode">◑</button>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- 04 MARKETING ID -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">04</span><h2>Marketing ID · la chapa</h2><p class="note">The enamelled nameplate screwed beside a porteño building door ("Dr. …, piso 3"), turned into a credential. Rivets, a double cream inner line and two chipped corners showing the iron. No ID-card layout, no crest.</p></div>
+    <div class="id-wrap">
+      <div>
+        <article class="chapa-id" aria-label="Marketing ID: Juan Lundahl, AI and Marketing Automation Specialist">
+          <span class="sheen" aria-hidden="true"></span>
+          <i class="rv a" aria-hidden="true"></i><i class="rv b" aria-hidden="true"></i><i class="rv c" aria-hidden="true"></i><i class="rv d" aria-hidden="true"></i>
+          <span class="chip1" aria-hidden="true"></span><span class="chip2" aria-hidden="true"></span>
+          <div class="body">
+            <div class="ph"><img src="../../../assets/img/juan.jpg" alt=""></div>
+            <div>
+              <p class="kicker">Marketing ID</p>
+              <h4>Juan Lundahl</h4>
+              <p class="role">AI &amp; Marketing Automation Specialist</p>
+            </div>
+          </div>
+          <dl>
+            <div><dt>Experience</dt><dd>6+ years</dd></div>
+            <div><dt>Focus</dt><dd>AI · Automation · CRM</dd></div>
+            <div><dt>Markets</dt><dd>NA · EMEA · LATAM</dd></div>
+            <div><dt>Home base</dt><dd class="home">Argentina</dd></div>
+          </dl>
+          <p class="num"><span>Nº MKT-2016-JL</span><span>Buenos Aires</span></p>
+        </article>
+        <button class="cartelito" aria-pressed="false" aria-label="Availability sign. Click to flip.">
+          <svg class="cuerda" viewBox="0 0 86 22" aria-hidden="true"><path d="M4 22 L43 3 L82 22" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="43" cy="3" r="2.6" fill="currentColor"/></svg>
+          <span class="faces"><span class="f front"><b>Abierto</b><small>Open to opportunities</small></span><span class="f back"><b>Vuelvo enseguida</b><small>Back in five minutes</small></span></span>
+        </button>
+      </div>
+      <div class="id-notes">
+        <h3>What changes from today's card</h3>
+        <p>The lanyard becomes a wall plate: steady, professional, unmistakably local. Interaction moves to the little shop-door sign hanging below it ("Abierto" / "Vuelvo enseguida"): tap to flip. Hover polishes the plate with a light sheen.</p>
+        <ul>
+          <li>Bondi-green enamel, cream double inner line, four rivets.</li>
+          <li>Portrait in an arched cream frame, like a door-plate window.</li>
+          <li>Runes and barcode replaced by a plate number and the city.</li>
+          <li>Argentina as home base in painted gold.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SECTION HEADING -->
+<section class="blk" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">05</span><h2>Section heading</h2></div>
+    <header class="sec-head">
+      <span class="destino"><b>05</b><i></i>Range · por todas las industrias</span>
+      <h2>Many industries. <em class="acc">One method.</em></h2>
+      <p>Every sector has its own language. My approach stays the same: understand the audience, build the right system and keep improving it.</p>
+      <div class="baldosas" aria-hidden="true"></div>
+    </header>
+  </div>
+</section>
+
+<!-- 06 WORK -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">06</span><h2>Work card</h2><p class="note">The card header is a shop fascia: green enamel, gold inner line, the company name painted in cream with a gold shadow and two small original flicks. "Current role" is a painted round seal. Bullets are tiny baldosas.</p></div>
+    <article class="work">
+      <header class="fascia">
+        <h3><svg aria-hidden="true" style="transform:scaleX(-1)"><use href="#f-flick"/></svg>VU Inc.<svg aria-hidden="true"><use href="#f-flick"/></svg></h3>
+        <span class="stamp">Current<br>role</span>
+      </header>
+      <div class="bd">
+        <p class="role">Marketing &amp; Automation Specialist</p>
+        <p class="sum">Marketing and automation role focused on the martech stack and AI-driven campaigns.</p>
+        <ul><li>Martech stack and automation infrastructure</li><li>AI integration in campaigns</li></ul>
+        <div class="ft">
+          <div class="row"><span class="chip">Mar 2026 – Present</span><span class="chip">Hybrid</span><span class="chip is-soft">Cybersecurity &amp; digital identity</span></div>
+          <button class="btn btn-secondary">Details +</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 07 ACHIEVEMENTS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">07</span><h2>Achievements</h2><p class="note">The café pizarra: green slate in a wooden frame, chalk-cream numbers, dashed chalk dividers. No crosses, no ornaments inside the numbers.</p></div>
+    <div class="pizarra">
+      <p class="hoy">Hoy en la pizarra<small>Achievements</small></p>
+      <div class="ach">
+        <div class="stat"><div class="v">6<sup>+</sup></div><p class="l">Years of experience</p></div>
+        <div class="stat"><div class="v">3</div><p class="l">Markets: NA · EMEA · LATAM</p></div>
+        <div class="stat"><div class="v">10</div><p class="l">Certifications</p></div>
+        <div class="stat"><div class="v">1</div><p class="l">ADEPA Prize</p></div>
+      </div>
+    </div>
+    <div class="award"><span class="chapa is-red">1st Prize · University Journalism</span><span class="txt">Association of Argentine Journalistic Entities (ADEPA)</span></div>
+  </div>
+</section>
+
+<!-- 08 CERTS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">08</span><h2>Certifications</h2><p class="note">At rest: cream cards with an ink rule. On hover they turn into a green enamel plate (cream inner line, chipped corner, gold underline). First card pinned in hover state.</p></div>
+    <div class="certs" id="certs"></div>
+  </div>
+</section>
+
+<!-- 09 MARKETS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">09</span><h2>Markets</h2><p class="note">Drawn like the route panel painted on a colectivo: line number, destination, stops in order, and Argentina as the cabecera (the terminus where the line lives).</p></div>
+    <div class="recorrido" role="list" aria-label="Markets route">
+      <div class="hd"><span class="linea">JL</span><span class="destino"><b>Recorrido</b><i></i>NA · EMEA · LATAM · Cabecera Argentina</span></div>
+      <div class="paradas">
+        <div class="parada" role="listitem"><span class="n">Parada 1</span><b>NA</b><small>North America</small><span class="arw" aria-hidden="true">→</span></div>
+        <div class="parada" role="listitem"><span class="n">Parada 2</span><b>EMEA</b><small>Europe, Middle East &amp; Africa</small><span class="arw" aria-hidden="true">→</span></div>
+        <div class="parada" role="listitem"><span class="n">Parada 3</span><b>LATAM</b><small>Latin America</small><span class="arw" aria-hidden="true">→</span></div>
+        <div class="parada cabecera" role="listitem"><span class="n">Cabecera · home base</span><b>Argentina</b><small>Based in Buenos Aires</small></div>
+      </div>
+    </div>
+    <div class="markets-chips">
+      <span class="chip">NA</span><span class="chip">EMEA</span><span class="chip is-active">LATAM</span>
+      <span class="chapa">Argentina <small>home base</small></span>
+    </div>
+  </div>
+</section>
+
+<!-- 10 KIT -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">10</span><h2>Buttons, chips, level dots</h2></div>
+    <div class="kit">
+      <div>
+        <h4>Buttons</h4>
+        <div class="row">
+          <a class="btn btn-primary" href="#">Get in touch →</a>
+          <a class="btn btn-secondary" href="#">Download CV (PDF)</a>
+          <a class="btn btn-ghost" href="#">See it on LinkedIn</a>
+          <button class="btn btn-icon" aria-label="Toggle dark mode">◐</button>
+        </div>
+      </div>
+      <div>
+        <h4>Chips &amp; plates</h4>
+        <div class="row">
+          <span class="chip">SEO</span>
+          <span class="chip is-soft"><span class="dot"></span>HubSpot CRM</span>
+          <span class="chip is-active">Retention &amp; Automation</span>
+          <span class="chip">Spanish · Native</span>
+          <span class="chapa">Work <small>Nº 03</small></span>
+          <span class="destino"><b>06</b><i></i>Work</span>
+        </div>
+      </div>
+      <div>
+        <h4>Level · vereda pads</h4>
+        <div class="lv">
+          <span>Expert</span><span class="dots" aria-label="4 of 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+          <span>Advanced</span><span class="dots" aria-label="3 of 4"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+          <span>Intermediate</span><span class="dots" aria-label="2 of 4"><i class="on"></i><i class="on"></i><i></i><i></i></span>
+          <span>Basic</span><span class="dots" aria-label="1 of 4"><i class="on"></i><i></i><i></i><i></i></span>
+        </div>
+        <div class="icons" aria-label="Line icons">
+          <figure><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 17h20v6a9 9 0 0 1-9 9h-2a9 9 0 0 1-9-9z"/><path d="M29 19h2a3 3 0 0 1 0 6h-3"/><path d="M6 34h28"/><path d="M15 8c-1.5 2 1.5 3 0 5M21 8c-1.5 2 1.5 3 0 5"/></svg>Pocillo</figure>
+          <figure><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 27c3-11 11-17 21-15 6 1 9 5 9 9-4-3-8-4-12-3"/><path d="M5 27c5 2 12 2 18-1 4-2 6-6 6-8"/><path d="M12 22c1-3 3-5 6-7M18 23c1-3 2-5 4-7"/></svg>Medialuna</figure>
+          <figure><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="30" height="18" rx="3"/><rect x="8" y="14" width="24" height="12" rx="1.5"/><circle cx="11" cy="20" r="1" fill="currentColor"/><circle cx="29" cy="20" r="1" fill="currentColor"/></svg>Chapa</figure>
+          <figure><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="6" y="6" width="28" height="28"/><path d="M6 13a7 7 0 0 0 7-7M27 6a7 7 0 0 0 7 7M34 27a7 7 0 0 0-7 7M13 34a7 7 0 0 0-7-7"/><circle cx="20" cy="20" r="5"/><circle cx="20" cy="20" r="1.6" fill="currentColor"/><circle cx="20" cy="11" r="1" fill="currentColor"/><circle cx="20" cy="29" r="1" fill="currentColor"/><circle cx="11" cy="20" r="1" fill="currentColor"/><circle cx="29" cy="20" r="1" fill="currentColor"/><circle cx="13.6" cy="13.6" r="1" fill="currentColor"/><circle cx="26.4" cy="13.6" r="1" fill="currentColor"/><circle cx="13.6" cy="26.4" r="1" fill="currentColor"/><circle cx="26.4" cy="26.4" r="1" fill="currentColor"/></svg>Baldosa</figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 DARK -->
+<section class="theme-dark dark-strip">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">11</span><h2>Dark mode strip</h2><p class="note">"Noche de bar notable": warm near-black over a faint vereda-vainilla grid, cream lettering, lit gold and celeste. Enamel plates keep their daytime colours, like real plates under a street lamp.</p></div>
+    <div class="grid">
+      <div class="mini">
+        <span class="destino"><b>01</b><i></i>About</span>
+        <h3>Who I <em class="acc">am.</em></h3>
+        <div class="row">
+          <a class="btn btn-primary" href="#">Explore work →</a>
+          <a class="btn btn-secondary" href="#">Resume</a>
+          <span class="chip is-soft"><span class="dot"></span>HubSpot CRM</span>
+        </div>
+        <svg class="fil fil-rule" style="max-width:300px;margin-top:18px" aria-hidden="true"><use href="#f-rule"/></svg>
+        <div class="dsw">
+          <div style="background:#1A1714;color:#F2E8D5">paper<br>#1A1714</div>
+          <div style="background:#24201B;color:#F2E8D5">surface<br>#24201B</div>
+          <div style="background:#D7A64B;color:#1A1714">ochre<br>#D7A64B</div>
+          <div style="background:#F2E8D5;color:#1A1714">ink<br>#F2E8D5</div>
+        </div>
+      </div>
+      <div class="side">
+        <a class="cert" href="#"><span class="iss">HubSpot</span><span class="nm">HubSpot Inbound</span><span class="dt">Nov 2025 <span class="go">View →</span></span></a>
+        <a class="cert demo-hover" href="#"><span class="iss">Coderhouse</span><span class="nm">Growth Marketing</span><span class="dt">Jul 2022 <span class="go">View →</span></span></a>
+        <span class="chapa is-cel" style="justify-self:start">Argentina <small>home base</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 MOBILE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">12</span><h2>Mobile · 375px</h2></div>
+    <div class="phone-row">
+      <div class="phone">
+        <div class="screen">
+          <svg class="sol" viewBox="-220 -220 440 440" aria-hidden="true"></svg>
+          <div class="m-hero">
+            <div class="m-top">
+              <figure class="cartel" style="margin:0">
+                <div class="top">Marketing · IA<b>Función diaria</b></div>
+                <div class="ph"><img src="../../../assets/img/juan.jpg" alt="Portrait of Juan Lundahl"></div>
+                <figcaption class="name">Juan Lundahl</figcaption>
+                <div class="band">NA · EMEA · LATAM</div>
+              </figure>
+              <span class="chapa" style="font-size:.66rem;padding-left:1.3em;padding-right:1.3em">Argentina <small>home</small></span>
+            </div>
+            <p class="hello"><span class="cinta">¡Hola!</span><span class="who" style="font-size:.76rem">I'm Juan Lundahl</span></p>
+            <h1>AI &amp; Marketing <em class="acc">Automation</em> Specialist</h1>
+            <p class="lede">I bring AI and automation into marketing and sales processes, optimize CRMs and help teams adopt a modern, advanced martech stack.</p>
+            <div class="tags"><span class="chip">AI</span><span class="chip">Automation</span><span class="chip">CRM Optimization</span><span class="chip">Martech Stack</span></div>
+            <div class="row"><a class="btn btn-primary" href="#">Explore work →</a><a class="btn btn-secondary" href="#">Resume</a></div>
+          </div>
+          <nav class="navpill" aria-label="Sample mobile navigation">
+            <span class="mark">JL</span><a href="#" class="on">About</a><a href="#">Skills</a><a href="#">Work</a><span class="sep"></span><span class="lang">EN</span>
+          </nav>
+        </div>
+      </div>
+      <div class="phone-notes">
+        <h3>Mobile rules</h3>
+        <ul>
+          <li>The theatre-bill portrait shrinks to 150px and sits beside a small "Argentina" plate.</li>
+          <li>The Sol de Mayo burst moves to the top-right corner, mostly cropped, behind the portrait only; the headline sits on plain cream.</li>
+          <li>16px gutter; H1 2.45rem Sansita 900 with the Swashed accent word.</li>
+          <li>Filete corners shrink to 44px and appear only on the hero and featured cards.</li>
+          <li>Pizarra and route panel stack to 2 then 1 column; plates never wrap mid-word.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 COMPARE -->
+<section class="blk" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">13</span><h2>Cómo se compara con B</h2><p class="note">What was removed because it read as a visitor's view, and what replaced it.</p></div>
+    <div class="compare">
+      <div>
+        <h4>Out (traveller cues)</h4>
+        <ul>
+          <li>Transit-ticket "boleto" credential and punch holes.</li>
+          <li>Generic subte line map for markets.</li>
+          <li>The "Buenos Aires" souvenir plate under the portrait.</li>
+          <li>Montserrat caps everywhere: a tidy, international signage look.</li>
+          <li>Pale ink-and-celeste palette that could be any vintage city.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>In (everyday porteño)</h4>
+        <ul>
+          <li>Door nameplate in chipped green enamel, plus the "Abierto / Vuelvo enseguida" shop sign.</li>
+          <li>Colectivo line numbers, destination signs and a route panel with Argentina as cabecera.</li>
+          <li>Shop-fascia work cards, café pizarra stats, baldosa dividers and vereda pads.</li>
+          <li>Painted-sign type (Sansita + Swashed) with gold drop shadow, used for one word at a time.</li>
+          <li>Bondi green, oxblood and ochre added to cream, ink and a weathered celeste; faint Sol de Mayo rays behind the hero.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 CHANGES -->
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-label"><span class="linea">14</span><h2>What would change in the real site</h2><p class="note"><code>css/tokens.css</code> values, the font link in <code>index.html</code>, plus reusable pieces: <code>.chapa</code>, <code>.linea</code>/<code>.destino</code>, the filete SVG sprite, the baldosa/vainilla data-URIs, the Sol burst (≈30 lines of JS or a static SVG) and <code>--arg-opacity</code>.</p></div>
+    <div class="table-scroll">
+    <table class="changes">
+      <thead><tr><th>Token</th><th>Today (Danish)</th><th>B2a light</th><th>B2a dark</th></tr></thead>
+      <tbody>
+        <tr><td><code>--navy</code> (primary)</td><td><i class="sw-i" style="background:#c8102e"></i>#C8102E</td><td><i class="sw-i" style="background:#1F5C4A"></i>#1F5C4A (enamel)</td><td>#1F5C4A (unchanged)</td></tr>
+        <tr><td><code>--navy-ink</code></td><td>#FFFFFF</td><td><i class="sw-i" style="background:#F3EBDA"></i>#F3EBDA</td><td>#F3EBDA</td></tr>
+        <tr><td><code>--accent</code></td><td>#F0A3AF</td><td><i class="sw-i" style="background:#C08A2E"></i>#C08A2E (ochre)</td><td>#D7A64B</td></tr>
+        <tr><td><code>--accent-2</code> (accent word)</td><td>#C8102E</td><td><i class="sw-i" style="background:#7A2430"></i>#7A2430 (oxblood)</td><td>#E0828A</td></tr>
+        <tr><td><code>--accent-soft</code></td><td>#FBE3E6</td><td><i class="sw-i" style="background:#D3E2EE"></i>#D3E2EE</td><td>#2A3D4F</td></tr>
+        <tr><td><code>--link</code> (new)</td><td>(accent-2)</td><td><i class="sw-i" style="background:#2D5F8A"></i>#2D5F8A</td><td>#8FB9DA</td></tr>
+        <tr><td><code>--bg / --bg-alt</code></td><td>#FBF8F7 / #F7EFEE</td><td>#F3EBDA / #E9DEC6</td><td>#1A1714 / #201C18</td></tr>
+        <tr><td><code>--surface</code></td><td>#FFFFFF</td><td>#FBF6EA</td><td>#24201B</td></tr>
+        <tr><td><code>--border / --border-strong</code></td><td>#EEDCDC / #DBBCBF</td><td>#D9CCB1 / #1C1B19 (ink outlines)</td><td>#3A342C / #514940</td></tr>
+        <tr><td><code>--ink / --ink-2 / --muted</code></td><td>#3A0D15 / #5A2830 / #7A5359</td><td>#1C1B19 / #3B3833 / #5F584D</td><td>#F2E8D5 / #DCD0BA / #B0A592</td></tr>
+        <tr><td>new <code>--filete</code> / <code>--celeste</code></td><td>(none)</td><td>#8A6424 / #7FA8C9</td><td>#D7A64B / #8FB9DA</td></tr>
+        <tr><td>new <code>--arg-opacity</code></td><td>(none)</td><td>0.22 (Sol burst)</td><td>0.22 (same dial)</td></tr>
+        <tr><td><code>--feature-bg</code></td><td>#8E0C22</td><td>#22302A (pizarra slate)</td><td>#22302A</td></tr>
+        <tr><td><code>--stage-1…4</code> (funnel)</td><td>pinks → oxblood</td><td>#E9DEC6 · #EBC66E · #1F5C4A · #7A2430</td><td>#2A3D4F · #D7A64B · #6FB59A · #E0828A</td></tr>
+        <tr><td>fonts</td><td>Albert Sans · Cormorant · JetBrains Mono · Noto Sans Runic</td><td colspan="2">Archivo (body) · Sansita (display) · Sansita Swashed (accent) · Encode Sans Condensed (signage, metadata)</td></tr>
+        <tr><td><code>--cross-* / --rune*</code></td><td>Nordic cross, runes</td><td colspan="2">Removed. Filete corner/rule or a baldosa strip take their slot, max one per section.</td></tr>
+        <tr><td><code>--radius / --radius-lg</code></td><td>12px / 20px</td><td>6px / 12px (plate corners)</td><td>same</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul class="list-cols">
+      <li>Eyebrows become colectivo numbers (<code>.linea</code>) or destination signs (<code>.destino</code>).</li>
+      <li>Headline *asterisk* accents render in Sansita Swashed, oxblood, ochre shadow (no rotation).</li>
+      <li>Hero: "Hej!" → "¡Hola!" ribbon; portrait as a theatre bill; faint Sol de Mayo burst behind it.</li>
+      <li>About: lanyard → enamel door plate + flip sign (reuses the pointer/keyboard wiring).</li>
+      <li>Achievements: café pizarra, dashed chalk dividers.</li>
+      <li>Work cards: shop-fascia header, painted round seal.</li>
+      <li>Markets/Range: colectivo route panel, Argentina as cabecera.</li>
+      <li>Background: cream + 1 KB noise; dark adds the vainilla grid.</li>
+      <li>Meta theme-color: #F3EBDA (light) / #1A1714 (dark).</li>
+      <li>Drop Albert Sans, Cormorant, JetBrains Mono, Noto Sans Runic.</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="board-foot"><div class="wrap">Board B2a · Porteño · standalone preview, not wired to the live site. All ornaments are original drawings.</div></footer>
+
+<script>
+(function () {
+  var light = [
+    ['--ink', '#1C1B19', 'Text, outlines, secondary button', '14.5:1 on --paper · AAA', '#F3EBDA'],
+    ['--ink-2', '#3B3833', 'Lede, secondary text', '9.8:1 on --paper · AAA', '#F3EBDA'],
+    ['--muted', '#5F584D', 'Meta, captions', '5.9:1 on --paper · 5.3:1 on --paper-2 · AA', '#F3EBDA'],
+    ['--enamel / --bondi', '#1F5C4A', 'Plates, primary button, fascia, issuer text', '6.6:1 on --paper; cream on it 6.6:1 · AA', '#F3EBDA'],
+    ['--oxblood', '#7A2430', 'Accent word, ribbon, red plate', '8.3:1 on --paper · cream on it 8.3:1 · AAA', '#F3EBDA'],
+    ['--celeste-ink', '#2D5F8A', 'Links, focus ring', '5.7:1 on --paper · AA', '#F3EBDA'],
+    ['--gold-line', '#8A6424', 'Filete hairlines, ornaments', '4.5:1 on --paper (AA if ever text)', '#F3EBDA'],
+    ['--ochre', '#C08A2E', 'Drop shadows, linea band (non-text)', '--ink on it 5.7:1 · AA', '#1C1B19'],
+    ['--celeste', '#7FA8C9', 'Weathered celeste, Sol rays, leaves (non-text)', '--ink on it 6.8:1 · AA', '#1C1B19'],
+    ['--slate', '#22302A', 'Café pizarra', 'cream chalk on it 11.3:1 · gold 8.4:1 · AAA', '#F2E8D5'],
+    ['--paper', '#F3EBDA', 'Newsprint cream page', 'Base for ratios above', '#1C1B19'],
+    ['--surface', '#FBF6EA', 'Cards, bill, route panel', '--ink on it 16.0:1', '#1C1B19']
+  ];
+  var dark = [
+    ['--paper', '#1A1714', 'Warm night background', '--ink on it 14.7:1', '#F2E8D5'],
+    ['--surface', '#24201B', 'Cards', '--muted on it 6.7:1', '#F2E8D5'],
+    ['--ink', '#F2E8D5', 'Cream text', '14.7:1 · AAA', '#1A1714'],
+    ['--muted', '#B0A592', 'Meta', '7.4:1 on --paper · AAA', '#1A1714'],
+    ['--oxblood (lit)', '#E0828A', 'Accent word', '6.6:1 on --paper · AA', '#1A1714'],
+    ['--ochre', '#D7A64B', 'Gold, filete, Sol rays', '8.0:1 on --paper', '#1A1714'],
+    ['--celeste', '#8FB9DA', 'Links, wavy rays', '8.6:1 on --paper · AAA', '#1A1714'],
+    ['--bondi (lit)', '#6FB59A', 'Issuer text, level pads', '7.4:1 on --paper · AAA', '#1A1714']
+  ];
+  function render(list, id) {
+    document.getElementById(id).innerHTML = list.map(function (s) {
+      return '<div class="sw"><div class="chip-c" style="background:' + s[1] + ';color:' + s[4] + '">Aa</div><div class="meta"><b>' + s[0] + '</b><span class="hex">' + s[1] + '</span><p class="role">' + s[2] + '</p><span class="aa">' + s[3] + '</span></div></div>';
+    }).join('');
+  }
+  render(light, 'sw-light'); render(dark, 'sw-dark');
+
+  var certs = [
+    ['HubSpot Inbound', 'HubSpot', 'Nov 2025', 1], ['Programmatic Advertising', 'Udemy', '2024', 1],
+    ['Social Media Marketing: Strategy and Optimization', 'LinkedIn', 'Aug 2023', 1], ['Content Creation: Strategy and Tools', 'LinkedIn', 'Aug 2023', 1],
+    ['Content Marketing for Social Media', 'LinkedIn', 'Aug 2023', 1], ['Deutsch Intensiv Kompakt', 'Goethe-Institut', 'Aug 2022', 0],
+    ['Growth Marketing', 'Coderhouse', 'Jul 2022', 1], ['UX/UI Design', 'Coderhouse', 'Apr 2022', 1],
+    ['EF SET English Certificate', 'EF SET', 'Mar 2022', 1], ['Digital Marketing (Community Manager & Advertising)', 'Coderhouse', '2021 – 2022', 1]
+  ];
+  document.getElementById('certs').innerHTML = certs.map(function (c, i) {
+    var open = c[3] ? '<a href="#"' : '<div tabindex="0"', close = c[3] ? '</a>' : '</div>';
+    return open + ' class="cert' + (i === 0 ? ' demo-hover' : '') + '"><span class="iss">' + c[1] + '</span><span class="nm">' + c[0].replace('&', '&amp;') + '</span><span class="dt">' + c[2] + (c[3] ? '<span class="go" aria-hidden="true">View →</span>' : '') + '</span>' + close;
+  }).join('');
+
+  /* Sol de Mayo: original line burst, 32 rays alternating straight and wavy */
+  function sol(svg) {
+    var out = '', N = 32, P = Math.PI;
+    function pt(r, a) { return (r * Math.cos(a)).toFixed(1) + ' ' + (r * Math.sin(a)).toFixed(1); }
+    for (var i = 0; i < N; i++) {
+      var a = i * 2 * P / N - P / 2;
+      if (i % 2 === 0) {
+        out += '<path class="rs" d="M' + pt(80, a - 0.045) + ' L' + pt(212, a) + ' L' + pt(80, a + 0.045) + '"/>';
+      } else {
+        var d = '', r0 = 82, r1 = 178;
+        for (var k = 0; k <= 24; k++) {
+          var t = k / 24, r = r0 + (r1 - r0) * t, off = Math.sin(t * P * 3) * 6.5 * (1 - t * 0.35);
+          var x = r * Math.cos(a) + off * Math.cos(a + P / 2), y = r * Math.sin(a) + off * Math.sin(a + P / 2);
+          d += (k ? ' L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+        }
+        out += '<path class="rw" d="' + d + '"/>';
+      }
+    }
+    out += '<circle class="ring" r="66"/><circle class="ring" r="72" stroke-dasharray="2 4"/>';
+    svg.innerHTML = out;
+  }
+  document.querySelectorAll('svg.sol').forEach(sol);
+
+  /* One dial for the Argentina background */
+  var dial = document.getElementById('dial'), outv = document.getElementById('dial-out');
+  dial.addEventListener('input', function () { document.documentElement.style.setProperty('--arg-opacity', dial.value); document.querySelectorAll('.theme-dark').forEach(function (el) { el.style.setProperty('--arg-opacity', dial.value); }); outv.textContent = dial.value; });
+
+  /* Abierto / Vuelvo enseguida */
+  var sign = document.querySelector('.cartelito');
+  sign.addEventListener('click', function () { sign.setAttribute('aria-pressed', sign.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); });
+})();
+</script>
+</body>
+</html>
