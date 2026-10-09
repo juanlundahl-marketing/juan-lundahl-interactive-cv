@@ -1,6 +1,7 @@
 /* Certifications: "Always learning." two-column layout. Big heading + count
    on the left, list on the right. The hovered / focused row becomes a green
-   enamel plate (B2a "Porteño") showing issuer and date. Education and languages sit below, compact. */
+   enamel plate (B2a "Porteño") showing issuer and date. Languages sit below, compact
+   (education has its own section: js/sections/education.js). */
 import { esc, rich } from '../utils.js';
 
 export const styles = 'css/sections/certifications.css';
@@ -10,7 +11,6 @@ const EXT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 export default function render(el, ctx) {
   const { data, ui } = ctx;
   const certs = data.certifications || [];
-  const edu = data.education || [];
   const langs = data.languages || [];
 
   el.innerHTML = `
@@ -36,27 +36,15 @@ export default function render(el, ctx) {
         </ul>
       </div>
 
+      ${langs.length ? `
       <div class="certs__extra">
-        ${edu.length ? `
-        <section class="extra" data-reveal aria-labelledby="edu-label">
-          <h3 class="eyebrow" id="edu-label">${esc(ui.educationLabel)}</h3>
-          <ul class="edu" role="list">
-            ${edu.map((e) => `
-              <li>
-                <p class="edu__degree">${esc(e.degree)}</p>
-                <p class="edu__inst">${esc(e.institution)}</p>
-                <p class="edu__period">${esc(e.period)}</p>
-              </li>`).join('')}
-          </ul>
-        </section>` : ''}
-        ${langs.length ? `
-        <section class="extra extra--langs" data-reveal style="--reveal-delay:80ms" aria-labelledby="langs-label">
+        <section class="extra extra--langs" data-reveal aria-labelledby="langs-label">
           <h3 class="eyebrow" id="langs-label">${esc(ui.languagesLabel)}</h3>
           <ul class="langs" role="list">
             ${langs.map((l) => `<li class="chip"><strong>${esc(l.name)}</strong><span>${esc(l.level)}</span></li>`).join('')}
           </ul>
-        </section>` : ''}
-      </div>
+        </section>
+      </div>` : ''}
     </div>`;
 
   /* Dim siblings while one row is active (hover or focus); CSS handles the rest. */

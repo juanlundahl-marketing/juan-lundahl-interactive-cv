@@ -7,7 +7,7 @@
    SHARED COMPONENTS (usable by any section):
    .section-head > .eyebrow:first-child  colectivo line number + destination
                                          sign. Number comes from --sec-n, set
-                                         per section id below ("01".."07").
+                                         per section id below ("01".."08").
    .eyebrow (anywhere else)              condensed caps sub-label with a dot
    .display / .display em                Sansita 900 + Swashed oxblood accent
    .btn / .btn--ghost                    enamel plate button / ink outline
@@ -119,9 +119,10 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 800; line-height
 #skills { --sec-n: "02"; }
 #work { --sec-n: "03"; }
 #range { --sec-n: "04"; }
-#certifications { --sec-n: "05"; }
-#achievements { --sec-n: "06"; }
-#contact { --sec-n: "07"; }
+#education { --sec-n: "05"; }
+#certifications { --sec-n: "06"; }
+#achievements { --sec-n: "07"; }
+#contact { --sec-n: "08"; }
 
 /* ---------- Typography ---------- */
 
@@ -564,6 +565,10 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 800; line-height
   :root:not([data-theme="light"]) .theme-icon--dark { display: block; }
 }
 
+/* Eight sections: tighten the pill on mid-size desktops so it still fits */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .site-nav__link { padding: 0 9px; letter-spacing: 0.06em; }
+}
 @media (max-width: 599px) {
   .site-nav__link { padding: 0 10px; font-size: 0.74rem; letter-spacing: 0.08em; }
   .site-nav__link--home { padding: 0; }

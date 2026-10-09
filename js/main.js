@@ -43,6 +43,7 @@ const SECTION_MODULES = {
   skills: './sections/skills.js',
   work: './sections/work.js',
   range: './sections/range.js',
+  education: './sections/education.js',
   certifications: './sections/certifications.js',
   achievements: './sections/achievements.js',
   contact: './sections/contact.js'
@@ -54,12 +55,13 @@ const NAV_KEYS = {
   skills: 'funnel',
   work: 'work',
   range: 'range',
+  education: 'education',
   certifications: 'certifications',
   achievements: 'achievements',
   contact: 'contact'
 };
 
-const SECTION_ORDER = ['hero', 'about', 'skills', 'work', 'range', 'certifications', 'achievements', 'contact'];
+const SECTION_ORDER = ['hero', 'about', 'skills', 'work', 'range', 'education', 'certifications', 'achievements', 'contact'];
 const LANGS = ['en', 'es', 'de'];
 const STORE ={ lang: 'jl-lang', theme: 'jl-theme' };
 

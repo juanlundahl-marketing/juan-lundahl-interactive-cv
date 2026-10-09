@@ -10,6 +10,7 @@
       "funnel": "Skills",
       "work": "Work",
       "range": "Range",
+      "education": "Education",
       "certifications": "Certifications",
       "achievements": "Achievements",
       "contact": "Contact",
@@ -212,32 +213,42 @@
     ],
     "education": [
       {
+        "id": "uca",
+        "featured": true,
+        "award": "adepa",
         "institution": "Pontifical Catholic University of Argentina (UCA)",
         "degree": "Bachelor's degree in Journalistic Communication",
-        "period": "2016 – 2020",
+        "start": "2016",
+        "end": "2020",
         "details": []
       },
       {
+        "id": "coderhouse",
         "institution": "Coderhouse",
         "degree": "Digital Marketing",
-        "period": "Oct 2021 – Jun 2022",
+        "start": "2021-10",
+        "end": "2022-06",
         "details": [
-          "Community Manager & Advertising (Oct 2021 – Jan 2022)",
-          "UX/UI Design (Dec 2021 – Mar 2022)",
-          "Advanced Network Advertising (Jan 2022 – Mar 2022)",
-          "Growth Marketing (Apr 2022 – Jun 2022)"
+          { "name": "Community Manager & Advertising", "start": "2021-10", "end": "2022-01" },
+          { "name": "UX/UI Design", "start": "2021-12", "end": "2022-03" },
+          { "name": "Advanced Network Advertising", "start": "2022-01", "end": "2022-03" },
+          { "name": "Growth Marketing", "start": "2022-04", "end": "2022-06" }
         ]
       },
       {
+        "id": "edx",
         "institution": "edX (Harvard University)",
         "degree": "Rhetoric: The Art of Persuasive Writing and Public Speaking",
-        "period": "May 2023 – Jul 2023",
+        "start": "2023-05",
+        "end": "2023-07",
         "details": []
       },
       {
+        "id": "uca-cc",
         "institution": "UCA Cultural Center",
         "degree": "Community Management",
-        "period": "Sep 2020 – Nov 2020",
+        "start": "2020-09",
+        "end": "2020-11",
         "details": []
       }
     ],
@@ -305,6 +316,7 @@
       "funnel": "Habilidades",
       "work": "Experiencia",
       "range": "Rango",
+      "education": "Educación",
       "certifications": "Certificaciones",
       "achievements": "Logros",
       "contact": "Contacto",
@@ -507,32 +519,42 @@
     ],
     "education": [
       {
+        "id": "uca",
+        "featured": true,
+        "award": "adepa",
         "institution": "Pontificia Universidad Católica Argentina (UCA)",
         "degree": "Licenciatura en Comunicación Periodística",
-        "period": "2016 – 2020",
+        "start": "2016",
+        "end": "2020",
         "details": []
       },
       {
+        "id": "coderhouse",
         "institution": "Coderhouse",
         "degree": "Marketing Digital",
-        "period": "Oct 2021 – Jun 2022",
+        "start": "2021-10",
+        "end": "2022-06",
         "details": [
-          "Community Manager y Publicidad (oct 2021 – ene 2022)",
-          "Diseño UX/UI (dic 2021 – mar 2022)",
-          "Publicidad Avanzada (ene 2022 – mar 2022)",
-          "Growth Marketing (abr 2022 – jun 2022)"
+          { "name": "Community Manager y Publicidad", "start": "2021-10", "end": "2022-01" },
+          { "name": "Diseño UX/UI", "start": "2021-12", "end": "2022-03" },
+          { "name": "Publicidad Avanzada", "start": "2022-01", "end": "2022-03" },
+          { "name": "Growth Marketing", "start": "2022-04", "end": "2022-06" }
         ]
       },
       {
+        "id": "edx",
         "institution": "edX (Harvard University)",
         "degree": "Retórica: el arte de escribir persuasivamente y hablar en público",
-        "period": "May 2023 – Jul 2023",
+        "start": "2023-05",
+        "end": "2023-07",
         "details": []
       },
       {
+        "id": "uca-cc",
         "institution": "Centro Cultural UCA",
         "degree": "Community Management",
-        "period": "Sep 2020 – Nov 2020",
+        "start": "2020-09",
+        "end": "2020-11",
         "details": []
       }
     ],
@@ -601,6 +623,7 @@
       "funnel": "Kompetenzen",
       "work": "Erfahrung",
       "range": "Bandbreite",
+      "education": "Ausbildung",
       "certifications": "Zertifikate",
       "achievements": "Erfolge",
       "contact": "Kontakt",
@@ -803,32 +826,42 @@
     ],
     "education": [
       {
+        "id": "uca",
+        "featured": true,
+        "award": "adepa",
         "institution": "Päpstliche Katholische Universität Argentiniens (UCA)",
         "degree": "Bachelor in Journalistischer Kommunikation",
-        "period": "2016 – 2020",
+        "start": "2016",
+        "end": "2020",
         "details": []
       },
       {
+        "id": "coderhouse",
         "institution": "Coderhouse",
         "degree": "Digitales Marketing",
-        "period": "Okt 2021 – Jun 2022",
+        "start": "2021-10",
+        "end": "2022-06",
         "details": [
-          "Community Manager & Werbung (Okt 2021 – Jan 2022)",
-          "UX/UI-Design (Dez 2021 – Mär 2022)",
-          "Fortgeschrittene Netzwerkwerbung (Jan 2022 – Mär 2022)",
-          "Growth Marketing (Apr 2022 – Jun 2022)"
+          { "name": "Community Manager & Werbung", "start": "2021-10", "end": "2022-01" },
+          { "name": "UX/UI-Design", "start": "2021-12", "end": "2022-03" },
+          { "name": "Fortgeschrittene Netzwerkwerbung", "start": "2022-01", "end": "2022-03" },
+          { "name": "Growth Marketing", "start": "2022-04", "end": "2022-06" }
         ]
       },
       {
+        "id": "edx",
         "institution": "edX (Harvard University)",
         "degree": "Rhetorik: Die Kunst des überzeugenden Schreibens und öffentlichen Sprechens",
-        "period": "Mai 2023 – Jul 2023",
+        "start": "2023-05",
+        "end": "2023-07",
         "details": []
       },
       {
+        "id": "uca-cc",
         "institution": "Kulturzentrum der UCA",
         "degree": "Community-Management",
-        "period": "Sep 2020 – Nov 2020",
+        "start": "2020-09",
+        "end": "2020-11",
         "details": []
       }
     ],

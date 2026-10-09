@@ -1,4 +1,4 @@
-/* Certifications: sticky heading left, list right. B2a "Porteño": rows turn into green enamel plates on hover / focus; compact education and languages. */
+/* Certifications: sticky heading left, list right. B2a "Porteño": rows turn into green enamel plates on hover / focus; compact languages. */
 
 /* ---------- B2a "Porteño" local palette (scoped; global tokens win where they exist) ----------
    Enamel colours are theme-independent (plates look the same day and night).
@@ -215,7 +215,7 @@
 .cert:focus-within .cert__link { color: var(--pt-enamel-ink); text-decoration-color: var(--pt-sign-gold); }
 .cert:focus-visible { outline: 2px solid var(--pt-celeste); outline-offset: 3px; }
 
-/* ---------- Education + languages (compact) ---------- */
+/* ---------- Languages (compact; education has its own section) ---------- */
 .certs__extra {
   display: grid;
   gap: var(--space-6);
@@ -223,36 +223,7 @@
   padding-top: var(--space-6);
   border-top: 1px solid var(--border-strong);
 }
-@media (min-width: 900px) {
-  .certs__extra { grid-template-columns: 1.6fr 1fr; gap: var(--space-8); }
-}
 .extra { display: grid; gap: var(--space-4); align-content: start; }
-.edu {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-3);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.edu li {
-  padding: 14px 16px;
-  border: 1.5px solid var(--ink);
-  border-radius: 6px;
-  background: var(--surface);
-  box-shadow: 3px 3px 0 var(--pt-paper-2), 3px 3px 0 1.5px var(--ink);
-}
-.edu__degree { font-weight: 700; line-height: 1.25; }
-.edu__inst { margin-top: 2px; font-size: var(--fs-sm); color: var(--ink-2); }
-.edu__period {
-  margin-top: var(--space-2);
-  font-family: var(--pt-signf);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--pt-green);
-}
 .langs { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
 .langs .chip {
   gap: 6px;
