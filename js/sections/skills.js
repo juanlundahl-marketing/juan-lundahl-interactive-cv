@@ -100,7 +100,7 @@ function funnelSVG(stages, ui) {
   return `<svg class="fn-svg" viewBox="0 0 ${W} ${H}" role="group" aria-label="${esc(ui.funnelAria)}">
     <path class="fn-loop" d="${loop}" aria-hidden="true"/>
     <path class="fn-loop-arrow" d="M${CX - 224},40 l-9,-5 l1,10 z" aria-hidden="true"/>
-    <text class="fn-loop-label" transform="translate(30 290) rotate(-90)" text-anchor="middle" aria-hidden="true">${esc(ui.loopLabel)}</text>
+    <text class="fn-loop-label" transform="translate(38 250) rotate(-90)" text-anchor="middle" aria-hidden="true">${esc(ui.loopLabel)}</text>
     <path class="fn-spout" d="${spout}" aria-hidden="true"/>
     <g class="fn-out" aria-hidden="true">
       <rect x="${CX - 90}" y="458" width="180" height="32" rx="5"/>
@@ -273,8 +273,8 @@ export default function render(el, ctx) {
     });
     const loopLabel = svg.querySelector('.fn-loop-label');
     loopLabel.removeAttribute('textLength');
-    if (loopLabel.getComputedTextLength() > 330) {
-      loopLabel.setAttribute('textLength', '330');
+    if (loopLabel.getComputedTextLength() > 290) {
+      loopLabel.setAttribute('textLength', '290');
       loopLabel.setAttribute('lengthAdjust', 'spacingAndGlyphs');
     }
   };

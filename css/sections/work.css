@@ -223,7 +223,7 @@ ol.timeline {
 
 .job__summary {
   margin-top: var(--space-4);
-  max-width: 64ch;
+  max-width: min(100%, 100ch);
   color: var(--ink-2);
 }
 

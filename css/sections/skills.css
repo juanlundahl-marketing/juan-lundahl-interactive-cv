@@ -14,7 +14,7 @@
 }
 
 .skills__head { max-width: none; }
-.skills__head > p { max-width: 64ch; }
+.skills__head > p { max-width: min(100%, 112ch); }
 
 /* Per-stage colour, used by plates, cards, pips and the mini funnel */
 .fn-pl[data-i="0"], .fn-step[data-i="0"], .fn-pips span[data-i="0"], .fn-mini__p[data-mi="0"] { --c: var(--fn-p1); --ci: var(--fn-p1-ink); }
@@ -315,7 +315,7 @@
 }
 .fn-across__title { font: 900 clamp(1.5rem, 1.2rem + 1vw, 2rem)/1.1 var(--font-display); margin: 8px 0 10px; }
 .fn-across__title em { font-family: var(--font-accent); font-style: normal; color: var(--oxblood); }
-.fn-across__intro { color: var(--ink-2); font-size: 0.97rem; margin-bottom: var(--space-5); max-width: 60ch; }
+.fn-across__intro { color: var(--ink-2); font-size: 0.97rem; margin-bottom: var(--space-5); max-width: min(100%, 100ch); }
 .fn-ai { display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 0 0 var(--space-5); padding: 0; list-style: none; }
 .fn-ai li { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .fn-ai__note { font-size: 0.82rem; color: var(--muted); }

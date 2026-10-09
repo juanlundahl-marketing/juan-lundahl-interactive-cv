@@ -253,7 +253,7 @@
   color: #E3ECE7;
 }
 .modes__note {
-  max-width: 52ch;
+  max-width: min(100%, 90ch);
   font-family: var(--pt-display);
   font-weight: 800;
   font-size: var(--fs-lg);
@@ -263,7 +263,7 @@
 
 /* ---------- (c) How I work: destination-sign labels ---------- */
 .collab__intro {
-  max-width: 62ch;
+  max-width: min(100%, 112ch);
   font-size: var(--fs-md);
   color: var(--ink-2);
 }
@@ -355,7 +355,7 @@
   box-shadow: inset 0 0 0 3px var(--pt-enamel-red), inset 0 0 0 4.5px var(--pt-enamel-ink), 0 3px 8px -3px var(--pt-shadow);
 }
 
-.rec__quote { position: relative; margin: 0; padding-top: var(--space-7); max-width: 64ch; }
+.rec__quote { position: relative; margin: 0; padding-top: var(--space-7); max-width: min(100%, 100ch); }
 .rec__quote::before {
   content: "\201C";
   position: absolute;
@@ -377,7 +377,7 @@
 }
 
 .rec__tr {
-  max-width: 62ch;
+  max-width: min(100%, 100ch);
   padding-left: var(--space-4);
   border-left: 3px solid var(--pt-ochre);
   display: grid;
